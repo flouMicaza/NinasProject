@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Inicio</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Inicio{% endblock %}
+
+
+{% block content %}
 <h1>Hola {{  user.username }}</h1>
 <p><a href="{% url 'usuarios:logout' %}">logout</a></p>
-</body>
-</html>
+{% endblock %}
