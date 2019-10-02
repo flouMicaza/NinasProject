@@ -141,3 +141,4 @@ pyvenv.cfg
 pip-selfcheck.json
 
 Sera borrado templates/
+Sera borrado static/CACHE/
