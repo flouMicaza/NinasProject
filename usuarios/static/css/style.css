@@ -1,7 +1,7 @@
 
 	body{
 		padding: 0;
-		margin:100px;
+		margin:0;
 		background: #ddd;
 	}
 	.btn{
@@ -23,4 +23,32 @@
 			width: 80%;
 		}
 	}
+
+
+/* label focus color */
+   .input-field input[type=text]:not(.browser-default):focus + label {
+     color: #FF5151;
+   }
+	.input-field input[type=password]:not(.browser-default):focus + label {
+     color: #FF5151;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:not(.browser-default):focus {
+     border-bottom: 1px solid #FF5151;
+     box-shadow: 0 1px 0 0 #FF5151;
+   }
+	.input-field input[type=password]:not(.browser-default):focus {
+     border-bottom: 1px solid #FF5151;
+     box-shadow: 0 1px 0 0 #FF5151;
+   }
+   /* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid green;
+     box-shadow: 0 1px 0 0 green;
+   }
+   .input-field input[type=password].valid {
+     border-bottom: 1px solid green;
+     box-shadow: 0 1px 0 0 green;
+   }
+
 

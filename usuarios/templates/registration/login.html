@@ -11,29 +11,41 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <title>{% block title %}Niñas Pro Proyecto{% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     </head>
     <body >
     <div class="container">
         <div class="row card hoverable">
+            <div class="card-image">
+                <!--img src="{% static "img/logo-sandia.png" %}" width="50%"-->
+
+            </div>
             <div class="card-content ">
+
                 <h4 class="center red-text text-accent-2">Iniciar Sesión</h4>
                     <form action="{% url 'usuarios:login' %}" method="post" class="row s12">
 
-                        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
                         {% csrf_token %}
-                        <div class="col s12">
-                            <div class="input-field">
-                                <input type="text" name="username" placeholder="Usuario">
-                            </div>
+
+                        <div class="col s12 input-field">
+                            <input  id="id_username" name="username" type="text" class="validate">
+                            <label for="id_username">Usuario</label>
                         </div>
-                        <div class="col s12">
-                            <div class="input-field">
-                                <input type="password" name="password" placeholder="Contraseña">
-                            </div>
+
+                        <div class="input-field col s12">
+                            <input id="id_password" type="password" name="password" class="validate">
+                            <label for="id_password">Contraseña</label>
                         </div>
+                    <div class="col s12">
+                        {% if error_message %}<small class="red-text"><strong>{{ error_message }}</strong></small>{% endif %}
+
+                    </div>
+
                         <div class="col s12 center">
                             <button type="submit" class="btn btn-large waves-effect waves-light red accent-2">Ingresar<i class="material-icons right">send</i></button>
                         </div>
+
                     </form>
             </div>
         </div>

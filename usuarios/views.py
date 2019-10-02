@@ -38,7 +38,7 @@ class LoginView(View):
         else:
             # Return an 'invalid login' error message.
             return render(request, 'registration/login.html', {
-                'error_message': 'Datos inválidos'
+                'error_message': 'Usuario o contraseña incorrectos'
             })
 
 
