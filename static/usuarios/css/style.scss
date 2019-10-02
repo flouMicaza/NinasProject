@@ -1,3 +1,4 @@
+$primary: #ff5151;
 
 	body{
 		padding: 0;
@@ -27,19 +28,19 @@
 
 /* label focus color */
    .input-field input[type=text]:not(.browser-default):focus + label {
-     color: #FF5151;
+     color: $primary;
    }
 	.input-field input[type=password]:not(.browser-default):focus + label {
-     color: #FF5151;
+     color: $primary;
    }
    /* label underline focus color */
    .input-field input[type=text]:not(.browser-default):focus {
-     border-bottom: 1px solid #FF5151;
-     box-shadow: 0 1px 0 0 #FF5151;
+     border-bottom: 1px solid $primary;
+     box-shadow: 0 1px 0 0 $primary;
    }
 	.input-field input[type=password]:not(.browser-default):focus {
-     border-bottom: 1px solid #FF5151;
-     box-shadow: 0 1px 0 0 #FF5151;
+     border-bottom: 1px solid $primary;
+     box-shadow: 0 1px 0 0 $primary;
    }
    /* valid color */
    .input-field input[type=text].valid {
