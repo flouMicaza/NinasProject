@@ -1,9 +1,8 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import  AbstractUser
 from django.db import models
 
 
-class Cuenta(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class User(AbstractUser):
     es_profesora = models.BooleanField('estado de profesora', default=False)
     es_voluntaria = models.BooleanField('estado de voluntaria', default=False)
     es_coordinadora = models.BooleanField('estado de coordinadora', default=False)
