@@ -2,8 +2,10 @@
   <dictionary name="florencia">
     <words>
       <w>contraseña</w>
+      <w>coordinadora</w>
       <w>cuenta</w>
       <w>datos</w>
+      <w>estado</w>
       <w>hola</w>
       <w>hoverable</w>
       <w>imagenes</w>
@@ -14,11 +16,14 @@
       <w>inválidos</w>
       <w>loginform</w>
       <w>niñas</w>
+      <w>profesora</w>
       <w>proyecto</w>
       <w>sesión</w>
       <w>simbolos</w>
+      <w>usuaria</w>
       <w>usuario</w>
       <w>usuarios</w>
+      <w>voluntaria</w>
     </words>
   </dictionary>
 </component>
