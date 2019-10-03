@@ -22,7 +22,7 @@ class CursosTest(TestCase):
                                                              es_coordinadora=True,
                                                              es_profesora=True)
 
-    def test_carga_inicio_profe(self):
+    def test_carga_inicio_profesora(self):
         self.client.force_login(user=self.usuaria_prof)
         response = self.client.get(reverse('usuarios:index'))
         self.assertTemplateUsed(response, 'cursos/inicio_docente.html')

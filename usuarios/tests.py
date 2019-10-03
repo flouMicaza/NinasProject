@@ -10,9 +10,9 @@ from usuarios.models import User
 class LoginTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.usuaria_prof = User.objects.create(username="Florencia", password="contraseña123",es_profesora=True)
+        self.usuaria_prof = User.objects.create(username="Florencia", password="contraseña123", es_profesora=True)
 
-        self.usuaria_alu = User.objects.create(username="Alumna",password="contraseña123",es_alumna=True)
+        self.usuaria_alu = User.objects.create(username="Alumna", password="contraseña123", es_alumna=True)
 
     def test_index_sin_login(self):
         response = self.client.get(reverse('usuarios:index'))
@@ -54,3 +54,34 @@ class LogoutTest(TestCase):
         response = self.client.get(reverse('usuarios:logout'))
         self.assertEquals(response.status_code, 302)
         self.assertRedirects(response, reverse('usuarios:index'))
+
+
+class UserModelTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.usuaria_profesora = User.objects.create_user(username="profesora", password="contraseña123", es_profesora=True)
+
+        self.usuaria_alumna = User.objects.create_user(username="alumna", password="contraseña123", es_alumna=True)
+
+        self.usuaria_voluntaria = User.objects.create_user(username="voluntaria", password="contraseña123",
+                                                           es_voluntaria=True)
+
+        self.usuaria_coordinadora = User.objects.create_user(username="coordinadora", password="contraseña123",
+                                                             es_coordinadora=True,
+                                                             es_profesora=True)
+
+    def test_user_is_profesora(self):
+        usuaria_profesora = User.objects.get(username="profesora")
+        self.assertEquals(self.usuaria_profesora, usuaria_profesora)
+        self.assertTrue(usuaria_profesora.es_profesora)
+        self.assertFalse(usuaria_profesora.es_voluntaria)
+        self.assertFalse(usuaria_profesora.es_coordinadora)
+        self.assertFalse(usuaria_profesora.es_alumna)
+
+    def test_user_is_voluntaria(self):
+        usuaria_voluntaria = User.objects.get(username="voluntaria")
+        self.assertEquals(self.usuaria_voluntaria, usuaria_voluntaria)
+        self.assertFalse(usuaria_voluntaria.es_profesora)
+        self.assertTrue(usuaria_voluntaria.es_voluntaria)
+        self.assertFalse(usuaria_voluntaria.es_coordinadora)
+        self.assertFalse(usuaria_voluntaria.es_alumna)
