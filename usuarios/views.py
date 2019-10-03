@@ -15,7 +15,10 @@ class IndexView(LoginRequiredMixin, View):
     redirect_field_name = ''
 
     def get(self, request):
-        return render(request, 'registration/inicio.html')
+        if request.user.es_profesora or request.user.es_voluntaria:
+            return render(request,'cursos/inicio_docente.html')
+        else:
+            return render(request, 'cursos/inicio_curso.html')
 
 
 class LoginView(View):

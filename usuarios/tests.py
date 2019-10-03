@@ -4,18 +4,15 @@ from django.test import TestCase, Client
 from django.urls import reverse
 
 # Create your tests here.
-from usuarios.models import Cuenta
+from usuarios.models import User
 
 
 class LoginTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.usuaria_prof = User.objects.create(username="Florencia", password="contraseña123")
-        self.cuenta_prof = Cuenta(user=self.usuaria_prof, es_profesora=True)
+        self.usuaria_prof = User.objects.create(username="Florencia", password="contraseña123",es_profesora=True)
 
-        self.usuaria_alu = User(username="Alumna")
-        self.usuaria_alu.save()
-        self.usuaria_alu.password = "contraseña123"
+        self.usuaria_alu = User.objects.create(username="Alumna",password="contraseña123",es_alumna=True)
 
     def test_index_sin_login(self):
         response = self.client.get(reverse('usuarios:index'))
@@ -49,7 +46,7 @@ class LogoutTest(TestCase):
     def setUp(self):
         self.client = Client()
         self.usuaria_prof = User.objects.create_user(username="Florencia", password="contraseña123")
-        self.cuenta_usuaria = Cuenta.objects.create(user=self.usuaria_prof, es_profesora=True)
+        self.cuenta_usuaria = User.objects.create(user=self.usuaria_prof, es_profesora=True)
 
         self.client.login(user=self.usuaria_prof)
 
