@@ -7,14 +7,12 @@ from django.urls import reverse
 from usuarios.models import Cuenta
 
 
-class ViewsTest(TestCase):
+class LoginTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.usuaria_prof = User(username="Florencia")
-        self.usuaria_prof.save()
-        self.usuaria_prof.password = "contraseña123"
+        self.usuaria_prof = User.objects.create(username="Florencia", password="contraseña123")
+        self.cuenta_prof = Cuenta(user=self.usuaria_prof, es_profesora=True)
 
-        self.cuenta_usuaria = Cuenta(user=self.usuaria_prof, es_profesora=True)
         self.usuaria_alu = User(username="Alumna")
         self.usuaria_alu.save()
         self.usuaria_alu.password = "contraseña123"
@@ -31,8 +29,8 @@ class ViewsTest(TestCase):
 
     def test_post_login(self):
         response = self.client.post(reverse('usuarios:login'), {'username': 'Florencia', 'password': 'contraseña123'})
-        self.assertEquals(response.status_code, 200)
-        #self.assertRedirects(response, reverse('usuarios:index'))
+        self.assertEquals(response.status_code, 302)
+        self.assertRedirects(response, reverse('usuarios:index'))
 
     def test_post_login_error(self):
         response = self.client.post(reverse('usuarios:login'), {'username': 'Flore', 'password': 'contraseña123'})
@@ -41,7 +39,21 @@ class ViewsTest(TestCase):
 
     '''def test_user_login(self):
         user = User.objects.get(username='Alumna')
-        self.assertFalse(user.is_authenticated)
+        self.assertTrue(user.is_anonymous)
         response = self.client.post(reverse('usuarios:login'), {'username': 'Alumna', 'password': 'contraseña123'})
-        self.assertTrue(user.is_authenticated)
-    '''
+        user = User.objects.get(username='Alumna')
+        self.assertFalse(user.is_anonymous)'''
+
+
+class LogoutTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.usuaria_prof = User.objects.create_user(username="Florencia", password="contraseña123")
+        self.cuenta_usuaria = Cuenta.objects.create(user=self.usuaria_prof, es_profesora=True)
+
+        self.client.login(user=self.usuaria_prof)
+
+    def test_get_logout(self):
+        response = self.client.get(reverse('usuarios:logout'))
+        self.assertEquals(response.status_code, 302)
+        self.assertRedirects(response, reverse('usuarios:index'))
