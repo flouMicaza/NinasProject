@@ -10,9 +10,9 @@ from usuarios.models import User
 class LoginTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.usuaria_prof = User.objects.create(username="Florencia", password="contraseña123", es_profesora=True)
+        self.usuaria_prof = User.objects.create_user(username="Florencia", password="contraseña123", es_profesora=True)
 
-        self.usuaria_alu = User.objects.create(username="Alumna", password="contraseña123", es_alumna=True)
+        self.usuaria_alu = User.objects.create_user(username="Alumna", password="contraseña123", es_alumna=True)
 
     def test_index_sin_login(self):
         response = self.client.get(reverse('usuarios:index'))
@@ -26,8 +26,10 @@ class LoginTest(TestCase):
 
     def test_post_login(self):
         response = self.client.post(reverse('usuarios:login'), {'username': 'Florencia', 'password': 'contraseña123'})
+        print(response)
+        self.assertTemplateNotUsed('registration/login.html')
         self.assertEquals(response.status_code, 302)
-        self.assertRedirects(response, reverse('usuarios:index'))
+        self.assertRedirects(response, reverse('usuarios:index'), status_code=302, target_status_code=200)
 
     def test_post_login_error(self):
         response = self.client.post(reverse('usuarios:login'), {'username': 'Flore', 'password': 'contraseña123'})
@@ -45,15 +47,15 @@ class LoginTest(TestCase):
 class LogoutTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.usuaria_prof = User.objects.create_user(username="Florencia", password="contraseña123")
-        self.cuenta_usuaria = User.objects.create(user=self.usuaria_prof, es_profesora=True)
+        self.usuaria_prof = User.objects.create_user(username="Florencia", password="contraseña123",es_profesora = True)
 
         self.client.login(user=self.usuaria_prof)
 
     def test_get_logout(self):
         response = self.client.get(reverse('usuarios:logout'))
+        print(response)
         self.assertEquals(response.status_code, 302)
-        self.assertRedirects(response, reverse('usuarios:index'))
+        self.assertRedirects(response, reverse('usuarios:index'), status_code=302, target_status_code=302)
 
 
 class UserModelTest(TestCase):
@@ -85,3 +87,36 @@ class UserModelTest(TestCase):
         self.assertTrue(usuaria_voluntaria.es_voluntaria)
         self.assertFalse(usuaria_voluntaria.es_coordinadora)
         self.assertFalse(usuaria_voluntaria.es_alumna)
+
+class IndexTest(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+        self.usuaria_prof = User.objects.create_user(username="profesora", password="contraseña123", es_profesora=True)
+
+        self.usuaria_alumna = User.objects.create_user(username="alumna", password="contraseña123", es_alumna=True)
+
+        self.usuaria_voluntaria = User.objects.create_user(username="voluntaria", password="contraseña123",
+                                                           es_voluntaria=True)
+
+        self.usuaria_coordinadora = User.objects.create_user(username="coordinadora", password="contraseña123",
+                                                             es_coordinadora=True,
+                                                             es_profesora=True)
+
+    def test_carga_inicio_profesora(self):
+        self.client.force_login(user=self.usuaria_prof)
+        response = self.client.get(reverse('usuarios:index'))
+        self.assertTemplateUsed(response, 'cursos/inicio_docente.html')
+        self.assertContains(response, 'Mis cursos')
+
+    def test_carga_inicio_voluntaria(self):
+        self.client.force_login(user=self.usuaria_voluntaria)
+        response = self.client.get(reverse('usuarios:index'))
+        self.assertTemplateUsed(response, 'cursos/inicio_docente.html')
+        self.assertContains(response, 'Mis cursos')
+
+    def test_carga_inicio_alumna(self):
+        self.client.force_login(user=self.usuaria_alumna)
+        response = self.client.get(reverse('usuarios:index'))
+        self.assertTemplateUsed(response, 'cursos/inicio_curso.html')
+        self.assertContains(response, 'C++ Básico')
