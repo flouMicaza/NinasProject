@@ -4,7 +4,9 @@ from django.test import TestCase, Client
 from django.urls import reverse
 
 # Create your tests here.
+from cursos.models import Curso
 from usuarios.models import User
+from usuarios.views import IndexView
 
 
 class LoginTest(TestCase):
@@ -26,10 +28,9 @@ class LoginTest(TestCase):
 
     def test_post_login(self):
         response = self.client.post(reverse('usuarios:login'), {'username': 'Florencia', 'password': 'contraseña123'})
-        print(response)
         self.assertTemplateNotUsed('registration/login.html')
         self.assertEquals(response.status_code, 302)
-        self.assertRedirects(response, reverse('usuarios:index'), status_code=302, target_status_code=200)
+        self.assertRedirects(response, reverse('usuarios:index'), status_code=302, target_status_code=302)
 
     def test_post_login_error(self):
         response = self.client.post(reverse('usuarios:login'), {'username': 'Flore', 'password': 'contraseña123'})
@@ -47,13 +48,12 @@ class LoginTest(TestCase):
 class LogoutTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.usuaria_prof = User.objects.create_user(username="Florencia", password="contraseña123",es_profesora = True)
+        self.usuaria_prof = User.objects.create_user(username="Florencia", password="contraseña123", es_profesora=True)
 
         self.client.login(user=self.usuaria_prof)
 
     def test_get_logout(self):
         response = self.client.get(reverse('usuarios:logout'))
-        print(response)
         self.assertEquals(response.status_code, 302)
         self.assertRedirects(response, reverse('usuarios:index'), status_code=302, target_status_code=302)
 
@@ -61,7 +61,8 @@ class LogoutTest(TestCase):
 class UserModelTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.usuaria_profesora = User.objects.create_user(username="profesora", password="contraseña123", es_profesora=True)
+        self.usuaria_profesora = User.objects.create_user(username="profesora", password="contraseña123",
+                                                          es_profesora=True)
 
         self.usuaria_alumna = User.objects.create_user(username="alumna", password="contraseña123", es_alumna=True)
 
@@ -88,6 +89,7 @@ class UserModelTest(TestCase):
         self.assertFalse(usuaria_voluntaria.es_coordinadora)
         self.assertFalse(usuaria_voluntaria.es_alumna)
 
+
 class IndexTest(TestCase):
 
     def setUp(self):
@@ -102,21 +104,31 @@ class IndexTest(TestCase):
         self.usuaria_coordinadora = User.objects.create_user(username="coordinadora", password="contraseña123",
                                                              es_coordinadora=True,
                                                              es_profesora=True)
+        self.curso_basico = Curso.objects.create(nombre="C++: Básico")
+        self.curso_basico.alumnas.add(self.usuaria_alumna)
+        self.curso_basico.profesoras.add(self.usuaria_prof)
+        self.curso_basico.voluntarias.add(self.usuaria_prof)
 
     def test_carga_inicio_profesora(self):
         self.client.force_login(user=self.usuaria_prof)
         response = self.client.get(reverse('usuarios:index'))
-        self.assertTemplateUsed(response, 'cursos/inicio_docente.html')
-        self.assertContains(response, 'Mis cursos')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('cursos:mis_cursos'))
 
     def test_carga_inicio_voluntaria(self):
         self.client.force_login(user=self.usuaria_voluntaria)
         response = self.client.get(reverse('usuarios:index'))
-        self.assertTemplateUsed(response, 'cursos/inicio_docente.html')
-        self.assertContains(response, 'Mis cursos')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('cursos:mis_cursos'))
 
     def test_carga_inicio_alumna(self):
         self.client.force_login(user=self.usuaria_alumna)
+        curso_id = self.curso_basico.id
         response = self.client.get(reverse('usuarios:index'))
-        self.assertTemplateUsed(response, 'cursos/inicio_curso.html')
-        self.assertContains(response, 'C++ Básico')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('cursos:curso', kwargs={'curso_id': curso_id}))
+
+    def test_get_curso_estudiante(self):
+        curso_id = self.curso_basico.id
+        index_view = IndexView()
+        self.assertEquals(index_view.get_curso_estudiante(username=self.usuaria_alumna.username), curso_id)

@@ -1,9 +1,7 @@
-from django.contrib.auth.models import  AbstractUser
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-class Cursos(object):
-    pass
 
 
 class User(AbstractUser):
@@ -13,7 +11,3 @@ class User(AbstractUser):
     es_alumna = models.BooleanField('estado de alumna', default=False)
     model_pic = models.ImageField(upload_to='media/imagenes/', default='pic_folder/None/no-img.jpg')
 
-
-    '''def get_cursos(self):
-        if(self.es_profesora):
-            Cursos.objects.filter(profesoras_in = self)'''

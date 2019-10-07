@@ -4,5 +4,10 @@
 
 {% block content %}
 <h1>Mis cursos</h1>
+    <ul>
+    {% for curso in cursos %}
+        <li>{{ curso.nombre }}</li>
+    {% endfor %}
+    </ul>
 <p><a href="{% url 'usuarios:logout' %}">logout</a></p>
 {% endblock %}

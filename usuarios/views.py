@@ -8,6 +8,8 @@ from django.views import View
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.cache import never_cache
+from cursos.models import Curso
+from usuarios.models import User
 
 
 class IndexView(LoginRequiredMixin, View):
@@ -16,9 +18,15 @@ class IndexView(LoginRequiredMixin, View):
 
     def get(self, request):
         if request.user.es_profesora or request.user.es_voluntaria:
-            return render(request,'cursos/inicio_docente.html')
+            return HttpResponseRedirect(reverse('cursos:mis_cursos'))
         else:
-            return render(request, 'cursos/inicio_curso.html')
+            curso_id = self.get_curso_estudiante(request.user.username)
+            return HttpResponseRedirect(reverse('cursos:curso', args='1'))
+
+    def get_curso_estudiante(self, username):
+        usuaria = User.objects.filter(username=username)
+        cursos = Curso.objects.filter(alumnas__in=usuaria)
+        return cursos[0].id
 
 
 class LoginView(View):
