@@ -9,9 +9,7 @@ from cursos.views import MisCursosView
 from usuarios.models import User
 
 
-class CursosDocenteViewTest(TestCase):
-    # probar que al cargar la pagina de una profesora o voluntaria muestre todos los curso que tiene asignados.
-    # probar que al cargar la pagina de una alumna se muestre el curso al que pertenece.
+class InitialData(TestCase):
     def setUp(self):
         self.client = Client()
         self.usuaria_profesora = User.objects.create_user(username="profesora", password="contraseña123",
@@ -39,13 +37,17 @@ class CursosDocenteViewTest(TestCase):
         self.curso_uandes.profesoras.add(self.usuaria_profesora)
         self.curso_uandes.voluntarias.add(self.usuaria_voluntaria)
 
-    '''def test_profesora_tiene_cursos(self):
-        response = self.client.get(reverse('usuarios:index'))
-        self.assertContains(response, 'Programación Uandes')
-        self.assertNotContains(response, 'C++: Avanzado')'''
 
-    '''def test_voluntario_tiene_cursos(self):
-        pass'''
+class MisCursosViewTest(InitialData):
+    # probar que al cargar mis cursos de una profesora o voluntaria muestre todos los curso que tiene asignados.
+
+    def setUp(self):
+        super(MisCursosViewTest, self).setUp()
+
+    def test_get_cursos_docente(self):
+        mis_cursos_view = MisCursosView()
+        lista_cursos = mis_cursos_view.get_cursos(self.usuaria_profesora2)
+        self.assertTrue(set([self.curso_basico, self.curso_avanzado]).issuperset(set(lista_cursos)))
 
     # Vista de inicio docente carga página mis cursos y muestra los respectivos cursos.
     def test_vista_inicio_profesora(self):
@@ -63,11 +65,6 @@ class CursosDocenteViewTest(TestCase):
         self.assertTemplateUsed('cursos/mis_cursos.html')
         self.assertContains(response, "Programación Uandes")
         self.client.logout()
-
-    def test_get_cursos_docente(self):
-        mis_cursos_view = MisCursosView()
-        lista_cursos = mis_cursos_view.get_cursos(self.usuaria_profesora2)
-        self.assertTrue(set([self.curso_basico, self.curso_avanzado]).issuperset(set(lista_cursos)))
 
 
 class CursoViewTest(TestCase):

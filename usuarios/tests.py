@@ -9,12 +9,28 @@ from usuarios.models import User
 from usuarios.views import IndexView
 
 
-class LoginTest(TestCase):
+class InitialData(TestCase):
     def setUp(self):
         self.client = Client()
-        self.usuaria_prof = User.objects.create_user(username="Florencia", password="contraseña123", es_profesora=True)
+        self.usuaria_prof = User.objects.create_user(username="profesora", password="contraseña123", es_profesora=True)
 
-        self.usuaria_alu = User.objects.create_user(username="Alumna", password="contraseña123", es_alumna=True)
+        self.usuaria_alumna = User.objects.create_user(username="alumna", password="contraseña123", es_alumna=True)
+
+        self.usuaria_voluntaria = User.objects.create_user(username="voluntaria", password="contraseña123",
+                                                           es_voluntaria=True)
+
+        self.usuaria_coordinadora = User.objects.create_user(username="coordinadora", password="contraseña123",
+                                                             es_coordinadora=True,
+                                                             es_profesora=True)
+        self.curso_basico = Curso.objects.create(nombre="C++: Básico")
+        self.curso_basico.alumnas.add(self.usuaria_alumna)
+        self.curso_basico.profesoras.add(self.usuaria_prof)
+        self.curso_basico.voluntarias.add(self.usuaria_prof)
+
+
+class LoginTest(InitialData):
+    def setUp(self):
+        super(LoginTest, self).setUp()
 
     def test_index_sin_login(self):
         response = self.client.get(reverse('usuarios:index'))
@@ -27,7 +43,7 @@ class LoginTest(TestCase):
         self.assertContains(response, 'Iniciar Sesión')
 
     def test_post_login(self):
-        response = self.client.post(reverse('usuarios:login'), {'username': 'Florencia', 'password': 'contraseña123'})
+        response = self.client.post(reverse('usuarios:login'), {'username': 'profesora', 'password': 'contraseña123'})
         self.assertTemplateNotUsed('registration/login.html')
         self.assertEquals(response.status_code, 302)
         self.assertRedirects(response, reverse('usuarios:index'), status_code=302, target_status_code=302)
@@ -45,11 +61,9 @@ class LoginTest(TestCase):
         self.assertFalse(user.is_anonymous)'''
 
 
-class LogoutTest(TestCase):
+class LogoutTest(InitialData):
     def setUp(self):
-        self.client = Client()
-        self.usuaria_prof = User.objects.create_user(username="Florencia", password="contraseña123", es_profesora=True)
-
+        super(LogoutTest, self).setUp()
         self.client.login(user=self.usuaria_prof)
 
     def test_get_logout(self):
@@ -58,24 +72,13 @@ class LogoutTest(TestCase):
         self.assertRedirects(response, reverse('usuarios:index'), status_code=302, target_status_code=302)
 
 
-class UserModelTest(TestCase):
+class UserModelTest(InitialData):
     def setUp(self):
-        self.client = Client()
-        self.usuaria_profesora = User.objects.create_user(username="profesora", password="contraseña123",
-                                                          es_profesora=True)
-
-        self.usuaria_alumna = User.objects.create_user(username="alumna", password="contraseña123", es_alumna=True)
-
-        self.usuaria_voluntaria = User.objects.create_user(username="voluntaria", password="contraseña123",
-                                                           es_voluntaria=True)
-
-        self.usuaria_coordinadora = User.objects.create_user(username="coordinadora", password="contraseña123",
-                                                             es_coordinadora=True,
-                                                             es_profesora=True)
+        super(UserModelTest, self).setUp()
 
     def test_user_is_profesora(self):
         usuaria_profesora = User.objects.get(username="profesora")
-        self.assertEquals(self.usuaria_profesora, usuaria_profesora)
+        self.assertEquals(self.usuaria_prof, usuaria_profesora)
         self.assertTrue(usuaria_profesora.es_profesora)
         self.assertFalse(usuaria_profesora.es_voluntaria)
         self.assertFalse(usuaria_profesora.es_coordinadora)
@@ -90,24 +93,10 @@ class UserModelTest(TestCase):
         self.assertFalse(usuaria_voluntaria.es_alumna)
 
 
-class IndexTest(TestCase):
+class IndexTest(InitialData):
 
     def setUp(self):
-        self.client = Client()
-        self.usuaria_prof = User.objects.create_user(username="profesora", password="contraseña123", es_profesora=True)
-
-        self.usuaria_alumna = User.objects.create_user(username="alumna", password="contraseña123", es_alumna=True)
-
-        self.usuaria_voluntaria = User.objects.create_user(username="voluntaria", password="contraseña123",
-                                                           es_voluntaria=True)
-
-        self.usuaria_coordinadora = User.objects.create_user(username="coordinadora", password="contraseña123",
-                                                             es_coordinadora=True,
-                                                             es_profesora=True)
-        self.curso_basico = Curso.objects.create(nombre="C++: Básico")
-        self.curso_basico.alumnas.add(self.usuaria_alumna)
-        self.curso_basico.profesoras.add(self.usuaria_prof)
-        self.curso_basico.voluntarias.add(self.usuaria_prof)
+        super(IndexTest, self).setUp()
 
     def test_carga_inicio_profesora(self):
         self.client.force_login(user=self.usuaria_prof)
