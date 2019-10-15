@@ -44,9 +44,9 @@ class MisCursosView(LoginRequiredMixin, View):
         :param username: usuario a buscar
         :return: lista de cursos
         """
-        usuaria = User.objects.filter(username=username)
-        if usuaria[0].es_profesora:
-            cursos = Curso.objects.filter(profesoras__in=usuaria)
+        usuaria = User.objects.get(username=username)
+        if usuaria.es_profesora:
+            cursos = Curso.objects.filter(profesoras__in=[usuaria])
         else:
-            cursos = Curso.objects.filter(voluntarias__in=usuaria)
+            cursos = Curso.objects.filter(voluntarias__in=[usuaria])
         return list(cursos)

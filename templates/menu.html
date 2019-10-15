@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block menu %}
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Niñas Pro</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href={% url 'cursos:mis_cursos' %}>Mis cursos</a></li>
+        <li><a href="{% url 'usuarios:logout' %}">Salir</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href={% url 'cursos:mis_cursos' %}>Mis cursos</a></li>
+        <li><a href="{% url 'usuarios:logout' %}">Salir</a></li>
+
+    </ul>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+        });
+
+    </script>
+{% endblock %}

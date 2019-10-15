@@ -15,10 +15,13 @@
         {% endcompress %}
 
     </head>
-    <body  background = '../static/img/pattern-simbolos-lila.png'>
+    <body >
         <main>
+            {% block menu %}
+            {% endblock %}
             {% block content %}
             {% endblock %}
+
         </main>
     </body>
 </html>

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'menu.html' %}
 {% block title %}Mis Cursos{% endblock %}
 
 
@@ -8,6 +8,5 @@
     {% for curso in cursos %}
         <li>{{ curso.nombre }}</li>
     {% endfor %}
-    </ul>
-<p><a href="{% url 'usuarios:logout' %}">logout</a></p>
+    </ul
 {% endblock %}

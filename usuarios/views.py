@@ -17,11 +17,16 @@ class IndexView(LoginRequiredMixin, View):
     redirect_field_name = ''
 
     def get(self, request):
+
         if request.user.es_profesora or request.user.es_voluntaria:
             return HttpResponseRedirect(reverse('cursos:mis_cursos'))
-        else:
+        elif request.user.es_alumna:
             curso_id = self.get_curso_estudiante(request.user.username)
             return HttpResponseRedirect(reverse('cursos:curso', args='1'))
+        else:
+            return render(request, 'cursos/pagina_error.html', {
+                'error_message': "El usuario no tiene tipo"
+            })
 
     def get_curso_estudiante(self, username):
         usuaria = User.objects.filter(username=username)
