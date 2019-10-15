@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block menu %}
 <nav>
@@ -10,7 +10,6 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href={% url 'cursos:mis_cursos' %}>Mis cursos</a></li>
         <li><a href="{% url 'usuarios:logout' %}">Salir</a></li>
-
       </ul>
     </div>
   </nav>
@@ -21,11 +20,9 @@
 
     </ul>
 
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems);
-        });
 
-    </script>
+{% endblock %}
+{% block scripts %}
+    <script src={% static 'scripts.js' %}></script>
+
 {% endblock %}
