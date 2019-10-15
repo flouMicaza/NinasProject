@@ -121,3 +121,40 @@ class IndexTest(InitialData):
         curso_id = self.curso_basico.id
         index_view = IndexView()
         self.assertEquals(index_view.get_curso_estudiante(username=self.usuaria_alumna.username), curso_id)
+
+
+class UserModelTest(InitialData):
+    def setUp(self):
+        super(UserModelTest, self).setUp()
+
+    def test_menu_items_docente(self):
+        menu_items = self.usuaria_prof.get_menu_items()
+        self.menu_items = [("Mis cursos", '/')]
+        self.assertEquals(self.menu_items, menu_items)
+        menu_items_voluntaria = self.usuaria_voluntaria.get_menu_items()
+        self.assertEquals(self.menu_items, menu_items_voluntaria)
+
+    def test_menu_items_coordinadora(self):
+        menu_items = self.usuaria_coordinadora.get_menu_items()
+        self.menu_items = [("Mis cursos", '/'), ('Modo coordinadora', '/coordinadora/inicio/')]
+        self.assertEquals(self.menu_items, menu_items)
+
+    def test_menu_items_estudiante(self):
+        pass
+
+
+class MenuTest(InitialData):
+    def setUp(self):
+        super(MenuTest, self).setUp()
+
+    def test_menu_docente(self):
+        self.client.force_login(user=self.usuaria_prof)
+        response = self.client.get(reverse('cursos:mis_cursos'))
+        self.assertContains(response, 'Mis cursos')
+        self.assertNotContains(response, 'Modo coordinadora')
+
+    def test_menu_coordinadora(self):
+        self.client.force_login(user=self.usuaria_coordinadora)
+        response = self.client.get(reverse('cursos:mis_cursos'))
+        self.assertContains(response, 'Mis cursos')
+        self.assertContains(response, 'Modo coordinadora')

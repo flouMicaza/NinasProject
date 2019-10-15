@@ -21,5 +21,6 @@ import usuarios
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("usuarios.urls")),
-    path('', include("cursos.urls"))
+    path('', include("cursos.urls")),
+    path('coordinadora/', include("coordinacion.urls"))
 ]
