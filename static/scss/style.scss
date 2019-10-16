@@ -1,15 +1,15 @@
-$materialize-red: (
-  "base":       #e51c23,
-  "lighten-5":  #fdeaeb,
-  "lighten-4":  #f8c1c3,
-  "lighten-3":  #f3989b,
-  "lighten-2":  #ee6e73,
-  "lighten-1":  #ea454b,
-  "darken-1":   #d0181e,
-  "darken-2":   #b9151b,
-  "darken-3":   #a21318,
-  "darken-4":   #8b1014,
-);
 
-$primary-color: color($materialize-red, "lighten-3") !default;
+$primary-color: #FF5252 !default;
+$hover-color:  #FF8A80;
 
+.btn-large {
+  background-color: $primary-color;
+}
+
+.btn-large:hover {
+  background-color: $hover-color;
+}
+
+nav {
+  background-color: $primary-color;
+}

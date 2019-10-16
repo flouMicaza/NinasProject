@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -17,7 +17,7 @@ class CursoView(LoginRequiredMixin, View):
     def get(self, request, **kwargs,):
         if request.user.es_profesora or request.user.es_voluntaria:
             # return HttpResponseRedirect(reverse('cursos:mis_cursos'))
-            pass
+            return HttpResponse("Here's the text of the Web page.")
         else:
             return render(request,'cursos/inicio_curso.html')
 
@@ -50,3 +50,11 @@ class MisCursosView(LoginRequiredMixin, View):
         else:
             cursos = Curso.objects.filter(voluntarias__in=[usuaria])
         return list(cursos)
+
+
+class EstadisticasView(LoginRequiredMixin,View):
+    login_url = 'usuarios:login'
+    redirect_field_name = ''
+    def get(self,request,**kwargs):
+        mensaje = "este curso",kwargs["curso_id"]
+        return HttpResponse(mensaje)

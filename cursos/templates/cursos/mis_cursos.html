@@ -16,7 +16,11 @@
                         {{ curso.nombre }}
                     </div>
                     <div class="collapsible-body">
-                        <h4>Bienvenida al curso {{ curso.nombre }}</h4>
+                        <!--h4>Bienvenida al curso {{ curso.nombre }}</h4-->
+
+                        <a href="{% url 'cursos:curso' curso_id=curso.id %}" class="waves-effect waves-light btn-large primary"><i class="material-icons right">school</i>Ver clases y problemas</a>
+
+                            <a href="{% url 'cursos:estadisticas' curso_id=curso.id %}" class="waves-effect waves-light btn-large red accent-2 disabled"><i class="material-icons right">show_chart</i>Ver estadísticas</a>
                     </div>
                 </li>
                 {% endfor %}
