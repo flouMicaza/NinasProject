@@ -1,12 +1,38 @@
 {% extends 'menu.html' %}
+{% load static %}
 {% block title %}Mis Cursos{% endblock %}
 
 
 {% block content %}
-<h1>Mis cursos</h1>
-    <ul>
-    {% for curso in cursos %}
-        <li>{{ curso.nombre }}</li>
-    {% endfor %}
-    </ul>
+    {% if cursos %}
+        <ul class=" collection with-header collapsible popout">
+            <li class="collection-header" >
+                    <h1>Mis cursos</h1>
+            </li>
+
+                {% for curso in cursos %}
+                <li>
+                    <div class="collapsible-header">
+                        {{ curso.nombre }}
+                    </div>
+                    <div class="collapsible-body">
+                        <h4>Bienvenida al curso {{ curso.nombre }}</h4>
+                    </div>
+                </li>
+                {% endfor %}
+
+        </ul>
+    {% else %}
+        <ul class="collection with-header">
+        <li class="collection-header"><h1>Mis cursos</h1></li>
+        <li class="collection-item">No hay cursos disponibles</li>
+
+      </ul>
+
+    {% endif %}
+
+{% endblock %}
+{% block scripts %}
+    <script src={% static 'js/scripts.js' %}></script>
+
 {% endblock %}
