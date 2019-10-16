@@ -68,7 +68,7 @@ class LogoutTest(InitialData):
 
     def test_get_logout(self):
         response = self.client.get(reverse('usuarios:logout'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 302)
         self.assertRedirects(response, reverse('usuarios:index'), status_code=302, target_status_code=302)
 
 
