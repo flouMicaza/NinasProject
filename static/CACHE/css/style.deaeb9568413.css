@@ -1,0 +1,3 @@
+/* line 20, static/scss/style.scss */
+.primary {
+  background-color: color(("base": #F44336, "lighten-5": #FFEBEE, "lighten-4": #FFCDD2, "lighten-3": #EF9A9A, "lighten-2": #E57373, "lighten-1": #EF5350, "darken-1": #E53935, "darken-2": #D32F2F, "darken-3": #C62828, "darken-4": #B71C1C, "accent-1": #FF8A80, "accent-2": #FF5252, "accent-3": #FF1744, "accent-4": #D50000), "accent-2"); }
