@@ -1,1 +1,1 @@
-web: gunicorn NiñasProject.wsgi --log-file
+web: gunicorn NiñasProject.wsgi --log-file -
