@@ -1,0 +1,15 @@
+
+$primary-color: #FF5252 !default;
+$hover-color:  #FF8A80;
+
+.btn-large {
+  background-color: $primary-color;
+}
+
+.btn-large:hover {
+  background-color: $hover-color;
+}
+
+nav {
+  background-color: $primary-color;
+}
