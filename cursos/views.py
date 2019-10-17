@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.urls import reverse
@@ -14,16 +14,11 @@ class CursoView(LoginRequiredMixin, View):
     login_url = 'usuarios:login'
     redirect_field_name = ''
 
-    def get(self, request, **kwargs,):
-        if request.user.es_profesora or request.user.es_voluntaria:
-            # return HttpResponseRedirect(reverse('cursos:mis_cursos'))
-            return HttpResponse("Here's the text of the Web page.")
-        else:
-            return render(request,'cursos/inicio_curso.html')
-
-    '''def get(self):
-        #como conseguir los parametros que mando por url.
-        self.kwargs['curso_id']'''
+    def get(self, request, **kwargs, ):
+        curso = get_object_or_404(Curso, pk=kwargs['curso_id'])
+        return render(request, 'cursos/inicio_curso.html', {
+            'curso': curso
+        })
 
 
 class MisCursosView(LoginRequiredMixin, View):
@@ -52,9 +47,10 @@ class MisCursosView(LoginRequiredMixin, View):
         return list(cursos)
 
 
-class EstadisticasView(LoginRequiredMixin,View):
+class EstadisticasView(LoginRequiredMixin, View):
     login_url = 'usuarios:login'
     redirect_field_name = ''
-    def get(self,request,**kwargs):
-        mensaje = "este curso",kwargs["curso_id"]
+
+    def get(self, request, **kwargs):
+        mensaje = "este curso", kwargs["curso_id"]
         return HttpResponse(mensaje)

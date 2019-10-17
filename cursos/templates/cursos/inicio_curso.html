@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
-{% block title %}Mis Cursos{% endblock %}
+{% extends 'menu.html' %}
+{% block title %}{{ curso.nombre }}{% endblock %}
 
 
 {% block content %}
-<h1>C++ Básico</h1>
+<h1>{{ curso.nombre }}</h1>
 <p><a href="{% url 'usuarios:logout' %}">logout</a></p>
 {% endblock %}

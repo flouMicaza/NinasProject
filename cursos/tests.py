@@ -7,6 +7,7 @@ from django.urls import reverse
 from cursos.models import Curso
 from cursos.views import MisCursosView
 from usuarios.models import User
+from usuarios.views import IndexView
 
 
 class InitialData(TestCase):
@@ -67,7 +68,39 @@ class MisCursosViewTest(InitialData):
         self.client.logout()
 
 
-class CursoViewTest(TestCase):
+class CursoViewTest(InitialData):
+    def setUp(self):
+        super(CursoViewTest, self).setUp()
+        self.usuaria_estudiante = User.objects.create_user(username="estudiante", password="contraseña123",
+                                                           es_alumna=True)
+        self.curso_basico.alumnas.add(self.usuaria_estudiante)
     # Vista inicio estudiante carga pagina de un curso y muestra info de ese curso.
+
     def test_vista_inicio_estudiante(self):
-        pass
+        self.client.force_login(user=self.usuaria_estudiante)
+        index_view = IndexView()
+        curso_id = index_view.get_curso_estudiante(username=self.usuaria_estudiante.username)
+        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': curso_id}))
+        self.assertTemplateUsed('inicio_curso.html')
+        self.assertContains(response, 'C++: Básico')
+        self.assertNotContains(response, 'Mis cursos')
+
+    def test_curso_profesora(self):
+        self.client.force_login(user=self.usuaria_profesora2)
+        mis_cursos_view = MisCursosView()
+        lista_cursos = mis_cursos_view.get_cursos(self.usuaria_profesora2)
+        primer_curso = lista_cursos[0]
+        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': lista_cursos[0].id}))
+        self.assertTemplateUsed('inicio_curso.html')
+        self.assertContains(response, primer_curso.nombre)
+        self.assertNotContains(response, 'Mi curso')
+
+    def test_curso_profesora(self):
+        self.client.force_login(user=self.usuaria_voluntaria2)
+        mis_cursos_view = MisCursosView()
+        lista_cursos = mis_cursos_view.get_cursos(self.usuaria_voluntaria2)
+        primer_curso = lista_cursos[0]
+        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': lista_cursos[0].id}))
+        self.assertTemplateUsed('inicio_curso.html')
+        self.assertContains(response, primer_curso.nombre)
+        self.assertNotContains(response, 'Mi curso')
