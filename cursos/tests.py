@@ -44,17 +44,17 @@ class MisCursosViewTest(InitialData):
 
     def setUp(self):
         super(MisCursosViewTest, self).setUp()
+        self.misCursosView = MisCursosView()
 
     def test_get_cursos_docente(self):
-        mis_cursos_view = MisCursosView()
-        lista_cursos = mis_cursos_view.get_cursos(self.usuaria_profesora2)
+        lista_cursos = self.misCursosView.get_cursos(self.usuaria_profesora2)
         self.assertTrue(set([self.curso_basico, self.curso_avanzado]).issuperset(set(lista_cursos)))
 
     # Vista de inicio docente carga página mis cursos y muestra los respectivos cursos.
     def test_vista_inicio_profesora(self):
         self.client.force_login(user=self.usuaria_profesora2)
         response = self.client.get(reverse('cursos:mis_cursos'))
-        self.assertTemplateUsed('cursos/mis_cursos.html')
+        self.assertTemplateUsed(response, 'cursos/mis_cursos.html')
         self.assertContains(response, "C++: Avanzado")
         self.assertContains(response, "C++: Básico")
         self.client.logout()
@@ -63,7 +63,7 @@ class MisCursosViewTest(InitialData):
     def test_vista_inicio_voluntaria(self):
         self.client.force_login(user=self.usuaria_voluntaria)
         response = self.client.get(reverse('cursos:mis_cursos'))
-        self.assertTemplateUsed('cursos/mis_cursos.html')
+        self.assertTemplateUsed(response, 'cursos/mis_cursos.html')
         self.assertContains(response, "Programación Uandes")
         self.client.logout()
 
@@ -74,33 +74,49 @@ class CursoViewTest(InitialData):
         self.usuaria_estudiante = User.objects.create_user(username="estudiante", password="contraseña123",
                                                            es_alumna=True)
         self.curso_basico.alumnas.add(self.usuaria_estudiante)
+
+        self.misCursosView = MisCursosView()
+        self.index_view = IndexView()
+
     # Vista inicio estudiante carga pagina de un curso y muestra info de ese curso.
 
     def test_vista_inicio_estudiante(self):
         self.client.force_login(user=self.usuaria_estudiante)
-        index_view = IndexView()
-        curso_id = index_view.get_curso_estudiante(username=self.usuaria_estudiante.username)
+
+        curso_id = self.index_view.get_curso_estudiante(username=self.usuaria_estudiante.username)
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': curso_id}))
-        self.assertTemplateUsed('inicio_curso.html')
+        self.assertTemplateUsed(response, 'cursos/inicio_curso.html')
         self.assertContains(response, 'C++: Básico')
         self.assertNotContains(response, 'Mis cursos')
 
     def test_curso_profesora(self):
         self.client.force_login(user=self.usuaria_profesora2)
-        mis_cursos_view = MisCursosView()
-        lista_cursos = mis_cursos_view.get_cursos(self.usuaria_profesora2)
+        lista_cursos = self.misCursosView.get_cursos(self.usuaria_profesora2)
         primer_curso = lista_cursos[0]
-        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': lista_cursos[0].id}))
-        self.assertTemplateUsed('inicio_curso.html')
+        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': primer_curso.id}))
+        self.assertTemplateUsed(response, 'cursos/inicio_curso.html')
         self.assertContains(response, primer_curso.nombre)
         self.assertNotContains(response, 'Mi curso')
 
-    def test_curso_profesora(self):
+    def test_curso_voluntaria(self):
         self.client.force_login(user=self.usuaria_voluntaria2)
-        mis_cursos_view = MisCursosView()
-        lista_cursos = mis_cursos_view.get_cursos(self.usuaria_voluntaria2)
+        lista_cursos = self.misCursosView.get_cursos(self.usuaria_voluntaria2)
         primer_curso = lista_cursos[0]
-        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': lista_cursos[0].id}))
-        self.assertTemplateUsed('inicio_curso.html')
+        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': primer_curso.id}))
+        self.assertTemplateUsed(response, 'cursos/inicio_curso.html')
         self.assertContains(response, primer_curso.nombre)
         self.assertNotContains(response, 'Mi curso')
+
+    def test_curso_no_existe(self):
+        # probar el link con un curso que no existe y que tire 404.
+        self.client.force_login(user=self.usuaria_profesora2)
+        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': 5}))
+        # self.assertTemplateUsed(response, 'error/404.html')
+        self.assertEquals(response.status_code, 404)
+
+    def test_curso_sin_permiso(self):
+        self.client.force_login(user=self.usuaria_profesora2)
+        otro_curso = 3
+        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': otro_curso}))
+        # self.assertTemplateUsed(response, 'error/403.html')
+        self.assertEquals(response.status_code, 403)

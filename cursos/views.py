@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
@@ -10,28 +10,9 @@ from cursos.models import Curso
 from usuarios.models import User
 
 
-class CursoView(LoginRequiredMixin, View):
+class CursosView(LoginRequiredMixin, View):
     login_url = 'usuarios:login'
     redirect_field_name = ''
-
-    def get(self, request, **kwargs, ):
-        curso = get_object_or_404(Curso, pk=kwargs['curso_id'])
-        return render(request, 'cursos/inicio_curso.html', {
-            'curso': curso
-        })
-
-
-class MisCursosView(LoginRequiredMixin, View):
-    login_url = 'usuarios:login'
-    redirect_field_name = ''
-
-    def get(self, request):
-        if request.user.es_alumna:
-            return HttpResponseRedirect(reverse('usuarios:index'))
-
-        else:
-            cursos = self.get_cursos(request.user.username)
-            return render(request, 'cursos/mis_cursos.html', {'cursos': cursos})
 
     def get_cursos(self, username):
         """
@@ -42,9 +23,34 @@ class MisCursosView(LoginRequiredMixin, View):
         usuaria = User.objects.get(username=username)
         if usuaria.es_profesora:
             cursos = Curso.objects.filter(profesoras__in=[usuaria])
-        else:
+        elif usuaria.es_voluntaria:
             cursos = Curso.objects.filter(voluntarias__in=[usuaria])
+        elif usuaria.es_alumna:
+            cursos = Curso.objects.filter(alumnas__in=[usuaria])
         return list(cursos)
+
+
+class CursoView(CursosView):
+
+    def get(self, request, **kwargs, ):
+        curso_id = kwargs['curso_id']
+        curso = get_object_or_404(Curso, pk=curso_id)
+        if curso in self.get_cursos(request.user.username):
+            return render(request, 'cursos/inicio_curso.html', {
+                'curso': curso
+        })
+        else:
+            return HttpResponseForbidden("No tienes permiso para acceder a este curso.")
+
+
+class MisCursosView(CursosView):
+
+    def get(self, request):
+        if request.user.es_profesora  or request.user.es_voluntaria :
+            cursos = self.get_cursos(request.user.username)
+            return render(request, 'cursos/mis_cursos.html', {'cursos': cursos})
+        else:
+            return HttpResponseRedirect(reverse('usuarios:index'))
 
 
 class EstadisticasView(LoginRequiredMixin, View):

@@ -17,7 +17,6 @@ class IndexView(LoginRequiredMixin, View):
     redirect_field_name = ''
 
     def get(self, request):
-
         if request.user.es_profesora or request.user.es_voluntaria:
             return HttpResponseRedirect(reverse('cursos:mis_cursos'))
         elif request.user.es_alumna:
