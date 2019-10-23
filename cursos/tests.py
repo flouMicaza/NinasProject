@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
-from django.test import TestCase, Client
+from django.test import TestCase, Client, LiveServerTestCase
 
 # Create your tests here.
 from django.urls import reverse
+from selenium.webdriver.chrome.webdriver import WebDriver
 
 from cursos.models import Curso
 from cursos.views import MisCursosView
@@ -10,7 +11,7 @@ from usuarios.models import User
 from usuarios.views import IndexView
 
 
-class InitialData(TestCase):
+class InitialData:
     def setUp(self):
         self.client = Client()
         self.usuaria_profesora = User.objects.create_user(username="profesora", password="contraseña123",
@@ -39,7 +40,7 @@ class InitialData(TestCase):
         self.curso_uandes.voluntarias.add(self.usuaria_voluntaria)
 
 
-class MisCursosViewTest(InitialData):
+class MisCursosViewTest(InitialData,TestCase):
     # probar que al cargar mis cursos de una profesora o voluntaria muestre todos los curso que tiene asignados.
 
     def setUp(self):
@@ -68,7 +69,7 @@ class MisCursosViewTest(InitialData):
         self.client.logout()
 
 
-class CursoViewTest(InitialData):
+class CursoViewTest(InitialData,TestCase):
     def setUp(self):
         super(CursoViewTest, self).setUp()
         self.usuaria_estudiante = User.objects.create_user(username="estudiante", password="contraseña123",
@@ -120,3 +121,29 @@ class CursoViewTest(InitialData):
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': otro_curso}))
         # self.assertTemplateUsed(response, 'error/403.html')
         self.assertEquals(response.status_code, 403)
+
+
+class SeleniumTest(InitialData, LiveServerTestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.selenium = WebDriver()
+        cls.selenium.implicitly_wait(10)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super().tearDownClass()
+
+    def login(self, user):
+        self.selenium.get('%s%s' % (self.live_server_url, '/login/'))
+        username_input = self.selenium.find_element_by_name("username")
+        username_input.send_keys(user.username)
+        password_input = self.selenium.find_element_by_name("password")
+        password_input.send_keys('contraseña123')
+        self.selenium.find_element_by_id('submit').click()
+
+    def test_muestra_cursos(self):
+        self.login(user=self.usuaria_profesora2)
+        cursos = self.selenium.find_elements_by_class_name('collapsible-header')
+        self.assertEqual(len(cursos), 2)
