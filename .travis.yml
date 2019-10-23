@@ -4,12 +4,12 @@ python:
 install:
   - pip3 install -r requirements.txt
 before_script:
-  - echo $PATH
   - python manage.py makemigrations
   - python manage.py migrate
+  - echo $PATH
   - wget http://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip
 
-  - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python3.6.7/lib/python3.6/bin/
+  - unzip chromedriver_linux64.zip -d /home/travis/bin/
 
   - export CHROME_BIN=chromium-browser
 script:
