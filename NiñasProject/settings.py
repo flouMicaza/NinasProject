@@ -35,12 +35,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Selenium_test',
     'usuarios',
     'compressor',
     'cursos',
     'coordinacion',
-    'clases'
+    'clases',
+    # 'Selenium_test',
 
 
 ]
