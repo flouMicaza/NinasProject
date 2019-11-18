@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'compressor',
     'cursos',
     'coordinacion',
-    # 'clases',
+    'clases',
     # 'Selenium_test',
 
 
