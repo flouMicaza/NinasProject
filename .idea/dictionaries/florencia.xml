@@ -2,7 +2,9 @@
   <dictionary name="florencia">
     <words>
       <w>alumnas</w>
+      <w>avanzada</w>
       <w>avanzado</w>
+      <w>basica</w>
       <w>basico</w>
       <w>bienvenida</w>
       <w>buscar</w>
@@ -10,9 +12,11 @@
       <w>carga</w>
       <w>clase</w>
       <w>clases</w>
+      <w>condiciones</w>
       <w>contraseña</w>
       <w>coordinacion</w>
       <w>coordinadora</w>
+      <w>creacion</w>
       <w>cuenta</w>
       <w>curso</w>
       <w>cursos</w>
@@ -27,6 +31,7 @@
       <w>este</w>
       <w>estudiante</w>
       <w>existe</w>
+      <w>fecha</w>
       <w>hola</w>
       <w>hoverable</w>
       <w>imagenes</w>
@@ -48,6 +53,8 @@
       <w>pagina</w>
       <w>perfil</w>
       <w>permiso</w>
+      <w>privadas</w>
+      <w>problema</w>
       <w>problemas</w>
       <w>profesor</w>
       <w>profesora</w>
@@ -55,6 +62,8 @@
       <w>programación</w>
       <w>proyecto</w>
       <w>prueba</w>
+      <w>publica</w>
+      <w>publicas</w>
       <w>puede</w>
       <w>página</w>
       <w>respectivos</w>

@@ -1,8 +1,24 @@
 {% extends 'menu.html' %}
+{% load static %}
 {% block title %}{{ curso.nombre }}{% endblock %}
 
 
 {% block content %}
-<h1>{{ curso.nombre }}</h1>
-<p><a href="{% url 'usuarios:logout' %}">logout</a></p>
+    <h1>{{ curso.nombre }}</h1>
+
+    <ul class="collection">
+    {% if clases %}
+        {% for clase in clases %}
+            <li class="collection-item">
+                <div>
+                    Clase {{ forloop.counter }}: {{ clase.nombre }}
+                    {% if user.es_profesora %}
+                        <a href="#!" class="secondary-content"><i class="material-icons">create</i>Editar</a>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+
+    {% endif %}
+    </ul>
 {% endblock %}
