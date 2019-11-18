@@ -14,7 +14,7 @@ usuaria_voluntaria = User.objects.create_user(username="voluntaria", password="c
 usuaria_voluntaria2 = User.objects.create_user(username="voluntaria2", password="contraseña123",es_voluntaria=True)
 
 usuaria_voluntaria3 = User.objects.create_user(username="voluntaria3", password="contraseña123",es_voluntaria=True)
-
+usuaria_estudiante = models.User.objects.create_user("alumna", password="contraseña123" , es_alumna=True)
 curso_basico.profesoras.add(usuaria_profesora2)
 curso_basico.voluntarias.add(usuaria_voluntaria2)
 curso_basico.voluntarias.add(usuaria_voluntaria3)
