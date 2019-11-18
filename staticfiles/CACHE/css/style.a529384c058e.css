@@ -1,0 +1,19 @@
+/* line 5, static/scss/style.scss */
+.btn-large {
+  background-color: #FF5252; }
+
+/* line 9, static/scss/style.scss */
+.btn-large:hover {
+  background-color: #FF8A80; }
+
+/* line 13, static/scss/style.scss */
+nav {
+  background-color: #FF5252; }
+
+/* line 18, static/scss/style.scss */
+span.editar-badge {
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: #fff;
+  background-color: #FF5252;
+  border-radius: 2px; }

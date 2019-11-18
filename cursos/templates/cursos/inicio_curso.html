@@ -13,7 +13,8 @@
                 <div>
                     Clase {{ forloop.counter }}: {{ clase.nombre }}
                     {% if user.es_profesora %}
-                        <a href="#!" class="secondary-content"><i class="material-icons">create</i>Editar</a>
+
+                        <a href="#!" class="secondary-content"><span class="editar-badge badge" data-badge-caption="Editar clase"><i class="tiny material-icons">create</i></span></a>
                     {% endif %}
                 </div>
             </li>

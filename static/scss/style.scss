@@ -13,3 +13,12 @@ $hover-color:  #FF8A80;
 nav {
   background-color: $primary-color;
 }
+
+
+span.editar-badge {
+	font-weight: 300;
+	font-size: 0.8rem;
+	color: #fff;
+	background-color: $primary-color;
+	border-radius: 2px;
+}
