@@ -9,17 +9,56 @@
     <ul class="collection">
     {% if clases %}
         {% for clase in clases %}
-            <li class="collection-item">
-                <div>
+            <li class="collection-item" >
+                <div id="clase_{{ clase.id }}" >
                     Clase {{ forloop.counter }}: {{ clase.nombre }}
                     {% if user.es_profesora %}
-
-                        <a href="#!" class="secondary-content"><span class="editar-badge badge" data-badge-caption="Editar clase"><i class="tiny material-icons">create</i></span></a>
+                         <a href="#!" class="secondary-content" onclick="editar_clase({{ clase.id }})">
+                             <span class="editar-badge badge" data-badge-caption="Editar clase">
+                                 <i class="tiny material-icons">create</i>
+                             </span>
+                         </a>
                     {% endif %}
+                </div>
+                <div style = "display:none" id="clase_edit_{{ clase.id }}">
+
+                        <div class="input-field ">
+                            <i class="material-icons prefix">mode_edit</i>
+                            <input value={{ clase.nombre }}  type='text' class='validate'><label class='active' for='clase_edit_" + id_clase + "'>Clase {{ forloop.counter }} :</label>
+                        </div>
+                        <div class="switch" style="align-self: start">
+                            <label>
+                                Pública
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                            </label>
+                            <div>
+                            <a class="waves-effect waves-light btn" style="align-self: end">Guardar</a>
+                        </div>
+                        </div>
+
+
                 </div>
             </li>
         {% endfor %}
+    {% else %}
+        <li class="collection-item">
+            No hay clases disponibles para este curso.
+            <div class="switch secondary-content ">
+                            <label class="switch-label">
+                              Pública
+                              <input type="checkbox">
+                              <span class="lever"></span>
 
+                            </label>
+                          </div>
+        </li>
     {% endif %}
     </ul>
+{% endblock %}
+
+
+{% block scripts %}
+    <script src={% static 'js/scripts.js' %}></script>
+
 {% endblock %}

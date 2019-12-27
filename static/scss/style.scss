@@ -22,3 +22,46 @@ span.editar-badge {
 	background-color: $primary-color;
 	border-radius: 2px;
 }
+
+.switch label input[type="checkbox"]:checked + .lever {
+	background-color: $hover-color;
+}
+
+.switch label input[type="checkbox"]:checked + .lever::after {
+	background-color:$primary-color;
+}
+
+.switch-label {
+	color : #373636
+}
+
+/* icon prefix focus color */
+   .input-field .prefix.active {
+     color: $primary-color;
+   }
+
+   /* label focus color */
+   .input-field input[type=text]:not(.browser-default):focus + label {
+     color: $primary-color;
+   }
+	.input-field input[type=password]:not(.browser-default):focus + label {
+     color: $primary-color;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:not(.browser-default):focus {
+     border-bottom: 1px solid $primary-color;
+     box-shadow: 0 1px 0 0 $primary-color;
+   }
+	.input-field input[type=password]:not(.browser-default):focus {
+     border-bottom: 1px solid $primary-color;
+     box-shadow: 0 1px 0 0 $primary-color;
+   }
+   /* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid green;
+     box-shadow: 0 1px 0 0 green;
+   }
+   .input-field input[type=password].valid {
+     border-bottom: 1px solid green;
+     box-shadow: 0 1px 0 0 green;
+   }

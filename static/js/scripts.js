@@ -11,4 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 
-
+ //evento para cuando se aprieta un botón de editar curso.
+function editar_clase(id_clase) {
+    $("#clase_"+ id_clase).css("display","none")
+    $("#clase_edit_" + id_clase).css({
+        "display": "flex",
+        "justify-content":"space-between"
+    })
+}

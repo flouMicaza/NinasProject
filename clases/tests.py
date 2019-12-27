@@ -38,6 +38,8 @@ class InitialData(TestCase):
         self.curso_avanzado.voluntarias.add(self.usuaria_voluntaria)
         self.curso_avanzado.voluntarias.add(self.usuaria_voluntaria2)
 
+        self.curso_sin_clase = Curso.objects.create(nombre="Sin Clases")
+        self.curso_sin_clase.voluntarias.add(self.usuaria_voluntaria)
         self.clase_basica_1 = Clase.objects.create(nombre="Variables", curso=self.curso_basico, publica=True,
                                                    fecha_clase=datetime.date(2019, 10, 19))
         self.clase_basica_2 = Clase.objects.create(nombre="Condiciones", curso=self.curso_basico, publica=False,
@@ -92,3 +94,10 @@ class ClasesEnCursoTest(InitialData):
         self.client.force_login(user=self.usuaria_alumna)
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_basico.id}))
         self.assertNotContains(response, 'editar')
+
+    def test_curso_sin_clases(self):
+        self.client.force_login(user=self.usuaria_voluntaria)
+        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_sin_clase.id}))
+        self.assertContains(response,"No hay clases disponibles para este curso.")
+        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_avanzado.id}))
+        self.assertNotContains(response, "No hay clases disponibles para este curso.")
