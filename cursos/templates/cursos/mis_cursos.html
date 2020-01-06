@@ -20,7 +20,9 @@
 
                         <a href="{% url 'cursos:curso' curso_id=curso.id %}" class="waves-effect waves-light btn-large primary"><i class="material-icons right">school</i>Ver clases y problemas</a>
 
-                            <a href="{% url 'cursos:estadisticas' curso_id=curso.id %}" class="waves-effect waves-light btn-large red accent-2 disabled"><i class="material-icons right">show_chart</i>Ver estadísticas</a>
+                        <a href="{% url 'cursos:estadisticas' curso_id=curso.id %}" class="waves-effect waves-light btn-large red accent-2 disabled"><i class="material-icons right">show_chart</i>Ver estadísticas</a>
+
+                        <a href="{% url 'asistencia:asistencia' curso_id=curso.id %}" class="waves-effect waves-light btn-large red accent-2"><i class="material-icons right">show_chart</i>Ver asistencia</a>
                     </div>
                 </li>
                 {% endfor %}

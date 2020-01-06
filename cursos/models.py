@@ -15,3 +15,6 @@ class Curso(models.Model):
     alumnas = models.ManyToManyField(User, related_name="alumnas", blank=True)
     tema = models.ManyToManyField(Tema, related_name="tags", blank=True)
 
+    def __str__(self):
+        return self.nombre
+
