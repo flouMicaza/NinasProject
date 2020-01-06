@@ -32,7 +32,7 @@ class CursosView(LoginRequiredMixin, View):
 
 class CursoView(CursosView):
 
-    def get(self, request, **kwargs, ):
+    def get(self, request, **kwargs ):
         curso_id = kwargs['curso_id']
         curso = get_object_or_404(Curso, pk=curso_id)
         if curso in self.get_cursos(request.user.username):
