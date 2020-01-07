@@ -1,6 +1,48 @@
-{% extends 'base.html' %}
+{% extends 'menu.html' %}
+{% load static %}
+{% block title %}Asistencia{% endblock %}
 
 {% block content %}
+    <h4>
+        Asistencia
+    </h4>
+    <h5>
+        Clase 1: Grafos
+    </h5>
+
+    <div class="container">
+
+      <table>
+        <thead>
+          <tr>
+            <th> Alumnas </th>
+            <th> Clase 1 </th>
+          </tr>
+        </thead>
+        <tbody>
+
+            {% for alumna in curso.alumnas.all %}
+              <tr>
+                <td> {{alumna.username}} </td>
+                <td>
+                <!-- <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button> -->
+                    <label>
+                        <input type="checkbox" />
+                        <span></span>
+                    </label>
+                </td>
+              </tr>
+            {% endfor %}
+
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="button1">
+        <a class="waves-effect waves-light btn-small">Save</a>
+    </div>
+
 
 
 

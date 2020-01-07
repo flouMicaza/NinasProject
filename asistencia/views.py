@@ -15,7 +15,7 @@ class AsistenciaView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         curso_id = kwargs['curso_id']
         curso = get_object_or_404(Curso, pk=curso_id)
-
+        print(curso)
         usuaria = User.objects.get(username=request.user.username)
         if usuaria.es_profesora:
             cursos = Curso.objects.filter(profesoras__in=[usuaria])
@@ -24,6 +24,6 @@ class AsistenciaView(LoginRequiredMixin, View):
 
         if curso in list(cursos):
             return render(request, 'asistencia/asistencia.html', {
-        #'curso': curso
+                'curso': curso
         })
         return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")

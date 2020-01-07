@@ -13,3 +13,26 @@ $hover-color:  #FF8A80;
 nav {
   background-color: $primary-color;
 }
+
+
+table {
+      border-collapse:collapse;
+      margin-top: 30px;
+      }
+      td, th {
+      padding: 10px;
+      border-bottom: 2px solid $hover-color;
+      text-align: center;
+      }
+
+.button1 {
+
+        background: $hover-color;
+        background-color: #f9e236b3;
+        color: white;
+        font: bold 10px/10px verdana;
+        position: absolute;
+        left: 70%;
+
+
+    }

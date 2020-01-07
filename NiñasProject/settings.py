@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'usuarios',
     'compressor',
     'cursos',
-    'coordinacion'
+    'coordinacion',
+    'asistencia',
+    'clases'
 ]
 
 MIDDLEWARE = [
