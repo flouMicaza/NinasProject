@@ -76,8 +76,8 @@ class Asistencia_GralViewTest(InitialData):
         self.asistencia_GralView = Asistencia_GralView()
         self.lista_cursos = self.misCursosView.get_cursos(self.usuaria_profesora2)
 
-
-    def test_asistencia_gral(self, usuaria, curso):
+    # Test para la vista de las asistencia gral de un curso por una usuaria
+    def test_vista_asistencia_gral(self, usuaria, curso):
         self.client.force_login(user=usuaria)
         response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': curso.id}))
         self.assertTemplateUsed(response, 'asistencia/asistencia_gral.html')
@@ -94,47 +94,18 @@ class Asistencia_GralViewTest(InitialData):
             self.assertContains(response, alumna.name)
 
         self.client.logout()
+
 
     def test_vista_asistencia_gral_profesora(self):
         usuaria = self.usuaria_profesora1
         curso = list(Curso.objects.filter(profesoras__in=[usuaria]))[0]
-        self.client.force_login(user=usuaria)
-        response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': curso.id}))
-        self.assertTemplateUsed(response, 'asistencia/asistencia_gral.html')
-        self.assertContains(response, "Pasar Asistencia")
-
-        self.assertContains(response, "Asistencia")
-        for clase in list(Clase.objects.filter(curso__in=[curso])):
-            self.assertContains(response, clase.nombre)
-
-        self.assertContains(response, "Nombre")
-        self.assertContains(response, "Total")
-
-        for alumna in curso.alumnas:
-            self.assertContains(response, alumna.name)
-
-        self.client.logout()
+        self.test_vista_asistencia_gral(usuaria, curso)
 
 
     def test_vista_asistencia_gral_voluntaria(self):
         usuaria = self.usuaria_voluntaria2
-        self.client.force_login(user=usuaria)
         curso = list(Curso.objects.filter(voluntarias__in=[usuaria]))[0]
-        response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': curso.id}))
-        self.assertTemplateUsed(response, 'asistencia/asistencia_gral.html')
-        self.assertContains(response, "Pasar Asistencia")
-
-        self.assertContains(response, "Asistencia")
-        for clase in list(Clase.objects.filter(curso__in=[curso])):
-            self.assertContains(response, clase.nombre)
-
-        self.assertContains(response, "Nombre")
-        self.assertContains(response, "Total")
-
-        for alumna in curso.alumnas:
-            self.assertContains(response, alumna.name)
-
-        self.client.logout()
+        self.test_vista_asistencia_gral(usuaria, curso)
 
 
     def test_curso_sin_permiso(self):
@@ -153,101 +124,85 @@ class AsistenciaViewTest(InitialData):
         super(AsistenciaViewTest, self).setUp()
         self.asistenciaView = AsistenciaView()
         self.lista_cursos = self.misCursosView.get_cursos(self.usuaria_profesora2)
+        self.dia_ninaspro= 6 #6 de Julio 2020 es sabado
+        self.hora_inicio = 10 #taller parte a las 10
 
 
-    def test_vista_asistencia_sabado(self):
-        ## una voluntaria va a ṕasar la lista un sabado a las 11:30
+    def test_vista_asistencia(self, day, hour, usuaria, curso):
         import datetime
-        day=6
-        hour=11
-        usuaria= self.usuaria_voluntaria1
+        newNow = datetime.datetime(year=2020, month=6, day=day, hour=hour)
+        datetime = Mock()
+        datetime.datetime.return_value = newNow
+
         self.client.force_login(user=usuaria)
-        newNow = datetime.datetime(year=2020, month=6, day=day, hour=hour)
-        datetime = Mock()
-        datetime.datetime.return_value = newNow
-
-        curso = list(Curso.objects.filter(volintarias__in=[usuaria]))[0]
         response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso.id}))
         self.assertTemplateUsed(response, 'asistencia/asistencia.html')
         self.assertContains(response, "Save")
-
         self.assertContains(response, "Asistencia")
         for clase in list(Clase.objects.filter(curso__in=[curso])):
             self.assertContains(response, clase.nombre)
         self.assertContains(response, "Nombre")
-
-        for i in range(4):
-            self.assertContains(response, "alumna" + str(i+1))
-
-        self.client.logout()
-
-
-    def test_vista_asistencia_domingo(self):
-        ## una profesora va a modificar la lista un domingo
-        import datetime
-        usuaria = self.usuaria_profesora1
-        day = 7
-        hour = 11
-        self.client.force_login(user=self.usuaria_profesora1)
-        newNow = datetime.datetime(year=2020, month=6, day=day, hour=hour)
-        datetime = Mock()
-        datetime.datetime.return_value = newNow
-
-        curso = list(Curso.objects.filter(profesoras__in=[usuaria]))[0]
-        response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso.id}))
-        self.assertTemplateUsed(response, 'asistencia/asistencia.html')
-        self.assertContains(response, "Save")
-
-        self.assertContains(response, "Asistencia")
-        for clase in list(Clase.objects.filter(curso__in=[curso])):
-            self.assertContains(response, clase.nombre)
-        self.assertContains(response, "Nombre")
-
         for i in range(4):
             self.assertContains(response, "alumna" + str(i + 1))
 
         self.client.logout()
 
 
-    def test_vista_asistencia_sin_permiso_sabado(self):
-        ## una voluntaria va a ṕasar la lista un sabado fuera de horario
-        import datetime
+    def test_vista_asistencia_sabado(self):
+        ## una voluntaria va a ṕasar la lista un dia de ninaspro a una hora permitida
+        day = self.dia_ninaspro
+        hour = self.hora_inicio + 1
         usuaria = self.usuaria_voluntaria1
-        day = 6
-        hour = 7
+        curso = list(Curso.objects.filter(volintarias__in=[usuaria]))[0]
+        self.test_vista_asistencia(day, hour, usuaria, curso)
 
-        self.client.force_login(user=self.usuaria)
+
+    def test_vista_asistencia_domingo(self):
+        ## una profesora va a modificar la lista un dia que no hay ninaspro
+        day = self.dia_ninaspro+1
+        hour = self.hora_inicio
+        usuaria = self.usuaria_profesora1
+        curso = list(Curso.objects.filter(profesoras__in=[usuaria]))[0]
+        self.test_vista_asistencia(day, hour, usuaria, curso)
+
+
+    def test_vista_asistencia_sin_permiso(self, day, hour, usuaria, curso):
+        import datetime
         newNow = datetime.datetime(year=2020, month=6, day=day, hour=hour)
         datetime = Mock()
         datetime.datetime.return_value = newNow
-
-        curso = list(Curso.objects.filter(voluntarias__in=[usuaria]))[0]
+        self.client.force_login(user=self.usuaria)
         response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso.id}))
         # self.assertTemplateUsed(response, 'error/403.html')
         self.assertEquals(response.status_code, 403)
-
         self.client.logout()
 
 
-    def test_vista_asistencia_sin_permiso(self):
+    def test_vista_asistencia_sin_permiso_voluntaria(self):
+        ## una voluntaria va a ṕasar la lista un dia de ninaspro fuera de horario
+        day = self.dia_ninaspro
+        hour = self.hora_inicio-1
+        usuaria = self.usuaria_voluntaria1
+        curso = list(Curso.objects.filter(voluntarias__in=[usuaria]))[0]
+        self.test_vista_asistencia_sin_permiso(day, hour, usuaria, curso)
+
+
+    def test_vista_asistencia_sin_permiso_profesora(self):
+        ## una profesora va a ṕasar la lista un dia de ninaspro antes de la clase
+        day = self.dia_ninaspro
+        hour = self.hora_inicio-1
+        usuaria = self.usuaria_voluntaria1
+        curso = list(Curso.objects.filter(voluntarias__in=[usuaria]))[0]
+        self.test_vista_asistencia_sin_permiso(day, hour, usuaria, curso)
+
+
+    def test_vista_asistencia_sin_permiso_alumna(self):
         ## una alumna quiere ṕasar la lista
-        import datetime
+        day = self.dia_ninaspro
+        hour = self.hora_inicio+1
         usuaria = self.usuaria_voluntaria1
-        day = 6
-        hour = 11
-
-        self.client.force_login(user=self.usuaria)
-        newNow = datetime.datetime(year=2020, month=6, day=day, hour=hour)
-        datetime = Mock()
-        datetime.datetime.return_value = newNow
-
-        curso = list(Curso.objects.filter(voluntarias__in=[usuaria]))[0]
-        response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso.id}))
-        # self.assertTemplateUsed(response, 'error/403.html')
-        self.assertEquals(response.status_code, 403)
-
-        self.client.logout()
-
+        curso = list(Curso.objects.filter(alumnas__in=[usuaria]))[0]
+        self.test_vista_asistencia_sin_permiso(day, hour, usuaria, curso)
 
 
 
