@@ -9,3 +9,10 @@ class Asistencia_clase(models.Model):
 
     def __str__(self):
         return "{0} asistió a la clase {1}".format(self.alumna.username, self.clase.nombre)
+"""
+    def get_asistencia_data(self, **kwargs):
+        context = super(UserPreferences, self).get_context_data(**kwargs)
+        context['form1'] = Preferences.objects.all()
+        return context
+"""
+

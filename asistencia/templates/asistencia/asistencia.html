@@ -3,6 +3,7 @@
 {% block title %}Asistencia{% endblock %}
 
 {% block content %}
+<form>{% csrf_token %}
     <h4>
         Asistencia
     </h4>
@@ -21,29 +22,25 @@
         </thead>
         <tbody>
 
-            {% for alumna in curso.alumnas.all %}
-              <tr>
-                <td> {{alumna.username}} </td>
-                <td>
-                    <label>
-                        <input type="checkbox" />
-                        <span></span>
-                    </label>
-                </td>
-              </tr>
-            {% endfor %}
+                {% for alumna in curso.alumnas.all %}
+                  <tr>
+                    <td> {{alumna.username}} </td>
+                    <td>
+                        <label>
+                            <input id=alumna.id type="checkbox" name="asistencia_alumna" value=0/>
+                            <span></span>
+                        </label>
+                    </td>
+                  </tr>
+                {% endfor %}
 
         </tbody>
       </table>
 
     </div>
 
-    <div class="button1">
-        <a class="waves-effect waves-light btn-small">Save</a>
-    </div>
-
-
-
+    <input type="submit" name="submit" value="guardar">
+</form>
 
 {% endblock %}
 
