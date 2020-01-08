@@ -128,6 +128,7 @@ class AsistenciaViewTest(InitialData):
         self.hora_inicio = 10 #taller parte a las 10
 
 
+    # Test para la vista de las asistencia un curso por una usuaria
     def test_vista_asistencia(self, day, hour, usuaria, curso):
         import datetime
         newNow = datetime.datetime(year=2020, month=6, day=day, hour=hour)
@@ -166,6 +167,7 @@ class AsistenciaViewTest(InitialData):
         self.test_vista_asistencia(day, hour, usuaria, curso)
 
 
+    # Test para la vista de las asistencia de un curso por una usuaria sin permiso
     def test_vista_asistencia_sin_permiso(self, day, hour, usuaria, curso):
         import datetime
         newNow = datetime.datetime(year=2020, month=6, day=day, hour=hour)
@@ -203,6 +205,13 @@ class AsistenciaViewTest(InitialData):
         usuaria = self.usuaria_voluntaria1
         curso = list(Curso.objects.filter(alumnas__in=[usuaria]))[0]
         self.test_vista_asistencia_sin_permiso(day, hour, usuaria, curso)
+
+    def test_vista_asistencia_curso_no_existe(self):
+        # probar el link con un curso que no existe y que tire 404.
+        self.client.force_login(user=self.usuaria_profesora1)
+        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': 5}))
+        # self.assertTemplateUsed(response, 'error/404.html')
+        self.assertEquals(response.status_code, 404)
 
 
 
