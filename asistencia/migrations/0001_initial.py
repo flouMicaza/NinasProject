@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Asistencia_clase',
+            name='Asistencia',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('alumna', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='alumna', to=settings.AUTH_USER_MODEL)),

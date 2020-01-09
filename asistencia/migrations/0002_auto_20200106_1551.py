@@ -16,12 +16,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='asistencia_clase',
+            model_name='asistencia',
             name='clase',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='clases.Clase'),
         ),
         migrations.AddField(
-            model_name='asistencia_clase',
+            model_name='asistencia',
             name='curso',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cursos.Curso'),
         ),

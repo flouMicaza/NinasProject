@@ -1,6 +1,6 @@
 from unittest.mock import Mock
 
-from asistencia.models import Asistencia_clase
+from asistencia.models import Asistencia
 from usuarios.models import User
 from django.urls import reverse
 from django.test import TestCase, Client
@@ -63,9 +63,9 @@ class InitialData(TestCase):
 
 
         for alumna in [self.usuaria_alumna1, self.usuaria_alumna2, self.usuaria_alumna3, self.usuaria_alumna4]:
-            self.asistencia_basico1 = Asistencia_clase.objects.create(alumna=alumna, clase=self.clase_basico1,
+            self.asistencia_basico1 = Asistencia.objects.create(alumna=alumna, clase=self.clase_basico1,
                                                              curso=self.curso_basico, author= self.usuaria_profesora1)
-            self.asistencia_basico2 = Asistencia_clase.objects.create(alumna=alumna, clase=self.clase_basico2,
+            self.asistencia_basico2 = Asistencia.objects.create(alumna=alumna, clase=self.clase_basico2,
                                                              curso=self.curso_basico, author= self.usuaria_profesora1)
 
 
