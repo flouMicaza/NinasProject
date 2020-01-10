@@ -64,17 +64,43 @@ class InitialData(TestCase):
         self.clase_basico1 = Clase.objects.create(nombre="Clase 1: Ciclos for", curso=self.curso_basico)
         self.clase_basico2 = Clase.objects.create(nombre="Clase 2: Ciclos while", curso=self.curso_basico)
 
-
-        for alumna in [self.usuaria_alumna1, self.usuaria_alumna2, self.usuaria_alumna3, self.usuaria_alumna4]:
+        ## basico1 : alumna1, alumna3, alumna4, alumna2
+        ## basico2 : alumna2, alumna4
+        for alumna in [self.usuaria_alumna1, self.usuaria_alumna3, self.usuaria_alumna4]:
             self.asistencia_basico1 = Asistencia.objects.create(alumna=alumna, clase=self.clase_basico1, author= self.usuaria_profesora1)
-            self.asistencia_basico2 = Asistencia.objects.create(alumna=alumna, clase=self.clase_basico2, author= self.usuaria_profesora1)
+
+        Asistencia.objects.create(alumna=self.usuaria_alumna2, clase=self.clase_basico2, author=self.usuaria_profesora1)
+        Asistencia.objects.create(alumna=self.usuaria_alumna2, clase=self.clase_basico1, author=self.usuaria_profesora1)
+        Asistencia.objects.create(alumna=self.usuaria_alumna4, clase=self.clase_basico2, author=self.usuaria_profesora1)
 
 
 class Asistencia_GralViewTest(InitialData):
 
-    def setup(self):
+    def setUp(self):
         super(Asistencia_GralViewTest, self).setUp()
         self.asistencia_GralView = Asistencia_GralView()
+
+    def test_get_asistencias(self):
+        curso = self.curso_basico
+        alumnas_curso = curso.alumnas.all()
+        asistencias = Asistencia.objects.filter(clase__curso=curso)
+        dic = self.asistencia_GralView.get_asistencias(asistencias)
+
+        for alumna in alumnas_curso:
+            asistencias_alumna = asistencias.filter(alumna=alumna)
+            self.assertEqual(len(asistencias_alumna), len(dic[alumna]))
+            for asistencia in asistencias_alumna:
+                self.assertTrue(asistencia.clase in dic[alumna])
+
+
+
+        """
+        for alumna in alumnas_asistentes:
+            clases = dic[alumna]
+            for clase in Clase.objects.filter(alumna=alumna, curso=curso):
+                self.assertTrue(clase in clases)
+        """
+
 
     # Test para la vista de las asistencia gral de un curso por una usuaria
     def vista_asistencia_gral(self, usuaria, curso):

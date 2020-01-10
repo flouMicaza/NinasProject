@@ -17,25 +17,40 @@ class Asistencia_GralView(LoginRequiredMixin, View):
     login_url = 'usuarios:login'
     redirect_field_name = ''
 
+    ## devuelve un diccionario que tiene como llave a la alumna del curso y como valor una lista con las clases a las que asistio
+    def get_asistencias(self, asistencias):
+        asist = list(asistencias.order_by('alumna'))
+        dic = {}
+        index = 0
+        while (index < len(asist)):
+            alumna = asist[index].alumna
+            lista = []
+            while (index < len(asist) and asist[index].alumna == alumna):
+                lista += [asist[index].clase]
+                index += 1
+            dic[alumna] = lista
+        return dic
+
     def get(self, request, **kwargs):
         curso_id = kwargs['curso_id']
         curso = get_object_or_404(Curso, pk=curso_id)
         usuaria = User.objects.get(username=request.user.username)
         if usuaria.es_profesora:
-            cursos = Curso.objects.filter(profesoras__in=[usuaria])
+            curso = Curso.objects.filter(profesoras__in=[usuaria], id=curso_id)
         elif usuaria.es_voluntaria:
-            cursos = Curso.objects.filter(voluntarias__in=[usuaria])
+            curso = Curso.objects.filter(voluntarias__in=[usuaria], id=curso_id)
 
-
-        clases = Clase.objects.filter(curso=curso).order_by('fecha_clase')
-        asistencias = Asistencia.objects.filter(clase__in=list(clases)) #poner ordey by fecha
+        clases = Clase.objects.filter(curso=curso)
+        asistencias = Asistencia.objects.filter(clase__in=list(clases))
         ## curso. almunas por orden alfabetico
         ## hacer dic con alumnas como llave y sus asistencias
-        if curso in list(cursos):
+        asistencia_por_alumna = self.get_asistencias(asistencias)
+
+        if len(list(curso))>0:
             return render(request, 'asistencia/asistencia_gral.html', {
                 'curso': curso,
                 'clases': clases,
-                'asistencias':asistencias,
+                'asistencias':asistencia_por_alumna,
         })
         return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
 
