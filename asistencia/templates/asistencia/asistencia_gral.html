@@ -1,0 +1,58 @@
+{% extends 'menu.html' %}
+{% load static %}
+{% block title %}Asistencia{% endblock %}
+
+{% block content %}
+
+    <div>
+         <h4> Asistencia </h4>
+         <h5> {{curso.nombre}} </h5>
+    </div>
+
+    <div class="col s4" style="align-self: stretch" >
+        <div class="material-icons right" >
+            <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small red accent-2">
+                <i class="material-icons right">format_list_bulleted</i>Pasar asistencia</a>
+        </div>
+    </div>
+
+    <div class="container">
+      <table>
+        <thead>
+
+          <tr>
+            <th> Alumnas </th>
+
+            {% for clase in clases %}
+                <th> Clase {{forloop.counter}} </th>
+            {% endfor %}
+
+          </tr>
+        </thead>
+
+        <tbody>
+            {% regroup asistencias by clase as asistencias_list  %}
+
+            {% for alumna in curso.alumnas.all %}
+              <tr>
+                <td> {{alumna.username}} </td>
+                {% for clase in clases %}
+
+
+                  <td>  </td>
+                 {% endfor %}
+              </tr>
+            {% endfor %}
+
+        </tbody>
+      </table>
+
+    </div>
+
+
+
+
+
+
+{% endblock %}
+
