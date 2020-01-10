@@ -1,6 +1,9 @@
+import datetime
+from datetime import date
 from unittest.mock import Mock
 
 from asistencia.models import Asistencia
+from cursos.views import MisCursosView, CursosView
 from usuarios.models import User
 from django.urls import reverse
 from django.test import TestCase, Client
@@ -72,10 +75,9 @@ class Asistencia_GralViewTest(InitialData):
     def setup(self):
         super(Asistencia_GralViewTest, self).setUp()
         self.asistencia_GralView = Asistencia_GralView()
-        self.lista_cursos = self.misCursosView.get_cursos(self.usuaria_profesora2)
 
     # Test para la vista de las asistencia gral de un curso por una usuaria
-    def test_vista_asistencia_gral(self, usuaria, curso):
+    def vista_asistencia_gral(self, usuaria, curso):
         self.client.force_login(user=usuaria)
         response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': curso.id}))
         self.assertTemplateUsed(response, 'asistencia/asistencia_gral.html')
@@ -97,13 +99,13 @@ class Asistencia_GralViewTest(InitialData):
     def test_vista_asistencia_gral_profesora(self):
         usuaria = self.usuaria_profesora1
         curso = list(Curso.objects.filter(profesoras__in=[usuaria]))[0]
-        self.test_vista_asistencia_gral(usuaria, curso)
+        self.vista_asistencia_gral(usuaria, curso)
 
 
     def test_vista_asistencia_gral_voluntaria(self):
         usuaria = self.usuaria_voluntaria2
         curso = list(Curso.objects.filter(voluntarias__in=[usuaria]))[0]
-        self.test_vista_asistencia_gral(usuaria, curso)
+        self.vista_asistencia_gral(usuaria, curso)
 
 
     def test_curso_sin_permiso(self):
@@ -121,20 +123,20 @@ class AsistenciaViewTest(InitialData):
     def setUp(self):
         super(AsistenciaViewTest, self).setUp()
         self.asistenciaView = AsistenciaView()
-        self.lista_cursos = self.misCursosView.get_cursos(self.usuaria_profesora2)
         self.dia_ninaspro= 6 #6 de Julio 2020 es sabado
         self.hora_inicio = 10 #taller parte a las 10
 
 
     # Test para la vista de las asistencia un curso por una usuaria
-    def test_vista_asistencia(self, day, hour, usuaria, curso):
+    def vista_asistencia(self, day, hour, usuaria, curso):
         import datetime
+        clase = list(Clase.objects.filter(curso=curso))[0]
         newNow = datetime.datetime(year=2020, month=6, day=day, hour=hour)
         datetime = Mock()
         datetime.datetime.return_value = newNow
 
         self.client.force_login(user=usuaria)
-        response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso.id}))
+        response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso.id,'clase_id': clase.id}))
         self.assertTemplateUsed(response, 'asistencia/asistencia.html')
         self.assertContains(response, "Save")
         self.assertContains(response, "Asistencia")
@@ -147,32 +149,35 @@ class AsistenciaViewTest(InitialData):
         self.client.logout()
 
 
-    def test_vista_asistencia_sabado(self):
+    def test_vista_asistencia_dia_ninaspro(self):
         ## una voluntaria va a ṕasar la lista un dia de ninaspro a una hora permitida
         day = self.dia_ninaspro
         hour = self.hora_inicio + 1
         usuaria = self.usuaria_voluntaria1
-        curso = list(Curso.objects.filter(volintarias__in=[usuaria]))[0]
-        self.test_vista_asistencia(day, hour, usuaria, curso)
+        curso = Curso.objects.create(nombre="Django")
+        curso.voluntarias.add(usuaria)
+        Clase.objects.create(nombre="Tutorial DjangoGirls", curso=curso, fecha_clase= datetime.datetime(year=2020, month=6, day=day, hour=hour))
+        self.vista_asistencia(day, hour, usuaria, curso)
 
 
-    def test_vista_asistencia_domingo(self):
+    def test_vista_asistencia_dia_no_ninaspro(self):
         ## una profesora va a modificar la lista un dia que no hay ninaspro
         day = self.dia_ninaspro+1
         hour = self.hora_inicio
         usuaria = self.usuaria_profesora1
         curso = list(Curso.objects.filter(profesoras__in=[usuaria]))[0]
-        self.test_vista_asistencia(day, hour, usuaria, curso)
+        self.vista_asistencia(day, hour, usuaria, curso)
 
 
     # Test para la vista de las asistencia de un curso por una usuaria sin permiso
-    def test_vista_asistencia_sin_permiso(self, day, hour, usuaria, curso):
+    def vista_asistencia_sin_permiso(self, day, hour, usuaria, curso):
         import datetime
+        clase = list(Clase.objects.filter(curso=curso))[0]
         newNow = datetime.datetime(year=2020, month=6, day=day, hour=hour)
         datetime = Mock()
         datetime.datetime.return_value = newNow
-        self.client.force_login(user=self.usuaria)
-        response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso.id}))
+        self.client.force_login(user=usuaria)
+        response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso.id,'clase_id': clase.id}))
         # self.assertTemplateUsed(response, 'error/403.html')
         self.assertEquals(response.status_code, 403)
         self.client.logout()
@@ -184,7 +189,7 @@ class AsistenciaViewTest(InitialData):
         hour = self.hora_inicio-1
         usuaria = self.usuaria_voluntaria1
         curso = list(Curso.objects.filter(voluntarias__in=[usuaria]))[0]
-        self.test_vista_asistencia_sin_permiso(day, hour, usuaria, curso)
+        self.vista_asistencia_sin_permiso(day, hour, usuaria, curso)
 
 
     def test_vista_asistencia_sin_permiso_profesora(self):
@@ -193,16 +198,16 @@ class AsistenciaViewTest(InitialData):
         hour = self.hora_inicio-1
         usuaria = self.usuaria_voluntaria1
         curso = list(Curso.objects.filter(voluntarias__in=[usuaria]))[0]
-        self.test_vista_asistencia_sin_permiso(day, hour, usuaria, curso)
+        self.vista_asistencia_sin_permiso(day, hour, usuaria, curso)
 
 
     def test_vista_asistencia_sin_permiso_alumna(self):
         ## una alumna quiere ṕasar la lista
         day = self.dia_ninaspro
         hour = self.hora_inicio+1
-        usuaria = self.usuaria_voluntaria1
+        usuaria = self.usuaria_alumna1
         curso = list(Curso.objects.filter(alumnas__in=[usuaria]))[0]
-        self.test_vista_asistencia_sin_permiso(day, hour, usuaria, curso)
+        self.vista_asistencia_sin_permiso(day, hour, usuaria, curso)
 
     def test_vista_asistencia_curso_no_existe(self):
         # probar el link con un curso que no existe y que tire 404.
