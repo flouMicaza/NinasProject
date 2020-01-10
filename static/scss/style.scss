@@ -1,12 +1,14 @@
 
 $primary-color: #FF5252 !default;
 $hover-color:  #FF8A80;
+$present_color: #FCFFD1;
+$absent-color: #FECCC4;
 
-.btn-large {
+.btn-large .btn-small {
   background-color: $primary-color;
 }
 
-.btn-large:hover {
+.btn-large:hover .btn-small:hover {
   background-color: $hover-color;
 }
 
@@ -17,7 +19,7 @@ nav {
 
 table {
       border-collapse:collapse;
-      margin-top: 30px;
+      margin-top: 70px;
       }
       td, th {
       padding: 10px;
@@ -25,14 +27,3 @@ table {
       text-align: center;
       }
 
-.button1 {
-
-        background: $hover-color;
-        background-color: #f9e236b3;
-        color: white;
-        font: bold 10px/10px verdana;
-        position: absolute;
-        left: 70%;
-
-
-    }

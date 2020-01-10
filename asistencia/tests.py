@@ -5,7 +5,7 @@ from usuarios.models import User
 from django.urls import reverse
 from django.test import TestCase, Client
 
-from asistencia.views import Asistencia_GralView
+from asistencia.views import Asistencia_GralView, AsistenciaView
 from clases.models import Clase
 from cursos.models import Curso
 
@@ -63,10 +63,8 @@ class InitialData(TestCase):
 
 
         for alumna in [self.usuaria_alumna1, self.usuaria_alumna2, self.usuaria_alumna3, self.usuaria_alumna4]:
-            self.asistencia_basico1 = Asistencia.objects.create(alumna=alumna, clase=self.clase_basico1,
-                                                             curso=self.curso_basico, author= self.usuaria_profesora1)
-            self.asistencia_basico2 = Asistencia.objects.create(alumna=alumna, clase=self.clase_basico2,
-                                                             curso=self.curso_basico, author= self.usuaria_profesora1)
+            self.asistencia_basico1 = Asistencia.objects.create(alumna=alumna, clase=self.clase_basico1, author= self.usuaria_profesora1)
+            self.asistencia_basico2 = Asistencia.objects.create(alumna=alumna, clase=self.clase_basico2, author= self.usuaria_profesora1)
 
 
 class Asistencia_GralViewTest(InitialData):

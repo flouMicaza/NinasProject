@@ -11,9 +11,7 @@
     <h5>
         {{clase.nombre}}
     </h5>
-
-    <div class="container">
-
+    <div>
       <table>
         <thead>
           <tr>
@@ -35,9 +33,12 @@
 
         </tbody>
       </table>
-
     </div>
-   <button type="submit" class="save btn btn-default" >Save</button>
+
+    <div>
+        <a href="{% url 'asistencia:asistencia_gral' curso_id=curso.id %}" class="waves-effect waves-light btn-small red accent-2">
+        <i class="material-icons right">check</i>Guardar</a>
+    </div>
 </form>
 
 {% endblock %}

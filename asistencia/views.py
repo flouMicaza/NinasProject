@@ -26,11 +26,14 @@ class Asistencia_GralView(LoginRequiredMixin, View):
         elif usuaria.es_voluntaria:
             cursos = Curso.objects.filter(voluntarias__in=[usuaria])
         clases = Clase.objects.filter(curso=curso)
-
+        asistencias = Asistencia.objects.filter(clase__in=list(clases)) #poner ordey by fecha
+        ## curso. almunas por orden alfabetico
+        ## hacer dic con alumnas como llave y sus asistencias
         if curso in list(cursos):
             return render(request, 'asistencia/asistencia_gral.html', {
                 'curso': curso,
                 'clases': clases,
+                'asistencias':asistencias,
         })
         return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
 
@@ -41,13 +44,14 @@ class AsistenciaView(LoginRequiredMixin, View):
 
     def get(self, request, **kwargs):
         curso_id = kwargs['curso_id']
+        clase_id = kwargs['clase_id']
         curso = get_object_or_404(Curso, pk=curso_id)
         usuaria = User.objects.get(username=request.user.username)
         if usuaria.es_profesora:
             cursos = Curso.objects.filter(profesoras__in=[usuaria])
         elif usuaria.es_voluntaria:
             cursos = Curso.objects.filter(voluntarias__in=[usuaria])
-        clase = Clase.objects.filter(curso=curso, fecha_clase__in=[datetime.today()])
+        clase = list(Clase.objects.filter(curso=curso, id=clase_id))[0]
         form = self.get_form(request)
 
         if curso in list(cursos):
