@@ -92,14 +92,20 @@ class Asistencia_GralViewTest(InitialData):
         print(alumnas_curso)
         print("ASISTENCIAS ---------------------------")
         print(asistencias)
-        dic = self.asistencia_GralView.get_asistencias(asistencias, alumnas_curso)
+        lista = self.asistencia_GralView.get_asistencias(asistencias, alumnas_curso)
+        lista_alumnas = lista[0]
+        lista_clases = lista[1]
 
-        self.assertEqual(len(dic), len(alumnas_curso))
-        for alumna in alumnas_curso:
+        self.assertEqual(len(lista_alumnas), len(lista_clases))
+        self.assertEqual(len(lista_alumnas), len(alumnas_curso))
+
+        i=0
+        for alumna in lista_alumnas:
             asistencias_alumna = asistencias.filter(alumna=alumna)
-            self.assertEqual(len(asistencias_alumna), len(dic[alumna]))
+            self.assertEqual(len(asistencias_alumna), len(lista_clases[i]))
             for asistencia in asistencias_alumna:
-                self.assertTrue(asistencia.clase in dic[alumna])
+                self.assertTrue(asistencia.clase in lista_clases[i])
+            i += 1
 
 
     # Test para la vista de las asistencia gral de un curso por una usuaria

@@ -19,33 +19,32 @@ class Asistencia_GralView(LoginRequiredMixin, View):
 
     ## devuelve un diccionario que tiene como llave a la alumna del curso y como valor una lista con las clases a las que asistio
     def get_asistencias(self, asistencias, alumnas):
-        #asist_por_nombre = asistencias.order_by('alumna__first_name')
+        lista_alumnas = []
+        lista_clases = []
+        # asist_por_nombre = asistencias.order_by('alumna__first_name')
         alum_por_nombre = alumnas.order_by('first_name')
         nro_alumnas = len(alumnas)
 
         i = 0
-        dic = {}
 
-        while(len(dic)<nro_alumnas):
+        while (len(lista_alumnas) < nro_alumnas):
             name = alum_por_nombre[i].first_name
-            alum = alumnas.filter(first_name = name).order_by('last_name')
+            alum = alumnas.filter(first_name=name).order_by('last_name')
 
             for alumna in alum:
-                print(alumna)
+                print("alumna = ", alumna)
                 asist = asistencias.filter(alumna=alumna)
-                print(len(asist))
                 lista = []
-                index=0
-                while (len(lista)<len(asist)):
+                index = 0
+                while (len(lista) < len(asist)):
                     lista += [asist[index].clase]
                     index += 1
-                dic[alumna] = lista
+
+                lista_alumnas += [alumna]
+                lista_clases += [lista]
                 i += 1
-                print(dic)
 
-
-
-        return dic
+        return [lista_alumnas, lista_clases]
 
 
     def get(self, request, **kwargs):
@@ -63,12 +62,15 @@ class Asistencia_GralView(LoginRequiredMixin, View):
             clases = Clase.objects.filter(curso=curso)
             asistencias = Asistencia.objects.filter(clase__curso=curso)
 
-            dic_asistencia = self.get_asistencias(asistencias, curso.alumnas.all())
+            lista = self.get_asistencias(asistencias, curso.alumnas.all())
+            lista_alumnas = lista[0]
+            lista_clases = lista[1]
 
             return render(request, 'asistencia/asistencia_gral.html', {
                 'curso': curso,
                 'clases': clases,
-                'asistencias': dic_asistencia
+                'alumnas' : lista_alumnas,
+                'asistencias': lista_clases
         })
         return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
 

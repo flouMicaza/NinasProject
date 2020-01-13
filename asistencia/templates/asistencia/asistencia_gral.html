@@ -31,16 +31,16 @@
         </thead>
 
         <tbody>
-            {% for alumna, clases_alumna in asistencias.items %}
+            {% for alumna, clases_alumna in lista_alumnas, lista_clases %}
 
                 <tr>
                     <td> {{alumna.first_name}}  {{alumna.last_name}}</td>
                     {% for clase in clases %}
 
                         {% if clase in clases_alumna %}
-                            <td> presente </td>
+                            <td>  <i class="material-icons">check</i> </td>
                         {% else %}
-                            <td>  </td>
+                            <td>  <i class="material-icons">close</i> </td>
                         {% endif %}
 
                     {% endfor%}
