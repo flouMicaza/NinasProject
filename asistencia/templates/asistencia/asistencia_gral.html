@@ -31,18 +31,22 @@
         </thead>
 
         <tbody>
-            {% regroup asistencias by clase as asistencias_list  %}
+            {% for alumna, clases_alumna in asistencias.items %}
 
-            {% for alumna in curso.alumnas.all %}
-              <tr>
-                <td> {{alumna.username}} </td>
-                {% for clase in clases %}
+                <tr>
+                    <td> {{alumna.first_name}}  {{alumna.last_name}}</td>
+                    {% for clase in clases %}
 
+                        {% if clase in clases_alumna %}
+                            <td> presente </td>
+                        {% else %}
+                            <td>  </td>
+                        {% endif %}
 
-                  <td>  </td>
-                 {% endfor %}
-              </tr>
-            {% endfor %}
+                    {% endfor%}
+                </tr>
+
+            {% endfor%}
 
         </tbody>
       </table>

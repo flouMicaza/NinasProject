@@ -31,16 +31,19 @@ class InitialData(TestCase):
         self.usuaria_voluntaria2 = User.objects.create_user(username="voluntaria2", first_name="voluntaria2",
                                                             password="contraseña123", es_voluntaria=True)
 
-        self.usuaria_alumna1 = User.objects.create_user(username="alumna1", first_name="alumna1",
+        self.usuaria_alumna1 = User.objects.create_user(username="alumna1", first_name="Juana", last_name="Perez",
                                                         password="contraseña123", es_alumna=True)
 
-        self.usuaria_alumna2 = User.objects.create_user(username="alumna2", first_name="alumna2",
+        self.usuaria_alumna2 = User.objects.create_user(username="alumna2", first_name="Claudia", last_name="Muñoz",
                                                         password="contraseña123", es_alumna=True)
 
-        self.usuaria_alumna3 = User.objects.create_user(username="alumna3", first_name="alumna3",
+        self.usuaria_alumna3 = User.objects.create_user(username="alumna3", first_name="Claudia", last_name="Briones",
                                                         password="contraseña123", es_alumna=True)
 
-        self.usuaria_alumna4 = User.objects.create_user(username="alumna4", first_name="alumna4",
+        self.usuaria_alumna4 = User.objects.create_user(username="alumna4", first_name="Claudia", last_name="Opazo",
+                                                        password="contraseña123", es_alumna=True)
+
+        self.usuaria_alumna5 = User.objects.create_user(username="alumna5", first_name="Antonia", last_name="Quezada",
                                                         password="contraseña123", es_alumna=True)
 
         self.curso_basico = Curso.objects.create(nombre="C++: Básico")
@@ -51,6 +54,8 @@ class InitialData(TestCase):
         self.curso_basico.alumnas.add(self.usuaria_alumna2)
         self.curso_basico.alumnas.add(self.usuaria_alumna3)
         self.curso_basico.alumnas.add(self.usuaria_alumna4)
+        self.curso_basico.alumnas.add(self.usuaria_alumna5)
+
 
         self.curso_avanzado = Curso.objects.create(nombre="C++: Avanzado")
         self.curso_avanzado.profesoras.add(self.usuaria_profesora2)
@@ -73,7 +78,6 @@ class InitialData(TestCase):
         Asistencia.objects.create(alumna=self.usuaria_alumna2, clase=self.clase_basico1, author=self.usuaria_profesora1)
         Asistencia.objects.create(alumna=self.usuaria_alumna4, clase=self.clase_basico2, author=self.usuaria_profesora1)
 
-
 class Asistencia_GralViewTest(InitialData):
 
     def setUp(self):
@@ -84,22 +88,18 @@ class Asistencia_GralViewTest(InitialData):
         curso = self.curso_basico
         alumnas_curso = curso.alumnas.all()
         asistencias = Asistencia.objects.filter(clase__curso=curso)
-        dic = self.asistencia_GralView.get_asistencias(asistencias)
+        print("ALUMNAS --------------------------")
+        print(alumnas_curso)
+        print("ASISTENCIAS ---------------------------")
+        print(asistencias)
+        dic = self.asistencia_GralView.get_asistencias(asistencias, alumnas_curso)
 
+        self.assertEqual(len(dic), len(alumnas_curso))
         for alumna in alumnas_curso:
             asistencias_alumna = asistencias.filter(alumna=alumna)
             self.assertEqual(len(asistencias_alumna), len(dic[alumna]))
             for asistencia in asistencias_alumna:
                 self.assertTrue(asistencia.clase in dic[alumna])
-
-
-
-        """
-        for alumna in alumnas_asistentes:
-            clases = dic[alumna]
-            for clase in Clase.objects.filter(alumna=alumna, curso=curso):
-                self.assertTrue(clase in clases)
-        """
 
 
     # Test para la vista de las asistencia gral de un curso por una usuaria

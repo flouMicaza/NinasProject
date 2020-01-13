@@ -18,18 +18,35 @@ class Asistencia_GralView(LoginRequiredMixin, View):
     redirect_field_name = ''
 
     ## devuelve un diccionario que tiene como llave a la alumna del curso y como valor una lista con las clases a las que asistio
-    def get_asistencias(self, asistencias):
-        asist = list(asistencias.order_by('alumna'))
+    def get_asistencias(self, asistencias, alumnas):
+        #asist_por_nombre = asistencias.order_by('alumna__first_name')
+        alum_por_nombre = alumnas.order_by('first_name')
+        nro_alumnas = len(alumnas)
+
+        i = 0
         dic = {}
-        index = 0
-        while (index < len(asist)):
-            alumna = asist[index].alumna
-            lista = []
-            while (index < len(asist) and asist[index].alumna == alumna):
-                lista += [asist[index].clase]
-                index += 1
-            dic[alumna] = lista
+
+        while(len(dic)<nro_alumnas):
+            name = alum_por_nombre[i].first_name
+            alum = alumnas.filter(first_name = name).order_by('last_name')
+
+            for alumna in alum:
+                print(alumna)
+                asist = asistencias.filter(alumna=alumna)
+                print(len(asist))
+                lista = []
+                index=0
+                while (len(lista)<len(asist)):
+                    lista += [asist[index].clase]
+                    index += 1
+                dic[alumna] = lista
+                i += 1
+                print(dic)
+
+
+
         return dic
+
 
     def get(self, request, **kwargs):
         curso_id = kwargs['curso_id']
@@ -40,17 +57,18 @@ class Asistencia_GralView(LoginRequiredMixin, View):
         elif usuaria.es_voluntaria:
             curso = Curso.objects.filter(voluntarias__in=[usuaria], id=curso_id)
 
-        clases = Clase.objects.filter(curso=curso)
-        asistencias = Asistencia.objects.filter(clase__in=list(clases))
-        ## curso. almunas por orden alfabetico
-        ## hacer dic con alumnas como llave y sus asistencias
-        asistencia_por_alumna = self.get_asistencias(asistencias)
-
         if len(list(curso))>0:
+            curso = curso[0]
+
+            clases = Clase.objects.filter(curso=curso)
+            asistencias = Asistencia.objects.filter(clase__curso=curso)
+
+            dic_asistencia = self.get_asistencias(asistencias, curso.alumnas.all())
+
             return render(request, 'asistencia/asistencia_gral.html', {
                 'curso': curso,
                 'clases': clases,
-                'asistencias':asistencia_por_alumna,
+                'asistencias': dic_asistencia
         })
         return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
 
