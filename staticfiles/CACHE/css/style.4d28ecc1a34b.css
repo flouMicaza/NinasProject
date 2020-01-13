@@ -1,0 +1,22 @@
+/* line 7, static/scss/style.scss */
+.btn-large .btn-small {
+  background-color: #FF5252; }
+
+/* line 11, static/scss/style.scss */
+.btn-large:hover .btn-small:hover {
+  background-color: #FF8A80; }
+
+/* line 15, static/scss/style.scss */
+nav {
+  background-color: #FF5252; }
+
+/* line 20, static/scss/style.scss */
+table {
+  border-collapse: collapse;
+  margin-top: 70px; }
+
+/* line 24, static/scss/style.scss */
+td, th {
+  padding: 10px;
+  border-bottom: 2px solid #FF8A80;
+  text-align: center; }

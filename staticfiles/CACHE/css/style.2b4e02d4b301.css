@@ -1,0 +1,44 @@
+body {
+  padding: 0;
+  margin: 0;
+  background: #ddd; }
+
+.btn {
+  margin-top: 10px; }
+
+.container {
+  margin: 100px auto;
+  width: 25%; }
+
+@media (max-width: 952px) {
+  .container {
+    width: 60%; } }
+
+@media (max-width: 475px) {
+  .container {
+    width: 80%; } }
+
+/* label focus color */
+.input-field input[type=text]:not(.browser-default):focus + label {
+  color: #ff5151; }
+
+.input-field input[type=password]:not(.browser-default):focus + label {
+  color: #ff5151; }
+
+/* label underline focus color */
+.input-field input[type=text]:not(.browser-default):focus {
+  border-bottom: 1px solid #ff5151;
+  box-shadow: 0 1px 0 0 #ff5151; }
+
+.input-field input[type=password]:not(.browser-default):focus {
+  border-bottom: 1px solid #ff5151;
+  box-shadow: 0 1px 0 0 #ff5151; }
+
+/* valid color */
+.input-field input[type=text].valid {
+  border-bottom: 1px solid green;
+  box-shadow: 0 1px 0 0 green; }
+
+.input-field input[type=password].valid {
+  border-bottom: 1px solid green;
+  box-shadow: 0 1px 0 0 green; }
