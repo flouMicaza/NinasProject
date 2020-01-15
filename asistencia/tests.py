@@ -71,12 +71,30 @@ class InitialData(TestCase):
 
         ## basico1 : alumna1, alumna3, alumna4, alumna2
         ## basico2 : alumna2, alumna4
-        for alumna in [self.usuaria_alumna1, self.usuaria_alumna3, self.usuaria_alumna4]:
-            self.asistencia_basico1 = Asistencia.objects.create(alumna=alumna, clase=self.clase_basico1, author= self.usuaria_profesora1)
 
-        Asistencia.objects.create(alumna=self.usuaria_alumna2, clase=self.clase_basico2, author=self.usuaria_profesora1)
-        Asistencia.objects.create(alumna=self.usuaria_alumna2, clase=self.clase_basico1, author=self.usuaria_profesora1)
-        Asistencia.objects.create(alumna=self.usuaria_alumna4, clase=self.clase_basico2, author=self.usuaria_profesora1)
+        Asistencia.objects.create(alumna=self.usuaria_alumna1, clase=self.clase_basico1, author=self.usuaria_profesora1,
+                                  asistio=True)
+        Asistencia.objects.create(alumna=self.usuaria_alumna2, clase=self.clase_basico1, author=self.usuaria_profesora1,
+                                  asistio=True)
+        Asistencia.objects.create(alumna=self.usuaria_alumna3, clase=self.clase_basico1, author=self.usuaria_profesora1,
+                                  asistio=True)
+        Asistencia.objects.create(alumna=self.usuaria_alumna4, clase=self.clase_basico1, author=self.usuaria_profesora1,
+                                  asistio=True)
+        Asistencia.objects.create(alumna=self.usuaria_alumna5, clase=self.clase_basico1, author=self.usuaria_profesora1,
+                                  asistio=True)
+
+        Asistencia.objects.create(alumna=self.usuaria_alumna1, clase=self.clase_basico2, author=self.usuaria_profesora1,
+                                  asistio=False)
+        Asistencia.objects.create(alumna=self.usuaria_alumna2, clase=self.clase_basico2, author=self.usuaria_profesora1,
+                                  asistio=True)
+        Asistencia.objects.create(alumna=self.usuaria_alumna3, clase=self.clase_basico2, author=self.usuaria_profesora1,
+                                  asistio=False)
+        Asistencia.objects.create(alumna=self.usuaria_alumna4, clase=self.clase_basico2, author=self.usuaria_profesora1,
+                                  asistio=True)
+        Asistencia.objects.create(alumna=self.usuaria_alumna5, clase=self.clase_basico2, author=self.usuaria_profesora1,
+                                  asistio=False)
+
+
 
 class Asistencia_GralViewTest(InitialData):
 
@@ -84,46 +102,109 @@ class Asistencia_GralViewTest(InitialData):
         super(Asistencia_GralViewTest, self).setUp()
         self.asistencia_GralView = Asistencia_GralView()
 
+
     def test_get_asistencias(self):
         curso = self.curso_basico
-        alumnas_curso = curso.alumnas.all()
+        clases = Clase.objects.filter(curso=curso)
+        alumnas_curso = list(curso.alumnas.all())
         asistencias = Asistencia.objects.filter(clase__curso=curso)
-        print("ALUMNAS --------------------------")
-        print(alumnas_curso)
-        print("ASISTENCIAS ---------------------------")
-        print(asistencias)
-        lista = self.asistencia_GralView.get_asistencias(asistencias, alumnas_curso)
-        lista_alumnas = lista[0]
-        lista_clases = lista[1]
 
-        self.assertEqual(len(lista_alumnas), len(lista_clases))
-        self.assertEqual(len(lista_alumnas), len(alumnas_curso))
+        lista_asistencias = self.asistencia_GralView.get_asistencias(asistencias, curso.alumnas.all())
+        # compuesto por una lista por alumna
+        # cada sublista contiene a la alumna, una lista de booleanos que indican si fue o no a cada clase
+        # y el total de clases a las que asistio
 
-        i=0
-        for alumna in lista_alumnas:
-            asistencias_alumna = asistencias.filter(alumna=alumna)
-            self.assertEqual(len(asistencias_alumna), len(lista_clases[i]))
-            for asistencia in asistencias_alumna:
-                self.assertTrue(asistencia.clase in lista_clases[i])
-            i += 1
+        self.assertEqual(len(lista_asistencias), len(alumnas_curso))
+        for lista in lista_asistencias:
+            self.assertEqual(len(lista[1]), len(clases))
+            alumnas_curso.remove(lista[0])
+        self.assertEqual(len(alumnas_curso), 0)
+
+        for asistencia in lista_asistencias:
+            alumna = asistencia[0]
+            nro_clases = len( Asistencia.objects.filter(clase__in=clases, alumna=alumna, asistio=True) )
+            self.assertEqual(nro_clases, asistencia[2])
 
 
-    # Test para la vista de las asistencia gral de un curso por una usuaria
+    def test_vista_gral_sin_alumnas(self):
+        ## Acceder a la asistencia de un curso sin alumnas
+        usuaria = self.usuaria_profesora1
+        self.curso = Curso.objects.create(nombre="Django")
+        self.curso.profesoras.add(usuaria)
+        self.clase1 = Clase.objects.create(nombre="Clase 1: Modelos en Django", curso=self.curso)
+        self.clase2 = Clase.objects.create(nombre="Clase 2: Administrador de Django", curso=self.curso)
+
+        self.client.force_login(user=usuaria)
+
+        response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': self.curso.id}))
+        self.assertTemplateUsed(response, 'asistencia/asistencia_sin_asistencias.html')
+        # Mensaje que arroja la página
+        self.assertContains(response, "¡Ups! No existen datos suficientes para acceder a la asistencia.")
+        self.assertContains(response, "Volver")
+        self.assertNotContains(response, "Alumnas")
+        self.assertNotContains(response, "Nombre")
+        self.assertNotContains(response, "Total")
+
+        self.client.logout()
+
+
+    def test_vista_gral_sin_clases(self):
+        ## Acceder a la asistencia de un curso sin clases
+        usuaria = self.usuaria_profesora1
+        self.curso = Curso.objects.create(nombre="Django")
+        self.curso.profesoras.add(usuaria)
+        self.curso.alumnas.add(self.usuaria_alumna1)
+        self.curso.alumnas.add(self.usuaria_alumna2)
+
+        self.client.force_login(user=usuaria)
+
+        response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': self.curso.id}))
+        self.assertTemplateUsed(response, 'asistencia/asistencia_sin_asistencias.html')
+        # Mensaje que arroja la página
+        self.assertContains(response, "¡Ups! No existen datos suficientes para acceder a la asistencia.")
+        self.assertContains(response, "Volver")
+        self.assertNotContains(response, "Alumnas")
+        self.assertNotContains(response, "Nombre")
+        self.assertNotContains(response, "Total")
+
+        self.client.logout()
+
+
+
+    ## Modelo de test para la vista de las asistencia gral de un curso por una usuaria
     def vista_asistencia_gral(self, usuaria, curso):
+        # Asistencias del curso
+        asistencias = Asistencia.objects.filter(clase__curso=curso)
+
+        # Las clases hechas hasta el momento
+        clases =[]
+        for a in asistencias:
+            if not a.clase in clases:
+                clases+=[a.clase]
+
         self.client.force_login(user=usuaria)
         response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': curso.id}))
         self.assertTemplateUsed(response, 'asistencia/asistencia_gral.html')
-        self.assertContains(response, "Pasar Asistencia")
 
+        #self.assertContains(response, "PASAR ASISTENCIA")
         self.assertContains(response, "Asistencia")
-        for clase in list(Clase.objects.filter(curso__in=[curso])):
-            self.assertContains(response, clase.nombre)
 
-        self.assertContains(response, "Nombre")
-        self.assertContains(response, "Total")
+        for clase in clases:
+            self.assertContains(response, "Clase "+ str(clase.id))
+            nro_asistencias = len(Asistencia.objects.filter(clase=clase, asistio=True))
+            self.assertContains(response, nro_asistencias)
 
-        for alumna in curso.alumnas:
-            self.assertContains(response, alumna.name)
+        self.assertContains(response, "Alumna")
+        self.assertContains(response, "Total clases")
+        self.assertContains(response, "Total alumnas")
+
+        for alumna in curso.alumnas.all():
+            total_alumna = len(asistencias.filter(alumna=alumna, asistio=True))
+            self.assertContains(response, total_alumna)
+            self.assertContains(response, alumna.first_name)
+            self.assertContains(response, alumna.last_name)
+
+
 
         self.client.logout()
 
@@ -141,6 +222,7 @@ class Asistencia_GralViewTest(InitialData):
 
 
     def test_curso_sin_permiso(self):
+        ## Usuaria intenta ingresar a asistencia de curso al que no pertenece
         self.usuaria_profesora = User.objects.create_user(username="profesora", first_name="profesora",
                                                            password="contraseña123", es_profesora=True)
         self.client.force_login(user=self.usuaria_profesora)
@@ -149,7 +231,7 @@ class Asistencia_GralViewTest(InitialData):
         self.assertEquals(response.status_code, 403)
         self.client.logout()
 
-
+"""
 class AsistenciaViewTest(InitialData):
 
     def setUp(self):
@@ -253,3 +335,4 @@ class AsistenciaViewTest(InitialData):
 
 
 
+"""

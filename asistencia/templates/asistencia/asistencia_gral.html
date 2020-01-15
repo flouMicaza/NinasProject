@@ -27,26 +27,51 @@
                 <th> Clase {{forloop.counter}} </th>
             {% endfor %}
 
+             <th> Total clases </th>
+
           </tr>
         </thead>
 
         <tbody>
-            {% for alumna, clases_alumna in lista_alumnas, lista_clases %}
+
+            {% for lista in lista_asistencias %}
 
                 <tr>
-                    <td> {{alumna.first_name}}  {{alumna.last_name}}</td>
-                    {% for clase in clases %}
 
-                        {% if clase in clases_alumna %}
+                    <td> {{ lista.0.first_name }} {{ lista.0.last_name }} </td>
+
+                    {% for bool in lista.1 %}
+
+                        {% if bool %}
                             <td>  <i class="material-icons">check</i> </td>
+                            <!-- <td bgcolor="82FFAD" >   </td> -->
+
                         {% else %}
                             <td>  <i class="material-icons">close</i> </td>
+
+                            <!-- <td bgcolor="#FF8C89">  </td> -->
+
                         {% endif %}
 
-                    {% endfor%}
+                    {% endfor %}
+
+                    <td> {{ lista.3 }} </td>
+
                 </tr>
 
-            {% endfor%}
+            {% endfor %}
+
+            <tr>
+                <th> Total alumnas </th>
+
+                {% for total in total_por_clase %}
+
+                    <td> {{ total }} </td>
+
+                {% endfor %}
+
+            </tr>
+
 
         </tbody>
       </table>

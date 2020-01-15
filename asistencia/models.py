@@ -10,8 +10,13 @@ class Asistencia(models.Model):
     author = models.ForeignKey('usuarios.User', related_name='profesora' ,on_delete=models.CASCADE)  # quien paso la asistencia
     asistio = models.BooleanField('alumna asisitio')
 
+    class Meta:
+        unique_together = (("alumna", "clase"),)
+
     def __str__(self):
-        return "{0} asistió a la clase {1}".format(self.alumna.username, self.clase.nombre)
+        if self.asistio:
+            return "{0} asistió a la clase {1}".format(self.alumna.username, self.clase.nombre)
+        return "{0} NO asistió a la clase {1}".format(self.alumna.username, self.clase.nombre)
 
 
 
