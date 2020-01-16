@@ -92,3 +92,70 @@ Asistencia.objects.create(alumna=usuaria_alumna3, clase=clase_basico2, author=us
 Asistencia.objects.create(alumna=usuaria_alumna4, clase=clase_basico2, author=usuaria_profesora, asistio=True)
 
 Asistencia.objects.create(alumna=usuaria_alumna5, clase=clase_basico2, author=usuaria_profesora, asistio=False)
+
+
+
+
+
+
+
+Asistencia.objects.create(alumna=alumna1, clase=clase3, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna2, clase=clase3, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna3, clase=clase3, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna4, clase=clase3, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna5, clase=clase3, author=profesora, asistio=True)
+
+Asistencia.objects.create(alumna=alumna1, clase=clase4, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna2, clase=clase4, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna3, clase=clase4, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna4, clase=clase4, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna5, clase=clase4, author=profesora, asistio=True)
+
+Asistencia.objects.create(alumna=alumna1, clase=clase5, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna2, clase=clase5, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna3, clase=clase5, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna4, clase=clase5, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna5, clase=clase5, author=profesora, asistio=True)
+
+Asistencia.objects.create(alumna=alumna1, clase=clase6, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna2, clase=clase6, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna3, clase=clase6, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna4, clase=clase6, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna5, clase=clase6, author=profesora, asistio=True)
+
+Asistencia.objects.create(alumna=alumna1, clase=clase7, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna2, clase=clase7, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna3, clase=clase7, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna4, clase=clase7, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna5, clase=clase7, author=profesora, asistio=True)
+
+Asistencia.objects.create(alumna=alumna1, clase=clase8, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna2, clase=clase8, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna3, clase=clase8, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna4, clase=clase8, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna5, clase=clase8, author=profesora, asistio=True)
+
+Asistencia.objects.create(alumna=alumna1, clase=clase9, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna2, clase=clase9, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna3, clase=clase9, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna4, clase=clase9, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna5, clase=clase9, author=profesora, asistio=True)
+
+Asistencia.objects.create(alumna=alumna1, clase=clase10, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna2, clase=clase10, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna3, clase=clase10, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna4, clase=clase10, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna5, clase=clase10, author=profesora, asistio=True)
+
+Asistencia.objects.create(alumna=alumna1, clase=clase11, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna2, clase=clase11, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna3, clase=clase11, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna4, clase=clase11, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna5, clase=clase11, author=profesora, asistio=True)
+
+Asistencia.objects.create(alumna=alumna1, clase=clase12, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna2, clase=clase12, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna3, clase=clase12, author=profesora, asistio=True)
+Asistencia.objects.create(alumna=alumna4, clase=clase12, author=profesora, asistio=False)
+Asistencia.objects.create(alumna=alumna5, clase=clase12, author=profesora, asistio=True)
+

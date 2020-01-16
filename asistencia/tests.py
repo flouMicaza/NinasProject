@@ -110,18 +110,18 @@ class Asistencia_GralViewTest(InitialData):
         asistencias = Asistencia.objects.filter(clase__curso=curso)
 
         lista_asistencias = self.asistencia_GralView.get_asistencias(asistencias, curso.alumnas.all())
-        # compuesto por una lista por alumna
-        # cada sublista contiene a la alumna, una lista de booleanos que indican si fue o no a cada clase
-        # y el total de clases a las que asistio
 
         self.assertEqual(len(lista_asistencias), len(alumnas_curso))
         for lista in lista_asistencias:
+            # Revisa que esten todas las clases
             self.assertEqual(len(lista[1]), len(clases))
             alumnas_curso.remove(lista[0])
+        # Revisa que esten todas las alumnas
         self.assertEqual(len(alumnas_curso), 0)
 
         for asistencia in lista_asistencias:
             alumna = asistencia[0]
+            # Revisa que el total de clases ṕor alumna sea correcto
             nro_clases = len( Asistencia.objects.filter(clase__in=clases, alumna=alumna, asistio=True) )
             self.assertEqual(nro_clases, asistencia[2])
 
@@ -137,9 +137,9 @@ class Asistencia_GralViewTest(InitialData):
         self.client.force_login(user=usuaria)
 
         response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': self.curso.id}))
-        self.assertTemplateUsed(response, 'asistencia/asistencia_sin_asistencias.html')
+        self.assertTemplateUsed(response, 'asistencia/asistencia_gral.html')
         # Mensaje que arroja la página
-        self.assertContains(response, "¡Ups! No existen datos suficientes para acceder a la asistencia.")
+        self.assertContains(response, "Para mostrar el historial de asistencia es necesario que el curso tenga alumnas inscritas.")
         self.assertContains(response, "Volver")
         self.assertNotContains(response, "Alumnas")
         self.assertNotContains(response, "Nombre")
@@ -159,10 +159,53 @@ class Asistencia_GralViewTest(InitialData):
         self.client.force_login(user=usuaria)
 
         response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': self.curso.id}))
-        self.assertTemplateUsed(response, 'asistencia/asistencia_sin_asistencias.html')
+        self.assertTemplateUsed(response, 'asistencia/asistencia_gral.html')
         # Mensaje que arroja la página
-        self.assertContains(response, "¡Ups! No existen datos suficientes para acceder a la asistencia.")
+        self.assertContains(response, "Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas.")
         self.assertContains(response, "Volver")
+        self.assertNotContains(response, "Alumnas")
+        self.assertNotContains(response, "Nombre")
+        self.assertNotContains(response, "Total")
+
+        self.client.logout()
+
+    def test_vista_gral_sin_clases_alumnas(self):
+        ## Acceder a la asistencia de un curso sin clases
+        usuaria = self.usuaria_profesora1
+        self.curso = Curso.objects.create(nombre="Django")
+        self.curso.profesoras.add(usuaria)
+
+        self.client.force_login(user=usuaria)
+
+        response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': self.curso.id}))
+        self.assertTemplateUsed(response, 'asistencia/asistencia_gral.html')
+        # Mensaje que arroja la página
+        self.assertContains(response, "Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas y alumnas inscritas.")
+        self.assertContains(response, "Volver")
+        self.assertNotContains(response, "Alumnas")
+        self.assertNotContains(response, "Nombre")
+        self.assertNotContains(response, "Total")
+
+        self.client.logout()
+
+
+    def test_vista_gral_sin_asistencias(self):
+        ## Acceder a la asistencia de un curso sin asistencias pasadas
+        usuaria = self.usuaria_profesora1
+        self.curso = Curso.objects.create(nombre="Django")
+        self.curso.profesoras.add(usuaria)
+        self.curso.alumnas.add(self.usuaria_alumna1)
+        self.curso.alumnas.add(self.usuaria_alumna2)
+        self.clase1 = Clase.objects.create(nombre="Clase 1: Modelos en Django", curso=self.curso)
+        self.clase2 = Clase.objects.create(nombre="Clase 2: Administrador de Django", curso=self.curso)
+
+        self.client.force_login(user=usuaria)
+
+        response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': self.curso.id}))
+        self.assertTemplateUsed(response, 'asistencia/asistencia_gral.html')
+        # Mensaje que arroja la página
+        self.assertContains(response, "¡Ups! No se ha pasado asistencia para este curso aún.")
+        #self.assertContains(response, "PASAR ASISTENCIA")
         self.assertNotContains(response, "Alumnas")
         self.assertNotContains(response, "Nombre")
         self.assertNotContains(response, "Total")
@@ -203,6 +246,7 @@ class Asistencia_GralViewTest(InitialData):
             self.assertContains(response, total_alumna)
             self.assertContains(response, alumna.first_name)
             self.assertContains(response, alumna.last_name)
+
 
 
 

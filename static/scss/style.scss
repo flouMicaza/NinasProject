@@ -3,14 +3,19 @@ $primary-color: #FF5252 !default;
 $hover-color:  #FF8A80;
 $present_color: #FCFFD1;
 $absent-color: #FECCC4;
+$x-color: #B32727;
+$check-color: #15B342;
 
-.btn-large .btn-small {
+.btn {
   background-color: $primary-color;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
-.btn-large:hover .btn-small:hover {
+.btn:hover {
   background-color: $hover-color;
 }
+
+.btn
 
 nav {
   background-color: $primary-color;
@@ -18,12 +23,19 @@ nav {
 
 
 table {
-      border-collapse:collapse;
-      margin-top: 70px;
-      }
-      td, th {
-      padding: 10px;
-      border-bottom: 2px solid $hover-color;
-      text-align: center;
-      }
+  border-collapse:collapse;
+  margin-top: 70px;
+}
+td, th {
+  padding: 10px;
+  border-bottom: 2px solid $hover-color;
+  text-align: center;
+}
 
+.icon-red {
+    color: $x-color;
+}
+
+.icon-green {
+    color: $check-color;
+}
