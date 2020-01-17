@@ -36,7 +36,7 @@ class Asistencia_GralView(LoginRequiredMixin, View):
             alum = alumnas.filter(first_name=name).order_by('last_name')
 
             for alumna in alum:
-                asist = asistencias.filter(alumna=alumna).order_by('clase_id')
+                asist = asistencias.filter(alumna=alumna).order_by('id')
                 lista_a = []
                 for asistencia in asist:
                     lista_a += [asistencia.asistio]
@@ -99,10 +99,10 @@ def get_form(request,**kwargs):
     curso = get_cursos(usuaria, curso_id)       ## entrega el curso si la persona tiene acceso
     clase = get_clases(curso_id, clase_id)      ## entrega la clase si corresponde al curso
 
-    if len(curso) == 0:
+    if curso == None:
         return HttpResponseForbidden("No tienes permiso para pasar asistencia en este curso.")
 
-    elif len(clase) == 0:
+    elif clase == None:
         return HttpResponseNotFound("La clase que buscas no existe.")
 
     else:

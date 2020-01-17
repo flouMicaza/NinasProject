@@ -36,7 +36,7 @@ def get_cursos(usuaria, curso_id):
 
 ## Entrega la clase si esta corresponde al curso ingresado
 def get_clases(curso_id, clase_id):
-    clases = Clase.objects.filter(curso_id=curso_id, clase_id=clase_id)
+    clases = Clase.objects.filter(curso_id=curso_id, id=clase_id)
     if len(clases) > 0:
         return clases[0]
     return None
