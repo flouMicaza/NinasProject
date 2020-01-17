@@ -6,13 +6,12 @@
 {% block content %}
 
     <div>
-         <h4> Asistencia </h4>
-         <h5> {{curso.nombre}} </h5>
-         <h6> {{ clase.nombre }} </h6>
+         <h4> Asistencia {{curso.nombre}} </h4>
+         <h5> {{ clase.nombre }} </h5>
     </div>
 
 
-    <div>
+    <div class="forms-table">
 
         <form method="POST" action="">
             {%csrf_token%}
@@ -28,7 +27,11 @@
 
                     </div>
                 {%endfor%}
-                <button type="submit" class="waves-effect waves-light btn-small">pasar asistencia</button>
+
+
+                <div>
+                    <button type="submit" class="waves-effect waves-light btn-small">pasar asistencia</button>
+                </div>
         </form>
     </div>
 

@@ -1,3 +1,8 @@
+from usuarios.models import *
+from cursos.models import *
+from clases.models import *
+
+## Recibe las alumnas de un curso y las ordena alfabeticamente
 def get_alumnas_en_orden(alumnas):
     alum_por_nombre = alumnas.order_by('first_name')
     nro_alumnas = len(alumnas)
@@ -14,7 +19,9 @@ def get_alumnas_en_orden(alumnas):
 
     return lista_alumnas
 
-"""def get_cursos(usuaria, curso_id):
+
+## Entrega el curso si la usuaria tiene permiso para acceder a el
+def get_cursos(usuaria, curso_id):
     if usuaria.es_profesora:
         cursos = Curso.objects.filter(profesoras__in=[usuaria], id=curso_id)
     elif usuaria.es_voluntaria:
@@ -24,5 +31,12 @@ def get_alumnas_en_orden(alumnas):
 
     if len(cursos) > 0:
         return cursos[0]
-    return None"""
+    return None
 
+
+## Entrega la clase si esta corresponde al curso ingresado
+def get_clases(curso_id, clase_id):
+    clases = Clase.objects.filter(curso_id=curso_id, clase_id=clase_id)
+    if len(clases) > 0:
+        return clases[0]
+    return None

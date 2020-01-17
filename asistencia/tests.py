@@ -2,13 +2,15 @@ import datetime
 from datetime import date
 from unittest.mock import Mock
 
+from asistencia.utils import *
+
 from asistencia.models import Asistencia
 from cursos.views import MisCursosView, CursosView
 from usuarios.models import User
 from django.urls import reverse
 from django.test import TestCase, Client
 
-from asistencia.views import Asistencia_GralView, AsistenciaView
+from asistencia.views import *
 from clases.models import Clase
 from cursos.models import Curso
 
@@ -273,6 +275,24 @@ class Asistencia_GralViewTest(InitialData):
         self.client.logout()
 
 
+class AlumnasEnOrdenTest(InitialData):
+
+    def test_get_asistencias(self):
+        curso = self.curso_basico
+        alumnas_curso = curso.alumnas.all()
+        lista_alumnas = list(alumnas_curso)
+
+        alumnas_en_orden = get_alumnas_en_orden(alumnas_curso)
+
+        self.assertEqual(len(alumnas_en_orden), len(alumnas_curso))
+
+        for alumna in alumnas_en_orden:
+            lista_alumnas.remove(alumna)
+
+        # Revisa que esten todas las alumnas
+        self.assertEqual(len(lista_alumnas), 0)
+
+"""
 
 class AsistenciaViewTest(InitialData):
 
@@ -380,3 +400,4 @@ class AsistenciaViewTest(InitialData):
         self.assertEquals(response.status_code, 404)
 
 
+"""

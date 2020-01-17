@@ -16,6 +16,7 @@ from .forms import AsistenciaForm
 from .utils import *
 
 
+
 class Asistencia_GralView(LoginRequiredMixin, View):
     login_url = 'usuarios:login'
     redirect_field_name = ''
@@ -50,12 +51,9 @@ class Asistencia_GralView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         curso_id = kwargs['curso_id']
         usuaria = User.objects.get(username=request.user.username)
-        if usuaria.es_profesora:
-            curso = Curso.objects.filter(profesoras__in=[usuaria], id=curso_id)
-        elif usuaria.es_voluntaria:
-            curso = Curso.objects.filter(voluntarias__in=[usuaria], id=curso_id)
+        curso = get_cursos(usuaria, curso_id)
 
-        if len(curso) > 0:
+        if curso != None and not usuaria.es_alumna:
             curso = curso[0]
             clases_totales = Clase.objects.filter(curso=curso).order_by('id')
             asistencias = Asistencia.objects.filter(clase__curso=curso).order_by('clase_id')
@@ -97,12 +95,9 @@ def get_form(request,**kwargs):
     curso_id = kwargs['curso_id']
     clase_id = kwargs['clase_id']
     usuaria = User.objects.get(username=request.user.username)
-    if usuaria.es_profesora:
-        curso = Curso.objects.filter(profesoras__in=[usuaria], id=curso_id)
-        clase = Clase.objects.filter(id=clase_id, curso__id=curso_id)
-    elif usuaria.es_voluntaria:
-        curso = Curso.objects.filter(voluntarias__in=[usuaria], id=curso_id)
-        clase = Clase.objects.filter(id=clase_id, curso__id=curso_id)
+
+    curso = get_cursos(usuaria, curso_id)       ## entrega el curso si la persona tiene acceso
+    clase = get_clases(curso_id, clase_id)      ## entrega la clase si corresponde al curso
 
     if len(curso) == 0:
         return HttpResponseForbidden("No tienes permiso para pasar asistencia en este curso.")
@@ -111,14 +106,15 @@ def get_form(request,**kwargs):
         return HttpResponseNotFound("La clase que buscas no existe.")
 
     else:
-        curso = curso[0]
-        clase = clase[0]
+
         lista=get_alumnas_en_orden(curso.alumnas.all())
         AsistenciaFormset = formset_factory(AsistenciaForm, extra=len(lista))
         template_name='asistencia/asistencia.html'
         heading_message = 'Model Formset Demo'
+
         if request.method=='GET':   ## cuando entro por primera vez
             formset=AsistenciaFormset(request.GET or None)
+
             for idx, form in enumerate(formset):
                 form.fields['asistio'].label=lista[idx]#.first_name+" "+lista[idx].last_name
             return render(request, template_name, {
@@ -127,6 +123,7 @@ def get_form(request,**kwargs):
                 'formset': formset,
                 'heading': heading_message,
             })
+
         elif request.method=='POST':    ## cuando pongo save
             formset=AsistenciaFormset(request.POST)
             if formset.is_valid():
@@ -134,3 +131,7 @@ def get_form(request,**kwargs):
                     print("alumna form", form.cleaned_data.get('alumna'))
                 #return redirect('asistencia:asistencia_gral')
                 return HttpResponseRedirect(reverse('asistencia:asistencia_gral', {'curso_id':1}))
+
+
+
+
