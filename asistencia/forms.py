@@ -31,17 +31,3 @@ AsistenciaFormset=formset_factory(AsistenciaForm, extra=3)
            # ), 'asistio':forms.CheckboxInput()})"""
 
 
-
-"""
-class AsistenciaNinaForm(forms.ModelForm):
-    class Meta:
-        model = Asistencia
-        fields = '__all__'
-        widgets = {'asistencia': forms.CheckboxSelectMultiple(attrs={'class': 'mi-clase'})}
-        
-        asistentes = forms.MultipleChoiceField(
-            required=False,
-            widget=forms.CheckboxSelectMultiple,
-            choices=[True],
-        )
-        """
