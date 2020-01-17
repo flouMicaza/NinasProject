@@ -16,10 +16,15 @@ class AsistenciaForm(forms.Form):
         # }
         #), 'asistio':forms.CheckboxInput()}
         #alumna=forms.CharField()
-    asistio=forms.BooleanField( widget=forms.CheckboxInput())
+    asistio=forms.BooleanField(label='hola', widget=forms.CheckboxInput())
+
+    def __init__(self, *args, **kwargs):
+        super(AsistenciaForm,self).__init__(*args,**kwargs)
+        print("holi soy terrible de pro")
+        #self.fields['asistio'].label='chao'
 
 
-AsistenciaFormset=formset_factory(AsistenciaForm, extra=3)
+#AsistenciaFormset=formset_factory(AsistenciaForm, extra=3)
 
 #fields=('alumna','asistio'), extra=3,
                                        #widgets={'alumna': forms.TextInput(attrs={

@@ -1,19 +1,19 @@
 from datetime import datetime
 from django import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
 from django.http import HttpResponseRedirect
-from django.forms import formset_factory
+from django.forms import formset_factory, modelformset_factory
 
 from .models import Asistencia
-from asistencia.forms import AsistenciaFormset
 from clases.models import Clase
 from cursos.models import Curso
 from usuarios.models import User
 from .forms import AsistenciaForm
+from .utils import *
 
 
 class Asistencia_GralView(LoginRequiredMixin, View):
@@ -93,45 +93,6 @@ class Asistencia_GralView(LoginRequiredMixin, View):
 
         return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
 
-
-
-"""
-class AsistenciaView(LoginRequiredMixin, View):
-    login_url = 'usuarios:login'
-    redirect_field_name = ''
-
-    def get(self, request, **kwargs):
-        curso_id = kwargs['curso_id']
-        curso = get_object_or_404(Curso, pk=curso_id)
-        clase_id = kwargs['clase_id']
-        curso = get_object_or_404(Curso, pk=curso_id)
-        usuaria = User.objects.get(username=request.user.username)
-        if usuaria.es_profesora:
-            cursos = Curso.objects.filter(profesoras__in=[usuaria])
-        elif usuaria.es_voluntaria:
-            cursos = Curso.objects.filter(voluntarias__in=[usuaria])
-
-
-        if len(cursos) > 0 and not usuaria.es_voluntaria:
-            curso = cursos[0]
-            clase = list(Clase.objects.filter(curso=curso, id=clase_id))[0]
-            #form = self.get_form(request)
-
-            print("--------------------------")
-            print(curso)
-            print("HOLAAAAAAAA")
-
-            if curso in list(cursos):
-                return render(request, 'asistencia/asistencia.html', {
-                    'curso': curso,
-                    'clase': clase,
-                    'form': form
-            })
-
-        return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
-        
-    """
-
 def get_form(request,**kwargs):
     curso_id = kwargs['curso_id']
     clase_id = kwargs['clase_id']
@@ -152,11 +113,14 @@ def get_form(request,**kwargs):
     else:
         curso = curso[0]
         clase = clase[0]
-
+        lista=get_alumnas_en_orden(curso.alumnas.all())
+        AsistenciaFormset = formset_factory(AsistenciaForm, extra=len(lista))
         template_name='asistencia/asistencia.html'
         heading_message = 'Model Formset Demo'
         if request.method=='GET':   ## cuando entro por primera vez
             formset=AsistenciaFormset(request.GET or None)
+            for idx, form in enumerate(formset):
+                form.fields['asistio'].label=lista[idx]#.first_name+" "+lista[idx].last_name
             return render(request, template_name, {
                 'curso': curso,
                 'clase': clase,
@@ -170,10 +134,3 @@ def get_form(request,**kwargs):
                     print("alumna form", form.cleaned_data.get('alumna'))
                 #return redirect('asistencia:asistencia_gral')
                 return HttpResponseRedirect(reverse('asistencia:asistencia_gral', {'curso_id':1}))
-
-
-
-
-
-
-

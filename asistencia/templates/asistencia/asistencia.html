@@ -20,12 +20,12 @@
                 {% for form in formset %}
                     <div>
                         <hr>
-                         <label>{{form.alumna.label}}</label>
-                         {{form.alumna}}
-                         <label>
+                        <label>
                             <input type="checkbox">
                              <span>{{ form.asistio }}</span>
                             </label>
+                         <label>{{form.asistio.label.first_name}} {{form.asistio.label.last_name}}</label>
+
                     </div>
                 {%endfor%}
                 <button type="submit" class="waves-effect waves-light btn-small">pasar asistencia</button>
