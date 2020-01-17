@@ -21,12 +21,11 @@ class AsistenciaForm(forms.Form):
 
 AsistenciaFormset=formset_factory(AsistenciaForm, extra=3)
 
-"""
 #fields=('alumna','asistio'), extra=3,
-#widgets={'alumna': forms.TextInput(attrs={
-# 'class': 'form-control',
-#'placeholder': 'alumna '
-# }
-# ), 'asistio':forms.CheckboxInput()})
-"""
+                                       #widgets={'alumna': forms.TextInput(attrs={
+               # 'class': 'form-control',
+                #'placeholder': 'alumna '
+               # }
+           # ), 'asistio':forms.CheckboxInput()})"""
+
 
