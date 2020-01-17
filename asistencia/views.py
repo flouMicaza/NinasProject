@@ -20,34 +20,31 @@ class Asistencia_GralView(LoginRequiredMixin, View):
     login_url = 'usuarios:login'
     redirect_field_name = ''
 
-    ## devuelve un diccionario que tiene como llave a la alumna del curso y como valor una lista con las clases a las que asistio
+
+    ## Devuelve un lista compuesta ṕor listas, hay una sublista por alumna.
+    ## Cada sublista contiene a la alumna, una lista de booleanos que indica si fue
+    # o no a la clase, y el nro total de clases a las que la alumna asistio
     def get_asistencias(self, asistencias, alumnas):
-        lista_alumnas = []
-        lista_clases = []
-        # asist_por_nombre = asistencias.order_by('alumna__first_name')
         alum_por_nombre = alumnas.order_by('first_name')
         nro_alumnas = len(alumnas)
-
+        lista_asistencias = []
         i = 0
 
-        while (len(lista_alumnas) < nro_alumnas):
+        while (len(lista_asistencias) < nro_alumnas):
             name = alum_por_nombre[i].first_name
             alum = alumnas.filter(first_name=name).order_by('last_name')
 
             for alumna in alum:
-                print("alumna = ", alumna)
-                asist = asistencias.filter(alumna=alumna)
-                lista = []
-                index = 0
-                while (len(lista) < len(asist)):
-                    lista += [asist[index].clase]
-                    index += 1
-
-                lista_alumnas += [alumna]
-                lista_clases += [lista]
+                asist = asistencias.filter(alumna=alumna).order_by('clase_id')
+                lista_a = []
+                for asistencia in asist:
+                    lista_a += [asistencia.asistio]
+                total = len( asist.filter(asistio=True) )
+                lista = [alumna, lista_a, total]
+                lista_asistencias += [lista]
                 i += 1
 
-        return [lista_alumnas, lista_clases]
+        return lista_asistencias
 
 
     def get(self, request, **kwargs):
@@ -59,23 +56,45 @@ class Asistencia_GralView(LoginRequiredMixin, View):
         elif usuaria.es_voluntaria:
             curso = Curso.objects.filter(voluntarias__in=[usuaria], id=curso_id)
 
-        if len(list(curso))>0:
+        if len(curso) > 0:
             curso = curso[0]
+            clases_totales = Clase.objects.filter(curso=curso).order_by('id')
+            asistencias = Asistencia.objects.filter(clase__curso=curso).order_by('clase_id')
+            lista_asistencias = list(self.get_asistencias(asistencias, curso.alumnas.all()))
+            clases_asist = []             # clases que ya tienen asistencias hasta el momento
+            total_por_clase = []    # total de alumnas por clase en clases
 
-            clases = Clase.objects.filter(curso=curso)
-            asistencias = Asistencia.objects.filter(clase__curso=curso)
+            for asistencia in asistencias:
+                if not asistencia.clase in clases_asist:
+                    clases_asist += [asistencia.clase]
+            for clase in clases_asist:
+                total_clase = len(asistencias.filter(clase=clase, asistio=True))
+                total_por_clase += [total_clase]
 
-            lista = self.get_asistencias(asistencias, curso.alumnas.all())
-            lista_alumnas = lista[0]
-            lista_clases = lista[1]
+            hay_clases = True
+            if len(Clase.objects.filter(curso=curso)) == 0:
+                hay_clases = not hay_clases
+            hay_alumnas = True
+            if len(curso.alumnas.all()) == 0:
+                hay_alumnas = not hay_alumnas
+
+            id_prox_clase = -1
+            if len(clases_asist) < len(clases_totales):
+                id_prox_clase = clases_totales[len(clases_asist)].id
 
             return render(request, 'asistencia/asistencia_gral.html', {
                 'curso': curso,
-                'clases': clases,
-                'alumnas' : lista_alumnas,
-                'asistencias': lista_clases
-        })
+                'clases': clases_asist,
+                'lista_asistencias': lista_asistencias,
+                'total_por_clase': total_por_clase,
+                'hay_clases': hay_clases,
+                'hay_alumnas': hay_alumnas,
+                'id_prox_clase': id_prox_clase
+            })
+
         return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
+
+
 
 
 class AsistenciaView(LoginRequiredMixin, View):

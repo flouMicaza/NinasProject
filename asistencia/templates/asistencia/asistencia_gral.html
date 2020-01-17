@@ -4,54 +4,164 @@
 
 {% block content %}
 
-    <div>
-         <h4> Asistencia </h4>
-         <h5> {{curso.nombre}} </h5>
-    </div>
+    {% if hay_clases and hay_alumnas and clases %}     <!-- C++: Basico -->
 
-    <div class="col s4" style="align-self: stretch" >
-        <div class="material-icons right" >
-            <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small red accent-2">
-                <i class="material-icons right">format_list_bulleted</i>Pasar asistencia</a>
+        <div>
+             <h4> Asistencia </h4>
+             <h5> {{curso.nombre}} </h5>
         </div>
-    </div>
 
-    <div class="container">
-      <table>
-        <thead>
+        {% if id_prox_clase < 0 %}
+            <div class="col s4" style="align-self: stretch" >
+                <div class="material-icons right" >
+                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn disabled">
+                        <i class="material-icons right">format_list_bulleted</i>
+                            Pasar asistencia
+                        </a>
+                </div>
+            </div>
+        {% else %}
+            <div class="col s4" style="align-self: stretch" >
+                <div class="material-icons right" >
+                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn">
+                        <i class="material-icons right">format_list_bulleted</i>
+                            Pasar asistencia
+                        </a>
+                </div>
+            </div>
+        {% endif %}
 
-          <tr>
-            <th> Alumnas </th>
+        <div class="container">
+          <table>
+            <thead>
 
-            {% for clase in clases %}
-                <th> Clase {{forloop.counter}} </th>
-            {% endfor %}
+              <tr>
+                <th> N° </th>
 
-          </tr>
-        </thead>
+                <th> Alumna </th>
 
-        <tbody>
-            {% for alumna, clases_alumna in lista_alumnas, lista_clases %}
+                {% for clase in clases %}
+                    <th> Clase {{forloop.counter}} </th>
+                {% endfor %}
+
+                 <th> Total clases </th>
+
+              </tr>
+            </thead>
+
+            <tbody>
+
+                {% for lista in lista_asistencias %}
+
+                    <tr>
+
+                        <td> {{forloop.counter}} </td>
+
+                        <td> {{ lista.0.first_name }} {{ lista.0.last_name }} </td>
+
+                        {% for bool in lista.1 %}
+
+                            {% if bool %}
+                                <td>  <i class="material-icons icon-green">check_circle</i> </td>
+                                <!-- <td bgcolor="82FFAD" >   </td> -->
+
+                            {% else %}
+                                <td>  <i class="material-icons icon-red">cancel</i> </td>
+
+                                <!-- <td bgcolor="#FF8C89">  </td> -->
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                        <td> {{ lista.2 }} </td>
+
+                    </tr>
+
+                {% endfor %}
 
                 <tr>
-                    <td> {{alumna.first_name}}  {{alumna.last_name}}</td>
-                    {% for clase in clases %}
+                    <th>  </th>
 
-                        {% if clase in clases_alumna %}
-                            <td>  <i class="material-icons">check</i> </td>
-                        {% else %}
-                            <td>  <i class="material-icons">close</i> </td>
-                        {% endif %}
+                    <th> Total alumnas </th>
 
-                    {% endfor%}
+                    {% for total in total_por_clase %}
+
+                        <td> {{ total }} </td>
+
+                    {% endfor %}
+
+                    <td>  </td>
+
                 </tr>
 
-            {% endfor%}
 
-        </tbody>
-      </table>
+            </tbody>
+          </table>
 
-    </div>
+        </div>
+
+
+
+
+    {% elif hay_clases and hay_alumnas %} <!-- Progra UAndes -->
+
+        </br>
+        </br>
+
+        ¡Ups! No se ha pasado asistencia para este curso aún.
+
+        </br>
+        </br>
+        </br>
+
+
+        <div class="col s4" style="align-self: stretch" >
+            <div class="material-icons left" >
+                <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=14 %}" class="waves-effect waves-light btn-small btn red accent-2">
+                    <i class="material-icons left">format_list_bulleted</i>Pasar asistencia</a>
+            </div>
+        </div>
+
+
+
+
+    {% else %}
+
+        </br>
+        </br>
+
+        <!-- no hay clases y no hay alumnas -->
+        {% if not hay_clases and not hay_alumnas %}      <!-- C++: Medio -->
+
+            Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas y alumnas inscritas.
+
+        <!-- no hay clases y hay alumnas -->
+        {% elif not hay_clases and hay_alumnas %}   <!-- Progra Antofa -->
+
+            Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas.
+
+
+        <!-- hay clases y no hay alumnas -->
+        {% elif hay_clases and not hay_alumnas %}       <!-- C++: Avanzado -->
+
+            Para mostrar el historial de asistencia es necesario que el curso tenga alumnas inscritas.
+
+        {% endif %}
+
+        </br>
+        </br>
+        </br>
+
+        <div class="col s4" style="align-self: stretch" >
+            <div class="material-icons left" >
+                <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn red accent-2">
+                        <i class="material-icons left">arrow_back</i>Volver</a>
+            </div>
+        </div>
+
+
+    {% endif %}
 
 
 
@@ -59,4 +169,5 @@
 
 
 {% endblock %}
+
 

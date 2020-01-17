@@ -4,8 +4,6 @@
 
 
 {% block content %}
-<form method="POST" class="asistencia-form-set">
-
     <h4>
         Asistencia {{curso.nombre}}
     </h4>
@@ -14,27 +12,16 @@
     </h5>
     <div>
 
-            <!--<form action="/asistio/" method="post">
-                {%csrf_token%}
-                {{form.as_p}}
-                <input type="submit" value="uwu submit">
-            </form>-->
-
-
-
-
-               <!-- <button type="submit" class="save btn btn-default">Pasar lista</button>-->
-
         <form method="POST" action="">
             {%csrf_token%}
                 {{formset.management_form}}
                 {%for form in formset%}
-            <label>{{form.alumna.label}}</label>
-            {{form.alumna}}
-            <label>
-        <input type="checkbox">
-        <span>{{ form.asistio }}</span>
-    </label>
+                     <label>{{form.alumna.label}}</label>
+                     {{form.alumna}}
+                     <label>
+                        <input type="checkbox">
+                         <span>{{ form.asistio }}</span>
+                        </label>
                 {%endfor%}
                 <button type="submit" class="waves-effect waves-light btn-small">pasar asistencia</button>
         </form>
