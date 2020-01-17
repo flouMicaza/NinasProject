@@ -16,12 +16,16 @@
             {%csrf_token%}
                 {{formset.management_form}}
                 {%for form in formset%}
+                    <div>
+                        <hr>
                      <label>{{form.alumna.label}}</label>
                      {{form.alumna}}
                      <label>
                         <input type="checkbox">
                          <span>{{ form.asistio }}</span>
                         </label>
+
+                        </div>
                 {%endfor%}
                 <button type="submit" class="waves-effect waves-light btn-small">pasar asistencia</button>
         </form>

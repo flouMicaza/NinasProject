@@ -6,30 +6,29 @@ from django.forms import formset_factory, modelformset_factory
 
 
 
-class AsistenciaForm(forms.ModelForm):
-    class Meta():
-        model=Asistencia
-        fields=('alumna','asistio',)
-        labels={'alumna': 'Alumna', 'asistio':'Asistio'}
-        widgets={'alumna': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'alumna '
-                }
-            ), 'asistio':forms.CheckboxInput()}
-    #alumna=forms.CharField()
-    #asistio=forms.BooleanField()
-    #widgets={'asistio':forms.CheckboxSelectMultiple}
+class AsistenciaForm(forms.Form):
     #class Meta():
-     #   model = Asistencia
+     #   model=Asistencia
       #  fields=('alumna','asistio',)
+       # labels={'alumna': 'Alumna', 'asistio':'Asistio'}
+        #widgets={'alumna': forms.TextInput(attrs={
+         #       'class': 'form-control',
+          #      'placeholder': 'alumna '
+           #     }
+            #), 'asistio':forms.CheckboxInput()}
+    #alumna=forms.CharField()
+    asistio=forms.BooleanField( widget=forms.CheckboxInput())
 
-AsistenciaFormset=modelformset_factory(Asistencia,
-                                       fields=('alumna','asistio'), extra=3,
-                                       widgets={'alumna': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'alumna '
-                }
-            ), 'asistio':forms.CheckboxInput()})
+
+AsistenciaFormset=formset_factory(AsistenciaForm, extra=3)
+
+"""
+ #fields=('alumna','asistio'), extra=3,
+                                       #widgets={'alumna': forms.TextInput(attrs={
+               # 'class': 'form-control',
+                #'placeholder': 'alumna '
+               # }
+           # ), 'asistio':forms.CheckboxInput()})"""
 
 
 
