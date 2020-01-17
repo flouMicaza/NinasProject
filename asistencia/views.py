@@ -49,7 +49,6 @@ class Asistencia_GralView(LoginRequiredMixin, View):
 
     def get(self, request, **kwargs):
         curso_id = kwargs['curso_id']
-        curso = get_object_or_404(Curso, pk=curso_id)
         usuaria = User.objects.get(username=request.user.username)
         if usuaria.es_profesora:
             curso = Curso.objects.filter(profesoras__in=[usuaria], id=curso_id)
@@ -96,13 +95,14 @@ class Asistencia_GralView(LoginRequiredMixin, View):
 
 
 
-
+"""
 class AsistenciaView(LoginRequiredMixin, View):
     login_url = 'usuarios:login'
     redirect_field_name = ''
 
     def get(self, request, **kwargs):
         curso_id = kwargs['curso_id']
+        curso = get_object_or_404(Curso, pk=curso_id)
         clase_id = kwargs['clase_id']
         curso = get_object_or_404(Curso, pk=curso_id)
         usuaria = User.objects.get(username=request.user.username)
@@ -110,34 +110,69 @@ class AsistenciaView(LoginRequiredMixin, View):
             cursos = Curso.objects.filter(profesoras__in=[usuaria])
         elif usuaria.es_voluntaria:
             cursos = Curso.objects.filter(voluntarias__in=[usuaria])
-        else:
-            return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
 
-        clase = list(Clase.objects.filter(curso=curso, id=clase_id))[0]
-        form = self.get_form(request)
 
-        if curso in list(cursos):
-            return render(request, 'asistencia/asistencia.html', {
-                'curso': curso,
-                'clase': clase,
-                'form': form
-        })
+        if len(cursos) > 0 and not usuaria.es_voluntaria:
+            curso = cursos[0]
+            clase = list(Clase.objects.filter(curso=curso, id=clase_id))[0]
+            #form = self.get_form(request)
+
+            print("--------------------------")
+            print(curso)
+            print("HOLAAAAAAAA")
+
+            if curso in list(cursos):
+                return render(request, 'asistencia/asistencia.html', {
+                    'curso': curso,
+                    'clase': clase,
+                    'form': form
+            })
 
         return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
+        
+    """
 
 def get_form(request,**kwargs):
-    template_name='asistencia/asistencia.html'
-    heading_message = 'Model Formset Demo'
-    if request.method=='GET':
-        formset=AsistenciaFormset(queryset=Asistencia.objects.none())
-    elif request.method=='POST':
-        formset=AsistenciaFormset(request.POST)
-        if formset.is_valid():
-            for form in formset:
-                print("alumna form", form.cleaned_data.get('alumna'))
-            #return redirect('asistencia:asistencia_gral')
-            return HttpResponseRedirect(reverse('asistencia:asistencia_gral', {'curso_id':1}))
-    return render(request,template_name,{'formset':formset,'heading': heading_message,})
+    curso_id = kwargs['curso_id']
+    clase_id = kwargs['clase_id']
+    usuaria = User.objects.get(username=request.user.username)
+    if usuaria.es_profesora:
+        curso = Curso.objects.filter(profesoras__in=[usuaria], id=curso_id)
+        clase = Clase.objects.filter(id=clase_id, curso__id=curso_id)
+    elif usuaria.es_voluntaria:
+        curso = Curso.objects.filter(voluntarias__in=[usuaria], id=curso_id)
+        clase = Clase.objects.filter(id=clase_id, curso__id=curso_id)
+
+    if len(curso) == 0:
+        return HttpResponseForbidden("No tienes permiso para pasar asistencia en este curso.")
+
+    elif len(clase) == 0:
+        return HttpResponseNotFound("La clase que buscas no existe.")
+
+    else:
+        curso = curso[0]
+        clase = clase[0]
+
+        template_name='asistencia/asistencia.html'
+        heading_message = 'Model Formset Demo'
+        if request.method=='GET':   ## cuando entro por primera vez
+            formset=AsistenciaFormset(request.GET or None)
+            return render(request, template_name, {
+                'curso': curso,
+                'clase': clase,
+                'formset': formset,
+                'heading': heading_message,
+            })
+        elif request.method=='POST':    ## cuando pongo save
+            formset=AsistenciaFormset(request.POST)
+            if formset.is_valid():
+                for form in formset:
+                    print("alumna form", form.cleaned_data.get('alumna'))
+                #return redirect('asistencia:asistencia_gral')
+                return HttpResponseRedirect(reverse('asistencia:asistencia_gral', {'curso_id':1}))
+
+
+
 
 
 

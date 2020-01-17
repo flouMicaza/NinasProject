@@ -4,24 +4,29 @@
 
 
 {% block content %}
-    <h4>
-        Asistencia {{curso.nombre}}
-    </h4>
-    <h5>
-        {{clase.nombre}}
-    </h5>
+
+    <div>
+         <h4> Asistencia </h4>
+         <h5> {{curso.nombre}} </h5>
+         <h6> {{ clase.nombre }} </h6>
+    </div>
+
+
     <div>
 
         <form method="POST" action="">
             {%csrf_token%}
                 {{formset.management_form}}
-                {%for form in formset%}
-                     <label>{{form.alumna.label}}</label>
-                     {{form.alumna}}
-                     <label>
-                        <input type="checkbox">
-                         <span>{{ form.asistio }}</span>
-                        </label>
+                {% for form in formset %}
+                    <div>
+                        <hr>
+                         <label>{{form.alumna.label}}</label>
+                         {{form.alumna}}
+                         <label>
+                            <input type="checkbox">
+                             <span>{{ form.asistio }}</span>
+                            </label>
+                    </div>
                 {%endfor%}
                 <button type="submit" class="waves-effect waves-light btn-small">pasar asistencia</button>
         </form>
