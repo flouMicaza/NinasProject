@@ -4,7 +4,8 @@
 
 
 {% block content %}
-<form method="POST" class="asistencia-form">{% csrf_token %}
+<form method="POST" class="asistencia-form-set">
+
     <h4>
         Asistencia {{curso.nombre}}
     </h4>
@@ -12,34 +13,34 @@
         {{clase.nombre}}
     </h5>
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th> Alumnas </th>
-          </tr>
-        </thead>
-        <tbody>
 
-                {% for alumna in curso.alumnas.all %}
-                  <tr>
-                    <td>
-                        <label>
-                            <input id=alumna.id type="checkbox" name="asistencia_alumna" value=0/>
-                            <span>{{alumna.username}}</span>
-                        </label>
-                    </td>
-                  </tr>
-                {% endfor %}
+            <!--<form action="/asistio/" method="post">
+                {%csrf_token%}
+                {{form.as_p}}
+                <input type="submit" value="uwu submit">
+            </form>-->
 
-        </tbody>
-      </table>
+
+
+
+               <!-- <button type="submit" class="save btn btn-default">Pasar lista</button>-->
+
+        <form method="POST" action="">
+            {%csrf_token%}
+                {{formset.management_form}}
+                {%for form in formset%}
+            <label>{{form.alumna.label}}</label>
+            {{form.alumna}}
+            <label>
+        <input type="checkbox">
+        <span>{{ form.asistio }}</span>
+    </label>
+                {%endfor%}
+                <button type="submit" class="waves-effect waves-light btn-small">pasar asistencia</button>
+        </form>
     </div>
 
-    <div>
-        <a href="{% url 'asistencia:asistencia_gral' curso_id=curso.id %}" class="waves-effect waves-light btn-small red accent-2">
-        <i class="material-icons right">check</i>Guardar</a>
-    </div>
-</form>
+
 
 {% endblock %}
 

@@ -2,15 +2,18 @@ from datetime import datetime
 from django import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
+from django.http import HttpResponseRedirect
+from django.forms import formset_factory
 
 from .models import Asistencia
-from asistencia.forms import AsistenciaForm
+from asistencia.forms import AsistenciaFormset
 from clases.models import Clase
 from cursos.models import Curso
 from usuarios.models import User
+from .forms import AsistenciaForm
 
 
 class Asistencia_GralView(LoginRequiredMixin, View):
@@ -103,20 +106,19 @@ class AsistenciaView(LoginRequiredMixin, View):
 
         return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
 
-    def get_form(self, request):
-        if request.method == "POST":
-            form = AsistenciaForm(request.POST)
-            asistentes = form.save(commit=False)
-            asistentes.author=request.user
-            asistentes.guardarAsistencia()
-        else:
-            form = AsistenciaForm()
-        return form
-
-
-
-
-
+def get_form(request,**kwargs):
+    template_name='asistencia/asistencia.html'
+    heading_message = 'Model Formset Demo'
+    if request.method=='GET':
+        formset=AsistenciaFormset(queryset=Asistencia.objects.none())
+    elif request.method=='POST':
+        formset=AsistenciaFormset(request.POST)
+        if formset.is_valid():
+            for form in formset:
+                print("alumna form", form.cleaned_data.get('alumna'))
+            #return redirect('asistencia:asistencia_gral')
+            return HttpResponseRedirect(reverse('asistencia:asistencia_gral', {'curso_id':1}))
+    return render(request,template_name,{'formset':formset,'heading': heading_message,})
 
 
 
