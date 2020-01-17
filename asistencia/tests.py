@@ -141,7 +141,7 @@ class Asistencia_GralViewTest(InitialData):
         # Mensaje que arroja la página
         self.assertContains(response, "Para mostrar el historial de asistencia es necesario que el curso tenga alumnas inscritas.")
         self.assertContains(response, "Volver")
-        self.assertNotContains(response, "Alumnas")
+        self.assertNotContains(response, "Alumna")
         self.assertNotContains(response, "Nombre")
         self.assertNotContains(response, "Total")
 
@@ -163,7 +163,7 @@ class Asistencia_GralViewTest(InitialData):
         # Mensaje que arroja la página
         self.assertContains(response, "Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas.")
         self.assertContains(response, "Volver")
-        self.assertNotContains(response, "Alumnas")
+        self.assertNotContains(response, "Alumna")
         self.assertNotContains(response, "Nombre")
         self.assertNotContains(response, "Total")
 
@@ -182,7 +182,7 @@ class Asistencia_GralViewTest(InitialData):
         # Mensaje que arroja la página
         self.assertContains(response, "Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas y alumnas inscritas.")
         self.assertContains(response, "Volver")
-        self.assertNotContains(response, "Alumnas")
+        self.assertNotContains(response, "Alumna")
         self.assertNotContains(response, "Nombre")
         self.assertNotContains(response, "Total")
 
@@ -206,7 +206,7 @@ class Asistencia_GralViewTest(InitialData):
         # Mensaje que arroja la página
         self.assertContains(response, "¡Ups! No se ha pasado asistencia para este curso aún.")
         #self.assertContains(response, "PASAR ASISTENCIA")
-        self.assertNotContains(response, "Alumnas")
+        self.assertNotContains(response, "Alumna")
         self.assertNotContains(response, "Nombre")
         self.assertNotContains(response, "Total")
 
@@ -247,9 +247,6 @@ class Asistencia_GralViewTest(InitialData):
             self.assertContains(response, alumna.first_name)
             self.assertContains(response, alumna.last_name)
 
-
-
-
         self.client.logout()
 
 
@@ -275,51 +272,56 @@ class Asistencia_GralViewTest(InitialData):
         self.assertEquals(response.status_code, 403)
         self.client.logout()
 
-"""
+
+
 class AsistenciaViewTest(InitialData):
 
     def setUp(self):
         super(AsistenciaViewTest, self).setUp()
         self.asistenciaView = AsistenciaView()
-        self.dia_ninaspro= 6 #6 de Julio 2020 es sabado
+        self.dia_ninaspro = 6 #6 de Julio 2020 es sabado
+        self.mes = 7
+        self.anio = 2020
         self.hora_inicio = 10 #taller parte a las 10
 
 
-    # Test para la vista de las asistencia un curso por una usuaria
+    ## Test para la vista de las asistencia de un curso por una usuaria
     def vista_asistencia(self, day, hour, usuaria, curso):
         import datetime
-        clase = list(Clase.objects.filter(curso=curso))[0]
-        newNow = datetime.datetime(year=2020, month=6, day=day, hour=hour)
+        # Se establece una fecha y una hora
+        newNow = datetime.datetime(year=self.anio, month=self.mes, day=day, hour=hour)
         datetime = Mock()
         datetime.datetime.return_value = newNow
+        # Se crea una clase sin asistencias un dia de ninasṕro
+        clase = Clase.objects.create(nombre="Clase prueba", curso=curso, fecha_clase=datetime.date(year=self.anio, month=self.mes, day=self.dia_ninaspro))
 
         self.client.force_login(user=usuaria)
         response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso.id,'clase_id': clase.id}))
         self.assertTemplateUsed(response, 'asistencia/asistencia.html')
-        self.assertContains(response, "Save")
+        self.assertContains(response, clase.nombre)
+        self.assertContains(response, "Guardar")
         self.assertContains(response, "Asistencia")
-        for clase in list(Clase.objects.filter(curso__in=[curso])):
-            self.assertContains(response, clase.nombre)
-        self.assertContains(response, "Nombre")
-        for i in range(4):
-            self.assertContains(response, "alumna" + str(i + 1))
+        self.assertContains(response, "Alumna")
+
+        for alumna in curso.alumnas.all():
+            self.assertContains(response, alumna.first_name + " " + alumna.last_name)
 
         self.client.logout()
 
 
     def test_vista_asistencia_dia_ninaspro(self):
-        ## una voluntaria va a ṕasar la lista un dia de ninaspro a una hora permitida
+        # Una voluntaria va a ṕasar la lista un dia de ninaspro a una hora permitida
         day = self.dia_ninaspro
         hour = self.hora_inicio + 1
         usuaria = self.usuaria_voluntaria1
         curso = Curso.objects.create(nombre="Django")
         curso.voluntarias.add(usuaria)
-        Clase.objects.create(nombre="Tutorial DjangoGirls", curso=curso, fecha_clase= datetime.datetime(year=2020, month=6, day=day, hour=hour))
+        Clase.objects.create(nombre="Tutorial DjangoGirls", curso=curso, fecha_clase= datetime.datetime(year=self.year, month=self.month, day=day, hour=hour))
         self.vista_asistencia(day, hour, usuaria, curso)
 
 
     def test_vista_asistencia_dia_no_ninaspro(self):
-        ## una profesora va a modificar la lista un dia que no hay ninaspro
+        # Una profesora va a modificar la lista un dia que no hay ninaspro
         day = self.dia_ninaspro+1
         hour = self.hora_inicio
         usuaria = self.usuaria_profesora1
@@ -327,13 +329,16 @@ class AsistenciaViewTest(InitialData):
         self.vista_asistencia(day, hour, usuaria, curso)
 
 
-    # Test para la vista de las asistencia de un curso por una usuaria sin permiso
+    ## Test para la vista de las asistencia de un curso por una usuaria sin permiso
     def vista_asistencia_sin_permiso(self, day, hour, usuaria, curso):
         import datetime
-        clase = list(Clase.objects.filter(curso=curso))[0]
-        newNow = datetime.datetime(year=2020, month=6, day=day, hour=hour)
+        # Se establece una fecha y una hora
+        newNow = datetime.datetime(year=self.anio, month=self.mes, day=day, hour=hour)
         datetime = Mock()
         datetime.datetime.return_value = newNow
+        # Se crea una clase sin asistencias un dia de ninasṕro
+        clase = Clase.objects.create(nombre="Clase prueba", curso=curso, fecha_clase=datetime.date(year=self.anio, month=self.mes, day=self.dia_ninaspro))
+
         self.client.force_login(user=usuaria)
         response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso.id,'clase_id': clase.id}))
         # self.assertTemplateUsed(response, 'error/403.html')
@@ -342,7 +347,7 @@ class AsistenciaViewTest(InitialData):
 
 
     def test_vista_asistencia_sin_permiso_voluntaria(self):
-        ## una voluntaria va a ṕasar la lista un dia de ninaspro fuera de horario
+        ## Una voluntaria va a ṕasar la lista un dia de ninaspro fuera de horario
         day = self.dia_ninaspro
         hour = self.hora_inicio-1
         usuaria = self.usuaria_voluntaria1
@@ -375,8 +380,3 @@ class AsistenciaViewTest(InitialData):
         self.assertEquals(response.status_code, 404)
 
 
-
-
-
-
-"""

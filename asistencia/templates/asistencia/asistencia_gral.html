@@ -11,14 +11,25 @@
              <h5> {{curso.nombre}} </h5>
         </div>
 
-        <div class="col s4" style="align-self: stretch" >
-            <div class="material-icons right" >
-                <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn">
-                    <i class="material-icons right">format_list_bulleted</i>
-                        Pasar asistencia
-                    </a>
+        {% if id_prox_clase < 0 %}
+            <div class="col s4" style="align-self: stretch" >
+                <div class="material-icons right" >
+                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn disabled">
+                        <i class="material-icons right">format_list_bulleted</i>
+                            Pasar asistencia
+                        </a>
+                </div>
             </div>
-        </div>
+        {% else %}
+            <div class="col s4" style="align-self: stretch" >
+                <div class="material-icons right" >
+                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn">
+                        <i class="material-icons right">format_list_bulleted</i>
+                            Pasar asistencia
+                        </a>
+                </div>
+            </div>
+        {% endif %}
 
         <div class="container">
           <table>
@@ -27,7 +38,7 @@
               <tr>
                 <th> N° </th>
 
-                <th> Alumnas </th>
+                <th> Alumna </th>
 
                 {% for clase in clases %}
                     <th> Clase {{forloop.counter}} </th>
