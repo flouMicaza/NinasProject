@@ -21,7 +21,6 @@ class Asistencia_GralView(LoginRequiredMixin, View):
     login_url = 'usuarios:login'
     redirect_field_name = ''
 
-
     ## Devuelve un lista compuesta ṕor listas, hay una sublista por alumna.
     ## Cada sublista contiene a la alumna, una lista de booleanos que indica si fue
     # o no a la clase, y el nro total de clases a las que la alumna asistio
@@ -54,7 +53,6 @@ class Asistencia_GralView(LoginRequiredMixin, View):
         curso = get_cursos(usuaria, curso_id)
 
         if curso != None and not usuaria.es_alumna:
-            curso = curso[0]
             clases_totales = Clase.objects.filter(curso=curso).order_by('id')
             asistencias = Asistencia.objects.filter(clase__curso=curso).order_by('clase_id')
             lista_asistencias = list(self.get_asistencias(asistencias, curso.alumnas.all()))
@@ -130,7 +128,7 @@ def get_form(request,**kwargs):
                 for form in formset:
                     print("alumna form", form.cleaned_data.get('alumna'))
                 #return redirect('asistencia:asistencia_gral')
-                return HttpResponseRedirect(reverse('asistencia:asistencia_gral', {'curso_id':1}))
+                return HttpResponseRedirect(reverse('asistencia:asistencia_gral', {'curso_id':curso_id}))
 
 
 

@@ -1,4 +1,4 @@
-
+{% load compress %}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 
-            <link type="text/x-scss" href="{% static 'scss/style.scss' %}" rel="stylesheet" media="screen">
+        {% compress css %}
+                    <link type="text/x-scss" href="{% static 'scss/style.scss' %}" rel="stylesheet" media="screen">
+        {% endcompress %}
         <link type="text/x-scss" href="{% static 'css/style.css' %}" rel="stylesheet" media="screen">
 
 

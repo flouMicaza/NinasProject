@@ -13,26 +13,43 @@
 
     <div class="forms-table">
 
-        <form method="POST" action="">
+        <form method="POST" action="" style="margin-top: 60px;" >
             {%csrf_token%}
                 {{formset.management_form}}
                 {% for form in formset %}
-                    <div>
-                        <hr>
+                    <div style="margin-top: 15px;" >
+
                         <label>
                             <input type="checkbox">
                              <span>{{ form.asistio }}</span>
                             </label>
-                         <label>{{form.asistio.label.first_name}} {{form.asistio.label.last_name}}</label>
+                         <label style="font-size:large; color:#000000e6;" >{{form.asistio.label.first_name}} {{form.asistio.label.last_name}}</label>
 
                     </div>
                 {%endfor%}
 
 
+            <!--    BUTTON QUE DEBERIA FUNCIONAR CUANDO SE PUEDAN GUARDAR LAS COSAS EN LA BDD
                 <div>
-                    <button type="submit" class="waves-effect waves-light btn-small">pasar asistencia</button>
+
+                    <a href="{% url 'asistencia:asistencia_gral' curso_id=curso.id %}">
+                        <button type="submit" style="margin-top: 40px;" class="waves-effect waves-light btn-small btn red accent-2">
+                            <i class="material-icons right">playlist_add_check</i>Guardar
+                        </button>
+                    </a>
+
                 </div>
+            -->
+
+
+
         </form>
+
+        <div>
+            <a href="{% url 'asistencia:asistencia_gral' curso_id=curso.id %}" style="margin-top: 40px;" class="waves-effect waves-light btn-small btn">
+                        <i class="material-icons right">playlist_add_check</i>Guardar</a>
+        </div>
+
     </div>
 
 

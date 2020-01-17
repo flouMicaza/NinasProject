@@ -20,6 +20,7 @@
                         </a>
                 </div>
             </div>
+
         {% else %}
             <div class="col s4" style="align-self: stretch" >
                 <div class="material-icons right" >
@@ -29,6 +30,7 @@
                         </a>
                 </div>
             </div>
+
         {% endif %}
 
         <div class="container">
@@ -115,12 +117,13 @@
         </br>
         </br>
 
-
         <div class="col s4" style="align-self: stretch" >
-            <div class="material-icons left" >
-                <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=14 %}" class="waves-effect waves-light btn-small btn red accent-2">
-                    <i class="material-icons left">format_list_bulleted</i>Pasar asistencia</a>
-            </div>
+                <div class="material-icons left" >
+                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn ">
+                        <i class="material-icons right">format_list_bulleted</i>
+                            Pasar asistencia
+                        </a>
+                </div>
         </div>
 
 
@@ -155,7 +158,7 @@
 
         <div class="col s4" style="align-self: stretch" >
             <div class="material-icons left" >
-                <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn red accent-2">
+                <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn">
                         <i class="material-icons left">arrow_back</i>Volver</a>
             </div>
         </div>
