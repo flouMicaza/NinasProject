@@ -4,42 +4,52 @@
 
 
 {% block content %}
-<form method="POST" class="asistencia-form">{% csrf_token %}
-    <h4>
-        Asistencia {{curso.nombre}}
-    </h4>
-    <h5>
-        {{clase.nombre}}
-    </h5>
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th> Alumnas </th>
-          </tr>
-        </thead>
-        <tbody>
 
-                {% for alumna in curso.alumnas.all %}
-                  <tr>
-                    <td>
+    <div>
+         <h4> Asistencia {{curso.nombre}} </h4>
+         <h5> {{ clase.nombre }} </h5>
+    </div>
+
+
+    <div class="forms-table">
+
+        <form method="POST" action="" class="list">
+            {%csrf_token%}
+                {{formset.management_form}}
+                {% for form in formset %}
+                    <div style="margin-top: 15px;" >
+
                         <label>
-                            <input id=alumna.id type="checkbox" name="asistencia_alumna" value=0/>
-                            <span>{{alumna.username}}</span>
-                        </label>
-                    </td>
-                  </tr>
-                {% endfor %}
+                            <input type="checkbox" class="checkbox-indigo"  >
+                             <span>{{ form.asistio }}</span>
+                            </label>
+                         <label class="nombre-checkbox" >{{form.asistio.label.first_name}} {{form.asistio.label.last_name}}</label>
 
-        </tbody>
-      </table>
+                    </div>
+                {%endfor%}
+
+
+            <!--    BUTTON QUE MANDA LAS COSAS A LA BDD -->
+                <div>
+
+                    <a href="{% url 'asistencia:asistencia_gral' curso_id=curso.id %}">
+                        <button type="submit" style="margin-top: 40px;" class="waves-effect waves-light btn-small btn red accent-2">
+                            <i class="material-icons right">playlist_add_check</i>Guardar
+                        </button>
+                    </a>
+
+                </div>
+
+
+
+
+        </form>
+
+
+
     </div>
 
-    <div>
-        <a href="{% url 'asistencia:asistencia_gral' curso_id=curso.id %}" class="waves-effect waves-light btn-small red accent-2">
-        <i class="material-icons right">check</i>Guardar</a>
-    </div>
-</form>
+
 
 {% endblock %}
 

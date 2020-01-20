@@ -11,7 +11,7 @@ class Asistencia(models.Model):
     asistio = models.BooleanField('alumna asisitio')
 
     class Meta:
-        unique_together = (("alumna", "clase"),)
+        unique_together=(("alumna","clase"))
 
     def __str__(self):
         if self.asistio:

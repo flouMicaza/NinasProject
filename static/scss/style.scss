@@ -6,9 +6,10 @@ $absent-color: #FECCC4;
 $x-color: #B32727;
 $check-color: #15B342;
 
-.btn {
+.btn, .btn-large, .btn-small {
   background-color: $primary-color;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+
 }
 
 .btn:hover {
@@ -32,6 +33,22 @@ td, th {
   text-align: center;
 }
 
+
+.list {
+    margin-top: 60px;
+}
+
+
+.nombre-checkbox {
+    font-size:large;
+    color:#000000e6;
+}
+.checkbox-indigo[type="checkbox"] + label:before{
+  border: 2px $primary-color;
+  background: transparent;
+}
+
+
 .icon-red {
     color: $x-color;
 }
@@ -39,3 +56,9 @@ td, th {
 .icon-green {
     color: $check-color;
 }
+
+
+
+
+
+

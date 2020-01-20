@@ -11,14 +11,27 @@
              <h5> {{curso.nombre}} </h5>
         </div>
 
-        <div class="col s4" style="align-self: stretch" >
-            <div class="material-icons right" >
-                <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn">
-                    <i class="material-icons right">format_list_bulleted</i>
-                        Pasar asistencia
-                    </a>
+        {% if id_prox_clase < 0 %}
+            <div class="col s4" style="align-self: stretch" >
+                <div class="material-icons right" >
+                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn disabled">
+                        <i class="material-icons right">format_list_bulleted</i>
+                            Pasar asistencia
+                        </a>
+                </div>
             </div>
-        </div>
+
+        {% else %}
+            <div class="col s4" style="align-self: stretch" >
+                <div class="material-icons right" >
+                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn">
+                        <i class="material-icons right">format_list_bulleted</i>
+                            Pasar asistencia
+                        </a>
+                </div>
+            </div>
+
+        {% endif %}
 
         <div class="container">
           <table>
@@ -27,7 +40,7 @@
               <tr>
                 <th> N° </th>
 
-                <th> Alumnas </th>
+                <th> Alumna </th>
 
                 {% for clase in clases %}
                     <th> Clase {{forloop.counter}} </th>
@@ -95,21 +108,19 @@
 
     {% elif hay_clases and hay_alumnas %} <!-- Progra UAndes -->
 
-        </br>
-        </br>
+        <div>
 
         ¡Ups! No se ha pasado asistencia para este curso aún.
 
-        </br>
-        </br>
-        </br>
-
+        </div>
 
         <div class="col s4" style="align-self: stretch" >
-            <div class="material-icons left" >
-                <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=14 %}" class="waves-effect waves-light btn-small btn red accent-2">
-                    <i class="material-icons left">format_list_bulleted</i>Pasar asistencia</a>
-            </div>
+                <div class="material-icons left" >
+                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn ">
+                        <i class="material-icons right">format_list_bulleted</i>
+                            Pasar asistencia
+                        </a>
+                </div>
         </div>
 
 
@@ -117,8 +128,7 @@
 
     {% else %}
 
-        </br>
-        </br>
+        <div>
 
         <!-- no hay clases y no hay alumnas -->
         {% if not hay_clases and not hay_alumnas %}      <!-- C++: Medio -->
@@ -138,13 +148,11 @@
 
         {% endif %}
 
-        </br>
-        </br>
-        </br>
+        </div>
 
         <div class="col s4" style="align-self: stretch" >
             <div class="material-icons left" >
-                <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn red accent-2">
+                <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn">
                         <i class="material-icons left">arrow_back</i>Volver</a>
             </div>
         </div>
