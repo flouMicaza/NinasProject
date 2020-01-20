@@ -20,7 +20,6 @@ class AsistenciaForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(AsistenciaForm,self).__init__(*args,**kwargs)
-        print("holi soy terrible de pro")
         #self.fields['asistio'].label='chao'
 
 
