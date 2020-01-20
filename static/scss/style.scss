@@ -33,19 +33,21 @@ td, th {
   text-align: center;
 }
 
+
 .list {
     margin-top: 60px;
 }
+
 
 .nombre-checkbox {
     font-size:large;
     color:#000000e6;
 }
-
 .checkbox-indigo[type="checkbox"] + label:before{
   border: 2px $primary-color;
   background: transparent;
 }
+
 
 .icon-red {
     color: $x-color;
