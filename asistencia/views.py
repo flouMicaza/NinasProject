@@ -108,7 +108,6 @@ def get_form(request,**kwargs):
         lista=get_alumnas_en_orden(curso.alumnas.all())
         AsistenciaFormset = formset_factory(AsistenciaForm, extra=len(lista))
         template_name='asistencia/asistencia.html'
-        heading_message = 'Model Formset Demo'
 
         if request.method=='GET':   ## cuando entro por primera vez
             formset=AsistenciaFormset(request.GET or None)
@@ -119,14 +118,17 @@ def get_form(request,**kwargs):
                 'curso': curso,
                 'clase': clase,
                 'formset': formset,
-                'heading': heading_message,
             })
 
         elif request.method=='POST':    ## cuando pongo save
             formset=AsistenciaFormset(request.POST)
             if formset.is_valid():
                 for form in formset:
-                    print("alumna form", form.cleaned_data.get('alumna'))
+                    asist=form.cleaned_data.get('asistio')
+                    alum=form.fields['asistio'].label
+                    Asistencia(alumna=alum, clase= clase_id, author= request.user, asistio=asist).save()
+                    print("alumna form", asist)
+
                 #return redirect('asistencia:asistencia_gral')
                 return HttpResponseRedirect(reverse('asistencia:asistencia_gral', {'curso_id':curso_id}))
 
