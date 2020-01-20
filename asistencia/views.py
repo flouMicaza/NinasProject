@@ -12,7 +12,7 @@ from .models import Asistencia
 from clases.models import Clase
 from cursos.models import Curso
 from usuarios.models import User
-from .forms import AsistenciaForm
+from .forms import AsistenciaForm, AsistenciaFormset
 from .utils import *
 
 
@@ -110,27 +110,34 @@ def get_form(request,**kwargs):
         template_name='asistencia/asistencia.html'
 
         if request.method=='GET':   ## cuando entro por primera vez
-            formset=AsistenciaFormset(request.GET or None)
-
+            formset = AsistenciaFormset(request.GET or None)
             for idx, form in enumerate(formset):
-                form.fields['asistio'].label=lista[idx]#.first_name+" "+lista[idx].last_name
+                form.fields['asistio'].label = lista[idx]
             return render(request, template_name, {
-                'curso': curso,
-                'clase': clase,
-                'formset': formset,
+            'curso': curso,
+            'clase': clase,
+            'formset': formset,
             })
 
         elif request.method=='POST':    ## cuando pongo save
             formset=AsistenciaFormset(request.POST)
+            for idx, form in enumerate(formset):
+                form.fields['asistio'].label = lista[idx]
             if formset.is_valid():
                 for form in formset:
-                    asist=form.cleaned_data.get('asistio')
-                    alum=form.fields['asistio'].label
-                    Asistencia(alumna=alum, clase= clase_id, author= request.user, asistio=asist).save()
-                    print("alumna form", asist)
+                    if form.is_valid():
+                        asist=form.cleaned_data.get('asistio')
+                        alum=form.fields['asistio'].label
+                        print("hola hola hola hola hola")
+                        print(alum)
+                        clase_actual=Clase.objects.filter(id=clase_id)[0]
+                    else:
+                        print("no era valido uwu")
+                    #Asistencia(alumna=alum, clase= clase_actual, author= request.user, asistio=asist).save()
 
+                print(type(clase_actual.curso.id))
                 #return redirect('asistencia:asistencia_gral')
-                return HttpResponseRedirect(reverse('asistencia:asistencia_gral', {'curso_id':curso_id}))
+                return HttpResponseRedirect(reverse('asistencia:asistencia_gral', kwargs={'curso_id':clase_actual.curso.id}))
 
 
 

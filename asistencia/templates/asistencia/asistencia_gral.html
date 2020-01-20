@@ -108,14 +108,11 @@
 
     {% elif hay_clases and hay_alumnas %} <!-- Progra UAndes -->
 
-        </br>
-        </br>
+        <div>
 
         ¡Ups! No se ha pasado asistencia para este curso aún.
 
-        </br>
-        </br>
-        </br>
+        </div>
 
         <div class="col s4" style="align-self: stretch" >
                 <div class="material-icons left" >
@@ -131,8 +128,7 @@
 
     {% else %}
 
-        </br>
-        </br>
+        <div>
 
         <!-- no hay clases y no hay alumnas -->
         {% if not hay_clases and not hay_alumnas %}      <!-- C++: Medio -->
@@ -152,9 +148,7 @@
 
         {% endif %}
 
-        </br>
-        </br>
-        </br>
+        </div>
 
         <div class="col s4" style="align-self: stretch" >
             <div class="material-icons left" >
