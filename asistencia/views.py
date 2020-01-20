@@ -133,7 +133,7 @@ def get_form(request,**kwargs):
                         clase_actual=Clase.objects.filter(id=clase_id)[0]
                     else:
                         print("no era valido uwu")
-                    #Asistencia(alumna=alum, clase= clase_actual, author= request.user, asistio=asist).save()
+                    Asistencia(alumna=alum, clase= clase_actual, author= request.user, asistio=asist).save()
 
                 print(type(clase_actual.curso.id))
                 #return redirect('asistencia:asistencia_gral')
