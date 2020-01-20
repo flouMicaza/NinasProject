@@ -13,17 +13,17 @@
 
     <div class="forms-table">
 
-        <form method="POST" action="" style="margin-top: 60px;" >
+        <form method="POST" action="" class="list">
             {%csrf_token%}
                 {{formset.management_form}}
                 {% for form in formset %}
                     <div style="margin-top: 15px;" >
 
                         <label>
-                            <input type="checkbox">
+                            <input type="checkbox" class="checkbox-indigo"  >
                              <span>{{ form.asistio }}</span>
                             </label>
-                         <label style="font-size:large; color:#000000e6;" >{{form.asistio.label.first_name}} {{form.asistio.label.last_name}}</label>
+                         <label class="nombre-checkbox" >{{form.asistio.label.first_name}} {{form.asistio.label.last_name}}</label>
 
                     </div>
                 {%endfor%}
