@@ -124,16 +124,17 @@ def get_form(request,**kwargs):
             for idx, form in enumerate(formset):
                 form.fields['asistio'].label = lista[idx]
             if formset.is_valid():
+                asistentes=['alumna2', 'alumna5', 'alumna4'] #lista de users de las alumnas que asistieron para el test de usuario
                 for form in formset:
-                    if form.is_valid():
-                        asist=form.cleaned_data.get('asistio')
-                        alum=form.fields['asistio'].label
-                        print("hola hola hola hola hola")
-                        print(alum)
-                        clase_actual=Clase.objects.filter(id=clase_id)[0]
-                    else:
-                        print("no era valido uwu")
-                    Asistencia(alumna=alum, clase= clase_actual, author= request.user, asistio=asist).save()
+                    #asistio=form.cleaned_data.get('asistio') #lo que debería leer el input del form
+                    asistio=False #todas false
+                    alumna=form.fields['asistio'].label
+                    if alumna.username in asistentes: #las que asistieron en el test
+                        asistio=True #se les marca true a mano
+                    print("hola hola hola hola hola")
+                    print(request.POST)
+                    clase_actual=Clase.objects.filter(id=clase_id)[0]
+                    Asistencia(alumna=alumna, clase= clase_actual, author= request.user, asistio=asistio).save()
 
                 print(type(clase_actual.curso.id))
                 #return redirect('asistencia:asistencia_gral')
