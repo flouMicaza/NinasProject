@@ -4,5 +4,6 @@
 
 {% block content %}
 <h1>{{ curso.nombre }}</h1>
+<h5>Cantidad total de clases: {{curso.cant_clases}}</h5>
 <p><a href="{% url 'usuarios:logout' %}">logout</a></p>
 {% endblock %}
