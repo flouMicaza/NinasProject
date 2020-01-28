@@ -133,26 +133,34 @@
         <!-- no hay clases y no hay alumnas -->
         {% if not hay_clases and not hay_alumnas %}      <!-- C++: Medio -->
 
-            Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas y alumnas inscritas.
+            <h2>Este curso no tiene clases ni alumnas!</h2>
+
+            <p>Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas y alumnas inscritas.</p>
 
         <!-- no hay clases y hay alumnas -->
         {% elif not hay_clases and hay_alumnas %}   <!-- Progra Antofa -->
 
-            Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas.
+            <h2>Este curso no tiene clases!</h2>
+
+            <p>Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas.</p>
 
 
         <!-- hay clases y no hay alumnas -->
         {% elif hay_clases and not hay_alumnas %}       <!-- C++: Avanzado -->
 
-            Para mostrar el historial de asistencia es necesario que el curso tenga alumnas inscritas.
+            <h2>Este curso no tiene alumnas!</h2>
+
+            <p>Para mostrar el historial de asistencia es necesario que el curso tenga alumnas inscritas.</p>
 
         {% endif %}
+
+            <p>Habla con la coordinadora del curso para solucionar el problema :)</p>
 
         </div>
 
         <div class="col s4" style="align-self: stretch" >
             <div class="material-icons left" >
-                <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn">
+                <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn" style="margin-top: 25px;">
                         <i class="material-icons left">arrow_back</i>Volver</a>
             </div>
         </div>
