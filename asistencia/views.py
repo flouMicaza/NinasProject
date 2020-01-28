@@ -12,7 +12,7 @@ from .models import Asistencia
 from clases.models import Clase
 from cursos.models import Curso
 from usuarios.models import User
-from .forms import AsistenciaForm, AsistenciaFormset
+from .forms import AsistenciaForm
 from .utils import *
 
 

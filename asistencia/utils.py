@@ -1,3 +1,4 @@
+from asistencia.models import Asistencia
 from usuarios.models import *
 from cursos.models import *
 from clases.models import *
@@ -40,3 +41,30 @@ def get_clases(curso_id, clase_id):
     if len(clases) > 0:
         return clases[0]
     return None
+
+
+## Calcula el procentaje de asistencia de la alumna con respecto a las clases totales
+def porcentaje_asistencia(usuaria, curso):
+    nro_clases = len(Clase.objects.filter(curso=curso))
+    nro_asistidas = len(Asistencia.objects.filter(clase__curso=curso, alumna=usuaria, asistio=True))
+
+    return (nro_asistidas/nro_clases)*100
+
+
+
+## Devuelve una lista de bools que indican si la alumna asistio o no a las clases de un curso
+def clases_asistencias_alumna(usuaria, curso):
+    asistencias = Asistencia.objects.filter(alumna=usuaria, clase__curso=curso).order_by('clase_id')
+    lista = []
+    for asistencia in asistencias:
+        lista += [[asistencia.clase, asistencia.asistio]]
+    return lista
+
+
+
+
+
+
+
+
+
