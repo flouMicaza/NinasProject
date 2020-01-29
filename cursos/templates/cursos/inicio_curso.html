@@ -31,6 +31,7 @@
                                 <div class="modal-content">
 
                                   <h4>Tu Asistencia</h4>
+
                                     <table>
                                         <thead>
                                           <tr>
@@ -54,10 +55,10 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                            <div class="material-icons right">
-                                                <a href="" class="modal-action modal-close waves-effect waves-light btn-small btn">
-                                                    <i class="material-icons right">check</i>Ok</a>
-                                            </div>
+                                    <div class="material-icons right">
+                                        <a href="" class="modal-action modal-close waves-effect waves-light btn-small btn">
+                                            <i class="material-icons right">check</i>Ok</a>
+                                    </div>
                                 </div>
 
                     </div>
@@ -67,20 +68,18 @@
 
 
 
-
-            <div class="flex-container">
-                <!-- BARRA DE PROGRESO -->
-                <div class="col 10">
+            <div class="row flex-container">
+                <div class="col s10">
                     <div class="progress">
                         <div class="determinate" style=" width: {{porcentaje_asistencia}}%"></div>
                     </div>
                 </div>
 
-                <!-- PORCENTAJE DE ASISTENCIA -->
                 <div class="col s1" style="font-size:larger;">
-                  {{ porcentaje_asistencia }}%
+                    {{ porcentaje_asistencia }}%
                 </div>
 
+                <div class="col s1"></div>
             </div>
 
 
