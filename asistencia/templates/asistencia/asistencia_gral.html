@@ -10,7 +10,6 @@
              <h4> Asistencia </h4>
              <h5> {{curso.nombre}} </h5>
              <p>Van {{clases_hasta_ahora}} clases de un total de {{curso.cant_clases}}.</p>
-
         </div>
 
         {% if id_prox_clase < 0 %}
@@ -40,7 +39,6 @@
                         <i class="material-icons left">arrow_back</i>Volver</a>
         </div>
         </div>
-
         <div class="container">
           <table>
             <thead>
@@ -119,7 +117,6 @@
         <div>
 
             <h3 style="text-align:center;margin-top:30px;">¡Ups!    Aún no se ha pasado asistencia para este curso.</h3>
-
             <div style="text-align:center;margin-top:10%"><img src="{% static 'images/escribir.png' %}" alt="gatito que pasa asistencia" style="width:300px;"></div>
 
         </div>
@@ -133,7 +130,6 @@
                         </a>
                 </div>
         </div>
-
         <!-- boton de volver: -->
         <div class="center-align">
         <div class="col s4 offset-s1 center-align" style="margin-top:105px; align-self: stretch; position:relative;left:46.5%;right:45%;" >
@@ -153,7 +149,6 @@
 
         <!-- no hay clases y no hay alumnas -->
         {% if not hay_clases and not hay_alumnas %}      <!-- C++: Medio -->
-
             <h2 style="text-align:center;">Este curso no tiene clases ni alumnas!</h2>
             <div style="text-align:center;"><img src="{% static 'images/error_kitten.png' %}" alt="gatito del mensaje de error" style="width:300px;"></div>
 
@@ -181,10 +176,6 @@
             <p style="text-align:center;">Habla con la coordinadora del curso para solucionar el problema :)</p>
 
         </div>
-
-
-        <!--<img src="{% static '../../NinasProject/static/images/error_kitten.png' %}" alt="holi">-->
-
         <div class="center-align">
         <div class="col s4 offset-s1 center-align" style="align-self: stretch; position:relative;left:45%;right:45%;" >
             <div class="material-icons left">
