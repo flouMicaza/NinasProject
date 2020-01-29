@@ -25,17 +25,25 @@ nav {
 
 table {
   border-collapse:collapse;
-  margin-top: 70px;
+
 }
+
+
 td, th {
-  padding: 10px;
-  border-bottom: 2px solid $hover-color;
-  text-align: center;
+    padding: 10px;
+    border-bottom: 2px solid $hover-color;
+    text-align: center;
+}
+
+.tabla-asistencia-alumna {
+    table-layout: fixed;
+    width: 80%;
+
 }
 
 
 .list {
-    margin-top: 60px;
+    margin-top: 10px;
 }
 
 

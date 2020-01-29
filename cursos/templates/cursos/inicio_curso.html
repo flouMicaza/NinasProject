@@ -32,26 +32,31 @@
 
                                   <h4>Tu Asistencia</h4>
 
-                                    <table>
-                                        <thead>
-                                          <tr>
-                                            <th> Clase </th>
-                                            <th> Asistio </th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for lista in clases_asistencias %}
-                                                <tr>
-                                                    <td> {{lista.0.nombre}} </td>
-                                                    {% if lista.1 %}
-                                                        <td>  <i class="material-icons icon-green">check</i> </td>
-                                                    {% else %}
-                                                        <td>  <i class="material-icons icon-red">clear</i> </td>
-                                                    {% endif %}
-                                                </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                      </table>
+                                    <p> Se han desarrollado {{nro_clases_realizadas}} clases de un total de {{nro_clases_totales}}. </p>
+
+                                    <center>
+                                        <table class="highlight tabla-asistencia-alumna">
+                                            <thead>
+                                              <tr>
+                                                <th> Clase </th>
+                                                <th> Asistio </th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for lista in clases_asistencias %}
+                                                    <tr>
+                                                        <td> {{lista.0.nombre}} </td>
+                                                        {% if lista.1 %}
+                                                            <td>  <i class="material-icons icon-green">check</i> </td>
+                                                        {% else %}
+                                                            <td>  <i class="material-icons icon-red">clear</i> </td>
+                                                        {% endif %}
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+
+                                        </table>
+                                    </center>
                                 </div>
 
                                 <div class="modal-footer">
