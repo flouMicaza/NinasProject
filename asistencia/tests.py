@@ -130,7 +130,9 @@ class UtilsTest(InitialData):
     def test_asistencias_alumna(self):
         asistencias = Asistencia.objects.filter(alumna=self.usuaria, clase__curso=self.mi_curso).order_by('clase_id')
         clases_asistencias = clases_asistencias_alumna(self.usuaria, self.mi_curso)
+        Clase.objects.create(nombre="mi_clase", curso=self.mi_curso) #clase sin asistencias
         self.assertEqual(len(asistencias), len(clases_asistencias))
+        self.assertNotEqual(len(clases_asistencias), len(Clase.objects.filter(curso=self.mi_curso)))
 
         for i in range(len(asistencias)):
             clase_asistencia = clases_asistencias[i]
