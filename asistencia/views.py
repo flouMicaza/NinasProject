@@ -139,7 +139,3 @@ def get_form(request,**kwargs):
                 print(type(clase_actual.curso.id))
                 #return redirect('asistencia:asistencia_gral')
                 return HttpResponseRedirect(reverse('asistencia:asistencia_gral', kwargs={'curso_id':clase_actual.curso.id}))
-
-
-
-
