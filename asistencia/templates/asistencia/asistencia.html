@@ -22,14 +22,14 @@
                 {{formset.management_form}}
                 {% for form in formset %}
                     <div style="margin-top: 15px;" >
-                        <img src="{{form.asistio.label.model_pic}}">
+                        <img src="{{form.asistio.label.model_pic}}" alt="foto de " style="width=300px;">
 
 
                         <label>
                             <input type="checkbox" class="checkbox-indigo"  >
                              <span>{{ form.asistio }}</span>
                             </label>
-                         <label class="nombre-checkbox" >{{form.asistio.label.first_name}} {{form.asistio.label.last_name}}</label>
+                         <label class="nombre-checkbox">{{form.asistio.label.first_name}} {{form.asistio.label.last_name}}</label>
 
                     </div>
                 {%endfor%}
