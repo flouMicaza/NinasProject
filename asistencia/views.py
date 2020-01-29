@@ -84,7 +84,8 @@ class Asistencia_GralView(LoginRequiredMixin, View):
                 'total_por_clase': total_por_clase,
                 'hay_clases': hay_clases,
                 'hay_alumnas': hay_alumnas,
-                'id_prox_clase': id_prox_clase
+                'id_prox_clase': id_prox_clase,
+                'clases_hasta_ahora': len(clases_asist)
             })
 
         return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
@@ -113,6 +114,7 @@ def get_form(request,**kwargs):
             formset = AsistenciaFormset(request.GET or None)
             for idx, form in enumerate(formset):
                 form.fields['asistio'].label = lista[idx]
+                print(form.fields['asistio'].label)
             return render(request, template_name, {
             'curso': curso,
             'clase': clase,
@@ -123,12 +125,14 @@ def get_form(request,**kwargs):
             formset=AsistenciaFormset(request.POST)
             for idx, form in enumerate(formset):
                 form.fields['asistio'].label = lista[idx]
+                print(form.fields['asistio'].label)
             if formset.is_valid():
                 asistentes=['alumna4', 'alumna7', 'alumna9', 'alumna14', 'alumna18', 'alumna21'] #lista de users de las alumnas que asistieron para el test de usuario
                 for form in formset:
                     #asistio=form.cleaned_data.get('asistio') #lo que debería leer el input del form
                     asistio=False #todas false
                     alumna=form.fields['asistio'].label
+
                     if alumna.username in asistentes: #las que asistieron en el test
                         asistio=True #se les marca true a mano
                     print(request.POST)

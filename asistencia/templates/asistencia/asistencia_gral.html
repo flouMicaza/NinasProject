@@ -9,6 +9,7 @@
         <div>
              <h4> Asistencia </h4>
              <h5> {{curso.nombre}} </h5>
+             <p>Van {{clases_hasta_ahora}} clases de un total de {{curso.cant_clases}}.</p>
         </div>
 
         {% if id_prox_clase < 0 %}
@@ -32,7 +33,12 @@
             </div>
 
         {% endif %}
-
+        <div class="col s4" style="align-self:stretch">
+        <div class="material-icons left" style="position:relative;left:15%;right:0%;">
+                <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn">
+                        <i class="material-icons left">arrow_back</i>Volver</a>
+        </div>
+        </div>
         <div class="container">
           <table>
             <thead>
@@ -110,17 +116,28 @@
 
         <div>
 
-        ¡Ups! No se ha pasado asistencia para este curso aún.
+            <h3 style="text-align:center;margin-top:30px;">¡Ups!    Aún no se ha pasado asistencia para este curso.</h3>
+            <div style="text-align:center;margin-top:10%"><img src="{% static 'images/escribir.png' %}" alt="gatito que pasa asistencia" style="width:300px;"></div>
 
         </div>
 
-        <div class="col s4" style="align-self: stretch" >
-                <div class="material-icons left" >
+        <!-- boton de pasar asistencia:-->
+        <div class="col s4" style="align-self: stretch; position:relative; margin-top:70px;" >
+                <div class="material-icons left" style="position:relative; left:43%; right:45%;">
                     <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn ">
                         <i class="material-icons right">format_list_bulleted</i>
                             Pasar asistencia
                         </a>
                 </div>
+        </div>
+        <!-- boton de volver: -->
+        <div class="center-align">
+        <div class="col s4 offset-s1 center-align" style="margin-top:105px; align-self: stretch; position:relative;left:46.5%;right:45%;" >
+            <div class="material-icons left">
+                <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn" style="margin-top: 25px;">
+                        <i class="material-icons left">arrow_back</i>Volver</a>
+            </div>
+        </div>
         </div>
 
 
@@ -132,29 +149,40 @@
 
         <!-- no hay clases y no hay alumnas -->
         {% if not hay_clases and not hay_alumnas %}      <!-- C++: Medio -->
+            <h2 style="text-align:center;">Este curso no tiene clases ni alumnas!</h2>
+            <div style="text-align:center;"><img src="{% static 'images/error_kitten.png' %}" alt="gatito del mensaje de error" style="width:300px;"></div>
 
-            Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas y alumnas inscritas.
+            <p style="text-align:center;margin-top:5%;">Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas y alumnas inscritas.</p>
 
         <!-- no hay clases y hay alumnas -->
         {% elif not hay_clases and hay_alumnas %}   <!-- Progra Antofa -->
 
-            Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas.
+            <h2 style="text-align:center;">Este curso no tiene clases!</h2>
+            <div style="text-align:center;margin-top:5%;"><img src="{% static 'images/error_kitten.png' %}" alt="gatito del mensaje de error" style="width:300px;"></div>
+
+            <p style="text-align:center;">Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas.</p>
 
 
         <!-- hay clases y no hay alumnas -->
         {% elif hay_clases and not hay_alumnas %}       <!-- C++: Avanzado -->
 
-            Para mostrar el historial de asistencia es necesario que el curso tenga alumnas inscritas.
+            <h2 style="text-align:center;">Este curso no tiene alumnas!</h2>
+            <div style="text-align:center;margin-top:5%"><img src="{% static 'images/error_kitten.png' %}" alt="gatito del mensaje de error" style="width:300px;"></div>
+
+            <p style="text-align:center;">Para mostrar el historial de asistencia es necesario que el curso tenga alumnas inscritas.</p>
 
         {% endif %}
 
-        </div>
+            <p style="text-align:center;">Habla con la coordinadora del curso para solucionar el problema :)</p>
 
-        <div class="col s4" style="align-self: stretch" >
-            <div class="material-icons left" >
-                <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn">
+        </div>
+        <div class="center-align">
+        <div class="col s4 offset-s1 center-align" style="align-self: stretch; position:relative;left:45%;right:45%;" >
+            <div class="material-icons left">
+                <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn" style="margin-top: 25px;">
                         <i class="material-icons left">arrow_back</i>Volver</a>
             </div>
+        </div>
         </div>
 
 

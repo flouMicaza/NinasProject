@@ -14,7 +14,7 @@ class Curso(models.Model):
     voluntarias = models.ManyToManyField(User, related_name="voluntarias", blank=True)
     alumnas = models.ManyToManyField(User, related_name="alumnas", blank=True)
     tema = models.ManyToManyField(Tema, related_name="tags", blank=True)
-    cant_clases = models.IntegerField(default=15)
+    cant_clases = models.IntegerField()
 
     def __str__(self):
         return self.nombre
