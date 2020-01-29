@@ -1,5 +1,4 @@
 import random
-
 from usuarios.models import *
 from cursos.models import Curso
 from asistencia.models import Asistencia
@@ -9,16 +8,14 @@ from clases.models import Clase
 ## CURSOS
 
 # guardado en la bdd
-curso_basico = Curso.objects.create(nombre="C++: Básico, FCFM")
-curso_medio = Curso.objects.create(nombre="C++: Medio, FCFM")
-curso_avanzado = Curso.objects.create(nombre="C++: Avanzado, FCFM")
-curso_uandes = Curso.objects.create(nombre="Python Uandes")
-curso_antofa = Curso.objects.create(nombre="Python Antofagasta")
-
-# nuevo
-curso_basico_umayor = Curso.objects.create(nombre="C++: Básico, UMayor")
-curso_medio_umayor = Curso.objects.create(nombre="C++: Medio, UMayor")
-curso_avanzado_umayor = Curso.objects.create(nombre="C++: Avanzado, UMayor")
+curso_basico = Curso.objects.create(nombre="C++: Básico, FCFM", cant_clases=8)
+curso_medio = Curso.objects.create(nombre="C++: Medio, FCFM", cant_clases=8)
+curso_avanzado = Curso.objects.create(nombre="C++: Avanzado, FCFM", cant_clases=8)
+curso_uandes = Curso.objects.create(nombre="Python Uandes", cant_clases=8)
+curso_antofa = Curso.objects.create(nombre="Python Antofagasta", cant_clases=8)
+curso_basico_umayor = Curso.objects.create(nombre="C++: Básico, UMayor", cant_clases=8)
+curso_medio_umayor = Curso.objects.create(nombre="C++: Medio, UMayor", cant_clases=8)
+curso_avanzado_umayor = Curso.objects.create(nombre="C++: Avanzado, UMayor", cant_clases=8)
 
 
 
@@ -299,6 +296,7 @@ usuaria_alumna99 = User.objects.create_user(username="alumna99", first_name="Dom
 
 usuaria_alumna100 = User.objects.create_user(username="alumna100", first_name="Asunción", last_name="Gómez", password="contraseña123", es_alumna=True)
 
+
 ## 30 alumnas
 alumnas1 = [usuaria_alumna1, usuaria_alumna2, usuaria_alumna3, usuaria_alumna4, usuaria_alumna5,
         usuaria_alumna6, usuaria_alumna7, usuaria_alumna8, usuaria_alumna9, usuaria_alumna10,
@@ -435,16 +433,16 @@ clase_medio_umayor10 = Clase.objects.create(nombre="Clase 10: Programación Din�
 clase_medio_umayor11 = Clase.objects.create(nombre="Clase 11: Super Clases ", curso=curso_medio_umayor)
 
 
-clase_avanzado_umayor1 = Clase.objects.create(nombre="Clase 1: Intro a la Programacion Competitiva", curso=curso_medio_umayor)
-clase_avanzado_umayor2 = Clase.objects.create(nombre="Clase 2: Intro a la Programacion Competitiva 2", curso=curso_medio_umayor)
-clase_avanzado_umayor3 = Clase.objects.create(nombre="Clase 3: Problemas OCI 2012", curso=curso_medio_umayor)
-clase_avanzado_umayor4 = Clase.objects.create(nombre="Clase 4: Problemas OCI 2013", curso=curso_medio_umayor)
-clase_avanzado_umayor5 = Clase.objects.create(nombre="Clase 5: Problemas OCI 2014", curso=curso_medio_umayor)
-clase_avanzado_umayor6 = Clase.objects.create(nombre="Clase 6: Problemas OCI 2015", curso=curso_medio_umayor)
-clase_avanzado_umayor7 = Clase.objects.create(nombre="Clase 7: Problemas OCI 2016", curso=curso_medio_umayor)
-clase_avanzado_umayor8 = Clase.objects.create(nombre="Clase 8: Problemas OCI 2017", curso=curso_medio_umayor)
-clase_avanzado_umayor9 = Clase.objects.create(nombre="Clase 9: Problemas OCI 2018", curso=curso_medio_umayor)
-clase_avanzado_umayor10 = Clase.objects.create(nombre="Clase 10: Problemas OCI 2019", curso=curso_medio_umayor)
+clase_avanzado_umayor1 = Clase.objects.create(nombre="Clase 1: Intro a la Programacion Competitiva", curso=curso_avanzado_umayor)
+clase_avanzado_umayor2 = Clase.objects.create(nombre="Clase 2: Intro a la Programacion Competitiva 2", curso=curso_avanzado_umayor)
+clase_avanzado_umayor3 = Clase.objects.create(nombre="Clase 3: Problemas OCI 2012", curso=curso_avanzado_umayor)
+clase_avanzado_umayor4 = Clase.objects.create(nombre="Clase 4: Problemas OCI 2013", curso=curso_avanzado_umayor)
+clase_avanzado_umayor5 = Clase.objects.create(nombre="Clase 5: Problemas OCI 2014", curso=curso_avanzado_umayor)
+clase_avanzado_umayor6 = Clase.objects.create(nombre="Clase 6: Problemas OCI 2015", curso=curso_avanzado_umayor)
+clase_avanzado_umayor7 = Clase.objects.create(nombre="Clase 7: Problemas OCI 2016", curso=curso_avanzado_umayor)
+clase_avanzado_umayor8 = Clase.objects.create(nombre="Clase 8: Problemas OCI 2017", curso=curso_avanzado_umayor)
+clase_avanzado_umayor9 = Clase.objects.create(nombre="Clase 9: Problemas OCI 2018", curso=curso_avanzado_umayor)
+clase_avanzado_umayor10 = Clase.objects.create(nombre="Clase 10: Problemas OCI 2019", curso=curso_avanzado_umayor)
 
 
 
