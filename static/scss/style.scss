@@ -16,8 +16,6 @@ $check-color: #15B342;
   background-color: $hover-color;
 }
 
-.btn
-
 nav {
   background-color: $primary-color;
 }
@@ -25,7 +23,6 @@ nav {
 
 table {
   border-collapse:collapse;
-
 }
 
 
@@ -38,8 +35,13 @@ td, th {
 .tabla-asistencia-alumna {
     table-layout: fixed;
     width: 80%;
-
 }
+
+.tabla-asist-gral {
+    margin-top: 3%;
+    margin-block-end: 10%;
+}
+
 
 
 .list {
@@ -85,10 +87,9 @@ td, th {
     background-color: #8697f3;
 }
 
-.modal-button {
-
+.text {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
-
 
 
 
