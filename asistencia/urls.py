@@ -1,4 +1,6 @@
 from django.urls import path, include
+
+import cursos
 from .views import get_form
 from asistencia import views
 

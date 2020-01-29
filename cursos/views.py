@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import View
 
+from asistencia.utils import clases_asistencias_alumna, porcentaje_asistencia, Clase
 from cursos.models import Curso
 from usuarios.models import User
 
@@ -35,9 +36,20 @@ class CursoView(CursosView):
     def get(self, request, **kwargs ):
         curso_id = kwargs['curso_id']
         curso = get_object_or_404(Curso, pk=curso_id)
+
         if curso in self.get_cursos(request.user.username):
+            usuaria = request.user
+            clases_totales = Clase.objects.filter(curso=curso)
+            clases_asistencias = clases_asistencias_alumna(usuaria=usuaria, curso=curso)
+
             return render(request, 'cursos/inicio_curso.html', {
-                'curso': curso
+                'curso': curso,
+                'usuaria': usuaria,
+                'porcentaje_asistencia': porcentaje_asistencia(usuaria=usuaria, curso=curso),
+                'clases_asistencias': clases_asistencias,
+                'nro_clases_totales': len(clases_totales),
+                'nro_clases_realizadas': len(clases_asistencias)
+
         })
         else:
             return HttpResponseForbidden("No tienes permiso para acceder a este curso.")

@@ -12,7 +12,7 @@ from .models import Asistencia
 from clases.models import Clase
 from cursos.models import Curso
 from usuarios.models import User
-from .forms import AsistenciaForm, AsistenciaFormset
+from .forms import AsistenciaForm
 from .utils import *
 
 
@@ -138,7 +138,3 @@ def get_form(request,**kwargs):
                 print(type(clase_actual.curso.id))
                 #return redirect('asistencia:asistencia_gral')
                 return HttpResponseRedirect(reverse('asistencia:asistencia_gral', kwargs={'curso_id':clase_actual.curso.id}))
-
-
-
-
