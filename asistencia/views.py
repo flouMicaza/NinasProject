@@ -84,7 +84,8 @@ class Asistencia_GralView(LoginRequiredMixin, View):
                 'total_por_clase': total_por_clase,
                 'hay_clases': hay_clases,
                 'hay_alumnas': hay_alumnas,
-                'id_prox_clase': id_prox_clase
+                'id_prox_clase': id_prox_clase,
+                'clases_hasta_ahora': len(clases_asist)
             })
 
         return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
