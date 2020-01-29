@@ -22,7 +22,7 @@
             {%csrf_token%}
                 {{formset.management_form}}
                 {% for form in formset %}
-                    <div style="margin-top: 15px;" >
+                    <div class="checkboxes text" style="margin-top: 15px;" >
                         <label>
                             <input type="checkbox" name="asistio">
                              <span>{{ form.asistio }}</span>
