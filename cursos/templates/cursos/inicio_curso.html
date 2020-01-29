@@ -2,103 +2,90 @@
 {% block title %}{{ curso.nombre }}{% endblock %}
 
 {% block content %}
-        <h1>{{ curso.nombre }}</h1>
+        <div><h1>{{ curso.nombre }}</h1></div>
 
         {% if usuaria.es_alumna %}
 
-            <div class="row" style="align-items:baseline;">
-
-                <div class="col s10">
-                    <div class="modulo-asistencia">
-                        <div>
-                            <h4 style="align-self: flex-start;">
-                            Asistencia
-                            </h4>
-                        </div>
-
-                        <div class="row" style="align-items: baseline;">
-                            <div class="col s10">
-                                <div class="progress">
-                                    <div class="determinate" style=" width: {{porcentaje_asistencia}}%"></div>
-                                </div>
-                            </div>
-
-                            <div class="col s1" style="margin-top=3.5%; font-size:larger;">
-                                {{ porcentaje_asistencia }}%
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+        <div class="modulo-asistencia">
 
 
-                <!-- Modal Trigger -->
+            <div class="flex-container">
 
-                 <!-- <a class="waves-effect waves-light btn pink darken-1 modal-trigger" href="#modal1">Launch Modal</a>-->
-
+                <!-- TÍTULO ASISTENCIA -->
                 <div>
-                    <div class="material-icons right">
-                        <a href="#modal1" class="waves-effect waves-light btn-small btn modal-trigger">
-                            <i class="material-icons right">search</i> Ver Detalle </a>
-                    </div>
+                    <h4> Asistencia </h4>
                 </div>
 
-
-                  <!-- Modal Structure -->
-
-                  <div id="modal1" class="modal">
-
-                    <div class="modal-content">
-
-                      <h4>Tu Asistencia</h4>
-
-                        <table>
-
-
-                            <thead>
-
-                              <tr>
-                                <th> Clase </th>
-                                <th> Asistio </th>
-                              </tr>
-
-                            </thead>
-
-                            <tbody>
-
-                                {% for lista in clases_asistencias %}
-                                    <tr>
-
-                                        <td> {{lista.0.nombre}} </td>
-
-                                        {% if lista.1 %}
-                                            <td>  <i class="material-icons icon-green">check</i> </td>
-                                        {% else %}
-                                            <td>  <i class="material-icons icon-red">clear</i> </td>
-                                        {% endif %}
-
-                                    </tr>
-
-                                {% endfor %}
-                            </tbody>
-                          </table>
-
-
-
-                    </div>
-
-                    <div class="modal-footer">
+                <!-- MODAL -->
+                <div>
+                    <!-- Modal Trigger -->
+                    <div>
                         <div class="material-icons right">
-                            <a href="" class="modal-action modal-close waves-effect waves-light btn-small btn">
-                                <i class="material-icons right">check</i>Ok</a>
+                            <a href="#modal1" class="waves-effect waves-light btn-small btn modal-trigger"> <i class="material-icons right">search</i> Ver Detalle </a>
                         </div>
                     </div>
 
-                  </div>
+                    <!-- Modal Structure -->
+                    <div id="modal1" class="modal">
 
+                                <div class="modal-content">
 
+                                  <h4>Tu Asistencia</h4>
+                                    <table>
+                                        <thead>
+                                          <tr>
+                                            <th> Clase </th>
+                                            <th> Asistio </th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for lista in clases_asistencias %}
+                                                <tr>
+                                                    <td> {{lista.0.nombre}} </td>
+                                                    {% if lista.1 %}
+                                                        <td>  <i class="material-icons icon-green">check</i> </td>
+                                                    {% else %}
+                                                        <td>  <i class="material-icons icon-red">clear</i> </td>
+                                                    {% endif %}
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                      </table>
+                                </div>
+
+                                <div class="modal-footer">
+                                            <div class="material-icons right">
+                                                <a href="" class="modal-action modal-close waves-effect waves-light btn-small btn">
+                                                    <i class="material-icons right">check</i>Ok</a>
+                                            </div>
+                                </div>
+
+                    </div>
+                </div>
 
             </div>
+
+
+
+
+            <div class="flex-container">
+                <!-- BARRA DE PROGRESO -->
+                <div class="col 10">
+                    <div class="progress">
+                        <div class="determinate" style=" width: {{porcentaje_asistencia}}%"></div>
+                    </div>
+                </div>
+
+                <!-- PORCENTAJE DE ASISTENCIA -->
+                <div class="col s1" style="font-size:larger;">
+                  {{ porcentaje_asistencia }}%
+                </div>
+
+            </div>
+
+
+        </div>
+
 
 
 

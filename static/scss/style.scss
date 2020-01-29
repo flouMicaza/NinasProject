@@ -61,12 +61,26 @@ td, th {
     margin-top: 5%;
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
 .progress {
+    background-color: #bfc8fbb3;
     transform: scale(1, 2);
     position: relative;
     left: 1.5%;
     right: 1.5%;
     margin-top: 2%;
+}
+
+.progress .determinate {
+    background-color: #8697f3;
+
 }
 
 .modal-button {
