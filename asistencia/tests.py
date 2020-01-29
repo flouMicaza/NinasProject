@@ -121,7 +121,7 @@ class UtilsTest(InitialData):
     def test_porcentaje_asistencia(self):
         nro_clases = len(Clase.objects.filter(curso=self.mi_curso))
         nro_asistencias = len(Asistencia.objects.filter(clase__curso=self.mi_curso, alumna=self.usuaria, asistio=True))
-        porcentaje = (nro_asistencias/nro_clases)*100
+        porcentaje = int((nro_asistencias/nro_clases)*100)
         porcentaje_calculado = porcentaje_asistencia(self.usuaria, self.mi_curso)
         self.assertEqual(porcentaje, porcentaje_calculado)
         self.assertTrue(porcentaje_calculado >= 0 and porcentaje_calculado <= 100)

@@ -48,7 +48,7 @@ def porcentaje_asistencia(usuaria, curso):
     nro_clases = len(Clase.objects.filter(curso=curso))
     nro_asistidas = len(Asistencia.objects.filter(clase__curso=curso, alumna=usuaria, asistio=True))
 
-    return (nro_asistidas/nro_clases)*100
+    return int((nro_asistidas/nro_clases)*100)
 
 
 
