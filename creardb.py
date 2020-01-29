@@ -323,6 +323,7 @@ clase_basico10 = Clase.objects.create(nombre="Clase 10: Programación Oridentada
 clase_basico11 = Clase.objects.create(nombre="Clase 11: Super Clases", curso=curso_basico)
 clase_basico12 = Clase.objects.create(nombre="Clase 12: Interfaz", curso=curso_basico)
 clase_basico13 = Clase.objects.create(nombre="Clase 13: Computadores", curso=curso_basico)
+clase_basico14 = Clase.objects.create(nombre="Clase 14: Historia de la Computación", curso=curso_basico)
 
 # nuevo
 clase_medio1 = Clase.objects.create(nombre="Clase 1: Arreglos", curso=curso_medio)
