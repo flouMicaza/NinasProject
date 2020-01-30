@@ -114,7 +114,6 @@ def get_form(request,**kwargs):
             formset = AsistenciaFormset(request.GET or None)
             for idx, form in enumerate(formset):
                 form.fields['asistio'].label = lista[idx]
-                print(form.fields['asistio'].label)
             return render(request, template_name, {
             'curso': curso,
             'clase': clase,
