@@ -26,8 +26,8 @@
             <div >
                 {% if id_prox_clase < 0 %}
                     <div class="material-icons right" >
-                        <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn disabled">
-                            <i class="material-icons right">format_list_bulleted</i>
+                        <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn disabled" >
+                            <i class="material-icons right" >format_list_bulleted</i>
                                 Pasar Asistencia
                             </a>
                     </div>
@@ -54,7 +54,11 @@
                         <th> Alumna </th>
 
                         {% for clase in clases %}
-                            <th> Clase {{forloop.counter}} </th>
+                            <th>
+                                <div class="tooltip top"> Clase {{forloop.counter}}
+                                    <span class="tiptext">{{clase.nombre}}</span>
+                                </div>
+                            </th>
                         {% endfor %}
 
                          <th> Clases Asistidas </th>
