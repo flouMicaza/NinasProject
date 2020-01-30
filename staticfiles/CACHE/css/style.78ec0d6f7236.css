@@ -1,0 +1,121 @@
+/* line 9, static/scss/style.scss */
+.btn, .btn-large, .btn-small {
+  background-color: #FF5252;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; }
+
+/* line 15, static/scss/style.scss */
+.btn:hover {
+  background-color: #FF8A80; }
+
+/* line 19, static/scss/style.scss */
+nav {
+  background-color: #FF5252; }
+
+/* line 24, static/scss/style.scss */
+table {
+  border-collapse: collapse; }
+
+/* line 29, static/scss/style.scss */
+td, th {
+  padding: 10px;
+  border-bottom: 2px solid #FF8A80;
+  text-align: center; }
+
+/* line 35, static/scss/style.scss */
+.tabla-asistencia-alumna {
+  table-layout: fixed;
+  width: 80%; }
+
+/* line 40, static/scss/style.scss */
+.tabla-asist-gral {
+  margin-top: 3%;
+  margin-block-end: 10%; }
+
+/* line 47, static/scss/style.scss */
+.list {
+  margin-top: 10px; }
+
+/* line 52, static/scss/style.scss */
+.nombre-checkbox {
+  font-size: large;
+  color: #000000e6; }
+
+/* line 56, static/scss/style.scss */
+.checkbox-indigo[type="checkbox"] + label:before {
+  border: 2px #FF5252;
+  background: transparent; }
+
+/* line 62, static/scss/style.scss */
+.icon-red {
+  color: #B32727; }
+
+/* line 66, static/scss/style.scss */
+.icon-green {
+  color: #15B342; }
+
+/* line 70, static/scss/style.scss */
+.modulo-asistencia {
+  margin-top: 5%; }
+
+/* line 74, static/scss/style.scss */
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; }
+
+/* line 81, static/scss/style.scss */
+.progress {
+  background-color: #bfc8fbb3;
+  transform: scale(1, 2); }
+
+/* line 86, static/scss/style.scss */
+.progress .determinate {
+  background-color: #8697f3; }
+
+/* line 90, static/scss/style.scss */
+.text {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; }
+
+/* line 94, static/scss/style.scss */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; }
+
+/* line 99, static/scss/style.scss */
+.tooltip .tiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  padding: 6px 0;
+  position: absolute;
+  z-index: 1;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
+
+/* line 111, static/scss/style.scss */
+.tooltip .tiptext::after {
+  content: "";
+  position: absolute;
+  border-width: 5px;
+  border-style: solid; }
+
+/* line 117, static/scss/style.scss */
+.tooltip:hover .tiptext {
+  visibility: visible; }
+
+/* line 121, static/scss/style.scss */
+.tooltip.top .tiptext {
+  margin-left: -60px;
+  bottom: 150%;
+  left: 50%; }
+
+/* line 126, static/scss/style.scss */
+.tooltip.top .tiptext::after {
+  margin-left: -5px;
+  top: 100%;
+  left: 50%;
+  border-color: #2E2E2E transparent transparent transparent; }
