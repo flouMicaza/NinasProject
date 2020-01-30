@@ -89,7 +89,14 @@ td, th {
 
 }
 
-
+.flex-container-asistencia {
+  display: flex;
+  flex-direction:row;
+  flex-wrap:nowrap;
+  justify-content:flex-start;
+  align-items:center;
+  margin-top:20px;
+}
 
 
 
