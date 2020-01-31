@@ -110,10 +110,11 @@ def get_form(request,**kwargs):
 
     else:
 
-        lista=get_alumnas_en_orden(curso.alumnas.all())
-        AsistenciaFormset = formset_factory(AsistenciaForm, extra=len(lista))
+        lista_alumnas=get_alumnas_en_orden(curso.alumnas.all())
         template_name='asistencia/asistencia.html'
-
+        for alu in lista_alumnas:
+            asist = Asistencia.create
+        formset = AsistenciaModelFormSet(queryset=Asistencia.objects.filter())
         if request.method=='GET':   ## cuando entro por primera vez
             formset = AsistenciaFormset(request.GET or None)
             for idx, form in enumerate(formset):
