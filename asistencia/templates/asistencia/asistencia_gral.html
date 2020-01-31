@@ -12,20 +12,20 @@
              <p>Van {{clases_hasta_ahora}} clases de un total de {{curso.cant_clases}}.</p>
         </div>
 
-        {% if id_prox_clase < 0 %}
+        {% if id_prox_clase < 0 %} <!-- si ya se ha pasado la lista a todas las clases que hay-->
             <div class="col s4" style="align-self: stretch" >
                 <div class="material-icons right" >
-                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn disabled">
+                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn disabled"> <!-- boton desactivado-->
                         <i class="material-icons right">format_list_bulleted</i>
                             Pasar asistencia
                         </a>
                 </div>
             </div>
 
-        {% else %}
+        {% else %} <!-- quedan clases en las que se puede pasar asistencia-->
             <div class="col s4" style="align-self: stretch" >
                 <div class="material-icons right" >
-                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn">
+                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn"> <!-- boton activado-->
                         <i class="material-icons right">format_list_bulleted</i>
                             Pasar asistencia
                         </a>
