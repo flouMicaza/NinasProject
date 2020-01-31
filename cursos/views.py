@@ -47,7 +47,7 @@ class CursoView(CursosView):
                 'usuaria': usuaria,
                 'porcentaje_asistencia': porcentaje_asistencia(usuaria=usuaria, curso=curso),
                 'clases_asistencias': clases_asistencias,
-                'nro_clases_totales': len(clases_totales),
+                'nro_clases_totales': max(len(clases_totales), curso.cant_clases),
                 'nro_clases_realizadas': len(clases_asistencias)
 
         })
