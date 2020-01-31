@@ -66,6 +66,7 @@ db.sqlite3-journal
 # Flask stuff:
 instance/
 .webassets-cache
+*/migrations
 
 # Scrapy stuff:
 .scrapy
@@ -140,5 +141,4 @@ pyvenv.cfg
 .venv
 pip-selfcheck.json
 
-Sera borrado templates/
-Sera borrado static/CACHE/
+static/CACHE/
