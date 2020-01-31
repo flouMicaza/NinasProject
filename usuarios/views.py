@@ -21,7 +21,7 @@ class IndexView(LoginRequiredMixin, View):
             return HttpResponseRedirect(reverse('cursos:mis_cursos'))
         elif request.user.es_alumna:
             curso_id = self.get_curso_estudiante(request.user.username)
-            return HttpResponseRedirect(reverse('cursos:curso', args='1'))
+            return HttpResponseRedirect(reverse('cursos:curso', args={curso_id: curso_id}))
         else:
             return render(request, 'cursos/pagina_error.html', {
                 'error_message': "El usuario no tiene tipo"
