@@ -37,10 +37,33 @@ td, th {
     width: 80%;
 }
 
-.tabla-asist-gral {
+.container-tabla-asist-gral {
+    max-width: 100%;
+    overflow-x: scroll;
     margin-top: 3%;
     margin-block-end: 10%;
 }
+
+.tabla-asist-gral .sticky-left{
+    position: sticky;
+    left: 0;
+    background-color: white;
+}
+
+.tabla-asist-gral .sticky-right{
+    position: sticky;
+    right: 0;
+    background-color: white;
+}
+
+.tabla-asist-gral th .sticky {
+    padding: 10px;
+    border-bottom: 2px solid $hover-color;
+    text-align: center;
+}
+
+
+
 
 
 
@@ -129,5 +152,7 @@ td, th {
     left: 50%;
     border-color: #2E2E2E transparent transparent transparent;
 }
+
+
 
 

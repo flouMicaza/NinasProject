@@ -44,14 +44,16 @@
 
 
         <!-- TABLA ASIST GRAL -->
-        <div class="container tabla-asist-gral">
-            <center>
-                <table>
+
+
+        <div class="container-tabla-asist-gral" >
+
+            <table class="tabla-asist-gral" >
                 <thead>
                     <tr>
-                        <th> N° </th>
 
-                        <th> Alumna </th>
+
+                        <th class="sticky-left"> Alumna </th>
 
                         {% for clase in clases %}
                             <th>
@@ -61,61 +63,60 @@
                             </th>
                         {% endfor %}
 
-                         <th> Clases Asistidas </th>
+                         <th class="sticky-right"> Clases Asistidas </th>
 
                     </tr>
                 </thead>
 
-                    <tbody>
+                <tbody>
 
-                    {% for lista in lista_asistencias %}
+                {% for lista in lista_asistencias %}
 
-                        <tr>
+                    <tr>
 
-                            <td> {{forloop.counter}} </td>
 
-                            <td> {{ lista.0.first_name }} {{ lista.0.last_name }} </td>
 
-                            {% for bool in lista.1 %}
+                        <td class="sticky-left"> {{forloop.counter}}. {{ lista.0.first_name }} {{ lista.0.last_name }} </td>
 
-                                {% if bool %}
-                                    <td>  <i class="material-icons icon-green">check_circle</i> </td>
-                                    <!-- <td bgcolor="82FFAD" >   </td> -->
+                        {% for bool in lista.1 %}
 
-                                {% else %}
-                                    <td>  <i class="material-icons icon-red">cancel</i> </td>
+                            {% if bool %}
+                                <td>  <i class="material-icons icon-green">check_circle</i> </td>
+                                <!-- <td bgcolor="82FFAD" >   </td> -->
 
-                                        <!-- <td bgcolor="#FF8C89">  </td> -->
+                            {% else %}
+                                <td>  <i class="material-icons icon-red">cancel</i> </td>
 
-                                    {% endif %}
+                                    <!-- <td bgcolor="#FF8C89">  </td> -->
 
-                                {% endfor %}
-
-                                <td> {{ lista.2 }} </td>
-
-                            </tr>
+                                {% endif %}
 
                         {% endfor %}
 
-                        <tr>
-                            <th>  </th>
+                        <td class="sticky-left"> {{ lista.2 }} </td>
 
-                            <th> Alumnas por clase </th>
+                    </tr>
 
-                            {% for total in total_por_clase %}
+                    {% endfor %}
 
-                                <td> {{ total }} </td>
-
-                            {% endfor %}
-
-                            <td>  </td>
-
-                        </tr>
+                    <tr>
 
 
-                    </tbody>
-                </table>
-            </center>
+                        <th class="sticky-right"> Alumnas por clase </th>
+
+                        {% for total in total_por_clase %}
+
+                            <td> {{ total }} </td>
+
+                        {% endfor %}
+
+                        <td>  </td>
+
+                    </tr>
+
+
+                </tbody>
+            </table>
         </div>
 
 
