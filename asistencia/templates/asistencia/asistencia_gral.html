@@ -12,46 +12,25 @@
              <p>Van {{clases_hasta_ahora}} clases de un total de {{curso.cant_clases}}.</p>
         </div>
 
-
-        {% if id_prox_clase < 0 %} <!-- si ya se ha pasado la lista a todas las clases que hay-->
-            <div class="col s4" style="align-self: stretch" >
-                <div class="material-icons right" >
-                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn disabled"> <!-- boton desactivado-->
-                        <i class="material-icons right">format_list_bulleted</i>
-                            Pasar asistencia
-                        </a>
-                </div>
-            </div>
-
-        {% else %} <!-- quedan clases en las que se puede pasar asistencia-->
-            <div class="col s4" style="align-self: stretch" >
-                <div class="material-icons right" >
-                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn"> <!-- boton activado-->
-                        <i class="material-icons right">format_list_bulleted</i>
-                            Pasar asistencia
-                        </a>
-
-
-        <div class="flex-container" style="margin-top: 2%;">
+        <div class="flex-container" style="margin-top: 2%;"> <!-- botones de pasar asistencia y de volver cuando hay tabla-->
             <!-- BUTTON DE VOLVER -->
             <div style="align-self:stretch">
                 <div class="material-icons left" style="position:relative;left:15%;right:0%;">
                         <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn">
                                 <i class="material-icons left">arrow_back</i>Volver</a>
-
                 </div>
             </div>
 
             <!-- BUTTON DE PASAR ASISTENCIA -->
             <div >
-                {% if id_prox_clase < 0 %}
+                {% if id_prox_clase < 0 %} <!-- disabled porque ya se pasó asistencia en todas-->
                     <div class="material-icons right" >
                         <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn disabled" >
                             <i class="material-icons right" >format_list_bulleted</i>
                                 Pasar Asistencia
                             </a>
                     </div>
-                {% else %}
+                {% else %} <!-- boton activado-->
                     <div class="material-icons right" >
                         <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn">
                             <i class="material-icons right">format_list_bulleted</i>
@@ -144,10 +123,8 @@
     {% elif hay_clases and hay_alumnas %} <!-- Progra UAndes -->
 
         <div>
-
             <h3 style="text-align:center;margin-top:30px;">¡Ups!    Aún no se ha pasado asistencia para este curso.</h3>
             <div style="text-align:center;margin-top:10%"><img src="{% static 'images/escribir.png' %}" alt="gatito que pasa asistencia" style="width:300px;"></div>
-
         </div>
 
         <!-- boton de pasar asistencia:-->
@@ -211,6 +188,7 @@
         </div>
 
 
-    {% endif %}
+   {% endif %} <!-- cierra el if hay clases and hay asistencias and hay alumnas-->
 
 {% endblock %}
+
