@@ -72,6 +72,9 @@ class Asistencia_GralView(LoginRequiredMixin, View):
             hay_alumnas = True
             if len(curso.alumnas.all()) == 0:
                 hay_alumnas = not hay_alumnas
+            hay_asistencias=True
+            if len(asistencias) == 0:
+                hay_asistencias = not hay_asistencias
 
             id_prox_clase = -1
             if len(clases_asist) < len(clases_totales):
@@ -84,6 +87,7 @@ class Asistencia_GralView(LoginRequiredMixin, View):
                 'total_por_clase': total_por_clase,
                 'hay_clases': hay_clases,
                 'hay_alumnas': hay_alumnas,
+                'hay_asistencias': hay_asistencias,
                 'id_prox_clase': id_prox_clase,
                 'clases_hasta_ahora': len(clases_asist)
             })

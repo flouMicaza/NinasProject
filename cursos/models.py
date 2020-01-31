@@ -9,7 +9,7 @@ class Tema(models.Model):
 
 
 class Curso(models.Model):
-    nombre = models.CharField(max_length=100, unique=True,default="curso_default")
+    nombre = models.CharField(max_length=100, default="curso_default")
     profesoras = models.ManyToManyField(User, related_name="profesoras", blank=True)
     voluntarias = models.ManyToManyField(User, related_name="voluntarias", blank=True)
     alumnas = models.ManyToManyField(User, related_name="alumnas", blank=True)
