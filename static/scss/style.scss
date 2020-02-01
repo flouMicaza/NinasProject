@@ -16,8 +16,6 @@ $check-color: #15B342;
   background-color: $hover-color;
 }
 
-.btn
-
 nav {
   background-color: $primary-color;
 }
@@ -25,7 +23,6 @@ nav {
 
 table {
   border-collapse:collapse;
-
 }
 
 
@@ -90,9 +87,10 @@ td, th {
     background-color: #8697f3;
 }
 
-.modal-button {
-
+.text {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
+
 
 .flex-container-asistencia {
   display: flex;
@@ -109,6 +107,7 @@ td, th {
              align-items: center;
              justify-content: center;
          }
+
 .tooltip {
     position: relative;
     display: inline-block;
@@ -147,5 +146,3 @@ td, th {
     left: 50%;
     border-color: #2E2E2E transparent transparent transparent;
 }
-
-

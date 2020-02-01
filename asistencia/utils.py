@@ -45,7 +45,7 @@ def get_clases(curso_id, clase_id):
 
 ## Calcula el procentaje de asistencia de la alumna con respecto a las clases totales
 def porcentaje_asistencia(usuaria, curso):
-    nro_clases = len(Clase.objects.filter(curso=curso))
+    nro_clases = max(len(Clase.objects.filter(curso=curso)),curso.cant_clases)
     nro_asistidas = len(Asistencia.objects.filter(clase__curso=curso, alumna=usuaria, asistio=True))
 
     return int((nro_asistidas/nro_clases)*100)
