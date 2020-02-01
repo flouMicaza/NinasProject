@@ -22,12 +22,11 @@
             {%csrf_token%}
                 {{formset.management_form}}
                 {% for form in formset %}
-                    <div class="checkboxes text" style="margin-top: 15px;" >
-                        <label>
-                            <input type="checkbox" name="asistio">
-                             <span>{{ form.asistio }}</span>
-                            </label>
-                         <label class="nombre-checkbox">{{form.asistio.label.first_name}} {{form.asistio.label.last_name}}</label>
+
+                    <div class="flex-container-asistencia" >
+                        <div><img src="{{form.asistio.label.model_pic.url}}"  style="width:70px; margin-right:15px;"></div>
+                        <div><label><input type="checkbox" name="asistio"><span>{{ form.asistio }}</span></label></div>
+                        <div><label class="nombre-checkbox">{{form.asistio.label.first_name}} {{form.asistio.label.last_name}}</label></div>
                     </div>
                 {%endfor%}
 

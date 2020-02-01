@@ -8,7 +8,7 @@ class User(AbstractUser):
     es_voluntaria = models.BooleanField('estado de voluntaria', default=False)
     es_coordinadora = models.BooleanField('estado de coordinadora', default=False)
     es_alumna = models.BooleanField('estado de alumna', default=False)
-    model_pic = models.ImageField(upload_to='media/imagenes/', default='pic_folder/None/no-img.jpg')
+    model_pic = models.ImageField(upload_to='users', default='pic_folder/None/no-img.jpg')
 
     def get_menu_items(self):
         items_dict = {

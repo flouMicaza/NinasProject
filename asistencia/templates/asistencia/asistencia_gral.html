@@ -12,8 +12,7 @@
              <p>Van {{clases_hasta_ahora}} clases de un total de {{curso.cant_clases}}.</p>
         </div>
 
-
-        <div class="flex-container" style="margin-top: 2%;">
+        <div class="flex-container" style="margin-top: 2%;"> <!-- botones de pasar asistencia y de volver cuando hay tabla-->
             <!-- BUTTON DE VOLVER -->
             <div style="align-self:stretch">
                 <div class="material-icons left" style="position:relative;left:15%;right:0%;">
@@ -24,14 +23,14 @@
 
             <!-- BUTTON DE PASAR ASISTENCIA -->
             <div >
-                {% if id_prox_clase < 0 %}
+                {% if id_prox_clase < 0 %} <!-- disabled porque ya se pasó asistencia en todas-->
                     <div class="material-icons right" >
                         <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn disabled" >
                             <i class="material-icons right" >format_list_bulleted</i>
                                 Pasar Asistencia
                             </a>
                     </div>
-                {% else %}
+                {% else %} <!-- boton activado-->
                     <div class="material-icons right" >
                         <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn">
                             <i class="material-icons right">format_list_bulleted</i>
@@ -124,15 +123,13 @@
     {% elif hay_clases and hay_alumnas %} <!-- Progra UAndes -->
 
         <div>
-
             <h3 style="text-align:center;margin-top:30px;">¡Ups!    Aún no se ha pasado asistencia para este curso.</h3>
             <div style="text-align:center;margin-top:10%"><img src="{% static 'images/escribir.png' %}" alt="gatito que pasa asistencia" style="width:300px;"></div>
-
         </div>
 
         <!-- boton de pasar asistencia:-->
-        <div class="col s4" style="align-self: stretch; position:relative; margin-top:70px;" >
-                <div class="material-icons left" style="position:relative; left:43%; right:45%;">
+        <div class="flex-center">
+                <div class="material-icons left">
                     <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn ">
                         <i class="material-icons right">format_list_bulleted</i>
                             Pasar asistencia
@@ -140,13 +137,11 @@
                 </div>
         </div>
         <!-- boton de volver: -->
-        <div class="center-align">
-        <div class="col s4 offset-s1 center-align" style="margin-top:105px; align-self: stretch; position:relative;left:46.5%;right:45%;" >
+        <div class="flex-center">
             <div class="material-icons left">
                 <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn" style="margin-top: 25px;">
                         <i class="material-icons left">arrow_back</i>Volver</a>
             </div>
-        </div>
         </div>
 
 
@@ -185,21 +180,15 @@
             <p style="text-align:center;">Habla con la coordinadora del curso para solucionar el problema :)</p>
 
         </div>
-        <div class="center-align">
-        <div class="col s4 offset-s1 center-align" style="align-self: stretch; position:relative;left:45%;right:45%;" >
+        <div class="flex-center">
             <div class="material-icons left">
                 <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn" style="margin-top: 25px;">
                         <i class="material-icons left">arrow_back</i>Volver</a>
             </div>
         </div>
-        </div>
 
 
-    {% endif %}
-
-
-
-
-
+   {% endif %} <!-- cierra el if hay clases and hay asistencias and hay alumnas-->
 
 {% endblock %}
+
