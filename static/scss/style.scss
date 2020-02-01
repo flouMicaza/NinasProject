@@ -52,6 +52,8 @@ td, th {
 .nombre-checkbox {
     font-size:large;
     color:#000000e6;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+
 }
 .checkbox-indigo[type="checkbox"] + label:before{
   border: 2px $primary-color;
