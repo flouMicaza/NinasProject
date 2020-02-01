@@ -1,0 +1,32 @@
+/* line 5, static/scss/style.scss */
+.btn-large {
+  background-color: #FF5252; }
+
+/* line 9, static/scss/style.scss */
+.btn-large:hover {
+  background-color: #FF8A80; }
+
+/* line 13, static/scss/style.scss */
+nav {
+  background-color: #FF5252; }
+
+/* line 17, static/scss/style.scss */
+table {
+  border-collapse: collapse; }
+
+/* line 20, static/scss/style.scss */
+td {
+  border: 1px solid #ccc; }
+
+/* line 23, static/scss/style.scss */
+th, td {
+  padding: 10px;
+  text-align: left; }
+
+/* line 27, static/scss/style.scss */
+tr:nth-child(even) {
+  background-color: #eee; }
+
+/* line 30, static/scss/style.scss */
+tr:nth-child(odd) {
+  background-color: #fff; }

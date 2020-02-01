@@ -1,0 +1,28 @@
+/* line 5, static/scss/style.scss */
+.btn-large {
+  background-color: #FF5252; }
+
+/* line 9, static/scss/style.scss */
+.btn-large:hover {
+  background-color: #FF8A80; }
+
+/* line 13, static/scss/style.scss */
+nav {
+  background-color: #FF5252; }
+
+/* line 18, static/scss/style.scss */
+table {
+  border-collapse: collapse;
+  margin-top: 30px; }
+
+/* line 22, static/scss/style.scss */
+td, th {
+  padding: 10px;
+  border-bottom: 2px solid #FF8A80;
+  text-align: center; }
+
+/* line 28, static/scss/style.scss */
+.button1 {
+  color: white;
+  position: absolute;
+  left: 70%; }

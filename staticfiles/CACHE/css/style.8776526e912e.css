@@ -1,0 +1,79 @@
+/* line 9, static/scss/style.scss */
+.btn, .btn-large, .btn-small {
+  background-color: #FF5252;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; }
+
+/* line 15, static/scss/style.scss */
+.btn:hover {
+  background-color: #FF8A80; }
+
+/* line 19, static/scss/style.scss */
+.btn
+nav {
+  background-color: #FF5252; }
+
+/* line 26, static/scss/style.scss */
+table {
+  border-collapse: collapse; }
+
+/* line 32, static/scss/style.scss */
+td, th {
+  padding: 10px;
+  border-bottom: 2px solid #FF8A80;
+  text-align: center; }
+
+/* line 38, static/scss/style.scss */
+.tabla-asistencia-alumna {
+  table-layout: fixed;
+  width: 80%; }
+
+/* line 43, static/scss/style.scss */
+.tabla-asist-gral {
+  margin-top: 8%;
+  margin-block-end: 10%; }
+
+/* line 48, static/scss/style.scss */
+.list, btns-container {
+  margin-top: 10px; }
+
+/* line 53, static/scss/style.scss */
+.nombre-checkbox {
+  font-size: large;
+  color: #000000e6; }
+
+/* line 57, static/scss/style.scss */
+.checkbox-indigo[type="checkbox"] + label:before {
+  border: 2px #FF5252;
+  background: transparent; }
+
+/* line 63, static/scss/style.scss */
+.icon-red {
+  color: #B32727; }
+
+/* line 67, static/scss/style.scss */
+.icon-green {
+  color: #15B342; }
+
+/* line 71, static/scss/style.scss */
+.modulo-asistencia {
+  margin-top: 5%; }
+
+/* line 75, static/scss/style.scss */
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; }
+
+/* line 82, static/scss/style.scss */
+.progress {
+  background-color: #bfc8fbb3;
+  transform: scale(1, 2); }
+
+/* line 87, static/scss/style.scss */
+.progress .determinate {
+  background-color: #8697f3; }
+
+/* line 91, static/scss/style.scss */
+.text {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; }
