@@ -18,15 +18,16 @@
 
     <div class="forms-table">
 
-        <form method="POST" action="" class="list">
+        <form method="post" class="list">
             {%csrf_token%}
                 {{formset.management_form}}
                 {% for form in formset %}
-
+                    {{ form.id }}
                     <div class="flex-container-asistencia" >
-                        <div><img src="{{form.asistio.label.model_pic.url}}"  style="width:70px; margin-right:15px;"></div>
-                        <div><label><input type="checkbox" name="asistio"><span>{{ form.asistio }}</span></label></div>
-                        <div><label class="nombre-checkbox">{{form.asistio.label.first_name}} {{form.asistio.label.last_name}}</label></div>
+                        <label class="nombre-checkbox">
+                            {{ form.asistio }}
+                            <span>{{ form.instance.alumna.first_name }} {{ form.instance.alumna.last_name }} </span>
+                        </label>
                     </div>
                 {%endfor%}
 

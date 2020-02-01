@@ -12,7 +12,7 @@ from .models import Asistencia
 from clases.models import Clase
 from cursos.models import Curso
 from usuarios.models import User
-from .forms import AsistenciaForm
+from .forms import AsistenciaModelFormSet
 from .utils import *
 
 
@@ -109,16 +109,13 @@ def get_form(request,**kwargs):
         return HttpResponseNotFound("La clase que buscas no existe.")
 
     else:
-
         lista_alumnas=get_alumnas_en_orden(curso.alumnas.all())
         template_name='asistencia/asistencia.html'
         for alu in lista_alumnas:
-            asist = Asistencia.create
-        formset = AsistenciaModelFormSet(queryset=Asistencia.objects.filter())
+            asist = Asistencia.objects.get_or_create(alumna=alu,clase=clase,author=usuaria)
         if request.method=='GET':   ## cuando entro por primera vez
-            formset = AsistenciaFormset(request.GET or None)
-            for idx, form in enumerate(formset):
-                form.fields['asistio'].label = lista[idx]
+            formset = AsistenciaModelFormSet(queryset=Asistencia.objects.filter(clase=clase))
+
             return render(request, template_name, {
             'curso': curso,
             'clase': clase,
@@ -126,23 +123,11 @@ def get_form(request,**kwargs):
             })
 
         elif request.method=='POST':    ## cuando pongo save
-            formset=AsistenciaFormset(request.POST)
-            for idx, form in enumerate(formset):
-                form.fields['asistio'].label = lista[idx]
-                print(form.fields['asistio'].label)
+            formset = AsistenciaModelFormSet(request.POST,
+                                             queryset=Asistencia.objects.filter(clase=clase))
+
             if formset.is_valid():
-                asistentes=['alumna4', 'alumna7', 'alumna9', 'alumna14', 'alumna18', 'alumna21'] #lista de users de las alumnas que asistieron para el test de usuario
-                for form in formset:
-                    #asistio=form.cleaned_data.get('asistio') #lo que debería leer el input del form
-                    asistio=False #todas false
-                    alumna=form.fields['asistio'].label
-
-                    if alumna.username in asistentes: #las que asistieron en el test
-                        asistio=True #se les marca true a mano
-                    print(request.POST)
-                    clase_actual=Clase.objects.filter(id=clase_id)[0]
-                    Asistencia(alumna=alumna, clase= clase_actual, author= request.user, asistio=asistio).save()
-
-                print(type(clase_actual.curso.id))
-                #return redirect('asistencia:asistencia_gral')
-                return HttpResponseRedirect(reverse('asistencia:asistencia_gral', kwargs={'curso_id':clase_actual.curso.id}))
+                instances = formset.save()
+                for inst in instances:
+                    print(inst,"instancia guardada")
+                return HttpResponseRedirect(reverse('asistencia:asistencia_gral', kwargs={'curso_id':clase.curso.id}))
