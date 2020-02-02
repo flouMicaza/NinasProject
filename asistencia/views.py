@@ -115,7 +115,6 @@ def get_form(request,**kwargs):
             asist = Asistencia.objects.get_or_create(alumna=alu,clase=clase,author=usuaria)
         if request.method=='GET':   ## cuando entro por primera vez
             formset = AsistenciaModelFormSet(queryset=Asistencia.objects.filter(clase=clase))
-
             return render(request, template_name, {
             'curso': curso,
             'clase': clase,
