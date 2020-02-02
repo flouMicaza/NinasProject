@@ -8,7 +8,7 @@ class Asistencia(models.Model):
     alumna = models.ForeignKey('usuarios.User', related_name='alumna' ,on_delete=models.CASCADE)
     clase = models.ForeignKey('clases.Clase', on_delete=models.CASCADE)
     author = models.ForeignKey('usuarios.User', related_name='profesora' ,on_delete=models.CASCADE)  # quien paso la asistencia
-    asistio = models.BooleanField('alumna asisitio')
+    asistio = models.BooleanField('alumna asisitio', default=False)
 
     class Meta:
         unique_together=(("alumna","clase"))

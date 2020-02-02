@@ -1,0 +1,79 @@
+/* line 9, static/scss/style.scss */
+.btn, .btn-large, .btn-small {
+  background-color: #FF5252;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; }
+
+/* line 15, static/scss/style.scss */
+.btn:hover {
+  background-color: #FF8A80; }
+
+/* line 19, static/scss/style.scss */
+.btn
+nav {
+  background-color: #FF5252; }
+
+/* line 26, static/scss/style.scss */
+table {
+  border-collapse: collapse;
+  margin-top: 70px; }
+
+/* line 30, static/scss/style.scss */
+td, th {
+  padding: 10px;
+  border-bottom: 2px solid #FF8A80;
+  text-align: center; }
+
+/* line 37, static/scss/style.scss */
+.list {
+  margin-top: 60px; }
+
+/* line 42, static/scss/style.scss */
+.nombre-checkbox {
+  font-size: large;
+  color: #000000e6; }
+
+/* line 46, static/scss/style.scss */
+.checkbox-indigo[type="checkbox"] + label:before {
+  border: 2px #FF5252;
+  background: transparent; }
+
+/* line 52, static/scss/style.scss */
+.icon-red {
+  color: #B32727; }
+
+/* line 56, static/scss/style.scss */
+.icon-green {
+  color: #15B342; }
+
+/* line 60, static/scss/style.scss */
+.modulo-asistencia {
+  margin-top: 5%; }
+
+/* line 64, static/scss/style.scss */
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+/* line 70, static/scss/style.scss */
+.flex-container1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+/* line 76, static/scss/style.scss */
+.progress {
+  background-color: #bfc8fbb3;
+  transform: scale(1, 2);
+  position: relative;
+  left: 1.5%;
+  right: 1.5%;
+  margin-top: 2%; }
+
+/* line 86, static/scss/style.scss */
+.progress .determinate {
+  background-color: #8697f3; }
+
+/* line 91, static/scss/style.scss */
+.modal-button {
+  margin-top: 1.5%; }

@@ -2,14 +2,13 @@ import datetime
 from datetime import date
 from unittest.mock import Mock
 
-from asistencia.utils import *
-
 from asistencia.models import Asistencia
 from cursos.views import MisCursosView, CursosView
 from usuarios.models import User
 from django.urls import reverse
 from django.test import TestCase, Client
 
+from asistencia.utils import get_alumnas_en_orden, porcentaje_asistencia, clases_asistencias_alumna
 from asistencia.views import *
 from clases.models import Clase
 from cursos.models import Curso
@@ -48,7 +47,7 @@ class InitialData(TestCase):
         self.usuaria_alumna5 = User.objects.create_user(username="alumna5", first_name="Antonia", last_name="Quezada",
                                                         password="contraseña123", es_alumna=True)
 
-        self.curso_basico = Curso.objects.create(nombre="C++: Básico")
+        self.curso_basico = Curso.objects.create(nombre="C++: Básico", cant_clases=15)
         self.curso_basico.profesoras.add(self.usuaria_profesora1)
         self.curso_basico.voluntarias.add(self.usuaria_voluntaria1)
         self.curso_basico.voluntarias.add(self.usuaria_voluntaria2)
@@ -59,7 +58,7 @@ class InitialData(TestCase):
         self.curso_basico.alumnas.add(self.usuaria_alumna5)
 
 
-        self.curso_avanzado = Curso.objects.create(nombre="C++: Avanzado")
+        self.curso_avanzado = Curso.objects.create(nombre="C++: Avanzado", cant_clases=15)
         self.curso_avanzado.profesoras.add(self.usuaria_profesora2)
         self.curso_avanzado.voluntarias.add(self.usuaria_voluntaria2)
         self.curso_basico.alumnas.add(self.usuaria_alumna2)
@@ -97,6 +96,49 @@ class InitialData(TestCase):
                                   asistio=False)
 
 
+class UtilsTest(InitialData):
+
+    def setUp(self):
+        super(UtilsTest, self).setUp()
+        self.mi_curso = self.curso_basico
+        self.alumnas_curso = self.mi_curso.alumnas.all()
+        self.usuaria = self.mi_curso.alumnas.all()[0]
+
+
+    def test_get_asistencias(self):
+        lista_alumnas = list(self.alumnas_curso)
+        alumnas_en_orden = get_alumnas_en_orden(self.alumnas_curso)
+
+        self.assertEqual(len(alumnas_en_orden), len(self.alumnas_curso))
+
+        for alumna in alumnas_en_orden:
+            lista_alumnas.remove(alumna)
+
+        # Revisa que esten todas las alumnas
+        self.assertEqual(len(lista_alumnas), 0)
+
+
+    def test_porcentaje_asistencia(self):
+        nro_clases = len(Clase.objects.filter(curso=self.mi_curso))
+        nro_asistencias = len(Asistencia.objects.filter(clase__curso=self.mi_curso, alumna=self.usuaria, asistio=True))
+        porcentaje = int((nro_asistencias/nro_clases)*100)
+        porcentaje_calculado = porcentaje_asistencia(self.usuaria, self.mi_curso)
+        self.assertEqual(porcentaje, porcentaje_calculado)
+        self.assertTrue(porcentaje_calculado >= 0 and porcentaje_calculado <= 100)
+
+
+    def test_asistencias_alumna(self):
+        asistencias = Asistencia.objects.filter(alumna=self.usuaria, clase__curso=self.mi_curso).order_by('clase_id')
+        clases_asistencias = clases_asistencias_alumna(self.usuaria, self.mi_curso)
+        Clase.objects.create(nombre="mi_clase", curso=self.mi_curso) #clase sin asistencias
+        self.assertEqual(len(asistencias), len(clases_asistencias))
+        self.assertNotEqual(len(clases_asistencias), len(Clase.objects.filter(curso=self.mi_curso)))
+
+        for i in range(len(asistencias)):
+            clase_asistencia = clases_asistencias[i]
+            self.assertEqual(clase_asistencia[0], asistencias[i].clase)
+            self.assertEqual(clase_asistencia[1], asistencias[i].asistio)
+
 
 class Asistencia_GralViewTest(InitialData):
 
@@ -131,7 +173,7 @@ class Asistencia_GralViewTest(InitialData):
     def test_vista_gral_sin_alumnas(self):
         ## Acceder a la asistencia de un curso sin alumnas
         usuaria = self.usuaria_profesora1
-        self.curso = Curso.objects.create(nombre="Django")
+        self.curso = Curso.objects.create(nombre="Django", cant_clases=15)
         self.curso.profesoras.add(usuaria)
         self.clase1 = Clase.objects.create(nombre="Clase 1: Modelos en Django", curso=self.curso)
         self.clase2 = Clase.objects.create(nombre="Clase 2: Administrador de Django", curso=self.curso)
@@ -141,7 +183,7 @@ class Asistencia_GralViewTest(InitialData):
         response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': self.curso.id}))
         self.assertTemplateUsed(response, 'asistencia/asistencia_gral.html')
         # Mensaje que arroja la página
-        self.assertContains(response, "Para mostrar el historial de asistencia es necesario que el curso tenga alumnas inscritas.")
+        self.assertContains(response, "Este curso no tiene alumnas!")
         self.assertContains(response, "Volver")
         self.assertNotContains(response, "Alumna")
         self.assertNotContains(response, "Nombre")
@@ -153,7 +195,7 @@ class Asistencia_GralViewTest(InitialData):
     def test_vista_gral_sin_clases(self):
         ## Acceder a la asistencia de un curso sin clases
         usuaria = self.usuaria_profesora1
-        self.curso = Curso.objects.create(nombre="Django")
+        self.curso = Curso.objects.create(nombre="Django", cant_clases=15)
         self.curso.profesoras.add(usuaria)
         self.curso.alumnas.add(self.usuaria_alumna1)
         self.curso.alumnas.add(self.usuaria_alumna2)
@@ -163,7 +205,7 @@ class Asistencia_GralViewTest(InitialData):
         response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': self.curso.id}))
         self.assertTemplateUsed(response, 'asistencia/asistencia_gral.html')
         # Mensaje que arroja la página
-        self.assertContains(response, "Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas.")
+        self.assertContains(response, "Este curso no tiene clases!")
         self.assertContains(response, "Volver")
         self.assertNotContains(response, "Alumna")
         self.assertNotContains(response, "Nombre")
@@ -174,7 +216,7 @@ class Asistencia_GralViewTest(InitialData):
     def test_vista_gral_sin_clases_alumnas(self):
         ## Acceder a la asistencia de un curso sin clases
         usuaria = self.usuaria_profesora1
-        self.curso = Curso.objects.create(nombre="Django")
+        self.curso = Curso.objects.create(nombre="Django", cant_clases=15)
         self.curso.profesoras.add(usuaria)
 
         self.client.force_login(user=usuaria)
@@ -182,7 +224,7 @@ class Asistencia_GralViewTest(InitialData):
         response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': self.curso.id}))
         self.assertTemplateUsed(response, 'asistencia/asistencia_gral.html')
         # Mensaje que arroja la página
-        self.assertContains(response, "Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas y alumnas inscritas.")
+        self.assertContains(response, "Este curso no tiene clases ni alumnas!")
         self.assertContains(response, "Volver")
         self.assertNotContains(response, "Alumna")
         self.assertNotContains(response, "Nombre")
@@ -194,7 +236,7 @@ class Asistencia_GralViewTest(InitialData):
     def test_vista_gral_sin_asistencias(self):
         ## Acceder a la asistencia de un curso sin asistencias pasadas
         usuaria = self.usuaria_profesora1
-        self.curso = Curso.objects.create(nombre="Django")
+        self.curso = Curso.objects.create(nombre="Django", cant_clases=15)
         self.curso.profesoras.add(usuaria)
         self.curso.alumnas.add(self.usuaria_alumna1)
         self.curso.alumnas.add(self.usuaria_alumna2)
@@ -206,7 +248,7 @@ class Asistencia_GralViewTest(InitialData):
         response = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id': self.curso.id}))
         self.assertTemplateUsed(response, 'asistencia/asistencia_gral.html')
         # Mensaje que arroja la página
-        self.assertContains(response, "¡Ups! No se ha pasado asistencia para este curso aún.")
+        self.assertContains(response, "Aún no se ha pasado asistencia para este curso.")
         #self.assertContains(response, "PASAR ASISTENCIA")
         self.assertNotContains(response, "Alumna")
         self.assertNotContains(response, "Nombre")
@@ -240,8 +282,8 @@ class Asistencia_GralViewTest(InitialData):
             self.assertContains(response, nro_asistencias)
 
         self.assertContains(response, "Alumna")
-        self.assertContains(response, "Total clases")
-        self.assertContains(response, "Total alumnas")
+        self.assertContains(response, "Alumnas por clase")
+        self.assertContains(response, "Clases Asistidas")
 
         for alumna in curso.alumnas.all():
             total_alumna = len(asistencias.filter(alumna=alumna, asistio=True))
@@ -275,25 +317,27 @@ class Asistencia_GralViewTest(InitialData):
         self.client.logout()
 
 
-class AlumnasEnOrdenTest(InitialData):
 
-    def test_get_asistencias(self):
+
+class MiCursoViewAlumnaTest(InitialData):
+
+    def test_Mi_Curso_Alumna(self):
         curso = self.curso_basico
-        alumnas_curso = curso.alumnas.all()
-        lista_alumnas = list(alumnas_curso)
+        usuaria = list(self.curso_basico.alumnas.all())[0]
 
-        alumnas_en_orden = get_alumnas_en_orden(alumnas_curso)
+        self.client.force_login(user=usuaria)
 
-        self.assertEqual(len(alumnas_en_orden), len(alumnas_curso))
+        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': curso.id}))
+        self.assertTemplateUsed(response, 'cursos/inicio_curso.html')
+        self.assertContains(response, curso.nombre)
+        self.assertContains(response, 'Asistencia')
+        self.assertContains(response, 'Ver Detalle')
+        self.assertContains(response, '%')
+        self.assertNotContains(response, 'Mis cursos')
 
-        for alumna in alumnas_en_orden:
-            lista_alumnas.remove(alumna)
 
-        # Revisa que esten todas las alumnas
-        self.assertEqual(len(lista_alumnas), 0)
 
 """
-
 class AsistenciaViewTest(InitialData):
 
     def setUp(self):
@@ -334,7 +378,7 @@ class AsistenciaViewTest(InitialData):
         day = self.dia_ninaspro
         hour = self.hora_inicio + 1
         usuaria = self.usuaria_voluntaria1
-        curso = Curso.objects.create(nombre="Django")
+        curso = Curso.objects.create(nombre="Django", cant_clases=15)
         curso.voluntarias.add(usuaria)
         Clase.objects.create(nombre="Tutorial DjangoGirls", curso=curso, fecha_clase= datetime.datetime(year=self.year, month=self.month, day=day, hour=hour))
         self.vista_asistencia(day, hour, usuaria, curso)
@@ -356,7 +400,7 @@ class AsistenciaViewTest(InitialData):
         newNow = datetime.datetime(year=self.anio, month=self.mes, day=day, hour=hour)
         datetime = Mock()
         datetime.datetime.return_value = newNow
-        # Se crea una clase sin asistencias un dia de ninasṕro
+        # Se crea una clase sin asistencias un dia de ninaspro
         clase = Clase.objects.create(nombre="Clase prueba", curso=curso, fecha_clase=datetime.date(year=self.anio, month=self.mes, day=self.dia_ninaspro))
 
         self.client.force_login(user=usuaria)
@@ -364,7 +408,27 @@ class AsistenciaViewTest(InitialData):
         # self.assertTemplateUsed(response, 'error/403.html')
         self.assertEquals(response.status_code, 403)
         self.client.logout()
+        
+    
+    def test_vista_asistencia_inconsistente(self):
+        ## Se ingresa a una clase y un curso que no es están relacionados
+        usuaria = self.usuaria_profesora1
+        curso = self.curso_basico       # debe tener clases creadas
+        
+        day = self.dia_ninaspro
+        hour = self.hora_inicio
+        clase = Clase.objects.filter(curso=curso)
+        curso1 = Curso.objects.create(nombre="Curso prueba", cant_clases=15)
+        curso1.profesoras.add(usuaria)
+        curso1.alumnas.add(self.usuaria_alumna1)
+        curso1.alumnas.add(self.usuaria_alumna2)
 
+        self.client.force_login(user=usuaria)
+        response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso1.id, 'clase_id': clase.id}))
+        # self.assertTemplateUsed(response, 'error/403.html')
+        self.assertEquals(response.status_code, 403)
+        self.client.logout()
+        
 
     def test_vista_asistencia_sin_permiso_voluntaria(self):
         ## Una voluntaria va a ṕasar la lista un dia de ninaspro fuera de horario
@@ -398,6 +462,9 @@ class AsistenciaViewTest(InitialData):
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': 5}))
         # self.assertTemplateUsed(response, 'error/404.html')
         self.assertEquals(response.status_code, 404)
-
-
 """
+
+
+
+
+

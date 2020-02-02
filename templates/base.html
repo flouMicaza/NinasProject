@@ -1,4 +1,4 @@
-
+{% load compress %}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -8,11 +8,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="{% static 'js/scripts.js' %}">
 
+        <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
-
-                    <link type="text/x-scss" href="{% static 'scss/style.scss' %}" rel="stylesheet" media="screen">
-
+        {% compress css %}
+            <link type="text/x-scss" href="{% static 'scss/style.scss' %}" rel="stylesheet" media="screen">
+        {% endcompress %}
         <link type="text/x-scss" href="{% static 'css/style.css' %}" rel="stylesheet" media="screen">
 
 

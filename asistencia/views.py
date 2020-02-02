@@ -12,7 +12,7 @@ from .models import Asistencia
 from clases.models import Clase
 from cursos.models import Curso
 from usuarios.models import User
-from .forms import AsistenciaForm, AsistenciaFormset
+from .forms import AsistenciaForm
 from .utils import *
 
 
@@ -72,6 +72,9 @@ class Asistencia_GralView(LoginRequiredMixin, View):
             hay_alumnas = True
             if len(curso.alumnas.all()) == 0:
                 hay_alumnas = not hay_alumnas
+            hay_asistencias=True
+            if len(asistencias) == 0:
+                hay_asistencias = not hay_asistencias
 
             id_prox_clase = -1
             if len(clases_asist) < len(clases_totales):
@@ -84,7 +87,9 @@ class Asistencia_GralView(LoginRequiredMixin, View):
                 'total_por_clase': total_por_clase,
                 'hay_clases': hay_clases,
                 'hay_alumnas': hay_alumnas,
-                'id_prox_clase': id_prox_clase
+                'hay_asistencias': hay_asistencias,
+                'id_prox_clase': id_prox_clase,
+                'clases_hasta_ahora': len(clases_asist)
             })
 
         return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
@@ -113,6 +118,7 @@ def get_form(request,**kwargs):
             formset = AsistenciaFormset(request.GET or None)
             for idx, form in enumerate(formset):
                 form.fields['asistio'].label = lista[idx]
+                print(form.fields['asistio'].label)
             return render(request, template_name, {
             'curso': curso,
             'clase': clase,
@@ -123,15 +129,16 @@ def get_form(request,**kwargs):
             formset=AsistenciaFormset(request.POST)
             for idx, form in enumerate(formset):
                 form.fields['asistio'].label = lista[idx]
+                print(form.fields['asistio'].label)
             if formset.is_valid():
                 asistentes=['alumna4', 'alumna7', 'alumna9', 'alumna14', 'alumna18', 'alumna21'] #lista de users de las alumnas que asistieron para el test de usuario
                 for form in formset:
                     #asistio=form.cleaned_data.get('asistio') #lo que debería leer el input del form
                     asistio=False #todas false
                     alumna=form.fields['asistio'].label
+
                     if alumna.username in asistentes: #las que asistieron en el test
                         asistio=True #se les marca true a mano
-                    print("hola hola hola hola hola")
                     print(request.POST)
                     clase_actual=Clase.objects.filter(id=clase_id)[0]
                     Asistencia(alumna=alumna, clase= clase_actual, author= request.user, asistio=asistio).save()
@@ -139,7 +146,3 @@ def get_form(request,**kwargs):
                 print(type(clase_actual.curso.id))
                 #return redirect('asistencia:asistencia_gral')
                 return HttpResponseRedirect(reverse('asistencia:asistencia_gral', kwargs={'curso_id':clase_actual.curso.id}))
-
-
-
-

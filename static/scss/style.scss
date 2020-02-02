@@ -16,8 +16,6 @@ $check-color: #15B342;
   background-color: $hover-color;
 }
 
-.btn
-
 nav {
   background-color: $primary-color;
 }
@@ -25,17 +23,52 @@ nav {
 
 table {
   border-collapse:collapse;
-  margin-top: 70px;
 }
+
+
 td, th {
-  padding: 10px;
-  border-bottom: 2px solid $hover-color;
-  text-align: center;
+    padding: 10px;
+    border-bottom: 2px solid $hover-color;
+    text-align: center;
 }
+
+.tabla-asistencia-alumna {
+    table-layout: fixed;
+    width: 80%;
+}
+
+.container-tabla-asist-gral {
+    max-width: 100%;
+    overflow-x: scroll;
+    margin-top: 3%;
+    margin-block-end: 10%;
+}
+
+.tabla-asist-gral .sticky-left{
+    position: sticky;
+    left: 0;
+    background-color: white;
+}
+
+.tabla-asist-gral .sticky-right{
+    position: sticky;
+    right: 0;
+    background-color: white;
+}
+
+.tabla-asist-gral th .sticky {
+    padding: 10px;
+    border-bottom: 2px solid $hover-color;
+    text-align: center;
+}
+
+
+
+
 
 
 .list {
-    margin-top: 60px;
+    margin-top: 10px;
 }
 
 
@@ -57,7 +90,68 @@ td, th {
     color: $check-color;
 }
 
+.modulo-asistencia{
+    margin-top: 5%;
+}
 
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.progress {
+    background-color: #bfc8fbb3;
+    transform: scale(1, 2);
+}
+
+.progress .determinate {
+    background-color: #8697f3;
+}
+
+.text {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+.tooltip .tiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    padding: 6px 0;
+    position: absolute;
+    z-index: 1;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.tooltip .tiptext::after {
+    content: "";
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+}
+.tooltip:hover .tiptext {
+    visibility: visible;
+}
+
+.tooltip.top .tiptext{
+    margin-left: -60px;
+    bottom: 150%;
+    left: 50%;
+}
+.tooltip.top .tiptext::after{
+    margin-left: -5px;
+    top: 100%;
+    left: 50%;
+    border-color: #2E2E2E transparent transparent transparent;
+}
 
 
 
