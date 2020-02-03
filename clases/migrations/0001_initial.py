@@ -40,3 +40,4 @@ class Migration(migrations.Migration):
             unique_together={('nombre', 'curso')},
         ),
     ]
+    
