@@ -1,5 +1,6 @@
 {% extends 'menu.html' %}
 {% load static %}
+{% load django_template_maths %}
 {% block title %}Asistencia{% endblock %}
 
 {% block content %}
@@ -63,6 +64,8 @@
 
                          <th> Clases Asistidas </th>
 
+                         <th> Clases Faltadas </th>
+
                     </tr>
                 </thead>
 
@@ -92,6 +95,9 @@
                                 {% endfor %}
 
                                 <td> {{ lista.2 }} </td>
+
+                                <td> {{clases_hasta_ahora|sub:lista.2}} </td>
+
 
                             </tr>
 
