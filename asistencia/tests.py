@@ -337,12 +337,11 @@ class MiCursoViewAlumnaTest(InitialData):
 
 
 
-"""
+
 class AsistenciaViewTest(InitialData):
 
     def setUp(self):
         super(AsistenciaViewTest, self).setUp()
-        self.asistenciaView = AsistenciaView()
         self.dia_ninaspro = 6 #6 de Julio 2020 es sabado
         self.mes = 7
         self.anio = 2020
@@ -357,7 +356,7 @@ class AsistenciaViewTest(InitialData):
         datetime = Mock()
         datetime.datetime.return_value = newNow
         # Se crea una clase sin asistencias un dia de ninasṕro
-        clase = Clase.objects.create(nombre="Clase prueba", curso=curso, fecha_clase=datetime.date(year=self.anio, month=self.mes, day=self.dia_ninaspro))
+        clase = Clase.objects.create(nombre="Clase prueba", curso=curso, fecha_clase=newNow)
 
         self.client.force_login(user=usuaria)
         response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso.id,'clase_id': clase.id}))
@@ -380,7 +379,7 @@ class AsistenciaViewTest(InitialData):
         usuaria = self.usuaria_voluntaria1
         curso = Curso.objects.create(nombre="Django", cant_clases=15)
         curso.voluntarias.add(usuaria)
-        Clase.objects.create(nombre="Tutorial DjangoGirls", curso=curso, fecha_clase= datetime.datetime(year=self.year, month=self.month, day=day, hour=hour))
+        Clase.objects.create(nombre="Tutorial DjangoGirls", curso=curso, fecha_clase= datetime(year=self.anio, month=self.mes, day=day, hour=hour))
         self.vista_asistencia(day, hour, usuaria, curso)
 
 
@@ -462,8 +461,6 @@ class AsistenciaViewTest(InitialData):
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': 5}))
         # self.assertTemplateUsed(response, 'error/404.html')
         self.assertEquals(response.status_code, 404)
-"""
-
 
 
 
