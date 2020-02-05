@@ -56,11 +56,6 @@ td, th {
     background-color: white;
 }
 
-.tabla-asist-gral th .sticky {
-    padding: 10px;
-    border-bottom: 2px solid $hover-color;
-    text-align: center;
-}
 
 
 
@@ -75,6 +70,8 @@ td, th {
 .nombre-checkbox {
     font-size:large;
     color:#000000e6;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+
 }
 .checkbox-indigo[type="checkbox"] + label:before{
   border: 2px $primary-color;
@@ -114,6 +111,23 @@ td, th {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
+
+.flex-container-asistencia {
+  display: flex;
+  flex-direction:row;
+  flex-wrap:nowrap;
+  justify-content:flex-start;
+  align-items:center;
+  margin-top:20px;
+}
+
+.flex-center {
+             display: flex;
+             flex-direction: row;
+             align-items: center;
+             justify-content: center;
+         }
+
 .tooltip {
     position: relative;
     display: inline-block;
@@ -146,13 +160,9 @@ td, th {
     bottom: 150%;
     left: 50%;
 }
-.tooltip.top .tiptext::after{
-    margin-left: -5px;
-    top: 100%;
-    left: 50%;
-    border-color: #2E2E2E transparent transparent transparent;
+.tooltip.top .tiptext::after {
+  margin-left: -5px;
+  top: 100%;
+  left: 50%;
+  border-color: #2E2E2E transparent transparent transparent;
 }
-
-
-
-
