@@ -45,7 +45,6 @@
 
         <!-- TABLA ASIST GRAL -->
 
-
         <div class="container-tabla-asist-gral" >
 
             <table class="tabla-asist-gral" >
@@ -55,12 +54,7 @@
 
                         {% for clase in clases %}
                             <th>
-                                <!--
-                                <div class="tooltip top"> Clase {{forloop.counter}}
-                                    <span class="tiptext">{{clase.nombre}}</span>
-                                </div>
-                                -->
-                                Clase {{ forloop.counter }}
+                                <abbr title="User Experience" rel="tooltip"> Clase {{ forloop.counter }} </abbr>
                             </th>
                         {% endfor %}
 
