@@ -51,19 +51,22 @@
             <table class="tabla-asist-gral" >
                 <thead>
                     <tr>
-                        <th class="sticky-left hola"> Alumna </th>
+                        <th class="sticky-left"> Alumna </th>
 
                         {% for clase in clases %}
                             <th>
+                                <!--
                                 <div class="tooltip top"> Clase {{forloop.counter}}
                                     <span class="tiptext">{{clase.nombre}}</span>
                                 </div>
+                                -->
+                                Clase {{ forloop.counter }}
                             </th>
                         {% endfor %}
 
-                         <th class="sticky-right"> Clases Asistidas </th>
+                         <th class="sticky-right-first"> Clases Asistidas </th>
 
-                         <th> Clases Faltadas </th>
+                         <th class="sticky-right-last"> Clases Faltadas </th>
 
                     </tr>
                 </thead>
@@ -93,9 +96,9 @@
                         {% endfor %}
 
 
-                        <td class="sticky-right"> {{ lista.2 }} </td>
+                        <td class="sticky-right-first"> {{ lista.2 }} </td>
 
-                        <td>  </td>
+                        <td class="sticky-right-last"> x </td>
 
                     </tr>
 
@@ -112,9 +115,9 @@
 
                         {% endfor %}
 
-                        <td class="sticky-right">  </td>
+                        <td class="sticky-right-first">  </td>
 
-                        <td>  </td>
+                        <td class="sticky-right-last">  </td>
 
                     </tr>
 

@@ -50,11 +50,21 @@ td, th {
     background-color: white;
 }
 
-.tabla-asist-gral .sticky-right{
-    position: sticky;
-    right: 0;
-    background-color: white;
+.tabla-asist-gral .sticky-right-first {
+  position: sticky;
+  right: 74px;
+  background-color: white;
 }
+
+.tabla-asist-gral .sticky-right-last {
+  position: sticky;
+  right: 0;
+  background-color: white;
+}
+
+
+
+
 
 
 
