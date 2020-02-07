@@ -36,9 +36,15 @@ td, th {
     width: 80%;
 }
 
+
 .container-tabla-asist-gral {
     max-width: 100%;
     overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position:relative;
+    margin-left:0%;
     margin-top: 3%;
     margin-block-end: 10%;
 }
