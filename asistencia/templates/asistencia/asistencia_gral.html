@@ -5,6 +5,27 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"></link>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script> $(document).ready(function(){
+    $('#tabla_asist_gral').DataTable({
+        order:[[0, "asc"]],
+        dom: "Blfrtip",
+        oLanguage: {
+            sLengthMenu: '<span>Rows per page:</span><select class="browser-default">' +
+                '<option value="10">10</option>' +
+                '<option value="20">20</option>' +
+                '<option value="30">30</option>' +
+                '<option value="40">40</option>' +
+                '<option value="50">50</option>' +
+                '<option value="-1">All</option>' +
+                '</select></div>'
+
+        }
+    });
+    $('select').material_select();
+});</script>
+
     {% if hay_clases and hay_alumnas and hay_asistencias %}     <!-- C++: Basico, FCFM y C++: Básico, UMayor -->
 
         <div>
@@ -44,14 +65,15 @@
 
 
         <!-- TABLA ASIST GRAL -->
-        <div class="container tabla-asist-gral">
-            <center>
-                <table>
+        <div class="container">
+                <table id= "tabla_asist_gral" class="display">
                 <thead>
                     <tr>
                         <th> N° </th>
 
-                        <th> Alumna </th>
+                        <th> Nombre </th>
+                        
+                        <th> Apellido </th>
 
                         {% for clase in clases %}
                             <th>
@@ -66,9 +88,9 @@
                          <th> Clases No Asistidas </th>
 
                     </tr>
+                    <tbody>
                 </thead>
 
-                    <tbody>
 
                     {% for lista in lista_asistencias %}
 
@@ -76,7 +98,9 @@
 
                             <td> {{forloop.counter}} </td>
 
-                            <td> {{ lista.0.first_name }} {{ lista.0.last_name }} </td>
+                            <td> {{ lista.0.first_name }}</td> 
+                            
+                            <td> {{ lista.0.last_name }} </td>
 
                             {% for bool in lista.1 %}
 
@@ -100,30 +124,31 @@
 
                             </tr>
 
-                        {% endfor %}
-
-                        <tr>
-                            <th>  </th>
-
-                            <th> Alumnas por clase </th>
-
-                            {% for total in total_por_clase %}
-
-                                <td> {{ total }} </td>
-
                             {% endfor %}
+                        </tbody>
+                        
+                        <tfoot>
+                        
+                            <tr>
+                                <th>  </th>
+                                
+                                <th> Alumnas por clase </th>
+                                
+                                <td>  </td>
+                                {% for total in total_por_clase %}
+                                
+                                <td> {{ total }} </td>
+                                
+                                {% endfor %}
+                                
+                                <td>  </td>
+                                
+                            </tr>
+                            
+                        </tfoot>
 
-                            <td>  </td>
-
-                        </tr>
-
-
-                    </tbody>
                 </table>
-            </center>
         </div>
-
-
 
 
     {% elif hay_clases and hay_alumnas %} <!-- Progra UAndes -->
