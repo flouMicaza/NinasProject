@@ -44,83 +44,80 @@
 
 
         <!-- TABLA ASIST GRAL -->
-        <div class="container tabla-asist-gral">
-            <center>
-                <table>
+
+        <div class="container-tabla-asist-gral" >
+
+            <table class="tabla-asist-gral" >
                 <thead>
                     <tr>
-                        <th> N° </th>
-
-                        <th> Alumna </th>
+                        <th class="sticky-left"> Alumna </th>
 
                         {% for clase in clases %}
                             <th>
-                                <div class="tooltip top"> Clase {{forloop.counter}}
-                                    <span class="tiptext">{{clase.nombre}}</span>
-                                </div>
+                                <abbr title="{{clase.nombre}}" rel="tooltip"> Clase {{ forloop.counter }} </abbr>
                             </th>
                         {% endfor %}
 
-                         <th> Clases Asistidas </th>
+                         <th class="sticky-right-first"> Clases Asistidas </th>
 
-                         <th> Clases No Asistidas </th>
+                         <th class="sticky-right-last"> Clases No Asistidas </th>
 
                     </tr>
                 </thead>
 
-                    <tbody>
+                <tbody>
 
-                    {% for lista in lista_asistencias %}
+                {% for lista in lista_asistencias %}
 
-                        <tr>
-
-                            <td> {{forloop.counter}} </td>
-
-                            <td> {{ lista.0.first_name }} {{ lista.0.last_name }} </td>
-
-                            {% for bool in lista.1 %}
-
-                                {% if bool %}
-                                    <td>  <i class="material-icons icon-green">check_circle</i> </td>
-                                    <!-- <td bgcolor="82FFAD" >   </td> -->
-
-                                {% else %}
-                                    <td>  <i class="material-icons icon-red">cancel</i> </td>
-
-                                        <!-- <td bgcolor="#FF8C89">  </td> -->
-
-                                    {% endif %}
-
-                                {% endfor %}
-
-                                <td> {{ lista.2 }} </td>
-
-                                <td> {{clases_hasta_ahora|sub:lista.2}} </td>
+                    <tr>
 
 
-                            </tr>
+
+                        <td class="sticky-left"> {{forloop.counter}}. {{ lista.0.first_name }} {{ lista.0.last_name }} </td>
+
+                        {% for bool in lista.1 %}
+
+                            {% if bool %}
+                                <td>  <i class="material-icons icon-green">check_circle</i> </td>
+
+
+                            {% else %}
+                                <td>  <i class="material-icons icon-red">cancel</i> </td>
+
+
+                                {% endif %}
 
                         {% endfor %}
 
-                        <tr>
-                            <th>  </th>
 
-                            <th> Alumnas por clase </th>
+                        <td class="sticky-right-first"> {{ lista.2 }} </td>
 
-                            {% for total in total_por_clase %}
+                        <td class="sticky-right-last"> {{clases_hasta_ahora|sub:lista.2}} </td>
 
-                                <td> {{ total }} </td>
+                    </tr>
 
-                            {% endfor %}
+                    {% endfor %}
 
-                            <td>  </td>
-
-                        </tr>
+                    <tr>
 
 
-                    </tbody>
-                </table>
-            </center>
+                        <th class="sticky-left"> Alumnas por clase </th>
+
+                        {% for total in total_por_clase %}
+
+                            <td> {{ total }} </td>
+
+                        {% endfor %}
+
+                        <td class="sticky-right-first">  </td>
+
+                        <td class="sticky-right-last">  </td>
+
+                    </tr>
+
+
+                </tbody>
+            </table>
         </div>
 
 
