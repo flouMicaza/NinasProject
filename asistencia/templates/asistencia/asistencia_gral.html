@@ -10,7 +10,12 @@
         <div>
              <h4> Asistencia </h4>
              <h5> {{curso.nombre}} </h5>
-             <p>Van {{clases_hasta_ahora}} clases de un total de {{curso.cant_clases}}.</p>
+             <p>Van {{clases_hasta_ahora}} clases de un total de 
+                 {% if clases_hasta_ahora > curso.cant_clases %}
+                    {{clases_hasta_ahora}}
+                {% else %}
+                    {{curso.cant_clases}}
+                {% endif %}.</p>
         </div>
 
         <div class="flex-container" style="margin-top: 2%; "> <!-- botones de pasar asistencia y de volver cuando hay tabla-->
