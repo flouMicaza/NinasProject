@@ -17,6 +17,7 @@ $(document).ready(function(){
   $('.modal').modal();
   
 $('#tabla_asist_gral').DataTable({
+    scrollX: true,
     order:[[0, "asc"]],
     dom: "Blfrtip",
     oLanguage: {
@@ -39,18 +40,14 @@ $('#tabla_asist_gral').DataTable({
                 sPrevious: "Anterior"
             },
         sZeroRecords: "No se encontraron resultados",
+    
     }
     
 });
 
 $('select').material_select();
 });
-    $('.modal').modal();
 
-
-
-
-//tooltip tabla asistencia gral
 $( function()
 {
     var targets = $( '[rel~=tooltip]' ),

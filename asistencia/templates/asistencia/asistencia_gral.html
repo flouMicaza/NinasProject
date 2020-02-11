@@ -44,15 +44,15 @@
 
 
         <!-- TABLA ASIST GRAL -->
-        <div>
-                <table id= "tabla_asist_gral" class="display">
+        <div class="container-tabla-asist-gral">
+            <table id= "tabla_asist_gral" class="display tabla-asist-gral">
                 <thead>
                     <tr>
                         <th> N° </th>
 
-                        <th> Nombre </th>
+                        <th class="sticky-left"> Nombre </th>
                         
-                        <th> Apellido </th>
+                        <th class="sticky-left"> Apellido </th>
 
                         {% for clase in clases %}
                             <th>
@@ -72,22 +72,17 @@
                 {% for lista in lista_asistencias %}
 
                     <tr>
-
-
-                            <td> {{ lista.0.first_name }}</td> 
-                            
-                            <td> {{ lista.0.last_name }} </td>
-
-                        <td class="sticky-left"> {{forloop.counter}}. {{ lista.0.first_name }} {{ lista.0.last_name }} </td>
-
+                        <td> {{ forloop.counter }}</td>
+                        <td class="sticky-left"> {{ lista.0.first_name }}</td>                            
+                        <td class="sticky-left"> {{ lista.0.last_name }} </td>
                         {% for bool in lista.1 %}
 
                             {% if bool %}
-                                <td>  <i class="material-icons icon-green">check_circle</i> </td>
+                            <td>  <i class="material-icons icon-green">check_circle</i> </td>
 
 
                             {% else %}
-                                <td>  <i class="material-icons icon-red">cancel</i> </td>
+                            <td>  <i class="material-icons icon-red">cancel</i> </td>
 
 
                                 {% endif %}
@@ -96,6 +91,7 @@
 
 
                         <td class="sticky-right-first"> {{ lista.2 }} </td>
+                        <td class="sticky-right-last"> {{clases_hasta_ahora|sub:lista.2}} </td>
 
                             {% endfor %}
                         </tbody>
@@ -105,7 +101,7 @@
                             <tr>
                                 <th>  </th>
                                 
-                                <th> Alumnas por clase </th>
+                                <th class="sticky-left"> Alumnas por clase </th>
                                 
                                 <td>  </td>
                                 {% for total in total_por_clase %}

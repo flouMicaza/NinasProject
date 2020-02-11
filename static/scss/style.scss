@@ -34,12 +34,11 @@ td, th {
 .tabla-asistencia-alumna {
     table-layout: fixed;
     width: 80%;
+    
 }
-
 
 .container-tabla-asist-gral {
     max-width: 100%;
-    overflow-x: scroll;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -54,6 +53,7 @@ td, th {
     left: 0;
     background-color: white;
 }
+
 
 .tabla-asist-gral .sticky-right-first {
   position: sticky;
@@ -133,6 +133,10 @@ td, th {
              justify-content: center;
          }
 
+div.dataTables_wrapper {
+  width: 100%;
+  margin: 0 auto,
+}
 
 
 
@@ -182,3 +186,4 @@ td, th {
             margin: 0;
         }
 
+      
