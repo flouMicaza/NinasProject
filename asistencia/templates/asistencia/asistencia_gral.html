@@ -5,27 +5,6 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"></link>
-<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script> $(document).ready(function(){
-    $('#tabla_asist_gral').DataTable({
-        order:[[0, "asc"]],
-        dom: "Blfrtip",
-        oLanguage: {
-            sLengthMenu: '<span>Rows per page:</span><select class="browser-default">' +
-                '<option value="10">10</option>' +
-                '<option value="20">20</option>' +
-                '<option value="30">30</option>' +
-                '<option value="40">40</option>' +
-                '<option value="50">50</option>' +
-                '<option value="-1">All</option>' +
-                '</select></div>'
-
-        }
-    });
-    $('select').material_select();
-});</script>
-
     {% if hay_clases and hay_alumnas and hay_asistencias %}     <!-- C++: Basico, FCFM y C++: Básico, UMayor -->
 
         <div>
@@ -34,10 +13,10 @@
              <p>Van {{clases_hasta_ahora}} clases de un total de {{curso.cant_clases}}.</p>
         </div>
 
-        <div class="flex-container" style="margin-top: 2%;"> <!-- botones de pasar asistencia y de volver cuando hay tabla-->
+        <div class="flex-container" style="margin-top: 2%; "> <!-- botones de pasar asistencia y de volver cuando hay tabla-->
             <!-- BUTTON DE VOLVER -->
             <div style="align-self:stretch">
-                <div class="material-icons left" style="position:relative;left:15%;right:0%;">
+                <div class="material-icons left" style="position:relative;right:0%;">
                         <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn">
                                 <i class="material-icons left">arrow_back</i>Volver</a>
                 </div>
@@ -65,7 +44,7 @@
 
 
         <!-- TABLA ASIST GRAL -->
-        <div class="container">
+        <div>
                 <table id= "tabla_asist_gral" class="display">
                 <thead>
                     <tr>
