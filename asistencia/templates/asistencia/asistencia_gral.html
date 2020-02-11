@@ -56,52 +56,46 @@
 
                         {% for clase in clases %}
                             <th>
-                                <div class="tooltip top"> Clase {{forloop.counter}}
-                                    <span class="tiptext">{{clase.nombre}}</span>
-                                </div>
+                                <abbr title="{{clase.nombre}}" rel="tooltip"> Clase {{ forloop.counter }} </abbr>
                             </th>
                         {% endfor %}
 
-                         <th> Clases Asistidas </th>
+                         <th class="sticky-right-first"> Clases Asistidas </th>
 
-                         <th> Clases No Asistidas </th>
+                         <th class="sticky-right-last"> Clases No Asistidas </th>
 
                     </tr>
                     <tbody>
                 </thead>
 
 
-                    {% for lista in lista_asistencias %}
+                {% for lista in lista_asistencias %}
 
-                        <tr>
+                    <tr>
 
-                            <td> {{forloop.counter}} </td>
 
                             <td> {{ lista.0.first_name }}</td> 
                             
                             <td> {{ lista.0.last_name }} </td>
 
-                            {% for bool in lista.1 %}
+                        <td class="sticky-left"> {{forloop.counter}}. {{ lista.0.first_name }} {{ lista.0.last_name }} </td>
 
-                                {% if bool %}
-                                    <td>  <i class="material-icons icon-green">check_circle</i> </td>
-                                    <!-- <td bgcolor="82FFAD" >   </td> -->
+                        {% for bool in lista.1 %}
 
-                                {% else %}
-                                    <td>  <i class="material-icons icon-red">cancel</i> </td>
-
-                                        <!-- <td bgcolor="#FF8C89">  </td> -->
-
-                                    {% endif %}
-
-                                {% endfor %}
-
-                                <td> {{ lista.2 }} </td>
-
-                                <td> {{clases_hasta_ahora|sub:lista.2}} </td>
+                            {% if bool %}
+                                <td>  <i class="material-icons icon-green">check_circle</i> </td>
 
 
-                            </tr>
+                            {% else %}
+                                <td>  <i class="material-icons icon-red">cancel</i> </td>
+
+
+                                {% endif %}
+
+                        {% endfor %}
+
+
+                        <td class="sticky-right-first"> {{ lista.2 }} </td>
 
                             {% endfor %}
                         </tbody>
