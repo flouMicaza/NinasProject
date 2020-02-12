@@ -24,7 +24,7 @@ SECRET_KEY = '9i+212k5=thfl4(c@uwc*mw!!=6q=&$(ite%&o7*toawmrvp5@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_template_maths',
     'usuarios',
     'compressor',
     'cursos',

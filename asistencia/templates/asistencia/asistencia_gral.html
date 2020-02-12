@@ -1,5 +1,6 @@
 {% extends 'menu.html' %}
 {% load static %}
+{% load django_template_maths %}
 {% block title %}Asistencia{% endblock %}
 
 {% block content %}
@@ -9,13 +10,18 @@
         <div>
              <h4> Asistencia </h4>
              <h5> {{curso.nombre}} </h5>
-             <p>Van {{clases_hasta_ahora}} clases de un total de {{curso.cant_clases}}.</p>
+             <p>Van {{clases_hasta_ahora}} clases de un total de 
+                 {% if clases_hasta_ahora > curso.cant_clases %}
+                    {{clases_hasta_ahora}}
+                {% else %}
+                    {{curso.cant_clases}}
+                {% endif %}.</p>
         </div>
 
-        <div class="flex-container" style="margin-top: 2%;"> <!-- botones de pasar asistencia y de volver cuando hay tabla-->
+        <div class="flex-container" style="margin-top: 2%; "> <!-- botones de pasar asistencia y de volver cuando hay tabla-->
             <!-- BUTTON DE VOLVER -->
             <div style="align-self:stretch">
-                <div class="material-icons left" style="position:relative;left:15%;right:0%;">
+                <div class="material-icons left" style="position:relative;right:0%;">
                         <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn">
                                 <i class="material-icons left">arrow_back</i>Volver</a>
                 </div>
@@ -25,9 +31,9 @@
             <div >
                 {% if id_prox_clase < 0 %} <!-- disabled porque ya se pasó asistencia en todas-->
                     <div class="material-icons right" >
-                        <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn disabled" >
-                            <i class="material-icons right" >format_list_bulleted</i>
-                                Pasar Asistencia
+                        <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn" >
+                            <i class="material-icons right" >edit</i>
+                                Modificar Asistencia
                             </a>
                     </div>
                 {% else %} <!-- boton activado-->
@@ -43,81 +49,80 @@
 
 
         <!-- TABLA ASIST GRAL -->
-        <div class="container tabla-asist-gral">
-            <center>
-                <table>
+        <div class="container-tabla-asist-gral">
+            <table id= "tabla_asist_gral" class="display tabla-asist-gral">
                 <thead>
                     <tr>
                         <th> N° </th>
 
-                        <th> Alumna </th>
+                        <th class="sticky-left"> Nombre </th>
+                        
+                        <th class="sticky-left"> Apellido </th>
 
                         {% for clase in clases %}
                             <th>
-                                <div class="tooltip top"> Clase {{forloop.counter}}
-                                    <span class="tiptext">{{clase.nombre}}</span>
-                                </div>
+                                <abbr title="{{clase.nombre}}" rel="tooltip"> Clase {{ forloop.counter }} </abbr>
                             </th>
                         {% endfor %}
 
-                         <th> Clases Asistidas </th>
+                         <th class="sticky-right-first"> Clases Asistidas </th>
+
+                         <th class="sticky-right-last"> Clases No Asistidas </th>
 
                     </tr>
+                    <tbody>
                 </thead>
 
-                    <tbody>
 
-                    {% for lista in lista_asistencias %}
+                {% for lista in lista_asistencias %}
 
-                        <tr>
+                    <tr>
+                        <td> {{ forloop.counter }}</td>
+                        <td class="sticky-left"> {{ lista.0.first_name }}</td>                            
+                        <td class="sticky-left"> {{ lista.0.last_name }} </td>
+                        {% for bool in lista.1 %}
 
-                            <td> {{forloop.counter}} </td>
+                            {% if bool %}
+                            <td>  <i class="material-icons icon-green">check_circle</i> </td>
 
-                            <td> {{ lista.0.first_name }} {{ lista.0.last_name }} </td>
 
-                            {% for bool in lista.1 %}
+                            {% else %}
+                            <td>  <i class="material-icons icon-red">cancel</i> </td>
 
-                                {% if bool %}
-                                    <td>  <i class="material-icons icon-green">check_circle</i> </td>
-                                    <!-- <td bgcolor="82FFAD" >   </td> -->
 
-                                {% else %}
-                                    <td>  <i class="material-icons icon-red">cancel</i> </td>
-
-                                        <!-- <td bgcolor="#FF8C89">  </td> -->
-
-                                    {% endif %}
-
-                                {% endfor %}
-
-                                <td> {{ lista.2 }} </td>
-
-                            </tr>
+                                {% endif %}
 
                         {% endfor %}
 
-                        <tr>
-                            <th>  </th>
 
-                            <th> Alumnas por clase </th>
-
-                            {% for total in total_por_clase %}
-
-                                <td> {{ total }} </td>
+                        <td class="sticky-right-first"> {{ lista.2 }} </td>
+                        <td class="sticky-right-last"> {{clases_hasta_ahora|sub:lista.2}} </td>
 
                             {% endfor %}
+                        </tbody>
+                        
+                        <tfoot>
+                        
+                            <tr>
+                                <th>  </th>
+                                
+                                <th class="sticky-left"> Alumnas por clase </th>
+                                
+                                <td>  </td>
+                                {% for total in total_por_clase %}
+                                
+                                <td> {{ total }} </td>
+                                
+                                {% endfor %}
+                                
+                                <td>  </td>
+                                
+                            </tr>
+                            
+                        </tfoot>
 
-                            <td>  </td>
-
-                        </tr>
-
-
-                    </tbody>
                 </table>
-            </center>
         </div>
-
-
 
 
     {% elif hay_clases and hay_alumnas %} <!-- Progra UAndes -->

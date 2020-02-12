@@ -24,9 +24,10 @@
                 {% for form in formset %}
                     {{ form.id }}
                     <div class="flex-container-asistencia" >
+                        <div><img src="{{form.instance.alumna.model_pic.url}}"  style="width:70px; margin-right:15px;"></div>
                         <label class="nombre-checkbox">
                             {{ form.asistio }}
-                            <span>{{ form.instance.alumna.first_name }} {{ form.instance.alumna.last_name }} </span>
+                            <span>{{ form.instance.alumna.first_name }} {{ form.instance.alumna.last_name }}</span>
                         </label>
                     </div>
                 {%endfor%}
