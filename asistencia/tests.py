@@ -400,7 +400,8 @@ class AsistenciaViewTest(InitialData):
         datetime = Mock()
         datetime.datetime.return_value = newNow
         # Se crea una clase sin asistencias un dia de ninaspro
-        clase = Clase.objects.create(nombre="Clase prueba", curso=curso, fecha_clase=datetime.date(year=self.anio, month=self.mes, day=self.dia_ninaspro))
+        fecha_clase=datetime.date(year=self.anio, month=self.mes, day=self.dia_ninaspro)
+        clase = Clase.objects.create(nombre="Clase prueba", curso=curso, fecha_clase=newNow)
 
         self.client.force_login(user=usuaria)
         response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso.id,'clase_id': clase.id}))
@@ -416,7 +417,7 @@ class AsistenciaViewTest(InitialData):
         
         day = self.dia_ninaspro
         hour = self.hora_inicio
-        clase = Clase.objects.filter(curso=curso)
+        clase = Clase.objects.filter(curso=curso).first()
         curso1 = Curso.objects.create(nombre="Curso prueba", cant_clases=15)
         curso1.profesoras.add(usuaria)
         curso1.alumnas.add(self.usuaria_alumna1)
@@ -425,7 +426,7 @@ class AsistenciaViewTest(InitialData):
         self.client.force_login(user=usuaria)
         response = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id': curso1.id, 'clase_id': clase.id}))
         # self.assertTemplateUsed(response, 'error/403.html')
-        self.assertEquals(response.status_code, 403)
+        self.assertEquals(response.status_code, 404)
         self.client.logout()
         
 
