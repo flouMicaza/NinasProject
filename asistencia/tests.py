@@ -364,7 +364,6 @@ class AsistenciaViewTest(InitialData):
         self.assertContains(response, clase.nombre)
         self.assertContains(response, "Guardar")
         self.assertContains(response, "Asistencia")
-        self.assertContains(response, "Alumna")
 
         for alumna in curso.alumnas.all():
             self.assertContains(response, alumna.first_name + " " + alumna.last_name)

@@ -51,7 +51,6 @@ class Asistencia_GralView(LoginRequiredMixin, View):
         curso_id = kwargs['curso_id']
         usuaria = User.objects.get(username=request.user.username)
         curso = get_cursos(usuaria, curso_id)
-
         if curso != None and not usuaria.es_alumna:
             clases_totales = Clase.objects.filter(curso=curso).order_by('id')
             asistencias = Asistencia.objects.filter(clase__curso=curso).order_by('clase_id')
@@ -102,7 +101,7 @@ def get_form(request,**kwargs):
     curso = get_cursos(usuaria, curso_id)       ## entrega el curso si la persona tiene acceso
     clase = get_clases(curso_id, clase_id)      ## entrega la clase si corresponde al curso
 
-    if curso == None:
+    if curso != None or not usuaria.es_alumna:
         return HttpResponseForbidden("No tienes permiso para pasar asistencia en este curso.")
 
     elif clase == None:
