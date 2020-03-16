@@ -11,7 +11,7 @@ from clases.models import Clase
 from cursos.models import Curso
 from usuarios.models import User
 
-
+#Vista padre de los cursos
 class CursosView(LoginRequiredMixin, View):
     login_url = 'usuarios:login'
     redirect_field_name = ''
