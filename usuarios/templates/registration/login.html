@@ -1,5 +1,5 @@
 {% load static %}
-{% load compress %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,9 +10,9 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <title>{% block title %}Niñas Pro Proyecto{% endblock %}</title>
-        {% compress css %}
+
         <link type="text/x-scss" href="{% static 'usuarios/css/style.scss' %}" rel="stylesheet" media="screen">
-        {% endcompress %}
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     </head>

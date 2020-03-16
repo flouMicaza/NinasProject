@@ -1,0 +1,11 @@
+<!--{% for alumna in curso.alumnas.all %}
+                  <tr>
+                    <td>
+                        <label>
+                            <input id=alumna.id type="checkbox" name="asistencia_alumna" value=0/>
+                            <span>{{alumna.first_name}}  {{alumna.last_name}}</span>
+                        </label>-->
+
+                    <!--</td>
+                  </tr>-->
+                {% endfor %}

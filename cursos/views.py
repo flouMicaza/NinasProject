@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import View
 
+from asistencia.utils import clases_asistencias_alumna, porcentaje_asistencia, Clase
 from clases.models import Clase
 from cursos.models import Curso
 from usuarios.models import User
@@ -30,41 +31,37 @@ class CursosView(LoginRequiredMixin, View):
             cursos = Curso.objects.filter(alumnas__in=[usuaria])
         return list(cursos)
 
-    """
-    
-    Método que entrega las clases asociadas a un curso, según el tipo de usuario. 
-    :param curso: curso que se está buscando.
-    :param username: usuario que está conectado. 
-    """
-
-    def get_clases(self, curso, username):
-        usuaria = User.objects.get(username=username)
-        if usuaria.es_profesora:
-            clases = Clase.objects.filter(curso__in=[curso])
-        else:
-            clases = Clase.objects.filter(curso__in=[curso], publica=True)
-        return list(clases)
-
 
 class CursoView(CursosView):
 
-    def get(self, request, **kwargs, ):
+    def get(self, request, **kwargs ):
         curso_id = kwargs['curso_id']
         curso = get_object_or_404(Curso, pk=curso_id)
+
         if curso in self.get_cursos(request.user.username):
-            clases = self.get_clases(curso, request.user.username)
+            usuaria = request.user
+            clases_totales = Clase.objects.filter(curso=curso)
+            clases_asistencias = clases_asistencias_alumna(usuaria=usuaria, curso=curso)
+
             return render(request, 'cursos/inicio_curso.html', {
                 'curso': curso,
-                'clases': clases
-            })
+                'usuaria': usuaria,
+                'clases' : clases_totales,
+                'porcentaje_asistencia': porcentaje_asistencia(usuaria=usuaria, curso=curso),
+                'clases_asistencias': clases_asistencias,
+                'nro_clases_totales': max(len(clases_totales), curso.cant_clases),
+                'nro_clases_realizadas': len(clases_asistencias)
+
+        })
         else:
             return HttpResponseForbidden("No tienes permiso para acceder a este curso.")
+
 
 
 class MisCursosView(CursosView):
 
     def get(self, request):
-        if request.user.es_profesora or request.user.es_voluntaria:
+        if request.user.es_profesora  or request.user.es_voluntaria :
             cursos = self.get_cursos(request.user.username)
             return render(request, 'cursos/mis_cursos.html', {'cursos': cursos})
         else:

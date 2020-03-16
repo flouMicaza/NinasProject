@@ -1,15 +1,189 @@
-
 $primary-color: #FF5252 !default;
 $hover-color:  #FF8A80;
+$present_color: #FCFFD1;
+$absent-color: #FECCC4;
+$x-color: #B32727;
+$check-color: #15B342;
 
-.btn-large {
+.btn, .btn-large, .btn-small {
   background-color: $primary-color;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+
 }
 
-.btn-large:hover {
+.btn:hover {
   background-color: $hover-color;
 }
 
 nav {
   background-color: $primary-color;
 }
+
+
+table {
+  border-collapse:collapse;
+}
+
+
+td, th {
+    padding: 10px;
+    border-bottom: 2px solid $hover-color;
+    text-align: center;
+}
+
+.tabla-asistencia-alumna {
+    table-layout: fixed;
+    width: 80%;
+    
+}
+
+.container-tabla-asist-gral {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position:relative;
+    margin-left:0%;
+    margin-top: 3%;
+    margin-block-end: 10%;
+}
+
+.tabla-asist-gral .sticky-left{
+    position: sticky;
+    left: 0;
+    background-color: white;
+}
+
+
+.tabla-asist-gral .sticky-right-first {
+  position: sticky;
+  right: 74px;
+  background-color: white;
+}
+
+.tabla-asist-gral .sticky-right-last {
+  position: sticky;
+  right: 0;
+  background-color: white;
+}
+
+.list {
+    margin-top: 10px;
+}
+
+
+.nombre-checkbox {
+    font-size:large;
+    color:#000000e6;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+
+}
+.checkbox-indigo[type="checkbox"] + label:before{
+  border: 2px $primary-color;
+  background: transparent;
+}
+
+
+.icon-red {
+    color: $x-color;
+}
+
+.icon-green {
+    color: $check-color;
+}
+
+.modulo-asistencia{
+    margin-top: 5%;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.progress {
+    background-color: #bfc8fbb3;
+    transform: scale(1, 2);
+}
+
+.progress .determinate {
+    background-color: #8697f3;
+}
+
+.text {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+}
+
+
+.flex-container-asistencia {
+  display: flex;
+  flex-direction:row;
+  flex-wrap:nowrap;
+  justify-content:flex-start;
+  align-items:center;
+  margin-top:20px;
+}
+
+.flex-center {
+             display: flex;
+             flex-direction: row;
+             align-items: center;
+             justify-content: center;
+         }
+
+div.dataTables_wrapper {
+  width: 100%;
+  margin: 0 auto,
+}
+
+
+
+
+#tooltip
+{
+    text-align: center;
+    color: #fff;
+    background: #111;
+    position: absolute;
+    z-index: 100;
+    padding: 15px;
+}
+
+    #tooltip:after /* triangle decoration */
+    {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #111;
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        margin-left: -10px;
+    }
+
+        #tooltip.top:after
+        {
+            border-top-color: transparent;
+            border-bottom: 10px solid #111;
+            top: -20px;
+            bottom: auto;
+        }
+
+        #tooltip.left:after
+        {
+            left: 10px;
+            margin: 0;
+        }
+
+        #tooltip.right:after
+        {
+            right: 10px;
+            left: auto;
+            margin: 0;
+        }
+
+      

@@ -20,17 +20,17 @@ class IndexView(LoginRequiredMixin, View):
         if request.user.es_profesora or request.user.es_voluntaria:
             return HttpResponseRedirect(reverse('cursos:mis_cursos'))
         elif request.user.es_alumna:
-            curso_id = self.get_id_curso_estudiante(request.user.username)
-            return HttpResponseRedirect(reverse('cursos:curso', args={curso_id}))
+            curso_id = self.get_curso_estudiante(request.user.username)
+            return HttpResponseRedirect(reverse('cursos:curso', args={curso_id: curso_id}))
         else:
             return render(request, 'cursos/pagina_error.html', {
                 'error_message': "El usuario no tiene tipo"
             })
 
-    def get_id_curso_estudiante(self, username):
-        usuaria = User.objects.get(username=username)
-        curso = Curso.objects.get(alumnas__in=[usuaria])
-        return curso.id
+    def get_curso_estudiante(self, username):
+        usuaria = User.objects.filter(username=username)
+        cursos = Curso.objects.filter(alumnas__in=usuaria)
+        return cursos[0].id
 
 
 class LoginView(View):

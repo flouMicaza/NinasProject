@@ -1,0 +1,203 @@
+{% extends 'menu.html' %}
+{% load static %}
+{% load django_template_maths %}
+{% block title %}Asistencia{% endblock %}
+
+{% block content %}
+
+    {% if hay_clases and hay_alumnas and hay_asistencias %}     <!-- C++: Basico, FCFM y C++: Básico, UMayor -->
+
+        <div>
+             <h4> Asistencia </h4>
+             <h5> {{curso.nombre}} </h5>
+             <p>Van {{clases_hasta_ahora}} clases de un total de 
+                 {% if clases_hasta_ahora > curso.cant_clases %}
+                    {{clases_hasta_ahora}}
+                {% else %}
+                    {{curso.cant_clases}}
+                {% endif %}.</p>
+        </div>
+
+        <div class="flex-container" style="margin-top: 2%; "> <!-- botones de pasar asistencia y de volver cuando hay tabla-->
+            <!-- BUTTON DE VOLVER -->
+            <div style="align-self:stretch">
+                <div class="material-icons left" style="position:relative;right:0%;">
+                        <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn">
+                                <i class="material-icons left">arrow_back</i>Volver</a>
+                </div>
+            </div>
+
+            <!-- BUTTON DE PASAR ASISTENCIA -->
+            <div >
+                {% if id_prox_clase < 0 %} <!-- disabled porque ya se pasó asistencia en todas-->
+                    <div class="material-icons right" >
+                        <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn" >
+                            <i class="material-icons right" >edit</i>
+                                Modificar Asistencia
+                            </a>
+                    </div>
+                {% else %} <!-- boton activado-->
+                    <div class="material-icons right" >
+                        <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn">
+                            <i class="material-icons right">format_list_bulleted</i>
+                                Pasar Asistencia
+                            </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <!-- TABLA ASIST GRAL -->
+        <div class="container-tabla-asist-gral">
+            <table id= "tabla_asist_gral" class="display tabla-asist-gral">
+                <thead>
+                    <tr>
+                        <th> N° </th>
+
+                        <th class="sticky-left"> Nombre </th>
+                        
+                        <th class="sticky-left"> Apellido </th>
+
+                        {% for clase in clases %}
+                            <th>
+                                <abbr title="{{clase.nombre}}" rel="tooltip"> Clase {{ forloop.counter }} </abbr>
+                            </th>
+                        {% endfor %}
+
+                         <th class="sticky-right-first"> Clases Asistidas </th>
+
+                         <th class="sticky-right-last"> Clases No Asistidas </th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for lista in lista_asistencias %}
+
+                        <tr>
+                            <td> {{ forloop.counter }}</td>
+                            <td class="sticky-left"> {{ lista.0.first_name }}</td>
+                            <td class="sticky-left"> {{ lista.0.last_name }} </td>
+                            {% for bool in lista.1 %}
+
+                                {% if bool %}
+                                    <td>  <i class="material-icons icon-green">check_circle</i> </td>
+
+
+                                {% else %}
+                                    <td>  <i class="material-icons icon-red">cancel</i> </td>
+
+
+                                {% endif %}
+
+                            {% endfor %}
+
+
+                            <td class="sticky-right-first"> {{ lista.2 }} </td>
+                            <td class="sticky-right-last"> {{clases_hasta_ahora|sub:lista.2}} </td>
+
+                                {% endfor %}
+                </tbody>
+                        
+                        <tfoot>
+                        
+                            <tr>
+                                <th>  </th>
+                                
+                                <th class="sticky-left"> Alumnas por clase </th>
+                                
+                                <td>  </td>
+                                {% for total in total_por_clase %}
+                                
+                                <td> {{ total }} </td>
+                                
+                                {% endfor %}
+                                
+                                <td>  </td>
+                                
+                            </tr>
+                            
+                        </tfoot>
+
+                </table>
+        </div>
+
+
+    {% elif hay_clases and hay_alumnas %} <!-- Progra UAndes -->
+
+        <div>
+            <h3 style="text-align:center;margin-top:30px;">¡Ups!    Aún no se ha pasado asistencia para este curso.</h3>
+            <div style="text-align:center;margin-top:10%"><img src="{% static 'images/escribir.png' %}" alt="gatito que pasa asistencia" style="width:300px;"></div>
+        </div>
+
+        <!-- boton de pasar asistencia:-->
+        <div class="flex-center">
+                <div class="material-icons left">
+                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn ">
+                        <i class="material-icons right">format_list_bulleted</i>
+                            Pasar asistencia
+                        </a>
+                </div>
+        </div>
+        <!-- boton de volver: -->
+        <div class="flex-center">
+            <div class="material-icons left">
+                <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn" style="margin-top: 25px;">
+                        <i class="material-icons left">arrow_back</i>Volver</a>
+            </div>
+        </div>
+
+
+
+
+    {% else %}
+
+        <div>
+
+        <!-- no hay clases y no hay alumnas -->
+        {% if not hay_clases and not hay_alumnas %}      <!-- C++: Medio -->
+            <h2 style="text-align:center;">Este curso no tiene clases ni alumnas!</h2>
+            <div style="text-align:center;"><img src="{% static 'images/error_kitten.png' %}" alt="gatito del mensaje de error" style="width:300px;"></div>
+
+            <p style="text-align:center;margin-top:5%;">Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas y alumnas inscritas.</p>
+
+        <!-- no hay clases y hay alumnas -->
+        {% elif not hay_clases and hay_alumnas %}   <!-- Progra Antofa -->
+
+            <h2 style="text-align:center;">Este curso no tiene clases!</h2>
+            <div style="text-align:center;margin-top:5%;"><img src="{% static 'images/error_kitten.png' %}" alt="gatito del mensaje de error" style="width:300px;"></div>
+
+            <p style="text-align:center;">Para mostrar el historial de asistencia es necesario que el curso tenga clases creadas.</p>
+
+
+        <!-- hay clases y no hay alumnas -->
+        {% elif hay_clases and not hay_alumnas %}       <!-- C++: Avanzado -->
+
+            <h2 style="text-align:center;">Este curso no tiene alumnas!</h2>
+            <div style="text-align:center;margin-top:5%"><img src="{% static 'images/error_kitten.png' %}" alt="gatito del mensaje de error" style="width:300px;"></div>
+
+            <p style="text-align:center;">Para mostrar el historial de asistencia es necesario que el curso tenga alumnas inscritas.</p>
+
+        {% endif %}
+
+            <p style="text-align:center;">Habla con la coordinadora del curso para solucionar el problema :)</p>
+
+        </div>
+        <div class="flex-center">
+            <div class="material-icons left">
+                <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn" style="margin-top: 25px;">
+                        <i class="material-icons left">arrow_back</i>Volver</a>
+            </div>
+        </div>
+
+
+   {% endif %} <!-- cierra el if hay clases and hay asistencias and hay alumnas-->
+
+{% endblock %}
+
+{% block scripts %}
+    <script src={% static 'js/scripts.js' %}></script>
+
+{% endblock %}

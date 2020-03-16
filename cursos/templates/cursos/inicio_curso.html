@@ -5,9 +5,100 @@
 
 {% block content %}
     <h1>{{ curso.nombre }}</h1>
+    {% if usuaria.es_alumna %}
+
+        <div class="modulo-asistencia">
+
+
+            <div class="flex-container">
+
+                <!-- TÍTULO ASISTENCIA -->
+                <div>
+                    <h4> Asistencia </h4>
+                </div>
+
+                <!-- MODAL -->
+                <div>
+                    <!-- Modal Trigger -->
+                    <div>
+                        <div class="material-icons right">
+                            <a href="#modal1" class="waves-effect waves-light btn-small btn modal-trigger"> <i class="material-icons right">search</i> Ver Detalle </a>
+                        </div>
+                    </div>
+
+                    <!-- Modal Structure -->
+                    <div id="modal1" class="modal">
+
+                                <div class="modal-content">
+
+                                  <h4>Tu Asistencia</h4>
+
+                                    <p> Se han desarrollado {{nro_clases_realizadas}} clases de un total de {{nro_clases_totales}}. </p>
+
+                                    <center>
+                                        <table class="highlight tabla-asistencia-alumna">
+                                            <thead>
+                                              <tr>
+                                                <th> Clase </th>
+                                                <th> Asistio </th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for lista in clases_asistencias %}
+                                                    <tr>
+                                                        <td> {{lista.0.nombre}} </td>
+                                                        {% if lista.1 %}
+                                                            <td>  <i class="material-icons icon-green">check</i> </td>
+                                                        {% else %}
+                                                            <td>  <i class="material-icons icon-red">clear</i> </td>
+                                                        {% endif %}
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+
+                                        </table>
+                                    </center>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <div class="material-icons right">
+                                        <a href="" class="modal-action modal-close waves-effect waves-light btn-small btn">
+                                            <i class="material-icons right">check</i>Ok</a>
+                                    </div>
+                                </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row flex-container">
+                <div class="col s10">
+                    <div class="progress">
+                        <div class="determinate" style=" width: {{porcentaje_asistencia}}%"></div>
+                    </div>
+                </div>
+
+                <div class="col s1" style="font-size:larger;">
+                    {{ porcentaje_asistencia }}%
+                </div>
+
+                <div class="col s1"></div>
+            </div>
+
+
+        </div>
+
+
+
+
+
+        {% endif %}
 
     <ul class="collection">
-    {% if clases %}
+        {% if clases %}
         {% for clase in clases %}
             <li class="collection-item" >
                 <div id="clase_{{ clase.id }}" >
@@ -20,25 +111,27 @@
                          </a>
                     {% endif %}
                 </div>
-                <div style = "display:none" id="clase_edit_{{ clase.id }}">
+                {% if user.es_profesora %}
+                    <div style = "display:none" id="clase_edit_{{ clase.id }}">
 
-                        <div class="input-field ">
-                            <i class="material-icons prefix">mode_edit</i>
-                            <input value={{ clase.nombre }}  type='text' class='validate'><label class='active' for='clase_edit_" + id_clase + "'>Clase {{ forloop.counter }} :</label>
-                        </div>
-                        <div class="switch" style="align-self: start">
-                            <label>
-                                Pública
-                                <input type="checkbox">
-                                <span class="lever"></span>
-                            </label>
-                            <div>
-                            <a class="waves-effect waves-light btn" style="align-self: end">Guardar</a>
-                        </div>
-                        </div>
+                            <div class="input-field ">
+                                <i class="material-icons prefix">mode_edit</i>
+                                <input value={{ clase.nombre }}  type='text' class='validate'><label class='active' for='clase_edit_" + id_clase + "'>Clase {{ forloop.counter }} :</label>
+                            </div>
+                            <div class="switch" style="align-self: start">
+                                <label>
+                                    Pública
+                                    <input type="checkbox">
+                                    <span class="lever"></span>
+                                </label>
+                                <div>
+                                    <a class="waves-effect waves-light btn" style="align-self: end">Guardar</a>
+                                </div>
+                            </div>
 
 
-                </div>
+                    </div>
+                {% endif %}
             </li>
         {% endfor %}
     {% else %}
@@ -55,8 +148,7 @@
         </li>
     {% endif %}
     </ul>
-{% endblock %}
-
+{% endblock %}\
 
 {% block scripts %}
     <script src={% static 'js/scripts.js' %}></script>

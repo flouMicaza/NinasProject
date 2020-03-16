@@ -13,6 +13,12 @@
             <link type="text/x-scss" href="{% static 'scss/style.scss' %}" rel="stylesheet" media="screen">
         {% endcompress %}
 
+        <!--Importar jquery primero, luego materialize js, luego css de datatables y finalmente js de datatables -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"></link>
+        <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
     </head>
     <body >
         <main>
@@ -26,8 +32,7 @@
 
         </main>
     </body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
     {% block scripts %}
     {% endblock %}
 </html>

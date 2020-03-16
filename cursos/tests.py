@@ -3,7 +3,7 @@ from django.test import TestCase, Client, LiveServerTestCase, selenium
 
 # Create your tests here.
 from django.urls import reverse
-from selenium.webdriver.chrome.webdriver import WebDriver
+#from selenium.webdriver.chrome.webdriver import WebDriver
 
 from cursos.models import Curso
 from cursos.views import MisCursosView

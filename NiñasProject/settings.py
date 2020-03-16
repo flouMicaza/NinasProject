@@ -35,14 +35,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_template_maths',
     'usuarios',
     'compressor',
     'cursos',
     'coordinacion',
-    'clases',
-    # 'Selenium_test',
-
-
+    'asistencia',
+    'clases'
 ]
 
 MIDDLEWARE = [
@@ -137,6 +136,10 @@ STATICFILES_FINDERS = (
     )
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 
 #STATIC_ROOT = 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
