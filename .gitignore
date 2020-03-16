@@ -143,3 +143,5 @@ pip-selfcheck.json
 
 static/CACHE/
 staticfiles/CACHE
+
+.vscode/
