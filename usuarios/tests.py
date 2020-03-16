@@ -120,7 +120,7 @@ class IndexTest(InitialData):
     def test_get_curso_estudiante(self):
         curso_id = self.curso_basico.id
         index_view = IndexView()
-        self.assertEquals(index_view.get_id_curso_estudiante(username=self.usuaria_alumna.username), curso_id)
+        self.assertEquals(index_view.get_curso_estudiante(username=self.usuaria_alumna.username), curso_id)
 
 
 class UserModelTest(InitialData):

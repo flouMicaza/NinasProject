@@ -84,7 +84,7 @@ class CursoViewTest(InitialData,TestCase):
     def test_vista_inicio_estudiante(self):
         self.client.force_login(user=self.usuaria_estudiante)
 
-        curso_id = self.index_view.get_id_curso_estudiante(username=self.usuaria_estudiante.username)
+        curso_id = self.index_view.get_curso_estudiante(username=self.usuaria_estudiante.username)
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': curso_id}))
         self.assertTemplateUsed(response, 'cursos/inicio_curso.html')
         self.assertContains(response, 'C++: Básico')
