@@ -105,7 +105,7 @@
                         Clase {{ forloop.counter }}: {{ clase.nombre }}
                         <div class="problema prueba">
                             {% for problema in clase.problemas.all %}
-                                <a href="{% url 'problemas:detalle' problema_id=problema.id %}">{{ problema }}</a> 
+                                <a href="{% url 'problemas:detalle-problema' curso_id=curso.id problema_id=problema.id%}">{{ problema }}</a>
                             {% endfor %}
                         </div>
                         {% if user.es_profesora %}

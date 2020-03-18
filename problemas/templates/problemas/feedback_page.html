@@ -1,0 +1,15 @@
+{% extends 'menu.html' %}
+{% load static %}
+{% block title %}{{ curso.nombre }}{% endblock %}
+
+
+{% block content %}
+    <h1>{{ curso.nombre }}</h1>
+    Usuario : {{ feedback_user }}
+    Feedback assignement : {{ feedback_assignement }}
+    Feedback date : {{ feedback_date }}
+    {% for test in test_array %}
+
+        <p>{{ test }}</p>
+    {% endfor %}
+{% endblock %}

@@ -9,5 +9,5 @@ from problemas import views
 app_name = 'problemas'
 
 urlpatterns = [
-    path('<int:problema_id>/problema/', views.ProblemasViews.as_view(), name='detalle'),
+    path('<int:curso_id>/curso/<int:problema_id>/problema/', views.ProblemasViews.as_view(), name='detalle-problema'),
 ] +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
