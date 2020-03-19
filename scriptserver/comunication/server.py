@@ -56,7 +56,6 @@ class Server:
                                                             "Invalid or corrupted tests file. Please contact a "
                                                             "teacher of assistant of the course of this assignment to "
                                                             "fix this error.")
-
         script = self.script_dict[lang](path_script)
 
         # print("Sending data to scheduler...")
@@ -68,6 +67,7 @@ class Server:
 
         reply_arr = []
 
+        #Procesamiento de los test. Aquí se define el array que le entrega al cliente.
         for result in results:
             # Unpack info
             passed = int(result[0])  # 1 byte

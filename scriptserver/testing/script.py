@@ -1,4 +1,4 @@
-from subprocess import Popen, PIPE, TimeoutExpired
+from subprocess import Popen, PIPE, TimeoutExpired, call
 
 script_dict = {}
 
@@ -64,3 +64,14 @@ class Python2Script(Script):
 
     def get_process(self):
         return Popen(['python', self.path], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+
+
+script_dict["cpp"] = lambda path: (CppScript(path))
+class CppScript(Script):
+
+    def __init__(self,path):
+        Script.__init__(self,path)
+
+    def get_process(self):
+        call(['g++','-std=c++11',self.path,'-o','hola.o'])
+        return Popen(['./hola.o'],stdin=PIPE,stdout=PIPE,stderr=PIPE)

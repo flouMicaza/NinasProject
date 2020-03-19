@@ -50,8 +50,8 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         data = request.POST.copy()
 
         # Get language and file from data
-        lang = 'python3'
-        file = request.FILES.get('sample_code')
+        lang = 'cpp'
+        file = request.FILES.get('sample_code') #Archivo que quiero testear
 
         # If the user didn´t uploaded a file it sends the user back to the same page
         if file == None:
@@ -66,12 +66,13 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         test_path = problema.tests.path.replace("\\", "/")
 
         if data["submission_type"] == "single":
-
-            # Send and receive data for testing
+            print(script_path,'', test_path)
+            # Send and receive data for testing.
             response = ComunicationClient.send_submission(script_path, test_path, lang)
 
             # Delete the source code file from the media folder
-            os.remove('media/' + filename)
+            #os.remove('media/' + filename)
+
 
             if response[0] == "success":
                 return self.handle_successful_single_response(request, problema, response[1], **kwargs)
@@ -108,5 +109,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         this_context['test_array'] = tests_arr
         return render(request, self.feedback_template_name, this_context)
 
-    def handle_failed_single_response(self,request):
-        return render(request,self.feedback_error_template_name)
+    def handle_failed_single_response(self,request,error,**kwargs):
+        this_context = self.get_context_data(**kwargs)
+        this_context['error'] = error
+        return render(request, self.feedback_error_template_name, this_context)
