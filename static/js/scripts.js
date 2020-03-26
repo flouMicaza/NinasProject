@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 
-
 //modal asistencia de un curso (para una alumna)
 $(document).ready(function(){
 
