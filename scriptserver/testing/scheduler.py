@@ -89,7 +89,7 @@ class SchedulerSlave(Thread):
     def run_script(self):
         try:
             results = self.tester.test_script(self.script)
-        except:
+        except Exception as e: #TODO: Aqui podría ser que puedo agarrar el error de compilación
             return self.server.error_slave.add_submission_to_queue(self.submission_id, "Error occured while testing script. Please try again later.")
 
         if len(results) > 0:

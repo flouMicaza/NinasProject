@@ -13,6 +13,7 @@ from cursos.models import Curso
 from problemas.models import Problema
 
 from scriptserver.comunication.client import Client
+from scriptserver.util import get_file_name
 
 ComunicationClient = Client()
 
@@ -59,24 +60,28 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
 
         # Save the file in the media folder
         fs = FileSystemStorage()
-        filename = fs.save(file.name, file)
+        filename = fs.save("solucion" + request.user.username + '.cpp', file) #TODO: parsear el nombre del archivo para sacar el formato.
 
         # get the path from the media folder
         script_path = os.getcwd().replace("\\", "/") + "/media/" + filename
         test_path = problema.tests.path.replace("\\", "/")
 
         if data["submission_type"] == "single":
-            print(script_path,'', test_path)
             # Send and receive data for testing.
             response = ComunicationClient.send_submission(script_path, test_path, lang)
 
-            # Delete the source code file from the media folder
-            #os.remove('media/' + filename)
-
+            compiled_file = filename.split('.')[0]
+            print(compiled_file)
+            # Delete compiled file
+            try:
+                os.remove(compiled_file) #TODO: Poner el nombre ofical que tendrá el archivo compilado.o
+            except:
+                pass
 
             if response[0] == "success":
                 return self.handle_successful_single_response(request, problema, response[1], **kwargs)
             else:
+                os.remove(script_path)
                 return self.handle_failed_single_response(request, response[1], **kwargs)
 
         elif data["submission_type"] == "multiple":

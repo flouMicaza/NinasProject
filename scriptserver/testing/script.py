@@ -1,5 +1,5 @@
 from subprocess import Popen, PIPE, TimeoutExpired, call
-
+from ..util import *
 script_dict = {}
 
 
@@ -73,5 +73,10 @@ class CppScript(Script):
         Script.__init__(self,path)
 
     def get_process(self):
-        call(['g++','-std=c++11',self.path,'-o','hola.o'])
-        return Popen(['./hola.o'],stdin=PIPE,stdout=PIPE,stderr=PIPE)
+        try:
+            file_name = get_file_name(self.path)
+            call(['g++','-std=c++11',self.path,'-o',file_name])
+        except Exception as e:
+            print("Excepcion porque esta malooooo en script",e) #TODO: Revisar que exception quiero mostras y como lidiar con ellas.
+
+        return Popen(['./' + file_name], stdin=PIPE, stdout=PIPE, stderr=PIPE)
