@@ -95,9 +95,6 @@ td, th {
     color: $check-color;
 }
 
-.modulo-asistencia{
-    margin-top: 5%;
-}
 
 .flex-container {
   display: flex;
@@ -190,3 +187,8 @@ div.dataTables_wrapper {
         }
 
       
+.title-and-button {
+  display: flex ;
+  justify-content:space-between;
+  align-items: baseline;
+}
