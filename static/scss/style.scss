@@ -5,6 +5,9 @@ $absent-color: #FECCC4;
 $x-color: #B32727;
 $check-color: #15B342;
 
+.container {
+  margin-top: 2em;
+}
 .btn, .btn-large, .btn-small {
   background-color: $primary-color;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
