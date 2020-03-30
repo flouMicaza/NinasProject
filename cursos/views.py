@@ -5,8 +5,9 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.urls import reverse
 from django.views import View
-
+from django.forms import modelform_factory, HiddenInput
 from asistencia.utils import clases_asistencias_alumna, porcentaje_asistencia, Clase
+
 from clases.models import Clase
 from cursos.models import Curso
 from usuarios.models import User
@@ -43,7 +44,7 @@ class CursoView(CursosView):
             clases_totales = Clase.objects.filter(curso=curso)
             clases_asistencias = clases_asistencias_alumna(usuaria=usuaria, curso=curso)
 
-            return render(request, 'cursos/inicio_curso.html', {
+            parameters = {
                 'curso': curso,
                 'usuaria': usuaria,
                 'clases' : clases_totales,
@@ -51,12 +52,23 @@ class CursoView(CursosView):
                 'clases_asistencias': clases_asistencias,
                 'nro_clases_totales': max(len(clases_totales), curso.cant_clases),
                 'nro_clases_realizadas': len(clases_asistencias)
-
-        })
+            }
+            return render(request, 'cursos/inicio_curso.html', parameters)
         else:
             return HttpResponseForbidden("No tienes permiso para acceder a este curso.")
 
+    def post(self, request,**kwargs):
+        id_clase = request.POST['id_clase']
+        clase_edit = Clase.objects.get(id=id_clase)
+        if request.POST.get('publica'):
+            clase_edit.publica = True
+        else:
+            clase_edit.publica = False
 
+        if request.POST.get('nombre'):
+            clase_edit.nombre = request.POST['nombre']
+        clase_edit.save()
+        return HttpResponseRedirect(reverse('cursos:curso',kwargs=kwargs))
 
 class MisCursosView(CursosView):
 

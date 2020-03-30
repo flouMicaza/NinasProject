@@ -103,38 +103,45 @@
                 <li class="collection-item" >
                     <div id="clase_{{ clase.id }}" >
                         Clase {{ forloop.counter }}: {{ clase.nombre }}
+                        {% if user.es_profesora %}
+                                 <a class="secondary-content" onclick="editar_clase({{ clase.id }})">
+                                     <span class="editar-badge badge" data-badge-caption="Editar clase">
+                                         <i class="tiny material-icons">create</i>
+                                     </span>
+                                 </a>
+                            {% endif %}
                         <div class="problema prueba">
                             {% for problema in clase.problemas.all %}
                                 <a href="{% url 'problemas:detalle-problema' curso_id=curso.id problema_id=problema.id%}">{{ problema }}</a>
                             {% endfor %}
                         </div>
-                        {% if user.es_profesora %}
-                             <a href="#!" class="secondary-content" onclick="editar_clase({{ clase.id }})">
-                                 <span class="editar-badge badge" data-badge-caption="Editar clase">
-                                     <i class="tiny material-icons">create</i>
-                                 </span>
-                             </a>
-                        {% endif %}
+
                     </div>
                     {% if user.es_profesora %}
                         <div style = "display:none" id="clase_edit_{{ clase.id }}">
-
+                            <form method="post" action="">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ clase.id }}" name="id_clase">
                                 <div class="input-field ">
                                     <i class="material-icons prefix">mode_edit</i>
-                                    <input value={{ clase.nombre }}  type='text' class='validate'><label class='active' for='clase_edit_" + id_clase + "'>Clase {{ forloop.counter }} :</label>
+                                    <input value="{{ clase.nombre }}"  type='text' class='validate' name="nombre">
+                                    <label class='active' for='clase_edit_" + id_clase + "'>Clase {{ forloop.counter }} :</label>
                                 </div>
                                 <div class="switch" style="align-self: start">
                                     <label>
-                                        Pública
-                                        <input type="checkbox">
-                                        <span class="lever"></span>
+                                        {% if clase.publica %}
+                                            <input type="checkbox" name="publica" class="filled-in" checked="checked" />
+                                        {% else %}
+                                            <input type="checkbox" name="publica" class="filled-in" />
+                                        {% endif %}
+                                        <span>Pública</span>
                                     </label>
                                     <div>
-                                        <a class="waves-effect waves-light btn" style="align-self: end">Guardar</a>
+                                        <button type="submit"  class="waves-effect waves-light btn-small btn" style="align-self: end">Guardar</button>
                                     </div>
                                 </div>
 
-
+                            </form>
                         </div>
                     {% endif %}
             </li>
@@ -142,14 +149,7 @@
     {% else %}
         <li class="collection-item">
             No hay clases disponibles para este curso.
-            <div class="switch secondary-content ">
-                            <label class="switch-label">
-                              Pública
-                              <input type="checkbox">
-                              <span class="lever"></span>
 
-                            </label>
-                          </div>
         </li>
     {% endif %}
     </ul>

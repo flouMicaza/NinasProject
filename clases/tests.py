@@ -89,11 +89,13 @@ class ClasesEnCursoTest(InitialData):
         self.client.force_login(user=self.usuaria_voluntaria)
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_basico.id}))
         self.assertNotContains(response, 'editar')
+        self.assertNotContains(response, 'guardar')
 
     def test_alumna_no_puede_editar(self):
         self.client.force_login(user=self.usuaria_alumna)
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_basico.id}))
         self.assertNotContains(response, 'editar')
+        self.assertNotContains(response, 'guardar')
 
     def test_curso_sin_clases(self):
         self.client.force_login(user=self.usuaria_voluntaria)
@@ -101,3 +103,4 @@ class ClasesEnCursoTest(InitialData):
         self.assertContains(response,"No hay clases disponibles para este curso.")
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_avanzado.id}))
         self.assertNotContains(response, "No hay clases disponibles para este curso.")
+
