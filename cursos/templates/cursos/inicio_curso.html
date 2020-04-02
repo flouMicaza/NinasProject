@@ -116,24 +116,17 @@
                         <div id="clase_{{ clase.id }}" class="publica{{ clase.publica }} collection-info">
                             <span>Clase {{ forloop.counter }}: {{ clase.nombre }}</span>
                             <div style="display: flex;">
-                            {% if user.es_profesora %}
+                                {% if user.es_profesora %}
                                     {% if clase.publica %} <p class="">Publicada</p>
                                     {% else %} <p>No publicada</p>
                                     {% endif %}
-                            {% endif %}
-                                <a class="" onclick="editar_clase({{ clase.id }})">
-                                    <i class="tiny material-icons">create</i>
-                                </a>
-                            </div>
 
+                                    <a class="" onclick="editar_clase({{ clase.id }})">
+                                        <i class="tiny material-icons">create</i>
+                                    </a>
+                                {% endif %}
+                            </div>
                         </div>
-                            <div class="problema prueba">
-                                {% for problema in clase.problemas.all %}
-                                    <a href="{% url 'problemas:detalle-problema' curso_id=curso.id problema_id=problema.id%}">{{ problema }}</a>
-
-                                {% endfor %}
-                            </div>
-
                         {% if user.es_profesora %}
                             <div style = "display:none" id="clase_edit_{{ clase.id }}">
                                 <form method="post" action="">
@@ -147,9 +140,9 @@
                                     <div class="switch" style="align-self: start">
                                         <label>
                                             {% if clase.publica %}
-                                                <input type="checkbox" name="publica" class="filled-in" checked="checked" />
+                                                <input type="checkbox" name="publica"  checked="checked" />
                                             {% else %}
-                                                <input type="checkbox" name="publica" class="filled-in" />
+                                                <input type="checkbox" name="publica"/>
                                             {% endif %}
                                             <span>Pública</span>
                                         </label>
@@ -160,6 +153,11 @@
                                 </form>
                             </div>
                         {% endif %}
+                        <div class="problema prueba">
+                            {% for problema in clase.problemas.all %}
+                                <a href="{% url 'problemas:detalle-problema' curso_id=curso.id problema_id=problema.id%}">{{ problema }}</a>
+                            {% endfor %}
+                        </div>
                     </li>
                 {% endif %}
             {% endfor %}
