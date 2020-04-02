@@ -15,13 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //modal asistencia de un curso (para una alumna)
 $(document).ready(function(){
-    window.setTimeout(function(){
-        $("#alert_box").fadeOut( "slow", function() {
-            console.log("timeouttttt")
-            });
-    },300)
+    $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
     $('select').not('.disabled').formSelect();
-  $('.modal').modal();
+    $('.modal').modal();
 
     $('#tabla_asist_gral').DataTable({
         scrollX: true,

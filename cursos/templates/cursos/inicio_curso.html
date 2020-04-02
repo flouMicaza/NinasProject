@@ -111,58 +111,63 @@
     <ul class="collection">
         {% if clases %}
             {% for clase in clases %}
-                <li class="collection-item" >
-                    <div id="clase_{{ clase.id }}" >
-                        Clase {{ forloop.counter }}: {{ clase.nombre }}
-                        {% if user.es_profesora %}
-                                 <a class="secondary-content" onclick="editar_clase({{ clase.id }})">
-                                     <span class="editar-badge badge" data-badge-caption="Editar clase">
-                                         <i class="tiny material-icons">create</i>
-                                     </span>
-                                 </a>
+                {% if clase.publica or not usuaria.es_alumna %}
+                    <li class="collection-item " >
+                        <div id="clase_{{ clase.id }}" class="publica{{ clase.publica }} collection-info">
+                            <span>Clase {{ forloop.counter }}: {{ clase.nombre }}</span>
+                            <div style="display: flex;">
+                            {% if user.es_profesora %}
+                                    {% if clase.publica %} <p class="">Publicada</p>
+                                    {% else %} <p>No publicada</p>
+                                    {% endif %}
                             {% endif %}
-                        <div class="problema prueba">
-                            {% for problema in clase.problemas.all %}
-                                <a href="{% url 'problemas:detalle-problema' curso_id=curso.id problema_id=problema.id%}">{{ problema }}</a>
-                            {% endfor %}
-                        </div>
+                                <a class="" onclick="editar_clase({{ clase.id }})">
+                                    <i class="tiny material-icons">create</i>
+                                </a>
+                            </div>
 
-                    </div>
-                    {% if user.es_profesora %}
-                        <div style = "display:none" id="clase_edit_{{ clase.id }}">
-                            <form method="post" action="">
-                                {% csrf_token %}
-                                <input type="hidden" value="{{ clase.id }}" name="id_clase">
-                                <div class="input-field ">
-                                    <i class="material-icons prefix">mode_edit</i>
-                                    <input value="{{ clase.nombre }}"  type='text' class='validate' name="nombre">
-                                    <label class='active' for='clase_edit_" + id_clase + "'>Clase {{ forloop.counter }} :</label>
-                                </div>
-                                <div class="switch" style="align-self: start">
-                                    <label>
-                                        {% if clase.publica %}
-                                            <input type="checkbox" name="publica" class="filled-in" checked="checked" />
-                                        {% else %}
-                                            <input type="checkbox" name="publica" class="filled-in" />
-                                        {% endif %}
-                                        <span>Pública</span>
-                                    </label>
-                                    <div>
-                                        <button type="submit"  class="waves-effect waves-light btn-small btn" style="align-self: end">Guardar</button>
+                        </div>
+                            <div class="problema prueba">
+                                {% for problema in clase.problemas.all %}
+                                    <a href="{% url 'problemas:detalle-problema' curso_id=curso.id problema_id=problema.id%}">{{ problema }}</a>
+
+                                {% endfor %}
+                            </div>
+
+                        {% if user.es_profesora %}
+                            <div style = "display:none" id="clase_edit_{{ clase.id }}">
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{ clase.id }}" name="id_clase">
+                                    <div class="input-field ">
+                                        <i class="material-icons prefix">mode_edit</i>
+                                        <input value="{{ clase.nombre }}"  type='text' class='validate' name="nombre">
+                                        <label class='active' for='clase_edit_" + id_clase + "'>Clase {{ forloop.counter }} :</label>
                                     </div>
-                                </div>
-
-                            </form>
-                        </div>
-                    {% endif %}
+                                    <div class="switch" style="align-self: start">
+                                        <label>
+                                            {% if clase.publica %}
+                                                <input type="checkbox" name="publica" class="filled-in" checked="checked" />
+                                            {% else %}
+                                                <input type="checkbox" name="publica" class="filled-in" />
+                                            {% endif %}
+                                            <span>Pública</span>
+                                        </label>
+                                        <div>
+                                            <button type="submit"  class="waves-effect waves-light btn-small btn" style="align-self: end">Guardar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <li class="collection-item">
+                No hay clases disponibles para este curso.
             </li>
-        {% endfor %}
-    {% else %}
-        <li class="collection-item">
-            No hay clases disponibles para este curso.
-
-        </li>
-    {% endif %}
+        {% endif %}
     </ul>
 {% endblock %}\
 

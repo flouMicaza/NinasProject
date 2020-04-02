@@ -4,6 +4,7 @@ $present_color: #FCFFD1;
 $absent-color: #FECCC4;
 $x-color: #B32727;
 $check-color: #15B342;
+$not-enabled-color: #80868b;
 
 .container {
   margin-top: 2em;
@@ -193,6 +194,11 @@ div.dataTables_wrapper {
   align-items: baseline;
 }
 
+.collection-info {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* label focus color */
    .input-field input[type=text]:not(.browser-default):focus + label {
      color: $primary-color;
@@ -257,4 +263,8 @@ div.dataTables_wrapper {
 /* When moving the mouse over the close button */
 .closebtn:hover {
   color: black;
+}
+
+.publicaFalse {
+  color: $not-enabled-color;
 }

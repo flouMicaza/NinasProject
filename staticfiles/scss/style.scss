@@ -211,12 +211,12 @@ div.dataTables_wrapper {
    }
    /* valid color */
    .input-field input[type=text].valid {
-     border-bottom: 1px solid green;
-     box-shadow: 0 1px 0 0 green;
+     border-bottom: 1px solid $primary-color;
+     box-shadow: 0 1px 0 0 $primary-color;
    }
    .input-field input[type=password].valid {
-     border-bottom: 1px solid green;
-     box-shadow: 0 1px 0 0 green;
+     border-bottom: 1px solid $primary-color;
+     box-shadow: 0 1px 0 0 $primary-color;
    }
 
   [type="checkbox"]:checked + span:not(.lever)::before {
@@ -232,4 +232,33 @@ div.dataTables_wrapper {
     font-size: 20px;
     color: white;
     cursor:pointer;
+}
+
+   /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: $primary-color; 
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+.publicaFalse {
+  background-color: lightgray;
 }
