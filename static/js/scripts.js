@@ -12,10 +12,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 
+
 //modal asistencia de un curso (para una alumna)
 $(document).ready(function(){
-
-  $('.modal').modal();
+    $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
+    $('select').not('.disabled').formSelect();
+    $('.modal').modal();
 
     $('#tabla_asist_gral').DataTable({
         scrollX: true,

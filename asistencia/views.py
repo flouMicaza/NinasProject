@@ -1,18 +1,13 @@
-from datetime import datetime
-from django import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden, HttpResponseNotFound
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.http import HttpResponseRedirect
-from django.forms import formset_factory, modelformset_factory
 
 from NiñasProject.decorators import profesora_required
-from .models import Asistencia
-from clases.models import Clase
-from cursos.models import Curso
+from NiñasProject.utils import get_cursos, get_clases
 from usuarios.models import User
 from .forms import AsistenciaModelFormSet
 from .utils import *

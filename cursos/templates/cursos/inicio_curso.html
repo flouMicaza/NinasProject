@@ -4,11 +4,27 @@
 
 
 {% block content %}
-    <h1>{{ curso.nombre }}</h1>
+    <!-- Mensaje de creación exitosa de curso -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                 <div class="alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                  {{message}}
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class='title-and-button' >
+        <h1>{{ curso.nombre }}</h1>
+        {% if usuaria.es_profesora %}
+            <a href="{% url 'clases:agregar_clase' curso_id=curso.id %}" class="waves-effect waves-light btn-large btn" >Agregar clase</a>
+        {% endif %}
+    </div>
+
     {% if usuaria.es_alumna %}
 
         <div class="modulo-asistencia">
-
 
             <div class="flex-container">
 
@@ -90,12 +106,7 @@
 
 
         </div>
-
-
-
-
-
-        {% endif %}
+    {% endif %}
 
     <ul class="collection">
         {% if clases %}
@@ -156,6 +167,8 @@
 {% endblock %}\
 
 {% block scripts %}
-    <script src={% static 'js/scripts.js' %}></script>
+    <script src={% static 'js/scripts.js' %}>
+
+    </script>
 
 {% endblock %}

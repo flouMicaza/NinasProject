@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_template_maths',
+    'materializecssform',
     'usuarios',
     'compressor',
     'cursos',
@@ -111,6 +112,12 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = 'usuarios.User'
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
+
+#Lineas para poder usar datetime field al crear clase
+from django.conf.global_settings import DATETIME_INPUT_FORMATS
+
+# ISO 8601 datetime format to accept html5 datetime input values
+DATETIME_INPUT_FORMATS += ["%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M"]
 
 LANGUAGE_CODE = 'en-us'
 
