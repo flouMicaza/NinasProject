@@ -2,14 +2,20 @@ import os
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import TemplateView
 
+from NiñasProject.decorators import profesora_required
+from NiñasProject.utils import get_cursos
+from clases.models import Clase
 from cursos.models import Curso
+from problemas.forms import ProblemaForm
 from problemas.models import Problema
 
 from scriptserver.comunication.client import Client
@@ -118,3 +124,17 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         this_context = self.get_context_data(**kwargs)
         this_context['error'] = error
         return render(request, self.feedback_error_template_name, this_context)
+
+
+@method_decorator([profesora_required], name='dispatch')
+class CrearProblemasViews(LoginRequiredMixin,View):
+    def get(self,request,**kwargs):
+        clase_id = kwargs['clase_id']
+        clase=get_object_or_404(Clase.objects.filter(id=clase_id))
+
+
+        if not request.user in clase.curso.profesoras.all():
+            return HttpResponseForbidden("No tienes permiso para ingresar a este curso.")
+
+        form = ProblemaForm()
+        return render(request,'problemas/crear_problema.html',{'clase':clase, 'form':form})

@@ -1,11 +1,9 @@
 from django.forms import ModelForm
-from clases.models import Clase
-
-
-
 
 from django.contrib.admin.widgets import AdminFileWidget
 from django.forms.widgets import HiddenInput, FileInput
+
+from problemas.models import Problema
 
 
 class HTML5RequiredMixin(object):
@@ -23,9 +21,8 @@ class HTML5RequiredMixin(object):
                         self.fields[field].label += ' *'
 
 
-class ClaseForm(HTML5RequiredMixin,ModelForm):
+class ProblemaForm(HTML5RequiredMixin,ModelForm):
 
     class Meta:
-        model = Clase
-        exclude = ['problemas']
-
+        model = Problema
+        exclude = ['source', 'fecha_creacion']

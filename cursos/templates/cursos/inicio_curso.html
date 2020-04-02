@@ -112,8 +112,8 @@
         {% if clases %}
             {% for clase in clases %}
                 {% if clase.publica or not usuaria.es_alumna %}
-                    <li class="collection-item " >
-                        <div id="clase_{{ clase.id }}" class="publica{{ clase.publica }} collection-info">
+                    <li class="collection-item publica{{ clase.publica }}" >
+                        <div id="clase_{{ clase.id }}" class="collection-info">
                             <p><b>Clase {{ forloop.counter }}: {{ clase.nombre }}</b></p>
                             <div style="display: flex;">
                                 {% if user.es_profesora %}
@@ -155,19 +155,18 @@
                         {% endif %}
 
                         <div id="problemas">
-                        <hr class="problemas-line">
-                         <div class="title-and-button">
-                            <p>Problemas de la clase:</p>
-                             <a class="btn-floating waves-effect waves-light btn-small btn" style="display: flex; "><i class="material-icons">add</i></a>
-                         </div>
-                            {% for problema in clase.problemas.all %}
-                                <div class="title-and-button">
-                                    <a href="{% url 'problemas:detalle-problema' curso_id=curso.id problema_id=problema.id%}">{{ problema }}</a>
-                                </div>
-                                <div class="title-and-button"><a href="{% url 'problemas:detalle-problema' curso_id=curso.id problema_id=problema.id%}">{{ problema }}</a></div>
-                                 <div class="title-and-button"><a href="{% url 'problemas:detalle-problema' curso_id=curso.id problema_id=problema.id%}">{{ problema }}</a></div>
-                                 <div class="title-and-button"><a href="{% url 'problemas:detalle-problema' curso_id=curso.id problema_id=problema.id%}">{{ problema }}</a></div>
-                            {% endfor %}
+                            <hr class="problemas-line">
+                             <div class="title-and-button">
+                                <p>Problemas de la clase:</p>
+                                 {% if usuaria.es_profesora %}
+                                    <a href="{%  url 'problemas:crear-problema' clase_id=clase.id%}" class="btn-floating waves-effect waves-light btn-small btn"><i class="material-icons">add</i></a>
+                                 {% endif %}
+                             </div>
+                                {% for problema in clase.problemas.all %}
+                                    <div class="title-and-button">
+                                        <a href="{% url 'problemas:detalle-problema' curso_id=curso.id problema_id=problema.id%}">{{ problema }}</a>
+                                    </div>
+                                {% endfor %}
                         </div>
 
                     </li>
