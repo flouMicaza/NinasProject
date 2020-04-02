@@ -268,3 +268,7 @@ div.dataTables_wrapper {
 .publicaFalse {
   color: $not-enabled-color;
 }
+
+hr.problemas-line {
+  border: 1px dotted $hover-color;
+}
