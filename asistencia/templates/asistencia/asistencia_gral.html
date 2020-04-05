@@ -70,55 +70,55 @@
                          <th class="sticky-right-last"> Clases No Asistidas </th>
 
                     </tr>
-                    <tbody>
                 </thead>
 
+                <tbody>
 
-                {% for lista in lista_asistencias %}
+                    {% for lista in lista_asistencias %}
 
-                    <tr>
-                        <td> {{ forloop.counter }}</td>
-                        <td class="sticky-left"> {{ lista.0.first_name }}</td>                            
-                        <td class="sticky-left"> {{ lista.0.last_name }} </td>
-                        {% for bool in lista.1 %}
+                        <tr>
+                            <td> {{ forloop.counter }}</td>
+                            <td class="sticky-left"> {{ lista.0.first_name }}</td>
+                            <td class="sticky-left"> {{ lista.0.last_name }} </td>
+                            {% for bool in lista.1 %}
 
-                            {% if bool %}
-                            <td>  <i class="material-icons icon-green">check_circle</i> </td>
+                                {% if bool %}
+                                    <td>  <i class="material-icons icon-green">check_circle</i> </td>
 
 
-                            {% else %}
-                            <td>  <i class="material-icons icon-red">cancel</i> </td>
+                                {% else %}
+                                    <td>  <i class="material-icons icon-red">cancel</i> </td>
 
 
                                 {% endif %}
 
-                        {% endfor %}
-
-
-                        <td class="sticky-right-first"> {{ lista.2 }} </td>
-                        <td class="sticky-right-last"> {{clases_hasta_ahora|sub:lista.2}} </td>
-
                             {% endfor %}
-                        </tbody>
-                        
+
+
+                            <td class="sticky-right-first"> {{ lista.2 }} </td>
+                            <td class="sticky-right-last"> {{clases_hasta_ahora|sub:lista.2}} </td>
+
+                                {% endfor %}
+                </tbody>
+
                         <tfoot>
-                        
+
                             <tr>
                                 <th>  </th>
-                                
+
                                 <th class="sticky-left"> Alumnas por clase </th>
-                                
+
                                 <td>  </td>
                                 {% for total in total_por_clase %}
-                                
+
                                 <td> {{ total }} </td>
-                                
+
                                 {% endfor %}
-                                
+
                                 <td>  </td>
-                                
+
                             </tr>
-                            
+
                         </tfoot>
 
                 </table>
@@ -197,3 +197,7 @@
 
 {% endblock %}
 
+{% block scripts %}
+    <script src={% static 'js/scripts.js' %}></script>
+
+{% endblock %}
