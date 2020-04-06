@@ -2,7 +2,7 @@ from clases.models import Clase
 from cursos.models import Curso
 
 ## Entrega el curso si la usuaria tiene permiso para acceder a el
-def get_cursos(usuaria, curso_id):
+def get_curso(usuaria, curso_id):
     if usuaria.es_profesora:
         cursos = Curso.objects.filter(profesoras__in=[usuaria], id=curso_id)
     elif usuaria.es_voluntaria:
@@ -16,7 +16,7 @@ def get_cursos(usuaria, curso_id):
 
 
 ## Entrega la clase si esta corresponde al curso ingresado
-def get_clases(curso_id, clase_id):
+def get_clase(curso_id, clase_id):
     clases = Clase.objects.filter(curso_id=curso_id, id=clase_id)
     if len(clases) > 0:
         return clases[0]

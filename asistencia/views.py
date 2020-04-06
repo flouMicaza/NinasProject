@@ -1,19 +1,19 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden, HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.http import HttpResponseRedirect
 
-from NiñasProject.decorators import profesora_required
-from NiñasProject.utils import get_cursos, get_clases
+from NiñasProject.decorators import profesora_required, docente_required
+from NiñasProject.utils import get_curso, get_clase
 from usuarios.models import User
 from .forms import AsistenciaModelFormSet
 from .utils import *
 
 
-@method_decorator([profesora_required], name='dispatch')
+@method_decorator([docente_required], name='dispatch')
 class Asistencia_GralView(LoginRequiredMixin, View):
     login_url = 'usuarios:login'
     redirect_field_name = ''
@@ -36,24 +36,23 @@ class Asistencia_GralView(LoginRequiredMixin, View):
                 lista_a = []
                 for asistencia in asist:
                     lista_a += [asistencia.asistio]
-                total = len( asist.filter(asistio=True) )
+                total = len(asist.filter(asistio=True))
                 lista = [alumna, lista_a, total]
                 lista_asistencias += [lista]
                 i += 1
 
         return lista_asistencias
 
-
     def get(self, request, **kwargs):
         curso_id = kwargs['curso_id']
         usuaria = User.objects.get(username=request.user.username)
-        curso = get_cursos(usuaria, curso_id)
+        curso = get_curso(usuaria, curso_id)
         if curso != None:
             clases_totales = Clase.objects.filter(curso=curso).order_by('id')
             asistencias = Asistencia.objects.filter(clase__curso=curso).order_by('clase_id')
             lista_asistencias = list(self.get_asistencias(asistencias, curso.alumnas.all()))
-            clases_asist = []             # clases que ya tienen asistencias hasta el momento
-            total_por_clase = []    # total de alumnas por clase en clases
+            clases_asist = []  # clases que ya tienen asistencias hasta el momento
+            total_por_clase = []  # total de alumnas por clase en clases
 
             for asistencia in asistencias:
                 if not asistencia.clase in clases_asist:
@@ -68,14 +67,15 @@ class Asistencia_GralView(LoginRequiredMixin, View):
             hay_alumnas = True
             if len(curso.alumnas.all()) == 0:
                 hay_alumnas = not hay_alumnas
-            hay_asistencias=True
+            hay_asistencias = True
             if len(asistencias) == 0:
                 hay_asistencias = not hay_asistencias
 
-            id_prox_clase = -1
-            if len(clases_asist) < len(clases_totales):
-                id_prox_clase = clases_totales[len(clases_asist)].id
-
+            clase_hoy = Clase.objects.filter(fecha_clase=date.today()).first()
+            if clase_hoy:
+                id_prox_clase = clase_hoy.id
+            else:
+                id_prox_clase = -1
             return render(request, 'asistencia/asistencia_gral.html', {
                 'curso': curso,
                 'clases': clases_asist,
@@ -90,40 +90,42 @@ class Asistencia_GralView(LoginRequiredMixin, View):
 
         return HttpResponseForbidden("No tienes permiso para acceder a la asistencia de este curso.")
 
-@profesora_required
-def get_form(request,**kwargs):
+
+@docente_required
+def get_form(request, **kwargs):
     curso_id = kwargs['curso_id']
     clase_id = kwargs['clase_id']
     usuaria = User.objects.get(username=request.user.username)
 
-    curso = get_cursos(usuaria, curso_id)       ## entrega el curso si la persona tiene acceso
-    clase = get_clases(curso_id, clase_id)      ## entrega la clase si corresponde al curso
+    curso = get_object_or_404(Curso, pk=curso_id)
+    clase = get_object_or_404(Clase, pk=clase_id)
+    ## entrega la clase si corresponde al curso
 
-    if curso == None:
+    if get_curso(usuaria,curso_id)==None:
         return HttpResponseForbidden("No tienes permiso para pasar asistencia en este curso.")
 
-    elif clase == None:
-        return HttpResponseNotFound("La clase que buscas no existe.")
+    elif get_clase(curso_id, clase_id)==None :
+        return HttpResponseNotFound("La clase que buscas no existe")
 
+    if clase.fecha_clase != date.today():
+        return HttpResponseRedirect(reverse('asistencia:asistencia_gral', kwargs={'curso_id': clase.curso.id}))
     else:
-        lista_alumnas=get_alumnas_en_orden(curso.alumnas.all())
-        template_name='asistencia/asistencia.html'
+        lista_alumnas = get_alumnas_en_orden(curso.alumnas.all())
+        template_name = 'asistencia/asistencia.html'
         for alu in lista_alumnas:
-            asist = Asistencia.objects.get_or_create(alumna=alu,clase=clase,author=usuaria)
-        if request.method=='GET':   ## cuando entro por primera vez
+            asist = Asistencia.objects.get_or_create(alumna=alu, clase=clase)
+        if request.method == 'GET':  ## cuando entro por primera vez
             formset = AsistenciaModelFormSet(queryset=Asistencia.objects.filter(clase=clase))
             return render(request, template_name, {
-            'curso': curso,
-            'clase': clase,
-            'formset': formset,
+                'curso': curso,
+                'clase': clase,
+                'formset': formset,
             })
 
-        elif request.method=='POST':    ## cuando pongo save
+        elif request.method == 'POST':  ## cuando pongo save
             formset = AsistenciaModelFormSet(request.POST,
                                              queryset=Asistencia.objects.filter(clase=clase))
 
             if formset.is_valid():
                 instances = formset.save()
-                for inst in instances:
-                    print(inst,"instancia guardada")
-                return HttpResponseRedirect(reverse('asistencia:asistencia_gral', kwargs={'curso_id':clase.curso.id}))
+                return HttpResponseRedirect(reverse('asistencia:asistencia_gral', kwargs={'curso_id': clase.curso.id}))
