@@ -3,7 +3,7 @@ python:
   - "3.6"
 install:
   - pip3 install -r requirements.txt
-script_before:
+before_script:
   - python manage.py makemigrations
   - python manage.py migrate
 script:
