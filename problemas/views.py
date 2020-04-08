@@ -1,11 +1,13 @@
 import os
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -137,4 +139,18 @@ class CrearProblemasViews(LoginRequiredMixin,View):
             return HttpResponseForbidden("No tienes permiso para ingresar a este curso.")
 
         form = ProblemaForm()
+        return render(request,'problemas/crear_problema.html',{'clase':clase, 'form':form})
+
+    def post(self,request,**kwargs):
+        clase_id = kwargs['clase_id']
+        clase=get_object_or_404(Clase.objects.filter(id=clase_id))
+        if not request.user in clase.curso.profesoras.all():
+            return HttpResponseForbidden("No tienes permiso para ingresar a este curso.")
+
+        form = ProblemaForm(request.POST,request.FILES)
+        if form.is_valid():
+            nuevo_problema = form.save()
+            clase.problemas.add(nuevo_problema)
+            messages.success(request,'Se creó el problema ' + nuevo_problema.titulo)
+            return HttpResponseRedirect(reverse('cursos:curso',kwargs={'curso_id':clase.curso.id}))
         return render(request,'problemas/crear_problema.html',{'clase':clase, 'form':form})

@@ -1,1 +1,61 @@
-{{ form.as_p }}
+{% extends 'menu.html' %}
+{% load static %}
+{% load materializecss %}
+
+{% block title %}{{ curso.nombre }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+    <h1>Crear problema</h1>
+        <div class="row">
+            <form method="post" class="col s12" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                {{ field.name }}
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="row">
+                    <div class="input-field col s6">
+                        {{ form.titulo }}
+                        {{ form.titulo.errors }}
+                        <label>Título del problema</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                       <label for="id_statement"><strong>Enunciado</strong></label>
+                        {{ form.statement}}
+                        <small>Solo se aceptan PDF's</small>
+                    </div>
+                </div>
+                <div class="row">
+                     <div class="form-group">
+                         <label><strong>Casos de prueba</strong></label>
+                        {{ form.tests }}
+                        <small>Se aceptan formatos .csv y .json</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <button type="submit" class="waves-effect waves-light btn-medium btn" >Crear problema</button>
+                        <a href="{% url 'cursos:curso' curso_id=clase.curso.id %}" class="waves-effect waves-light btn-medium btn">Cancelar</a>
+                    </div>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
