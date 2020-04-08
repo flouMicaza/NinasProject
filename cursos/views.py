@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404
 
@@ -67,6 +68,14 @@ class CursoView(CursosView):
 
         if request.POST.get('nombre'):
             clase_edit.nombre = request.POST['nombre']
+
+        if request.POST.get('fecha_clase'):
+            #no puede haber dos clases un mismo día.
+            if len(Clase.objects.filter(fecha_clase=request.POST.get('fecha_clase'))) == 0:
+                clase_edit.fecha_clase = request.POST['fecha_clase']
+            else:
+                messages.success(request,"No se actualizó la fecha, ya existe una clase para ese día")
+
         clase_edit.save()
         return HttpResponseRedirect(reverse('cursos:curso',kwargs=kwargs))
 

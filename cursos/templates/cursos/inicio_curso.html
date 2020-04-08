@@ -132,11 +132,18 @@
                                 <form method="post" action="">
                                     {% csrf_token %}
                                     <input type="hidden" value="{{ clase.id }}" name="id_clase">
-                                    <div class="input-field ">
-                                        <i class="material-icons prefix">mode_edit</i>
-                                        <input value="{{ clase.nombre }}"  type='text' class='validate' name="nombre">
-                                        <label class='active' for='clase_edit_" + id_clase + "'>Clase {{ forloop.counter }} :</label>
+                                    <div class="title-and-button">
+                                        <div class="input-field ">
+                                            <i class="material-icons prefix">mode_edit</i>
+                                            <input value="{{ clase.nombre }}"  type='text' class='validate' name="nombre">
+                                            <label class='active' for='clase_edit_" + id_clase + "'>Clase {{ forloop.counter }} :</label>
+                                        </div>
+                                        <div>
+                                            <input value="{{ clase.fecha_clase.year }}-{{ clase.fecha_clase.month }}-{{ clase.fecha_clase.day }}" type="text" id="fecha_clase" class="datepicker" name="fecha_clase">
+                                            <label class="active" for="fecha_clase">Fecha clase </label>
+                                        </div>
                                     </div>
+
                                     <div class="switch" style="align-self: start">
                                         <label>
                                             {% if clase.publica %}
