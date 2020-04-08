@@ -1,3 +1,4 @@
+import datetime
 import random
 from usuarios.models import *
 from cursos.models import Curso
@@ -368,7 +369,7 @@ agregaAlumnas(alumnas5, curso_medio_umayor)
 ## CLASES
 
 # guardado en la bdd
-clase_basico1 = Clase.objects.create(nombre="Clase 1: Ciclos for", curso=curso_basico)
+clase_basico1 = Clase.objects.create(nombre="Clase 1: Ciclos for", curso=curso_basico,fecha_clase=datetime.date.today())
 clase_basico2 = Clase.objects.create(nombre="Clase 2: Ciclos while", curso=curso_basico)
 clase_basico3 = Clase.objects.create(nombre="Clase 3: Grafos", curso=curso_basico)
 clase_basico4 = Clase.objects.create(nombre="Clase 4: DBS", curso=curso_basico)
