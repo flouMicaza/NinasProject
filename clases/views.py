@@ -12,7 +12,7 @@ from clases.forms import ClaseForm
 from django.contrib import messages
 
 @method_decorator([profesora_required], name='dispatch')
-class ClaseView(LoginRequiredMixin, View):
+class CrearClaseView(LoginRequiredMixin, View):
     login_url = 'usuarios:login'
     redirect_field_name = ''
 

@@ -16,3 +16,5 @@ class Clase(models.Model):
     def __str__(self):
         return self.nombre + ' , ' + self.curso.nombre
 
+    class Meta:
+        ordering = ['fecha_clase']
