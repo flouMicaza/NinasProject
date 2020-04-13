@@ -1,15 +1,13 @@
-{% extends 'menu.html' %}
-{% load static %}
-{% block title %}{{ curso.nombre }}{% endblock %}
 
 
-{% block content %}
-    <h1>{{ curso.nombre }}</h1>
-    Usuario : {{ feedback_user }}
-    Feedback assignement : {{ feedback_assignement }}
-    Feedback date : {{ feedback_date }}<br>
+<h1>Resultados</h1>
+
+{% if test_array %}
     {% for test in test_array %}
         passed : {{ test.0 }} test_input : {{ test.1 }} expected_output: {{ test.2 }} comment: {{ test.3 }} type: {{ test.4 }} err: {{ test.5 }} actual_output: {{ test.6 }}<br>
 
     {% endfor %}
-{% endblock %}
+{% else %}
+    No se han enviado soluciones aún.
+
+{% endif %}

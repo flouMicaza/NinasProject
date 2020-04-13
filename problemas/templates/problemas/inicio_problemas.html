@@ -2,63 +2,21 @@
 {% load static %}
 {% block title %}{{ curso.nombre}} : {{ problema.titulo }}{% endblock %}
 
-
 {% block content %}
-    <div class="container">
-        <div class="row my-5">
-            <div class="col-8 col-md-9">
-                {{ curso.nombre }}
-                {{ problema.titulo }}
-                {% if problema.statement %}
-                    <div class="row">
-                        <div class="col">
-                            <object data="{{ problema.statement.url }}" type="application/pdf"
-                                    width="100%" height="1000">
-                                <p>Something happened</p>
-                            </object>
-                        </div>
-                    </div>
-                {% else %}
-                    <p>This problema doesn't have a statement.</p>
-                {% endif %}
-            </div>
-            <div class="col-4 col-md-3">
-                <div class="row">
-                    <div class="card w-100">
-                        <div class="card-body">
-                            <h5 class="card-title">Send Script</h5>
-                            <form method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <label for="file">File</label>
-                                    <input type="file" class="form-control-file" name="sample_code" id="file">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" class="form-control" name="submission_type" value="single">
-                                </div>
-                                <div class="row justify-content-center mt-3 px-5">
-                                    {% if has_tests %}
-                                        <button type="submit" class="btn btn-outline-primary btn-block"
-                                                onclick="showMessage()">Send
-                                        </button>
-                                    {% else %}
-                                        <button type="submit" class="btn btn-outline-primary btn-block"
-                                                onclick="showMessage()" disabled>Send
-                                        </button>
-                                    {% endif %}
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<h3>{{ problema.titulo }}</h3>
+<h4>{{ curso.nombre }}</h4>
+    <!-- Tabs del problema-->
+ <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
+    <li class="tab"><a class="{{ enunciado_active }}" href="#enunciado">Enunciado</a></li>
+    <li class="tab"><a class="{{ resultados_active }}" href="#resultados">Resultados</a></li>
+    <li class="tab disabled"><a href="#anteriores">Envíos Anteriores</a></li>
+  </ul>
+  <div id="enunciado" class="col s12">{% include "problemas/enunciado_problema.html" %}</div>
+  <div id="resultados" class="col s12">{% include "problemas/feedback_page.html" %}</div>
+  <div id="anteriores" class="col s12">{% include "problemas/envios_anteriores.html" %}</div>
 
-        </div>
-    </div>
 
-    <script>
-        let showMessage = () => {
-            $('#cover, #message').css('display', 'block');
-        };
-    </script>
+
+
+
 {% endblock %}

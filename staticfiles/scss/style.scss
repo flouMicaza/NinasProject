@@ -4,6 +4,7 @@ $present_color: #FCFFD1;
 $absent-color: #FECCC4;
 $x-color: #B32727;
 $check-color: #15B342;
+$not-enabled-color: #80868b;
 
 .container {
   margin-top: 2em;
@@ -193,6 +194,11 @@ div.dataTables_wrapper {
   align-items: baseline;
 }
 
+.collection-info {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* label focus color */
    .input-field input[type=text]:not(.browser-default):focus + label {
      color: $primary-color;
@@ -260,5 +266,22 @@ div.dataTables_wrapper {
 }
 
 .publicaFalse {
-  background-color: lightgray;
+  color: $not-enabled-color;
+}
+
+hr.problemas-line {
+  border: 1px dotted $not-enabled-color;
+}
+
+.collection {
+  border: 1px solid $hover-color;
+}
+
+.collection .collection-item {
+  border-bottom: 1px solid $hover-color;
+}
+
+.col .row .my-row{
+	margin-left: -10rem;
+	margin-right: -20rem;
 }

@@ -29,7 +29,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
     login_url = 'usuarios:login'
     redirect_field_name = ''
     template_name = "problemas/inicio_problemas.html"
-    feedback_template_name = "problemas/feedback_page.html"
+    feedback_template_name = "problemas/inicio_problemas.html"
     feedback_error_template_name = "problemas/feedback_error.html"
 
 
@@ -47,6 +47,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
 
 
     def post(self, request, *args, **kwargs):
+
         # Get assignment and post data
         problema = get_object_or_404(Problema, id=self.kwargs['problema_id'])
         curso = get_object_or_404(Curso, id=self.kwargs['curso_id'])
@@ -74,38 +75,24 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         script_path = os.getcwd().replace("\\", "/") + "/media/" + filename
         test_path = problema.tests.path.replace("\\", "/")
 
-        if data["submission_type"] == "single":
-            # Send and receive data for testing.
-            response = ComunicationClient.send_submission(script_path, test_path, lang)
 
-            compiled_file = filename.split('.')[0]
-            print(compiled_file)
-            # Delete compiled file
-            try:
-                os.remove(compiled_file) #TODO: Poner el nombre ofical que tendrá el archivo compilado.o
-            except:
-                pass
+        # Send and receive data for testing.
+        response = ComunicationClient.send_submission(script_path, test_path, lang)
 
-            if response[0] == "success":
-                return self.handle_successful_single_response(request, problema, response[1], **kwargs)
-            else:
-                os.remove(script_path)
-                return self.handle_failed_single_response(request, response[1], **kwargs)
+        compiled_file = filename.split('.')[0]
+        print(compiled_file)
+        # Delete compiled file
+        try:
+            os.remove(compiled_file) #TODO: Poner el nombre ofical que tendrá el archivo compilado.o
+        except:
+            pass
 
-        elif data["submission_type"] == "multiple":
-
-            '''SaveScriptProcess(request.user.account, assignment, lang, ComunicationClient, script_path,
-                              test_path).start()
-
-            this_context = self.get_context_data()
-
-            return render(request, self.template_name, this_context)'''
+        if response[0] == "success":
+            return self.handle_successful_single_response(request, problema, response[1], **kwargs)
         else:
+            os.remove(script_path)
+            return self.handle_failed_single_response(request, response[1], **kwargs)
 
-            # Delete the source code file from the media folder
-            os.remove('media/' + filename)
-
-            raise Exception("Unidentified submission")
 
 
     def handle_successful_single_response(self, request, assignment, tests_arr, **kwargs):
@@ -120,6 +107,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         this_context['feedback_assignment'] = feedback_assignment
         this_context['feedback_date'] = feedback_date
         this_context['test_array'] = tests_arr
+        this_context['resultados_active'] = "active"
         return render(request, self.feedback_template_name, this_context)
 
     def handle_failed_single_response(self,request,error,**kwargs):
