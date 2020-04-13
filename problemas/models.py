@@ -1,4 +1,6 @@
 import os
+
+from django.core.validators import FileExtensionValidator
 from django.db import models
 
 from django.db.models.signals import post_save
@@ -13,12 +15,12 @@ class Problema(models.Model):
     titulo = models.CharField(max_length=100)
     fecha_creacion = models.DateTimeField(editable=False, blank=True, null=True)
 
-    statement = models.FileField(upload_to='statements',help_text="Solo se aceptan PDF's")
+    statement = models.FileField(upload_to='statements',help_text="Solo se aceptan PDF's",validators=[FileExtensionValidator(['pdf'])])
 
     # The source with which the statement file was created (a .zip or another compression format)
     source = models.FileField(upload_to='source', blank=True, null=True)
 
-    tests = models.FileField(upload_to='test_files',help_text="Se aceptan formatos .csv y .json")
+    tests = models.FileField(upload_to='test_files',help_text="Se aceptan formatos .csv y .json",validators=[FileExtensionValidator(['json', 'csv'])])
 
     def save(self, *args, **kwargs):
         """
