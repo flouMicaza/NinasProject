@@ -9,10 +9,6 @@ before_script:
   - python manage.py makemigrations
   - python manage.py migrate
   - echo $PATH
-  - wget http://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip
 
-  - unzip chromedriver_linux64.zip -d /home/travis/bin/
-
-  - export CHROME_BIN=chromium-browser
 script:
   - python manage.py test
