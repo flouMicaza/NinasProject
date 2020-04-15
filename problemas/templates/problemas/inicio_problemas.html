@@ -3,8 +3,11 @@
 {% block title %}{{ curso.nombre}} : {{ problema.titulo }}{% endblock %}
 
 {% block content %}
-<h3>{{ problema.titulo }}</h3>
-<h4>{{ curso.nombre }}</h4>
+
+    <h3>{{ problema.titulo }}</h3>
+    <h4>{{ curso.nombre }}</h4>
+    <a href="{% url 'cursos:curso' curso_id=curso.id %}" class="waves-effect waves-light btn-small btn">
+                        <i class="material-icons left">arrow_back</i>Volver</a>
     <!-- Tabs del problema-->
  <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
     <li class="tab"><a class="{{ enunciado_active }}" href="#enunciado">Enunciado</a></li>
@@ -14,9 +17,5 @@
   <div id="enunciado" class="col s12">{% include "problemas/enunciado_problema.html" %}</div>
   <div id="resultados" class="col s12">{% include "problemas/feedback_page.html" %}</div>
   <div id="anteriores" class="col s12">{% include "problemas/envios_anteriores.html" %}</div>
-
-
-
-
 
 {% endblock %}

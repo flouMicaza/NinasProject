@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //modal asistencia de un curso (para una alumna)
 $(document).ready(function(){
+    $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
     $('select').not('.disabled').formSelect();
     $('.modal').modal();
     $('.tabs').tabs();

@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, DateInput, DateField
 from clases.models import Clase
 
 
@@ -24,7 +24,9 @@ class HTML5RequiredMixin(object):
 
 
 class ClaseForm(HTML5RequiredMixin,ModelForm):
-
+    from functools import partial
+    DateInput = partial(DateInput, {'class': 'datepicker'})
+    fecha_clase = DateField(label="Fecha clase", widget=DateInput())
     class Meta:
         model = Clase
         exclude = ['problemas']

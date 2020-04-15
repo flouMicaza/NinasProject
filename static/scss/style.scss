@@ -194,41 +194,8 @@ div.dataTables_wrapper {
   align-items: baseline;
 }
 
-.collection-info {
-  display: flex;
-  justify-content: space-between;
-}
 
-/* label focus color */
-   .input-field input[type=text]:not(.browser-default):focus + label {
-     color: $primary-color;
-   }
-	.input-field input[type=password]:not(.browser-default):focus + label {
-     color: $primary-color;
-   }
-   /* label underline focus color */
-   .input-field input[type=text]:not(.browser-default):focus {
-     border-bottom: 1px solid $primary-color;
-     box-shadow: 0 1px 0 0 $primary-color;
-   }
-	.input-field input[type=password]:not(.browser-default):focus {
-     border-bottom: 1px solid $primary-color;
-     box-shadow: 0 1px 0 0 $primary-color;
-   }
-   /* valid color */
-   .input-field input[type=text].valid {
-     border-bottom: 1px solid $primary-color;
-     box-shadow: 0 1px 0 0 $primary-color;
-   }
-   .input-field input[type=password].valid {
-     border-bottom: 1px solid $primary-color;
-     box-shadow: 0 1px 0 0 $primary-color;
-   }
 
-  [type="checkbox"]:checked + span:not(.lever)::before {
-    border-right : 2px solid $hover-color;
-    border-bottom : 2px solid $hover-color;
-  }
 
 
   .icon_style{
@@ -273,10 +240,4 @@ hr.problemas-line {
   border: 1px dotted $not-enabled-color;
 }
 
-.collection {
-  border: 1px solid $hover-color;
-}
 
-.collection .collection-item {
-  border-bottom: 1px solid $hover-color;
-}
