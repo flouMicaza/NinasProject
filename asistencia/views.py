@@ -71,7 +71,7 @@ class Asistencia_GralView(LoginRequiredMixin, View):
             if len(asistencias) == 0:
                 hay_asistencias = not hay_asistencias
 
-            clase_hoy = Clase.objects.filter(fecha_clase=date.today()).first()
+            clase_hoy = Clase.objects.filter(fecha_clase=date.today(),curso=curso).first()
             if clase_hoy:
                 id_prox_clase = clase_hoy.id
             else:
