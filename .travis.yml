@@ -4,6 +4,7 @@ python:
 install:
   - pip3 install -r requirements.txt
 before_script:
+  - python manage.py collectstatic --noinput
   - python manage.py makemigrations
   - python manage.py migrate
 script:
