@@ -470,7 +470,7 @@ clases_avanzado_umayor = [clase_avanzado_umayor1, clase_avanzado_umayor2, clase_
 def nuevaAsistencia(clases, alumnas, profesora):
     for clase in clases:
         for alumna in alumnas:
-            Asistencia.objects.create(alumna=alumna, clase=clase, author=profesora, asistio=random.randint(0, 1))
+            Asistencia.objects.create(alumna=alumna, clase=clase, asistio=random.randint(0, 1))
 
 
 nuevaAsistencia(clases_basico, alumnas_basico, usuaria_profesora)
