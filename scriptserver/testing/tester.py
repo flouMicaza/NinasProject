@@ -16,6 +16,7 @@ class Tester:
         """
         self.tests.append(test)
 
+    #TODO: MOdificar esto cuando modifique los test. 
     def add_new_test(self, test_input, test_output, comment="", type="public"):
         """
         Creates a tests and adds it to the tests array

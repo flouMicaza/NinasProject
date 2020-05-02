@@ -1,5 +1,5 @@
 class Test():
-
+    # TODO: Modificar esto cuando modifique los test.
     def __init__(self, input, output, comment, type):
         self.input = input
         self.output = output
