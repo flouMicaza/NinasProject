@@ -1,5 +1,5 @@
 from django.contrib import admin
-from clases.models import Clase
-from problemas.models import Problema
+from problemas.models import Problema, Caso
 
 admin.site.register(Problema)
+admin.site.register(Caso)

@@ -1,5 +1,6 @@
 import os
-
+import json
+from django.conf import settings
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
@@ -34,9 +35,6 @@ class Problema(models.Model):
 
     def __str__(self):
         return self.titulo
-
-    def get_absolute_url(self):
-        return reverse('assignment', kwargs={'pk': self.pk})
 
     def get_source_name(self):
         return self.source.name.split("/")[-1]
@@ -78,3 +76,19 @@ def create_assignment(sender, instance, created, **kwargs):
 
         # Deletes the old file
         os.remove(test_url)
+        create_test_cases(instance)
+
+def create_test_cases(problema):
+    f = open(settings.BASE_DIR + problema.tests.url,'r')
+    with open(settings.BASE_DIR + problema.tests.url, 'r') as f:
+        datastore = json.load(f)
+
+    for test_dict in datastore:  # Aquí es donde se generan los test, tengo que modificar para que reciba mi nueva info.
+        caso = Caso(descripcion=test_dict["Comment"],input=test_dict["Input"],output_esperado=test_dict["Output"],problema=problema)
+        caso.save()
+
+class Caso(models.Model):
+    descripcion = models.TextField(help_text="Descripción del caso")
+    input = models.CharField(max_length=255,help_text="Input del caso")
+    output_esperado = models.CharField(max_length=255,help_text="Output esperado para el input")
+    problema = models.ForeignKey(Problema, on_delete=models.CASCADE, help_text="Problema al que pertenece el caso")
