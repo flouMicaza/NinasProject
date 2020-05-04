@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_template_maths',
-    'materializecssform',
     'usuarios',
     'compressor',
     'cursos',
