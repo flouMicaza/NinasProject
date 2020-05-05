@@ -64,6 +64,7 @@ def create_assignment(sender, instance, created, **kwargs):
             instance.tests = None
             instance.save()
             os.remove(test_url)
+            print("El archivo de test no es válido")
             return
 
         # Passes the information from the original file to the json file
@@ -79,12 +80,11 @@ def create_assignment(sender, instance, created, **kwargs):
         create_test_cases(instance)
 
 def create_test_cases(problema):
-    f = open(settings.BASE_DIR + problema.tests.url,'r')
     with open(settings.BASE_DIR + problema.tests.url, 'r') as f:
         datastore = json.load(f)
 
     for test_dict in datastore:  # Aquí es donde se generan los test, tengo que modificar para que reciba mi nueva info.
-        caso = Caso(descripcion=test_dict["Comment"],input=test_dict["Input"],output_esperado=test_dict["Output"],problema=problema)
+        caso = Caso(descripcion=test_dict["Descripcion"],input=test_dict["Input"],output_esperado=test_dict["Output"],problema=problema)
         caso.save()
 
 class Caso(models.Model):

@@ -34,8 +34,7 @@ def check_valid_csv(path):
         try:
             reader = csv.reader(csvFile)
             headers = next(reader, None)
-            if len(headers) != 4 or headers[0] != "Input" or headers[1] != "Output" or headers[2] != "Comment" or \
-                    headers[3] != "Test Type":
+            if len(headers) != 4 or headers[0] != "Input" or headers[1] != "Output" or headers[2] != "Descripcion":
                 raise Exception
 
             for row in reader:
@@ -57,8 +56,7 @@ def check_valid_yml(path):
 
             for e in new_list:
                 headers = list(e.keys())
-                if len(headers) != 4 or headers[0] != "Input" or headers[1] != "Output" or headers[2] != "Comment" or \
-                        headers[3] != "Test Type":
+                if len(headers) != 4 or headers[0] != "Input" or headers[1] != "Output" or headers[2] != "Descripcion":
                     raise Exception
 
             ymlFile.close()
@@ -75,13 +73,13 @@ def check_valid_json(path):
 
             for e in datastore:
                 headers = list(e.keys())
-                if len(headers) != 4 or headers[0] != "Input" or headers[1] != "Output" or headers[2] != "Comment" or \
-                        headers[3] != "Test Type":
+                if len(headers) != 3 or headers[0] != "Input" or headers[1] != "Output" or headers[2] != "Descripcion":
                     raise Exception
 
             jsonFile.close()
             return True
         except:
+            print("El archivo de test no es válido")
             jsonFile.close()
             return False
 
