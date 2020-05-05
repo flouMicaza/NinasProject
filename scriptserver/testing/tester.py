@@ -17,16 +17,15 @@ class Tester:
         self.tests.append(test)
 
     #TODO: MOdificar esto cuando modifique los test. 
-    def add_new_test(self, test_input, test_output, comment="", type="public"):
+    def add_new_test(self, test_input, test_output, comment=""):
         """
         Creates a tests and adds it to the tests array
         :param test_input: str
         :param test_output: str
         :param comment: str
-        :param type: str
         :return: None
         """
-        self.tests.append(Test(test_input, test_output, comment, type))
+        self.tests.append(Test(test_input, test_output, comment))
 
     def set_timeout(self, new_timeout):
         self.timeout = new_timeout

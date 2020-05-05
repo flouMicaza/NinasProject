@@ -1,10 +1,9 @@
 class Test():
-    # TODO: Modificar esto cuando modifique los test.
-    def __init__(self, input, output, comment, type):
+    def __init__(self, input, output, comment):
         self.input = input
         self.output = output
         self.comment = comment
-        self.type = type
+
 
     def get_comment(self):
         return self.comment

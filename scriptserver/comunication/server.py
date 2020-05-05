@@ -76,7 +76,6 @@ class Server:
             expected_output = test.output.decode()[:STD_BYTE_LEN]  # STDLEN bytes
             actual_output = result[2][0].decode()[:STD_BYTE_LEN]  # STDLEN bytes
             comment = test.get_comment()[:CATEGORY_BYTE_LEN]  # CATLEN bytes
-            type = test.get_type()  # 12 bytes at most
             err = result[2][1]  # 1 byte
             timeout = result[2][2]
 
@@ -85,7 +84,7 @@ class Server:
 
 
             # Create reply as a json bytes object
-            reply_arr.append([passed, test_input, expected_output, comment, type, err, actual_output])
+            reply_arr.append([passed, test_input, expected_output, comment, err, actual_output])
 
             # print("Sent:", reply_message)
         reply_message = json.dumps(["success", reply_arr]).encode()
