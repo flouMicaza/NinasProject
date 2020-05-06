@@ -92,3 +92,6 @@ class Caso(models.Model):
     input = models.CharField(max_length=255,help_text="Input del caso")
     output_esperado = models.CharField(max_length=255,help_text="Output esperado para el input")
     problema = models.ForeignKey(Problema, on_delete=models.CASCADE, help_text="Problema al que pertenece el caso")
+
+    def __str__(self):
+        return self.problema.titulo + "-" + self.descripcion

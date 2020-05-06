@@ -1,5 +1,6 @@
 import os
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import FileSystemStorage
@@ -17,8 +18,9 @@ from NiñasProject.decorators import profesora_required
 from NiñasProject.utils import get_cursos
 from clases.models import Clase
 from cursos.models import Curso
+from feedback.models import Feedback, TestFeedback
 from problemas.forms import ProblemaForm
-from problemas.models import Problema
+from problemas.models import Problema, Caso
 
 from scriptserver.comunication.client import Client
 from scriptserver.util import get_file_name
@@ -69,10 +71,10 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
 
         # Save the file in the media folder
         fs = FileSystemStorage()
-        filename = fs.save("solucion" + request.user.username + '.cpp', file) #TODO: parsear el nombre del archivo para sacar el formato.
+        filename = fs.save(file.name, file) #TODO: parsear el nombre del archivo para sacar el formato.
 
         # get the path from the media folder
-        script_path = os.getcwd().replace("\\", "/") + "/media/" + filename
+        script_path = settings.MEDIA_ROOT +'/' + filename
         test_path = problema.tests.path.replace("\\", "/")
 
 
@@ -80,32 +82,37 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         response = ComunicationClient.send_submission(script_path, test_path, lang)
 
         compiled_file = filename.split('.')[0]
-        print(compiled_file)
-        # Delete compiled file
+
         try:
-            os.remove(compiled_file) #TODO: Poner el nombre ofical que tendrá el archivo compilado.o
+            # Delete compiled file
+            os.remove(compiled_file)
         except:
             pass
-
+        os.remove(script_path)
         if response[0] == "success":
-            return self.handle_successful_single_response(request, problema, response[1], **kwargs)
+
+            return self.handle_successful_single_response(request, problema, response[1],file, **kwargs)
         else:
             os.remove(script_path)
             return self.handle_failed_single_response(request, response[1], **kwargs)
 
 
 
-    def handle_successful_single_response(self, request, assignment, tests_arr, **kwargs):
+    def handle_successful_single_response(self, request, problema, tests_arr,codigo_solucion,  **kwargs):
         # Save tests_arr as a feedback object and a group of simple_test_feedback objects
         feedback_user = request.user
-        feedback_assignment = assignment
-        feedback_date = timezone.now()
+        feedback_problema = problema
+        feedback_codigo = codigo_solucion
+        feedback = Feedback.objects.create(user=feedback_user,problema=feedback_problema,codigo_solucion=feedback_codigo)
 
+        for test in tests_arr:
+            input = test[1]
+            caso = Caso.objects.get(input=input,problema=problema,)
+            TestFeedback.objects.create(passed=test[0], output_obtenido=test[5],error=test[4],caso=caso,feedback=feedback)
 
         this_context = self.get_context_data(**kwargs)
         this_context['feedback_user'] = feedback_user
-        this_context['feedback_assignment'] = feedback_assignment
-        this_context['feedback_date'] = feedback_date
+        this_context['feedback_problema'] = feedback_problema
         this_context['test_array'] = tests_arr
         this_context['resultados_active'] = "active"
         return render(request, self.feedback_template_name, this_context)

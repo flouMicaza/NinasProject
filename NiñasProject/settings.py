@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'coordinacion',
     'asistencia',
     'clases',
-    'problemas'
+    'problemas',
+    'feedback'
 ]
 
 MIDDLEWARE = [
@@ -120,7 +121,7 @@ DATETIME_INPUT_FORMATS += ["%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M"]
 
 LANGUAGE_CODE = 'es-CL'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Santiago'
 
 USE_I18N = True
 
