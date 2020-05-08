@@ -34,11 +34,11 @@ def check_valid_csv(path):
         try:
             reader = csv.reader(csvFile)
             headers = next(reader, None)
-            if len(headers) != 4 or headers[0] != "Input" or headers[1] != "Output" or headers[2] != "Descripcion":
+            if len(headers) != 3 or headers[0] != "Input" or headers[1] != "Output" or headers[2] != "Descripcion":
                 raise Exception
 
             for row in reader:
-                if len(row) != 4:
+                if len(row) != 3:
                     raise Exception
 
             csvFile.close()
@@ -56,7 +56,7 @@ def check_valid_yml(path):
 
             for e in new_list:
                 headers = list(e.keys())
-                if len(headers) != 4 or headers[0] != "Input" or headers[1] != "Output" or headers[2] != "Descripcion":
+                if len(headers) != 3 or headers[0] != "Input" or headers[1] != "Output" or headers[2] != "Descripcion":
                     raise Exception
 
             ymlFile.close()
