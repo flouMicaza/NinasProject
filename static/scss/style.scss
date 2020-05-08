@@ -1,9 +1,9 @@
-$primary-color: #FF5252 !default;
+$primary-color: #FF5252!default;
 $hover-color:  #FF8A80;
-$present_color: #FCFFD1;
+$present_color: #fcffd1;
 $absent-color: #FECCC4;
-$x-color: #B32727;
-$check-color: #15B342;
+$x-color: #eb1212;
+$check-color: #05A175;
 $not-enabled-color: #80868b;
 
 .container {
@@ -241,3 +241,10 @@ hr.problemas-line {
 }
 
 
+.feedback-bueno {
+  background-color: $check-color
+}
+
+.feedback-malo {
+  background-color: $x-color
+}

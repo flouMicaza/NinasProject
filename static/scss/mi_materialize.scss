@@ -1,11 +1,19 @@
-$primary-color: #FF5252 !default;
+$primary-color: #FF5252!default;
 $hover-color:  #FF8A80;
 $present_color: #FCFFD1;
 $absent-color: #FECCC4;
-$x-color: #B32727;
-$check-color: #15B342;
+$x-color: #FC3535;
+$check-color: #05A175;
 $not-enabled-color: #80868b;
 
+
+
+.tabs .tab a:hover, .tabs .tab a.active {
+  color: $primary-color;
+}
+.tabs .tab.disabled a, .tabs .tab.disabled a:hover{
+  color: $hover-color
+}
 /* datepicker */
 .datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
 	color: $primary-color;
