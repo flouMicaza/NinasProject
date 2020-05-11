@@ -37,14 +37,18 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         problema = get_object_or_404(Problema, id=self.kwargs['problema_id'])
         curso = get_object_or_404(Curso,id=self.kwargs['curso_id'])
 
         context['curso'] = curso
         context['problema'] = problema
         context['has_tests'] = bool(problema.tests)
-
+        if self.kwargs['result']==1:
+            feedback = Feedback.objects.filter(problema=problema).order_by('fecha_envio').last()
+            context['test_feedback'] = TestFeedback.objects.filter(feedback=feedback)
+            context['cantidad_buenos'] = context['test_feedback'].filter(passed='True').count()
+            context['cantidad_total'] = context['test_feedback'].filter(passed='False').count()
+            context['resultados_active'] = "active"
         return context
 
 
@@ -111,8 +115,9 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
             TestFeedback.objects.create(passed=test[0], output_obtenido=test[5],error=test[4],caso=caso,feedback=feedback)
 
         this_context = self.get_context_data(**kwargs)
-        this_context['feedback_user'] = feedback_user
-        this_context['feedback_problema'] = feedback_problema
+        this_context['test_feedback'] = TestFeedback.objects.filter(feedback=feedback)
+        this_context['cantidad_buenos'] = this_context['test_feedback'].filter(passed='True').count()
+        this_context['cantidad_malos'] = this_context['test_feedback'].filter(passed='False').count()
         this_context['test_array'] = tests_arr
         this_context['resultados_active'] = "active"
         return render(request, self.feedback_template_name, this_context)

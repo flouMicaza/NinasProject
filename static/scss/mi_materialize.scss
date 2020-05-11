@@ -6,13 +6,10 @@ $x-color: #FC3535;
 $check-color: #05A175;
 $not-enabled-color: #80868b;
 
+blockquote {
 
-
-.tabs .tab a:hover, .tabs .tab a.active {
-  color: $primary-color;
-}
-.tabs .tab.disabled a, .tabs .tab.disabled a:hover{
-  color: $hover-color
+  border-left: 5px solid $hover-color;
+  font-size: 1.5em;
 }
 /* datepicker */
 .datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {

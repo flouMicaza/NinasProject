@@ -33,7 +33,10 @@ td, th {
     padding: 10px;
     border-bottom: 2px solid $hover-color;
     text-align: center;
+	max-width: 5em;
+	word-wrap: break-word;
 }
+
 
 .tabla-asistencia-alumna {
     table-layout: fixed;

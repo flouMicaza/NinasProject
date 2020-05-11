@@ -1,13 +1,44 @@
 
+    {% if test_feedback %}
+    <div style="display: flex; justify-content: space-between">
 
-<h1>Resultados</h1>
+        <blockquote>Casos aprobados: {{ cantidad_buenos }} <br>
+        Casos no aprobados: {{ cantidad_malos }}</blockquote>
 
-{% if test_array %}
-    {% for test in test_array %}
-        passed : {{ test.0 }} test_input : {{ test.1 }} expected_output: {{ test.2 }} comment: {{ test.3 }}  err: {{ test.4 }} actual_output: {{ test.5 }}<br>
+    </div>
 
-    {% endfor %}
-{% else %}
-    No se han enviado soluciones aún.
 
-{% endif %}
+        <table id="tabla-feedback" class="cell-border" >
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th>Input</th>
+                    <th>Output esperado</th>
+                    <th>Output obtenido</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for test in test_feedback %}
+                    <tr>
+                        <td>{{ test.caso.descripcion }}</td>
+                        <td>{{test.caso.input }}</td>
+                        <td>{{test.caso.output_esperado }}</td>
+                        <td >{{test.output_obtenido }}</td>
+                        {% if test.passed %}
+                            <td>  <i class="material-icons icon-green">check_circle</i> </td>
+                        {% else %}
+                          <td>  <i class="material-icons icon-red">cancel</i> </td>
+                        {% endif %}
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+    {% else %}
+        No se han enviado soluciones aún.
+
+    {% endif %}

@@ -18,7 +18,7 @@ $(document).ready(function(){
     $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
     $('select').not('.disabled').formSelect();
     $('.modal').modal();
-    $('.tabs').tabs();
+    $('ul.tabs').tabs();
     $('#tabla_asist_gral').DataTable({
         scrollX: true,
         order:[[0, "asc"]],
@@ -46,9 +46,22 @@ $(document).ready(function(){
 
         }
     
-});
+    });
 
-$('select').material_select();
+    $('#tabla-feedback').DataTable({
+        scrollY : 600,
+        paging : false,
+        searching: false,
+        "columnDefs": [
+    { "orderable": false, "targets": 0 },
+
+    { "orderable": false, "targets": 1 },
+
+    { "orderable": false, "targets": 2 }
+  ]
+    })
+
+    $('select').material_select();
 });
 
 $( function()
