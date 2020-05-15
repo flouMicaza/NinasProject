@@ -27,6 +27,19 @@ from scriptserver.util import get_file_name
 
 ComunicationClient = Client()
 
+
+def get_ordered_test_feedback(test_feedbacks,problema):
+    descripciones = Caso.objects.filter(problema=problema).values('descripcion').distinct()
+    result = []
+    for d in descripciones:
+        dic = {'descripcion':d}
+        dic['test_feedback'] = test_feedbacks.filter(caso__descripcion=d['descripcion'])
+        dic['casos_buenos'] = dic['test_feedback'].filter(passed=True).count()
+        dic['casos_malos'] = dic['test_feedback'].filter(passed=False).count()
+        result.append(dic)
+    return result
+
+
 class ProblemasViews(LoginRequiredMixin, TemplateView):
     login_url = 'usuarios:login'
     redirect_field_name = ''
@@ -48,6 +61,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
             context['test_feedback'] = TestFeedback.objects.filter(feedback=feedback)
             context['cantidad_buenos'] = context['test_feedback'].filter(passed='True').count()
             context['cantidad_malos'] = context['test_feedback'].filter(passed='False').count()
+            context['ordered_test_feedback'] = get_ordered_test_feedback(context['test_feedback'], problema)
             context['resultados_active'] = "active"
         return context
 
@@ -108,7 +122,6 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         feedback_problema = problema
         feedback_codigo = codigo_solucion
         feedback = Feedback.objects.create(user=feedback_user,problema=feedback_problema,codigo_solucion=feedback_codigo)
-
         for test in tests_arr:
             input = test[1]
             caso = Caso.objects.get(input=input,problema=problema,)
@@ -116,6 +129,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
 
         this_context = self.get_context_data(**kwargs)
         this_context['test_feedback'] = TestFeedback.objects.filter(feedback=feedback)
+        this_context['ordered_test_feedback'] = get_ordered_test_feedback(this_context['test_feedback'],problema)
         this_context['cantidad_buenos'] = this_context['test_feedback'].filter(passed='True').count()
         this_context['cantidad_malos'] = this_context['test_feedback'].filter(passed='False').count()
         this_context['test_array'] = tests_arr

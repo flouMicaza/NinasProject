@@ -1,44 +1,62 @@
-
-    {% if test_feedback %}
-    <div style="display: flex; justify-content: space-between">
-
-        <blockquote>Casos aprobados: {{ cantidad_buenos }} <br>
-        Casos no aprobados: {{ cantidad_malos }}</blockquote>
-
+{% if test_feedback %}
+    <div id="reporte_inicial">
+            <div style="display: flex"><i class="material-icons icon-green" style="align-self: center; margin-right: 0">check_circle</i>Casos aprobados: {{ cantidad_buenos }} </div>
+            <div style="display: flex"><i class="material-icons icon-red" style="align-self: center; margin-right: 0">cancel</i>Casos no aprobados: {{ cantidad_malos }} </div>
     </div>
 
+    <ul class="collapsible expandable">
+        {% for category in ordered_test_feedback %}
+            {% if category.casos_malos != 0 %}
+                <li class="active">
+            {% else %}
+                <li>
+            {% endif %}
+                <div class="collapsible-header title-and-button">
+                    {{ category.descripcion.descripcion  }}
+                    <div style="display:flex; flex-wrap: nowrap">
+                        <div style="display: flex;"><i class="material-icons icon-green" style="align-self: end; margin-right: 0">check_circle</i>{{ category.casos_buenos }} </div>
+                        <div style="display: flex; padding-left: 0.5em"><i class="material-icons icon-red" style="align-self: end; margin-right: 0">cancel</i>{{ category.casos_malos }} </div>
+                    </div>
+                </div>
+                <div class="collapsible-body">
+                    <div style="max-width: 100%; overflow-x:auto">
+                        <table class="data-feedback" >
+                            <thead>
+                                <tr class="row_good_feedback">
+                                    <th>Resultado</th>
+                                    <th>Descripción</th>
+                                    <th>Input</th>
+                                    <th>Output esperado</th>
+                                    <th>Output obtenido</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for test in category.test_feedback %}
+                                    {% if test.passed %}
+                                        <tr class="row_good_feedback">
+                                            <td ><i class="material-icons icon-green">check_circle</i> </td>
+                                            <td >{{ test.caso.descripcion }}</td>
+                                            <td >{{test.caso.input }}</td>
+                                            <td >{{test.caso.output_esperado }}</td>
+                                            <td class="" >{{test.output_obtenido }}</td>
+                                        </tr>
+                                    {% else %}
+                                        <tr class="row_bad_feedback">
+                                            <td >  <i class="material-icons icon-red">cancel</i> </td>
+                                            <td >{{ test.caso.descripcion }}</td>
+                                            <td >{{test.caso.input }}</td>
+                                            <td >{{test.caso.output_esperado }}</td>
+                                            <td>{{ test.output_obtenido }}</td>
+                                        </tr>
+                                        <tr class="row_bad_feedback"><td class="sugerencia" colspan="5"><b style="">Sugerencia:</b> Se muestra una eliminación menos. Quiźas no están bien fijados los límites de los clclos. </td></tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                    </table>
+                    </div>
+                </div>
+            </li>
 
-        <table id="tabla-feedback" class="cell-border" >
-            <thead>
-                <tr>
-                    <th>Descripción</th>
-                    <th>Input</th>
-                    <th>Output esperado</th>
-                    <th>Output obtenido</th>
-                    <th>Resultado</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for test in test_feedback %}
-                    <tr>
-                        <td>{{ test.caso.descripcion }}</td>
-                        <td>{{test.caso.input }}</td>
-                        <td>{{test.caso.output_esperado }}</td>
-                        <td >{{test.output_obtenido }}</td>
-                        {% if test.passed %}
-                            <td>  <i class="material-icons icon-green">check_circle</i> </td>
-                        {% else %}
-                          <td>  <i class="material-icons icon-red">cancel</i> </td>
-                        {% endif %}
-                    </tr>
-
-                {% endfor %}
-            </tbody>
-        </table>
-
-
-
-    {% else %}
-        No se han enviado soluciones aún.
-
-    {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
