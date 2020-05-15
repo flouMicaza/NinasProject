@@ -88,3 +88,7 @@ blockquote {
     border-right : 2px solid $hover-color;
     border-bottom : 2px solid $hover-color;
   }
+
+li.active> .collapsible-header{
+  background-color:  #dddddd60;
+}
