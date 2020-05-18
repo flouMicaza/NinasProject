@@ -84,14 +84,14 @@ def create_test_cases(problema):
         datastore = json.load(f)
 
     for test_dict in datastore:  # Aquí es donde se generan los test, tengo que modificar para que reciba mi nueva info.
-        caso = Caso(descripcion=test_dict["Descripcion"],input=test_dict["Input"],output_esperado=test_dict["Output"],problema=problema)
+        caso = Caso(categoría=test_dict["Categoria"],input=test_dict["Input"],output_esperado=test_dict["Output"],problema=problema)
         caso.save()
 
 class Caso(models.Model):
-    descripcion = models.TextField(help_text="Descripción del caso")
+    categoría = models.TextField(help_text="Descripción del caso")
     input = models.CharField(max_length=255,help_text="Input del caso")
     output_esperado = models.CharField(max_length=255,help_text="Output esperado para el input")
     problema = models.ForeignKey(Problema, on_delete=models.CASCADE, help_text="Problema al que pertenece el caso")
 
     def __str__(self):
-        return self.problema.titulo + "-" + self.descripcion
+        return self.problema.titulo + "-" + self.categoría

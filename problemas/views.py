@@ -29,11 +29,11 @@ ComunicationClient = Client()
 
 
 def get_ordered_test_feedback(test_feedbacks,problema):
-    descripciones = Caso.objects.filter(problema=problema).values('descripcion').distinct()
+    categorías = Caso.objects.filter(problema=problema).values('categoría').distinct()
     result = []
-    for d in descripciones:
-        dic = {'descripcion':d}
-        dic['test_feedback'] = test_feedbacks.filter(caso__descripcion=d['descripcion'])
+    for d in categorías:
+        dic = {'categoría':d}
+        dic['test_feedback'] = test_feedbacks.filter(caso__categoría=d['categoría'])
         dic['casos_buenos'] = dic['test_feedback'].filter(passed=True).count()
         dic['casos_malos'] = dic['test_feedback'].filter(passed=False).count()
         result.append(dic)

@@ -12,7 +12,7 @@
                 <li>
             {% endif %}
                 <div class="collapsible-header title-and-button">
-                    {{ category.descripcion.descripcion  }}
+                    {{ category.categoría.categoría  }}
                     <div style="display:flex; flex-wrap: nowrap">
                         <div style="display: flex;"><i class="material-icons icon-green" style="align-self: end; margin-right: 0">check_circle</i>{{ category.casos_buenos }} </div>
                         <div style="display: flex; padding-left: 0.5em"><i class="material-icons icon-red" style="align-self: end; margin-right: 0">cancel</i>{{ category.casos_malos }} </div>
@@ -24,7 +24,6 @@
                             <thead>
                                 <tr class="row_good_feedback">
                                     <th>Resultado</th>
-                                    <th>Descripción</th>
                                     <th>Input</th>
                                     <th>Output esperado</th>
                                     <th>Output obtenido</th>
@@ -35,7 +34,6 @@
                                     {% if test.passed %}
                                         <tr class="row_good_feedback">
                                             <td ><i class="material-icons icon-green">check_circle</i> </td>
-                                            <td >{{ test.caso.descripcion }}</td>
                                             <td >{{test.caso.input }}</td>
                                             <td >{{test.caso.output_esperado }}</td>
                                             <td class="" >{{test.output_obtenido }}</td>
@@ -43,7 +41,6 @@
                                     {% else %}
                                         <tr class="row_bad_feedback">
                                             <td >  <i class="material-icons icon-red">cancel</i> </td>
-                                            <td >{{ test.caso.descripcion }}</td>
                                             <td >{{test.caso.input }}</td>
                                             <td >{{test.caso.output_esperado }}</td>
                                             <td>{{ test.output_obtenido }}</td>
