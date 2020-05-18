@@ -16,7 +16,10 @@ $not-enabled-color: #80868b;
   margin-top:1em;
   margin-bottom: 1em;
 }
+.consolas{
+    font: 1.3rem Inconsolata, monospace;
 
+}
  tr.row_good_feedback > td , tr.row_good_feedback > th{
     padding: 10px;
     border-bottom: 2px solid $not-enabled-color ;

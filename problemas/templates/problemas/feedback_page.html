@@ -34,16 +34,16 @@
                                     {% if test.passed %}
                                         <tr class="row_good_feedback">
                                             <td ><i class="material-icons icon-green">check_circle</i> </td>
-                                            <td >{{test.caso.input }}</td>
-                                            <td >{{test.caso.output_esperado }}</td>
-                                            <td class="" >{{test.output_obtenido }}</td>
+                                            <td class="consolas">{{test.caso.input }}</td>
+                                            <td class="consolas">{{test.caso.output_esperado }}</td>
+                                            <td class="consolas" >{{test.output_obtenido }}</td>
                                         </tr>
                                     {% else %}
                                         <tr class="row_bad_feedback">
                                             <td >  <i class="material-icons icon-red">cancel</i> </td>
-                                            <td >{{test.caso.input }}</td>
-                                            <td >{{test.caso.output_esperado }}</td>
-                                            <td>{{ test.output_obtenido }}</td>
+                                            <td class="consolas">{{test.caso.input }}</td>
+                                            <td class="consolas">{{test.caso.output_esperado }}</td>
+                                            <td class="consolas">{{ test.output_obtenido }}</td>
                                         </tr>
                                         <tr class="row_bad_feedback"><td class="sugerencia" colspan="5"><b style="">Sugerencia:</b> Se muestra una eliminación menos. Quiźas no están bien fijados los límites de los clclos. </td></tr>
                                     {% endif %}
