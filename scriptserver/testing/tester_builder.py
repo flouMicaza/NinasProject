@@ -21,7 +21,7 @@ class TesterBuilder():
             datastore = json.load(f)
 
         for test_dict in datastore: #Aquí es donde se generan los test, tengo que modificar para que reciba mi nueva info.
-            self.tester.add_new_test(test_dict["Input"].encode(), test_dict["Output"].encode(), test_dict["Descripcion"])
+            self.tester.add_new_test(test_dict["Input"].encode(), test_dict["Output"].encode(), test_dict["Categoria"])
 
     def add_test_with_path(self, path):
         """
