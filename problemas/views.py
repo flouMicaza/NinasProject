@@ -9,13 +9,12 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.urls import reverse
-from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import TemplateView
 
 from NiñasProject.decorators import profesora_required
-from NiñasProject.utils import get_cursos
+from NiñasProject.utils import get_ordered_test_feedback
 from clases.models import Clase
 from cursos.models import Curso
 from feedback.models import Feedback, TestFeedback
@@ -23,21 +22,8 @@ from problemas.forms import ProblemaForm
 from problemas.models import Problema, Caso
 
 from scriptserver.comunication.client import Client
-from scriptserver.util import get_file_name
 
 ComunicationClient = Client()
-
-
-def get_ordered_test_feedback(test_feedbacks,problema):
-    categorías = Caso.objects.filter(problema=problema).values('categoría').distinct()
-    result = []
-    for d in categorías:
-        dic = {'categoría':d}
-        dic['test_feedback'] = test_feedbacks.filter(caso__categoría=d['categoría'])
-        dic['casos_buenos'] = dic['test_feedback'].filter(passed=True).count()
-        dic['casos_malos'] = dic['test_feedback'].filter(passed=False).count()
-        result.append(dic)
-    return result
 
 
 class ProblemasViews(LoginRequiredMixin, TemplateView):
@@ -56,6 +42,8 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         context['curso'] = curso
         context['problema'] = problema
         context['has_tests'] = bool(problema.tests)
+        context['casos'] = Caso.objects.filter(problema=problema)
+
         if self.kwargs['result']==1:
             feedback = Feedback.objects.filter(problema=problema).order_by('fecha_envio').last()
             context['test_feedback'] = TestFeedback.objects.filter(feedback=feedback)
@@ -129,7 +117,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
 
         this_context = self.get_context_data(**kwargs)
         this_context['test_feedback'] = TestFeedback.objects.filter(feedback=feedback)
-        this_context['ordered_test_feedback'] = get_ordered_test_feedback(this_context['test_feedback'],problema)
+        this_context['ordered_test_feedback'] = get_ordered_test_feedback(this_context['test_feedback'], problema)
         this_context['cantidad_buenos'] = this_context['test_feedback'].filter(passed='True').count()
         this_context['cantidad_malos'] = this_context['test_feedback'].filter(passed='False').count()
         this_context['test_array'] = tests_arr
