@@ -43,3 +43,15 @@ def get_ordered_test_feedback(test_feedbacks, problema):
         dic['casos_malos'] = dic['test_feedback'].filter(passed=False).count()
         result.append(dic)
     return result
+
+
+'''
+Método que entrega casos clasificados por categoría. 
+'''
+def get_casos_por_categoria(casos):
+    categorias = casos.values('categoría').distinct()
+    casos_ordenados = []
+    for categoria in categorias:
+        cat = {'categoria': categoria['categoría'], 'casos': casos.filter(categoría=categoria['categoría'])}
+        casos_ordenados.append(cat)
+    return casos_ordenados

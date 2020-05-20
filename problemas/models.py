@@ -94,4 +94,4 @@ class Caso(models.Model):
     problema = models.ForeignKey(Problema, on_delete=models.CASCADE, help_text="Problema al que pertenece el caso")
 
     def __str__(self):
-        return self.problema.titulo + "-" + self.categoría
+        return self.problema.titulo + "-" + str(self.id)

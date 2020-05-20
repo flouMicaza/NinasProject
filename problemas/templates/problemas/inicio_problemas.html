@@ -11,11 +11,15 @@
     <!-- Tabs del problema-->
  <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
     <li class="tab"><a class="{{ enunciado_active }}" href="#enunciado">Enunciado</a></li>
+     {% if request.user.es_profesora or request.user.es_voluntaria %}
+        <li class="tab"><a href="#casos">Casos de prueba</a> </li>
+    {% endif %}
     <li class="tab"><a class="{{ resultados_active }}" href="#resultados">Resultados</a></li>
-    <li class="tab disabled"><a href="#anteriores">Envíos Anteriores</a></li>
+
   </ul>
   <div id="enunciado" class="col s12 tab_content">{% include "problemas/enunciado_problema.html" %}</div>
   <div id="resultados" class="col s12 tab_content">{% include "problemas/feedback_page.html" %}</div>
-  <div id="anteriores" class="col s12 tab-content">{% include "problemas/envios_anteriores.html" %}</div>
-
+    {% if request.user.es_profesora or request.user.es_voluntaria %}
+        <div id="casos" class="col s12 tab_content">{% include "problemas/casos_prueba.html" %}</div>
+    {% endif %}
 {% endblock %}

@@ -7,7 +7,7 @@ from django.core.files import File
 # Create your tests here.
 from feedback.models import Feedback, TestFeedback
 from problemas.models import Problema, Caso
-from problemas.views import get_ordered_test_feedback
+from NiñasProject.utils import get_ordered_test_feedback
 from usuarios.models import User
 
 

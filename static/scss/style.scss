@@ -18,17 +18,27 @@ $not-enabled-color: #80868b;
 }
 .consolas{
     font: 1.3rem Inconsolata, monospace;
-
 }
- tr.row_good_feedback > td , tr.row_good_feedback > th{
-    padding: 10px;
-    border-bottom: 2px solid $not-enabled-color ;
-  	border-top: 1px solid #ddd;
-	border-right: 1px solid #ddd;
-    border-left: 1px solid #ddd;
-    text-align: center;
-	max-width: 5em;
-	word-wrap: break-word;
+#casos-de-prueba > tbody > tr:nth-child(even) {background-color: #f2f2f2;}
+
+.tabla-modal > td{
+  padding: 10px;
+  border-bottom: 1px solid $not-enabled-color ;
+  border-top: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  text-align: center;
+}
+
+tr.row_good_feedback > td , tr.row_good_feedback > th{
+  padding: 10px;
+  border-bottom: 1px solid $not-enabled-color ;
+  border-top: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  text-align: center;
+  max-width: 5em;
+  word-wrap: break-word;
 }
 tr.row_bad_feedback > td {
   padding: 10px;
@@ -64,7 +74,6 @@ td, th {
     padding: 10px;
     border-bottom: 2px solid $hover-color;
     text-align: center;
-	max-width: 5em;
 	word-wrap: break-word;
 }
 

@@ -14,10 +14,10 @@ from django.views import View
 from django.views.generic import TemplateView
 
 from NiñasProject.decorators import profesora_required
-from NiñasProject.utils import get_ordered_test_feedback
+from NiñasProject.utils import get_ordered_test_feedback, get_casos_por_categoria
 from clases.models import Clase
 from cursos.models import Curso
-from feedback.models import Feedback, TestFeedback
+from feedback.models import Feedback, TestFeedback, OutputAlternativo
 from problemas.forms import ProblemaForm
 from problemas.models import Problema, Caso
 
@@ -33,18 +33,17 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
     feedback_template_name = "problemas/inicio_problemas.html"
     feedback_error_template_name = "problemas/feedback_error.html"
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         problema = get_object_or_404(Problema, id=self.kwargs['problema_id'])
-        curso = get_object_or_404(Curso,id=self.kwargs['curso_id'])
+        curso = get_object_or_404(Curso, id=self.kwargs['curso_id'])
 
         context['curso'] = curso
         context['problema'] = problema
         context['has_tests'] = bool(problema.tests)
-        context['casos'] = Caso.objects.filter(problema=problema)
+        context['casos'] = get_casos_por_categoria(Caso.objects.filter(problema=problema))
 
-        if self.kwargs['result']==1:
+        if self.kwargs['result'] == 1:
             feedback = Feedback.objects.filter(problema=problema).order_by('fecha_envio').last()
             context['test_feedback'] = TestFeedback.objects.filter(feedback=feedback)
             context['cantidad_buenos'] = context['test_feedback'].filter(passed='True').count()
@@ -52,7 +51,6 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
             context['ordered_test_feedback'] = get_ordered_test_feedback(context['test_feedback'], problema)
             context['resultados_active'] = "active"
         return context
-
 
     def post(self, request, *args, **kwargs):
 
@@ -69,7 +67,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
 
         # Get language and file from data
         lang = 'cpp'
-        file = request.FILES.get('sample_code') #Archivo que quiero testear
+        file = request.FILES.get('sample_code')  # Archivo que quiero testear
 
         # If the user didn´t uploaded a file it sends the user back to the same page
         if file == None:
@@ -77,12 +75,11 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
 
         # Save the file in the media folder
         fs = FileSystemStorage()
-        filename = fs.save(file.name, file) #TODO: parsear el nombre del archivo para sacar el formato.
+        filename = fs.save(file.name, file)  # TODO: parsear el nombre del archivo para sacar el formato.
 
         # get the path from the media folder
-        script_path = settings.MEDIA_ROOT +'/' + filename
+        script_path = settings.MEDIA_ROOT + '/' + filename
         test_path = problema.tests.path.replace("\\", "/")
-
 
         # Send and receive data for testing.
         response = ComunicationClient.send_submission(script_path, test_path, lang)
@@ -97,23 +94,31 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         os.remove(script_path)
         if response[0] == "success":
 
-            return self.handle_successful_single_response(request, problema, response[1],file, **kwargs)
+            return self.handle_successful_single_response(request, problema, response[1], file, **kwargs)
         else:
             os.remove(script_path)
             return self.handle_failed_single_response(request, response[1], **kwargs)
 
-
-
-    def handle_successful_single_response(self, request, problema, tests_arr,codigo_solucion,  **kwargs):
+    def handle_successful_single_response(self, request, problema, tests_arr, codigo_solucion, **kwargs):
         # Save tests_arr as a feedback object and a group of simple_test_feedback objects
         feedback_user = request.user
         feedback_problema = problema
         feedback_codigo = codigo_solucion
-        feedback = Feedback.objects.create(user=feedback_user,problema=feedback_problema,codigo_solucion=feedback_codigo)
+        feedback = Feedback.objects.create(user=feedback_user, problema=feedback_problema,
+                                           codigo_solucion=feedback_codigo)
         for test in tests_arr:
             input = test[1]
-            caso = Caso.objects.get(input=input,problema=problema,)
-            TestFeedback.objects.create(passed=test[0], output_obtenido=test[5],error=test[4],caso=caso,feedback=feedback)
+            caso = Caso.objects.get(input=input, problema=problema, )
+            test_feedback = TestFeedback.objects.create(passed=test[0], output_obtenido=test[5], error=test[4],
+                                                        caso=caso,
+                                                        feedback=feedback)
+            # Si no pasa el test, tengo que agregar output_alternativo
+            if test_feedback.passed == 0:
+                output_alternativo, created = OutputAlternativo.objects.get_or_create(caso=caso,
+                                                                                      output_obtenido=test_feedback.output_obtenido)
+                if not created:
+                    output_alternativo.frecuencia += 1
+                    output_alternativo.save()
 
         this_context = self.get_context_data(**kwargs)
         this_context['test_feedback'] = TestFeedback.objects.filter(feedback=feedback)
@@ -124,35 +129,34 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         this_context['resultados_active'] = "active"
         return render(request, self.feedback_template_name, this_context)
 
-    def handle_failed_single_response(self,request,error,**kwargs):
+    def handle_failed_single_response(self, request, error, **kwargs):
         this_context = self.get_context_data(**kwargs)
         this_context['error'] = error
         return render(request, self.feedback_error_template_name, this_context)
 
 
 @method_decorator([profesora_required], name='dispatch')
-class CrearProblemasViews(LoginRequiredMixin,View):
-    def get(self,request,**kwargs):
+class CrearProblemasViews(LoginRequiredMixin, View):
+    def get(self, request, **kwargs):
         clase_id = kwargs['clase_id']
-        clase=get_object_or_404(Clase.objects.filter(id=clase_id))
-
+        clase = get_object_or_404(Clase.objects.filter(id=clase_id))
 
         if not request.user in clase.curso.profesoras.all():
             return HttpResponseForbidden("No tienes permiso para ingresar a este curso.")
 
         form = ProblemaForm()
-        return render(request,'problemas/crear_problema.html',{'clase':clase, 'form':form})
+        return render(request, 'problemas/crear_problema.html', {'clase': clase, 'form': form})
 
-    def post(self,request,**kwargs):
+    def post(self, request, **kwargs):
         clase_id = kwargs['clase_id']
-        clase=get_object_or_404(Clase.objects.filter(id=clase_id))
+        clase = get_object_or_404(Clase.objects.filter(id=clase_id))
         if not request.user in clase.curso.profesoras.all():
             return HttpResponseForbidden("No tienes permiso para ingresar a este curso.")
 
-        form = ProblemaForm(request.POST,request.FILES)
+        form = ProblemaForm(request.POST, request.FILES)
         if form.is_valid():
             nuevo_problema = form.save()
             clase.problemas.add(nuevo_problema)
-            messages.success(request,'Se creó el problema ' + nuevo_problema.titulo)
-            return HttpResponseRedirect(reverse('cursos:curso',kwargs={'curso_id':clase.curso.id}))
-        return render(request,'problemas/crear_problema.html',{'clase':clase, 'form':form})
+            messages.success(request, 'Se creó el problema ' + nuevo_problema.titulo)
+            return HttpResponseRedirect(reverse('cursos:curso', kwargs={'curso_id': clase.curso.id}))
+        return render(request, 'problemas/crear_problema.html', {'clase': clase, 'form': form})

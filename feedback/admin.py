@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
-from feedback.models import Feedback, TestFeedback
+from feedback.models import Feedback, TestFeedback, OutputAlternativo
 
 
 @admin.register(Feedback)
@@ -14,3 +14,8 @@ class FeedbackAdmin(admin.ModelAdmin):
 class TestFeedbackAdmin(admin.ModelAdmin):
     base_model = TestFeedback
     list_display = ['__str__','caso', 'feedback', 'output_obtenido']
+
+@admin.register(OutputAlternativo)
+class OutputAlternativoAdmin(admin.ModelAdmin):
+    base_model = OutputAlternativo
+    list_display = ['__str__','caso', 'output_obtenido','frecuencia']

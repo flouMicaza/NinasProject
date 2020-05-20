@@ -12,7 +12,8 @@
                 <li>
             {% endif %}
                 <div class="collapsible-header title-and-button">
-                    {{ category.categoría.categoría  }}
+                    <div><i class="material-icons">expand_more</i>
+                    {{ category.categoría.categoría  }}</div>
                     <div style="display:flex; flex-wrap: nowrap">
                         <div style="display: flex;"><i class="material-icons icon-green" style="align-self: end; margin-right: 0">check_circle</i>{{ category.casos_buenos }} </div>
                         <div style="display: flex; padding-left: 0.5em"><i class="material-icons icon-red" style="align-self: end; margin-right: 0">cancel</i>{{ category.casos_malos }} </div>
