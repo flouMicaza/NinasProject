@@ -6,6 +6,11 @@ $x-color: #FC3535;
 $check-color: #05A175;
 $not-enabled-color: #80868b;
 
+
+blockquote {
+  border-left: 5px solid $primary-color;
+}
+
 span.badge.new {
   background-color: $primary-color;
 }
