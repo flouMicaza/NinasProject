@@ -9,12 +9,12 @@
             <p>Output esperado: <span class="consolas">{{ caso.output_esperado }}</span></p>
         </div>
 
-        <div id="outputs-sugeridos">
+        <div id="outputs-sugeridos" style="margin-top:2em">
             <h5>Outputs recibidos</h5>
             <div style="max-width: 100%; overflow-x:auto">
                 <table class="data-feedback" >
                     <thead>
-                        <tr class="row_good_feedback">
+                        <tr class="tabla-modal">
                             <th>Output recibido</th>
                             <th>Frecuencia</th>
                             <th>Sugerencia</th>
@@ -23,13 +23,13 @@
                     </thead>
                     <tbody>
                         <tr class=" tabla-modal">
-                            <td class="consolas">++++++++</td>
+                            <td class="consolas">++++-</td>
                             <td >5</td>
                             <td><input type="text" placeholder="Ingresa una sugerencia para arreglar este caso"/></td>
                             <td><a class="btn btn-small"><i class="material-icons">add_circle</i></a></td>
                         </tr>
                         <tr class=" tabla-modal">
-                            <td class="consolas">++++++++</td>
+                            <td class="consolas">++++++++--</td>
                             <td >5</td>
                             <td><input type="text" placeholder="Ingresa una sugerencia para arreglar este caso"/></td>
                             <td><a class="btn btn-small"><i class="material-icons">add_circle</i></a></td>
@@ -44,7 +44,7 @@
              <div style="max-width: 100%; overflow-x:auto">
                 <table class="data-feedback" >
                     <thead>
-                        <tr class="row_good_feedback">
+                        <tr class="tabla-modal">
                             <th>Output recibido</th>
                             <th>Frecuencia</th>
                             <th>Sugerencia</th>
@@ -53,24 +53,21 @@
                     </thead>
                     <tbody>
                         <tr class=" tabla-modal">
-                            <td class="consolas">++++++++</td>
+                            <td class="consolas">+++-</td>
                             <td >5</td>
                             <td>Se ingresó un + de más. Revisa los límites de los ciclos, estás iterando de más. </td>
-                            <td><a class="btn btn-small disabled">Caso agregado</a></td>
+                            <td><a class="btn btn-small disabled">Agregado</a></td>
                         </tr>
                         <tr class=" tabla-modal">
-                            <td class="consolas">++++++++</td>
+                            <td class="consolas">+-+-+-+-</td>
                             <td >5</td>
                             <td>Se ingresó un + de más. Revisa los límites de los ciclos, estás iterando de más. </td>
-                             <td><a class="btn btn-small disabled">Caso agregado</a></td>
+                             <td><a class="btn btn-small disabled">Agregado</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
         </div>
-
-
-
     </div>
 </div>

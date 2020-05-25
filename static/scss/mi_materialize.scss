@@ -6,6 +6,9 @@ $x-color: #FC3535;
 $check-color: #05A175;
 $not-enabled-color: #80868b;
 
+span.badge.new {
+  background-color: $primary-color;
+}
 
 /* datepicker */
 .datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
