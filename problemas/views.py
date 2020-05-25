@@ -3,8 +3,9 @@ import os
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core import serializers
 from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponseForbidden, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
@@ -160,3 +161,15 @@ class CrearProblemasViews(LoginRequiredMixin, View):
             messages.success(request, 'Se creó el problema ' + nuevo_problema.titulo)
             return HttpResponseRedirect(reverse('cursos:curso', kwargs={'curso_id': clase.curso.id}))
         return render(request, 'problemas/crear_problema.html', {'clase': clase, 'form': form})
+
+
+class CasosAlternativos(LoginRequiredMixin, View):
+    def post(self, request):
+        if request.is_ajax():
+            id_caso = request.POST.get('id')
+            caso = Caso.objects.get(id=id_caso)
+            outputs_alternativos = OutputAlternativo.objects.filter(caso=caso)
+            outputs_alternativos_json = serializers.serialize('json', outputs_alternativos)
+            return JsonResponse({'id': id_caso, 'outputs_alternativos': outputs_alternativos_json})
+        else:
+            return render(request, '/')

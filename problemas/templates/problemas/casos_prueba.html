@@ -7,29 +7,28 @@
             </div>
             <div class="collapsible-body">
                 <div style="max-width: 100%; overflow-x:auto">
-                        <table id="casos-de-prueba" class="data-feedback" >
-                            <thead>
+                    <table id="casos-de-prueba" class="data-feedback" >
+                        <thead>
+                            <tr class="row_good_feedback">
+                                <th>Input</th>
+                                <th>Output esperado</th>
+                                <th>Casos alternativos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for caso in categoria.casos %}
                                 <tr class="row_good_feedback">
-                                    <th>Input</th>
-                                    <th>Output esperado</th>
-                                    <th>Casos alternativos</th>
+                                    <td class="consolas">{{ caso.input }}</td>
+                                    <td class="consolas output">{{ caso.output_esperado }}</td>
+                                    <td>
+                                        <button class="ver-alternativos"  id="{{ caso.id }}">
+                                            Ver <span class="new badge " data-badge-caption="Nuevos outputs">4</span>
+                                        </button>
+                                    </td>
+
                                 </tr>
-                            </thead>
-                            <tbody>
-                                    {% for caso in categoria.casos %}
-                                        <tr class="row_good_feedback">
-                                            <td class="consolas">{{ caso.input }}</td>
-                                            <td class="consolas output">{{ caso.output_esperado }}</td>
-                                            <td>
-                                                <a class="modal-trigger " href="#output_alternativo_{{ caso.id }}">
-                                                    Ver <span class="new badge " data-badge-caption="Nuevos outputs">4</span>
-                                                </a>
-                                            </td>
-
-                                        </tr>
-                                {% endfor %}
-
-                            </tbody>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -40,3 +39,33 @@
         {% endfor %}
     {% endfor %}
 </ul>
+
+{%  block scripts %}
+    <script>
+    $(document).on('click', '.ver-alternativos', function () {
+        var id = $(this)[0].id
+        $.ajax({
+            url:'{% url 'problemas:casos-alternativos' %}',
+            type:'POST',
+            data:{
+                'id':id,
+                 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success:function (data) {
+                console.log('success!', data)
+                openModal(data);
+            },
+            error:function(){
+                console.log('hubo un error')
+            }
+        })
+    })
+
+    function openModal(product_data){
+        console.log($('#output_alternativo_' + product_data.id))
+         $('#output_alternativo_'+ product_data.id).modal('open');
+    }
+
+    </script>
+
+{% endblock %}
