@@ -14,7 +14,7 @@
      {% if request.user.es_profesora or request.user.es_voluntaria %}
         <li class="tab"><a href="#casos">Casos de prueba</a> </li>
     {% endif %}
-    <li class="tab"><a class="{{ resultados_active }}" href="#resultados">Resultados</a></li>
+    <li class="tab"><a class="{{ resultados_active }}" href="#resultados">Mi feedback</a></li>
 
   </ul>
   <div id="enunciado" class="col s12 tab_content">{% include "problemas/enunciado_problema.html" %}</div>

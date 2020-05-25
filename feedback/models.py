@@ -34,4 +34,3 @@ class OutputAlternativo(models.Model):
 
     class Meta:
         unique_together = ("caso", "output_obtenido")
-
