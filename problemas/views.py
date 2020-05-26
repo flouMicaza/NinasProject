@@ -168,8 +168,16 @@ class CasosAlternativos(LoginRequiredMixin, View):
         if request.is_ajax():
             id_caso = request.POST.get('id')
             caso = Caso.objects.get(id=id_caso)
-            outputs_alternativos = OutputAlternativo.objects.filter(caso=caso)
-            outputs_alternativos_json = serializers.serialize('json', outputs_alternativos)
-            return JsonResponse({'id': id_caso, 'outputs_alternativos': outputs_alternativos_json})
+            outputs_sugeridos = OutputAlternativo.objects.filter(caso=caso, agregado=False,frecuencia__gt=1)
+            outputs_agregados = OutputAlternativo.objects.filter(caso=caso, agregado=True)
+            context = {
+                'id_caso': id_caso,
+                'caso' : caso,
+                'outputs_sugeridos' : outputs_sugeridos,
+                'outputs_agregados' : outputs_agregados
+            }
+            return render(request, 'problemas/modal_casos_alternativos.html', context)
+
+
         else:
             return render(request, '/')

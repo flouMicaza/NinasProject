@@ -1,4 +1,5 @@
-<div id="output_alternativo_{{ caso.id }}" class="modal">
+<div id="output_alternativo_{{ id_caso }}" class="modal">
+
     <div class="modal-content">
         <div id="header-modal">
             <div class="title-and-button">
@@ -14,7 +15,7 @@
         <div id="outputs-sugeridos" style="margin-top:2em">
             <h5>Outputs recibidos</h5>
             <div style="max-width: 100%; overflow-x:auto">
-                <table class="data-feedback" >
+                <table id='tabla-output-sugerido' class="data-feedback" >
                     <thead>
                         <tr class="tabla-modal">
                             <th>Output recibido</th>
@@ -24,18 +25,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class=" tabla-modal">
-                            <td class="consolas">++++-</td>
-                            <td >5</td>
-                            <td><input type="text" placeholder="Ingresa una sugerencia para arreglar este caso"/></td>
-                            <td><a class="btn btn-small"><i class="material-icons">add_circle</i></a></td>
-                        </tr>
-                        <tr class=" tabla-modal">
-                            <td class="consolas">++++++++--</td>
-                            <td >5</td>
-                            <td><input type="text" placeholder="Ingresa una sugerencia para arreglar este caso"/></td>
-                            <td><a class="btn btn-small"><i class="material-icons">add_circle</i></a></td>
-                        </tr>
+                        {% if outputs_sugeridos %}
+                            {% for output in outputs_sugeridos %}
+                                    <tr class=" tabla-modal">
+                                        <td class="consolas">{{  output.output_obtenido}}</td>
+                                        <td >{{ output.frecuencia }}</td>
+                                        <td><input type="text" placeholder="Ingresa una sugerencia para arreglar este caso"/></td>
+                                        <td><a class="btn btn-small"><i class="material-icons">add_circle</i></a></td>
+                                    </tr>
+                            {% endfor %}
+                        {% else %}
+                             <tr class="tabla-modal">
+                                <td colspan="4">No se han recibido errores para este caso</td>
+                            </tr>
+                        {% endif %}
                     </tbody>
                 </table>
             </div>
@@ -44,7 +47,7 @@
         <div id="outputs-alternativos" style="margin-top: 2em">
             <h5>Outputs agregados</h5>
              <div style="max-width: 100%; overflow-x:auto">
-                <table class="data-feedback" >
+                <table id='tabla-output-agregado' class="data-feedback" >
                     <thead>
                         <tr class="tabla-modal">
                             <th>Output recibido</th>
@@ -54,18 +57,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class=" tabla-modal">
-                            <td class="consolas">+++-</td>
-                            <td >5</td>
-                            <td>Se ingresó un + de más. Revisa los límites de los ciclos, estás iterando de más. </td>
-                            <td><a class="btn btn-small disabled">Agregado</a></td>
-                        </tr>
-                        <tr class=" tabla-modal">
-                            <td class="consolas">+-+-+-+-</td>
-                            <td >5</td>
-                            <td>Se ingresó un + de más. Revisa los límites de los ciclos, estás iterando de más. </td>
-                             <td><a class="btn btn-small disabled">Agregado</a></td>
-                        </tr>
+                        {% if outputs_agregados %}
+                            {% for output in outputs_agregados %}
+                                <tr class=" tabla-modal">
+                                    <td class="consolas">{{ output.output_obtenido }}</td>
+                                    <td >{{ output.frecuencia }}</td>
+                                    <td>{{ output.sugerencia }}</td>
+                                    <td><a class="btn btn-small disabled">Agregado</a></td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr class="tabla-modal">
+                                <td colspan="4">No se han agregado casos aún. </td>
+                            </tr>
+                        {% endif %}
                     </tbody>
                 </table>
             </div>

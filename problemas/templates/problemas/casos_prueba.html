@@ -21,7 +21,7 @@
                                     <td class="consolas">{{ caso.input }}</td>
                                     <td class="consolas output">{{ caso.output_esperado }}</td>
                                     <td>
-                                        <button class="ver-alternativos"  id="{{ caso.id }}">
+                                        <button class="open-modal" id="{{ caso.id }}">
                                             Ver <span class="new badge " data-badge-caption="Nuevos outputs">4</span>
                                         </button>
                                     </td>
@@ -34,7 +34,7 @@
             </div>
         </li>
         {% for caso in categoria.casos  %}
-            <div>{% include 'problemas/modal_casos_alternativos.html' %}</div>
+            <div id="modal_div_{{ caso.id }}"></div>
 
         {% endfor %}
     {% endfor %}
@@ -42,8 +42,33 @@
 
 {%  block scripts %}
     <script>
-    $(document).on('click', '.ver-alternativos', function () {
+
+    $(document).on('click', '.open-modal', function () {
         var id = $(this)[0].id
+        var modalDiv = $('#modal_div_' + id)
+        $.ajax({
+            url:'{% url 'problemas:casos-alternativos' %}',
+            type:'POST',
+            data:{
+                'id':id,
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success:function (data) {
+                console.log(data)
+                modalDiv.html(data)
+                mi_modal = $('#output_alternativo_'+ id)
+                mi_modal.modal();
+                mi_modal.modal('open')
+            },
+            error:function(){
+                console.log('hubo un error')
+            }
+        })
+    })
+
+   /* $(document).on('click', '.ver-alternativos', function () {
+        var id = $(this)[0].id
+        console.log(id)
         $.ajax({
             url:'{% url 'problemas:casos-alternativos' %}',
             type:'POST',
@@ -59,11 +84,29 @@
                 console.log('hubo un error')
             }
         })
-    })
+    })*/
 
     function openModal(product_data){
-        console.log($('#output_alternativo_' + product_data.id))
-         $('#output_alternativo_'+ product_data.id).modal('open');
+        mi_modal = $('#output_alternativo_'+ product_data.id)
+        mi_modal.modal('open');
+        let outputs_sugeridos = product_data['outputs_sugeridos']
+        let outputs_agregados = product_data['outputs_agregados']
+        console.log("outputs", outputs_sugeridos)
+        var tabla_sugeridos = mi_modal.find('#tabla-output-sugerido')
+        var tabla_agregados =mi_modal.find('#tabla-output-agregado')
+        for(let elem in outputs_sugeridos) {
+            tabla_sugeridos.find('tbody').append(
+                "<tr class='tabla-modal'>" +
+                "   <td class='consolas'>" +outputs_sugeridos[elem]['output_obtenido'] + "</td>" +
+                "   <td >" +outputs_sugeridos[elem]['frecuencia'] + "</td>" +
+                "   <td><input type='text' placeholder='Ingresa una sugerencia para arreglar este caso'/></td>" +
+                "   <td><a class='btn btn-small'><i class='material-icons'>add_circle</i></a></td>" +
+                "</tr>");
+        }
+        for(let elem in outputs_agregados) {
+            console.log("agregados", outputs_agregados[elem])
+        }
+        //arreglar que cuando lo abro denuevo entonces se agrega lo mismo muchas muchas veces
     }
 
     </script>
