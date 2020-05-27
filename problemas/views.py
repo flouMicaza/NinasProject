@@ -178,6 +178,5 @@ class CasosAlternativos(LoginRequiredMixin, View):
             }
             return render(request, 'problemas/modal_casos_alternativos.html', context)
 
-
         else:
-            return render(request, '/')
+            return render(request, 'problemas/feedback_error.html', {'error':'No se hizo una request ajax'})
