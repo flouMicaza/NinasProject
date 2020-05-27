@@ -46,7 +46,12 @@
                                             <td class="consolas output">{{test.caso.output_esperado }}</td>
                                             <td class="consolas output">{{ test.output_obtenido }}</td>
                                         </tr>
-                                        <tr class="row_bad_feedback"><td class="sugerencia" colspan="5"><b style="">Sugerencia:</b> Se muestra una eliminación menos. Quiźas no están bien fijados los límites de los clclos. </td></tr>
+                                        {% if test.output_alternativo and test.output_alternativo.agregado %}
+                                            <tr class="row_bad_feedback"><td class="sugerencia" colspan="5"><b style="">Sugerencia:</b> {{ test.output_alternativo.sugerencia}} </td></tr>
+                                        {% else %}
+                                            <tr class="row_bad_feedback"><td class="sugerencia" colspan="5"><b style="">Sugerencia:</b> No hay sugerencias para este caso, contacta a tu tutora para mas ayuda.  </td></tr>
+
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
                             </tbody>

@@ -24,6 +24,11 @@ class TestFeedback(models.Model):
     caso = models.ForeignKey(Caso, on_delete=models.CASCADE, help_text="Caso que probó este test_feedback")
     feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE,
                                  help_text="Feedback con que se creó este test_feedback")
+    output_alternativo = models.ForeignKey('OutputAlternativo',
+                                           on_delete=models.CASCADE,
+                                           blank=True,
+                                           null=True,
+                                           help_text="si existe una sugerencia para el output obtenido,se agrega aquí")
 
 
 class OutputAlternativo(models.Model):
@@ -32,6 +37,7 @@ class OutputAlternativo(models.Model):
     frecuencia = models.IntegerField(help_text="Frecuencia con que ha aparecido el output", default=1)
     sugerencia = models.TextField(blank=True, help_text="Sugerencia para la estudiante de como mejorar el código")
     agregado = models.BooleanField(help_text="Si se ha agregado o no como output alternativo", default=False)
+
 
     class Meta:
         unique_together = ("caso", "output_obtenido")

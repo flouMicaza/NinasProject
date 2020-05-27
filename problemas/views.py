@@ -107,19 +107,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         feedback_codigo = codigo_solucion
         feedback = Feedback.objects.create(user=feedback_user, problema=feedback_problema,
                                            codigo_solucion=feedback_codigo)
-        for test in tests_arr:
-            input = test[1]
-            caso = Caso.objects.get(input=input, problema=problema, )
-            test_feedback = TestFeedback.objects.create(passed=test[0], output_obtenido=test[5], error=test[4],
-                                                        caso=caso,
-                                                        feedback=feedback)
-            # Si no pasa el test, tengo que agregar output_alternativo
-            if test_feedback.passed == 0:
-                output_alternativo, created = OutputAlternativo.objects.get_or_create(caso=caso,
-                                                                                      output_obtenido=test_feedback.output_obtenido)
-                if not created:
-                    output_alternativo.frecuencia += 1
-                    output_alternativo.save()
+        self.crear_test_feedbacks(feedback, tests_arr)
 
         this_context = self.get_context_data(**kwargs)
         this_context['test_feedback'] = TestFeedback.objects.filter(feedback=feedback)
@@ -129,6 +117,25 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         this_context['test_array'] = tests_arr
         this_context['resultados_active'] = "active"
         return render(request, self.feedback_template_name, this_context)
+
+    def crear_test_feedbacks(self, feedback, tests_arr):
+        for test in tests_arr:
+            input = test[1]
+            caso = Caso.objects.get(input=input, problema=feedback.problema)
+            test_feedback = TestFeedback.objects.create(passed=test[0], output_obtenido=test[5], error=test[4],
+                                                        caso=caso,
+                                                        feedback=feedback)
+
+            # Si no pasa el test, tengo que agregar output_alternativo y asociarselo al test_feedback
+            if test_feedback.passed == 0:
+                output_alternativo, created = OutputAlternativo.objects.get_or_create(caso=caso,
+                                                                                      output_obtenido=test_feedback.output_obtenido)
+                if not created:
+                    output_alternativo.frecuencia += 1
+                    output_alternativo.save()
+
+                test_feedback.output_alternativo = output_alternativo
+                test_feedback.save()
 
     def handle_failed_single_response(self, request, error, **kwargs):
         this_context = self.get_context_data(**kwargs)

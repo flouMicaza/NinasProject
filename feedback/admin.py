@@ -13,7 +13,7 @@ class FeedbackAdmin(admin.ModelAdmin):
 @admin.register(TestFeedback)
 class TestFeedbackAdmin(admin.ModelAdmin):
     base_model = TestFeedback
-    list_display = ['__str__','caso', 'feedback', 'output_obtenido']
+    list_display = ['__str__','caso', 'feedback', 'output_obtenido','output_alternativo']
 
 @admin.register(OutputAlternativo)
 class OutputAlternativoAdmin(admin.ModelAdmin):
