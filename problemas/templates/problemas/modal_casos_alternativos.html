@@ -1,5 +1,4 @@
 <div id="output_alternativo_{{ id_caso }}" class="modal">
-
     <div class="modal-content">
         <div id="header-modal">
             <div class="title-and-button">
@@ -16,33 +15,42 @@
 
         <div id="outputs-sugeridos" style="margin-top:2em">
             <h5>Outputs recibidos</h5>
-            <div style="max-width: 100%; overflow-x:auto">
-                <table id='tabla-output-sugerido' class="data-feedback" >
-                    <thead>
-                        <tr class="tabla-modal">
-                            <th>Output recibido</th>
-                            <th>Frecuencia</th>
-                            <th>Sugerencia</th>
-                            <th>Agregar caso alternativo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if outputs_sugeridos %}
-                            {% for output in outputs_sugeridos %}
-                                    <tr class=" tabla-modal">
-                                        <td class="consolas">{{  output.output_obtenido}}</td>
-                                        <td >{{ output.frecuencia }}</td>
-                                        <td><input type="text" placeholder="Ingresa una sugerencia para arreglar este caso"/></td>
-                                        <td><a class="btn btn-small"><i class="material-icons">add_circle</i></a></td>
-                                    </tr>
-                            {% endfor %}
-                        {% else %}
-                             <tr class="tabla-modal">
-                                 <td colspan="4"><span class="letra_rosada">No se han recibido errores para este caso</span></td>
+
+                <div style="max-width: 100%; overflow-x:auto">
+                <form method="post" action="{% url 'feedback:actualizar-outputs-alternativos' caso_id=id_caso%}" class="list">
+                    {% csrf_token %}
+                    {{ formset.management_form }}
+                    <table id='tabla-output-sugerido' class="data-feedback" >
+                        <thead>
+                            <tr class="tabla-modal">
+                                <th>Output recibido</th>
+                                <th>Frecuencia</th>
+                                <th>Sugerencia</th>
                             </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {% if outputs_sugeridos %}
+
+                                {% for form in formset %}
+                                    {{ form.id }}
+                                        <tr class=" tabla-modal">
+                                            <td class="consolas">{{  form.instance.output_obtenido}}</td>
+                                            <td >{{ form.instance.frecuencia }}</td>
+                                            <td>{{ form.sugerencia }}</td>
+                                        </tr>
+                                {% endfor %}
+
+                            {% else %}
+                                 <tr class="tabla-modal">
+                                     <td colspan="4"><span class="letra_rosada">No se han recibido errores para este caso</span></td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                    <div style="display: flex; justify-content: flex-end">
+                        <button type="submit" class="btn btn-small modal-close" style="margin-top:1em">Guardar y salir<span><i class="material-icons right">save</i></span></button>
+                    </div>
+                </form>
             </div>
         </div>
 

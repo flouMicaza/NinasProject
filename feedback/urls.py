@@ -7,4 +7,5 @@ from feedback import views
 app_name = 'feedback'
 urlpatterns = [
     path('casos-alternativos', views.CasosAlternativos.as_view(),name='casos-alternativos'),
-   ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('<int:caso_id>/actualizar-outputs-alternativos', views.ActualizarOutputsAlternativos.as_view(),name='actualizar-outputs-alternativos'),
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

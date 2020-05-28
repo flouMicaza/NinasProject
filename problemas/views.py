@@ -53,7 +53,6 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         return context
 
     def post(self, request, *args, **kwargs):
-
         # Get assignment and post data
         problema = get_object_or_404(Problema, id=self.kwargs['problema_id'])
         curso = get_object_or_404(Curso, id=self.kwargs['curso_id'])

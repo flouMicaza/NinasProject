@@ -48,13 +48,10 @@
         var modalDiv = $('#modal_div_' + id)
         $.ajax({
             url:'{% url 'feedback:casos-alternativos' %}',
-            type:'POST',
             data:{
                 'id':id,
-                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
             },
             success:function (data) {
-                console.log(data)
                 modalDiv.html(data)
                 mi_modal = $('#output_alternativo_'+ id)
                 mi_modal.modal();
