@@ -3,9 +3,8 @@ import os
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core import serializers
 from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponseForbidden, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
@@ -170,20 +169,3 @@ class CrearProblemasViews(LoginRequiredMixin, View):
         return render(request, 'problemas/crear_problema.html', {'clase': clase, 'form': form})
 
 
-class CasosAlternativos(LoginRequiredMixin, View):
-    def post(self, request):
-        if request.is_ajax():
-            id_caso = request.POST.get('id')
-            caso = Caso.objects.get(id=id_caso)
-            outputs_sugeridos = OutputAlternativo.objects.filter(caso=caso, agregado=False,frecuencia__gt=1)
-            outputs_agregados = OutputAlternativo.objects.filter(caso=caso, agregado=True)
-            context = {
-                'id_caso': id_caso,
-                'caso' : caso,
-                'outputs_sugeridos' : outputs_sugeridos,
-                'outputs_agregados' : outputs_agregados
-            }
-            return render(request, 'problemas/modal_casos_alternativos.html', context)
-
-        else:
-            return render(request, 'problemas/feedback_error.html', {'error':'No se hizo una request ajax'})

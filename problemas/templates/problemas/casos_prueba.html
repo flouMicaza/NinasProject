@@ -47,7 +47,7 @@
         var id = $(this)[0].id
         var modalDiv = $('#modal_div_' + id)
         $.ajax({
-            url:'{% url 'problemas:casos-alternativos' %}',
+            url:'{% url 'feedback:casos-alternativos' %}',
             type:'POST',
             data:{
                 'id':id,
@@ -70,7 +70,7 @@
         var id = $(this)[0].id
         console.log(id)
         $.ajax({
-            url:'{% url 'problemas:casos-alternativos' %}',
+            url:'{% url 'feedback:casos-alternativos' %}',
             type:'POST',
             data:{
                 'id':id,
