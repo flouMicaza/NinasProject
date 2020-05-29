@@ -1,90 +1,92 @@
-<div id="output_alternativo_{{ id_caso }}" class="modal">
-    <div class="modal-content">
-        <div id="header-modal">
-            <div class="title-and-button">
-                <h4>Outputs alternativos</h4>
-                <a href="#!" class="modal-close btn btn-small"><i class="material-icons">close</i> </a>
+<div class="content">
+    <div id="output_alternativo_{{ id_caso }}" class="modal">
+        <div class="modal-content">
+            <div id="header-modal">
+                <div class="title-and-button">
+                    <h4>Outputs alternativos</h4>
+                    <a href="#!" class="modal-close btn btn-small"><i class="material-icons">close</i> </a>
+                </div>
+                <p>En esta sección encontrarás los outputs recibidos para este caso de prueba y podrás agregar una sugerencia en cada output recibido, para que las estudiantes puedan arreglar su código. </p>
+
+                <blockquote>
+                    <p>Input: <span class="consolas">{{ caso.input }}</span></p>
+                    <p>Output esperado: <span class="consolas">{{ caso.output_esperado }}</span></p>
+                </blockquote>
             </div>
-            <p>En esta sección encontrarás los outputs recibidos para este caso de prueba y podrás agregar una sugerencia en cada output recibido, para que las estudiantes puedan arreglar su código. </p>
 
-            <blockquote>
-                <p>Input: <span class="consolas">{{ caso.input }}</span></p>
-                <p>Output esperado: <span class="consolas">{{ caso.output_esperado }}</span></p>
-            </blockquote>
-        </div>
+            <div id="outputs-sugeridos" style="margin-top:2em">
+                <h5>Outputs recibidos</h5>
 
-        <div id="outputs-sugeridos" style="margin-top:2em">
-            <h5>Outputs recibidos</h5>
+                    <div style="max-width: 100%; overflow-x:auto">
+                    <form method="post" action="{% url 'feedback:actualizar-outputs-alternativos' caso_id=id_caso%}" class="list">
+                        {% csrf_token %}
+                        {{ formset.management_form }}
+                        <table id='tabla-output-sugerido' class="data-feedback" >
+                            <thead>
+                                <tr class="tabla-modal">
+                                    <th>Output recibido</th>
+                                    <th>Frecuencia</th>
+                                    <th>Sugerencia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if outputs_sugeridos %}
 
-                <div style="max-width: 100%; overflow-x:auto">
-                <form method="post" action="{% url 'feedback:actualizar-outputs-alternativos' caso_id=id_caso%}" class="list">
-                    {% csrf_token %}
-                    {{ formset.management_form }}
-                    <table id='tabla-output-sugerido' class="data-feedback" >
+                                    {% for form in formset %}
+                                        {{ form.id }}
+                                            <tr class=" tabla-modal">
+                                                <td class="consolas">{{  form.instance.output_obtenido}}</td>
+                                                <td >{{ form.instance.frecuencia }}</td>
+                                                <td>{{ form.sugerencia }}</td>
+                                            </tr>
+                                    {% endfor %}
+
+                                {% else %}
+                                     <tr class="tabla-modal">
+                                         <td colspan="4"><span class="letra_rosada">No se han recibido errores para este caso</span></td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                        <div style="display: flex; justify-content: flex-end">
+                            <button type="submit" class="btn btn-small modal-close" style="margin-top:1em">Guardar y salir<span><i class="material-icons right">save</i></span></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="outputs-alternativos" style="margin-top: 2em">
+                <h5>Outputs agregados</h5>
+                 <div style="max-width: 100%; overflow-x:auto">
+                    <table id='tabla-output-agregado' class="data-feedback" >
                         <thead>
                             <tr class="tabla-modal">
                                 <th>Output recibido</th>
                                 <th>Frecuencia</th>
                                 <th>Sugerencia</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% if outputs_sugeridos %}
-
-                                {% for form in formset %}
-                                    {{ form.id }}
-                                        <tr class=" tabla-modal">
-                                            <td class="consolas">{{  form.instance.output_obtenido}}</td>
-                                            <td >{{ form.instance.frecuencia }}</td>
-                                            <td>{{ form.sugerencia }}</td>
-                                        </tr>
+                            {% if outputs_agregados %}
+                                {% for output in outputs_agregados %}
+                                    <tr class=" tabla-modal">
+                                        <td class="consolas">{{ output.output_obtenido }}</td>
+                                        <td >{{ output.frecuencia }}</td>
+                                        <td>{{ output.sugerencia }}</td>
+                                        <td><a class="btn btn-small disabled">Agregado</a></td>
+                                    </tr>
                                 {% endfor %}
-
                             {% else %}
-                                 <tr class="tabla-modal">
-                                     <td colspan="4"><span class="letra_rosada">No se han recibido errores para este caso</span></td>
+                                <tr class="tabla-modal">
+                                    <td colspan="4"><span class="letra_rosada"> No se han agregado casos aún. </span></td>
                                 </tr>
                             {% endif %}
                         </tbody>
                     </table>
-                    <div style="display: flex; justify-content: flex-end">
-                        <button type="submit" class="btn btn-small modal-close" style="margin-top:1em">Guardar y salir<span><i class="material-icons right">save</i></span></button>
-                    </div>
-                </form>
-            </div>
-        </div>
+                </div>
 
-        <div id="outputs-alternativos" style="margin-top: 2em">
-            <h5>Outputs agregados</h5>
-             <div style="max-width: 100%; overflow-x:auto">
-                <table id='tabla-output-agregado' class="data-feedback" >
-                    <thead>
-                        <tr class="tabla-modal">
-                            <th>Output recibido</th>
-                            <th>Frecuencia</th>
-                            <th>Sugerencia</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if outputs_agregados %}
-                            {% for output in outputs_agregados %}
-                                <tr class=" tabla-modal">
-                                    <td class="consolas">{{ output.output_obtenido }}</td>
-                                    <td >{{ output.frecuencia }}</td>
-                                    <td>{{ output.sugerencia }}</td>
-                                    <td><a class="btn btn-small disabled">Agregado</a></td>
-                                </tr>
-                            {% endfor %}
-                        {% else %}
-                            <tr class="tabla-modal">
-                                <td colspan="4"><span class="letra_rosada"> No se han agregado casos aún. </span></td>
-                            </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
             </div>
-
         </div>
     </div>
 </div>
