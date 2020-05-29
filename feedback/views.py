@@ -55,11 +55,12 @@ class ActualizarOutputsAlternativos(LoginRequiredMixin, View):
                 inst.agregado = True
                 inst.save()
         return HttpResponseRedirect(
-            reverse('problemas:casos-problema', kwargs={'curso_id': curso.id, 'problema_id': caso.problema.id, 'result': 0}))
+            reverse('problemas:casos-problema',
+                    kwargs={'curso_id': curso.id, 'problema_id': caso.problema.id, 'result': 0}))
 
-    #FIX: esto asume que un problema solo pertenece a un curso!
+    # FIX: esto asume que un problema solo pertenece a un curso!
     def get_curso(self, caso, user):
-        clase = Clase.objects.filter(problemas__in=[caso.problema]) #clases en la que está este problema
-        curso = clase.values('curso') #cursos en los que está este problema
+        clase = Clase.objects.filter(problemas__in=[caso.problema])  # clases en la que está este problema
+        curso = clase.values('curso')  # cursos en los que está este problema
 
         return Curso.objects.get(clase__in=clase)

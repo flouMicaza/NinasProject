@@ -43,12 +43,24 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         context['problema'] = problema
         context['has_tests'] = bool(problema.tests)
         context['casos'] = get_casos_por_categoria(Caso.objects.filter(problema=problema))
+
+        nuevos_outputs = {}
+        for caso in Caso.objects.filter(problema=problema):
+            nuevos_outputs[caso.id] = OutputAlternativo.objects.filter(caso=caso, agregado=False,frecuencia__gt=1).count()
+        context['nuevos_outputs'] = nuevos_outputs
+
         if self.tab == 'enunciado':
-            context['enunciado_active'] = "active"
+            context['enunciado_active'] = 'active'
+            context['casos_active'] = ''
+            context['resultados_active'] = ''
         elif self.tab == 'casos':
+            context['enunciado_active'] = ''
             context['casos_active'] = 'active'
+            context['resultados_active'] = ''
         else:
-            context['resultados_active'] = "active"
+            context['enunciado_active'] = ''
+            context['casos_active'] = ''
+            context['resultados_active'] = 'active'
 
         if self.kwargs['result'] == 1:
             feedback = Feedback.objects.filter(problema=problema).order_by('fecha_envio').last()
@@ -122,9 +134,11 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         this_context['cantidad_malos'] = this_context['test_feedback'].filter(passed='False').count()
         this_context['test_array'] = tests_arr
         this_context['resultados_active'] = "active"
+        this_context['enunciado_active'] = ""
         return render(request, self.feedback_template_name, this_context)
 
     def crear_test_feedbacks(self, feedback, tests_arr):
+        nuevos_outputs = {}
         for test in tests_arr:
             input = test[1]
             caso = Caso.objects.get(input=input, problema=feedback.problema)
@@ -132,7 +146,8 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
                                                         caso=caso,
                                                         feedback=feedback)
 
-            # Si no pasa el test, tengo que agregar output_alternativo y asociarselo al test_feedback
+
+            # Si no pasa el test, tengo que agregar output_alternativo y asociárselo al test_feedback
             if test_feedback.passed == 0:
                 output_alternativo, created = OutputAlternativo.objects.get_or_create(caso=caso,
                                                                                       output_obtenido=test_feedback.output_obtenido)
