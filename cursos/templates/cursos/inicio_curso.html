@@ -176,7 +176,7 @@
                              </div>
                             {% for problema in clase.problemas.all %}
                                 <div class="title-and-button">
-                                    <a href="{% url 'problemas:detalle-problema' curso_id=curso.id problema_id=problema.id result=0%}">{{ problema }}</a>
+                                    <a href="{% url 'problemas:enunciado-problema' curso_id=curso.id problema_id=problema.id result=0%}">{{ problema }}</a>
                                 </div>
                             {% endfor %}
                         </div>
