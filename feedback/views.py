@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 
@@ -32,16 +33,16 @@ class CasosAlternativos(LoginRequiredMixin, View):
             }
             return render(request, 'problemas/modal_casos_alternativos.html', context)
 
+        #TODO: si no es ajax que se debería hacer?
         else:
             print("la request no es ajax")
             return HttpResponseRedirect('/')
-
 
 
 @method_decorator([docente_required], name='dispatch')
 class ActualizarOutputsAlternativos(LoginRequiredMixin, View):
     def post(self, request,**kwargs):
         print("me llego el form!!!!!",kwargs['caso_id'])
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect(reverse('problemas:casos-problema', kwargs={'curso_id':1, 'problema_id':52 , 'result':0}))
 
 

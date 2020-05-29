@@ -27,6 +27,7 @@ ComunicationClient = Client()
 
 
 class ProblemasViews(LoginRequiredMixin, TemplateView):
+    tab = 'enunciado'
     login_url = 'usuarios:login'
     redirect_field_name = ''
     template_name = "problemas/inicio_problemas.html"
@@ -42,6 +43,12 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         context['problema'] = problema
         context['has_tests'] = bool(problema.tests)
         context['casos'] = get_casos_por_categoria(Caso.objects.filter(problema=problema))
+        if self.tab == 'enunciado':
+            context['enunciado_active'] = "active"
+        elif self.tab == 'casos':
+            context['casos_active'] = 'active'
+        else:
+            context['resultados_active'] = "active"
 
         if self.kwargs['result'] == 1:
             feedback = Feedback.objects.filter(problema=problema).order_by('fecha_envio').last()
@@ -53,6 +60,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         return context
 
     def post(self, request, *args, **kwargs):
+
         # Get assignment and post data
         problema = get_object_or_404(Problema, id=self.kwargs['problema_id'])
         curso = get_object_or_404(Curso, id=self.kwargs['curso_id'])
@@ -166,5 +174,3 @@ class CrearProblemasViews(LoginRequiredMixin, View):
             messages.success(request, 'Se creó el problema ' + nuevo_problema.titulo)
             return HttpResponseRedirect(reverse('cursos:curso', kwargs={'curso_id': clase.curso.id}))
         return render(request, 'problemas/crear_problema.html', {'clase': clase, 'form': form})
-
-
