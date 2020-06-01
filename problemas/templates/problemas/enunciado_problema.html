@@ -16,7 +16,14 @@
         <div class="card horizontal">
             <div class="card-content">
                 <span class="card-title">Subir solución</span>
+
                 <div class="card-action">
+                    {% if file_error %}
+                        <div class="alert">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            {{file_error}}
+                        </div>
+                    {% endif %}
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="row">
@@ -31,6 +38,7 @@
                                            placeholder = "Seleccionar archivo" />
                                 </div>
                             </div>
+
                             <small>Solo se acepta formato .cpp</small>
                         </div>
 

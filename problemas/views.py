@@ -89,8 +89,10 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         file = request.FILES.get('sample_code')  # Archivo que quiero testear
 
         # If the user didn´t uploaded a file it sends the user back to the same page
-        if file == None:
-            return render(request, self.template_name, self.get_context_data(**kwargs))
+        if file is None or file.name.split('.')[-1]!='cpp':
+            context_data = self.get_context_data(**kwargs)
+            context_data['file_error'] = "Debes agregar un archivo" if (file is None) else "El archivo debe ser formato .cpp"
+            return render(request, self.template_name, context_data)
 
         # Save the file in the media folder
         fs = FileSystemStorage()
