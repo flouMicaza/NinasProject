@@ -58,12 +58,17 @@ tr.row_bad_feedback > td {
   word-wrap: break-word;
 }
 
-tr.row_bad_feedback> td.sugerencia > b{
-  background-color:  #FF5252;
+tr.row_bad_feedback> td.sugerencia > .b_sugerencia{
+  background-color:  $primary-color;
   color: whitesmoke;
   padding: 0.5em
 }
 
+.b_error {
+  background-color:  $x-color;
+  color: whitesmoke;
+  padding: 0.5em
+}
 
 tr.row_bad_feedback> td.sugerencia{
   padding: 10px;

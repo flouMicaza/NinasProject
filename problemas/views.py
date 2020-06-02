@@ -96,7 +96,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
 
         # Save the file in the media folder
         fs = FileSystemStorage()
-        filename = fs.save(file.name, file)  # TODO: parsear el nombre del archivo para sacar el formato.
+        filename = fs.save(file.name, file)
 
         # get the path from the media folder
         script_path = settings.MEDIA_ROOT + '/' + filename
@@ -112,12 +112,12 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
             os.remove(compiled_file)
         except:
             pass
-        os.remove(script_path)
-        if response[0] == "success":
 
+        if response[0] == "success":
+            os.remove(script_path)
             return self.handle_successful_single_response(request, problema, response[1], file, **kwargs)
         else:
-            os.remove(script_path)
+            #os.remove(script_path)
             return self.handle_failed_single_response(request, response[1], **kwargs)
 
     def handle_successful_single_response(self, request, problema, tests_arr, codigo_solucion, **kwargs):
@@ -149,8 +149,8 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
                                                         feedback=feedback)
 
 
-            # Si no pasa el test, tengo que agregar output_alternativo y asociárselo al test_feedback
-            if test_feedback.passed == 0:
+            # Si no pasa el test y no tuvo error, tengo que agregar output_alternativo y asociárselo al test_feedback
+            if test_feedback.passed == 0 and test_feedback.error == 0:
                 output_alternativo, created = OutputAlternativo.objects.get_or_create(caso=caso,
                                                                                       output_obtenido=test_feedback.output_obtenido)
                 if not created:

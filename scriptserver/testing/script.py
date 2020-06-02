@@ -1,4 +1,4 @@
-from subprocess import Popen, PIPE, TimeoutExpired, call
+from subprocess import Popen, PIPE, TimeoutExpired, call, STDOUT, run
 from ..util import *
 script_dict = {}
 
@@ -30,6 +30,7 @@ class Script:
         killed_by_time = False
         try:
             out, err = p.communicate(timeout=timeout)
+            err = p.returncode
         except TimeoutExpired:
             p.kill()
             out, err = p.communicate()
@@ -39,7 +40,7 @@ class Script:
 
     def process_error(self, err):
         # No Error
-        if len(err) == 0:
+        if err == 0:
             return 0
         # Error
         else:
@@ -75,7 +76,10 @@ class CppScript(Script):
     def get_process(self):
         try:
             file_name = get_file_name(self.path)
-            call(['g++','-std=c++11',self.path,'-o',file_name])
+            # Con run puedo tomar el output y el error que se genere. Para trabajo futuro.
+            a = run(['g++','-std=c++11',self.path,'-o',file_name], capture_output=True)
+
+
         except Exception as e:
             print("Excepcion porque esta malooooo en script",e) #TODO: Revisar que exception quiero mostras y como lidiar con ellas.
 

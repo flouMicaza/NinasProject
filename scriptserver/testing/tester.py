@@ -4,7 +4,7 @@ from scriptserver.util import clean_output
 
 class Tester:
 
-    def __init__(self, timeout=5):
+    def __init__(self, timeout=2):
         self.tests = []
         self.timeout = timeout
 
@@ -16,7 +16,6 @@ class Tester:
         """
         self.tests.append(test)
 
-    #TODO: MOdificar esto cuando modifique los test. 
     def add_new_test(self, test_input, test_output, comment=""):
         """
         Creates a tests and adds it to the tests array

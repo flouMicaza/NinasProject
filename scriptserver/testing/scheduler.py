@@ -8,7 +8,7 @@ import logging
 
 class Scheduler(Thread):
 
-    def __init__(self, server, process_num=1):
+    def __init__(self, server, process_num=10):
         Thread.__init__(self)
 
         self.queue = Queue()
@@ -89,12 +89,21 @@ class SchedulerSlave(Thread):
     def run_script(self):
         try:
             results = self.tester.test_script(self.script)
-        except Exception as e: #TODO: Aqui podría ser que puedo agarrar el error de compilación
-            return self.server.error_slave.add_submission_to_queue(self.submission_id, "Error occured while testing script. Please try again later.")
+        except OSError:
+            return self.server.error_slave.add_submission_to_queue(self.submission_id,
+                                                                   "Ocurrió un error al compilar tu archivo, "
+                                                                   "comprueba con tu tutora que tu código compile y "
+                                                                   "vuelve a intentarlo. ")
+        except Exception as e:
+            return self.server.error_slave.add_submission_to_queue(self.submission_id, "Ocurrió un error al procesar "
+                                                                                       "tu código, comprueba con tu "
+                                                                                       "tutora que tu código compile "
+                                                                                       "y vuelve a intentarlo. ")
 
         if len(results) > 0:
             self.server.answer_submission(self.submission_id, results)
         else:
-            self.server.answer_submission_error(self.submission_id, "No tests exist in the test file. Please contact a teacher of assistant of the course of this assignment to fix this error.")
+            self.server.answer_submission_error(self.submission_id, "No hay tests para este problema. Contacta a tu "
+                                                                    "tutora para que arregle este error.")
 
         self.scheduler.add_process()
