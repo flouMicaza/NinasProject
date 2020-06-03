@@ -34,6 +34,7 @@ class Script:
         except TimeoutExpired:
             p.kill()
             out, err = p.communicate()
+            err = p.returncode
             killed_by_time = True
 
         return out, err, killed_by_time
@@ -78,7 +79,7 @@ class CppScript(Script):
             file_name = get_file_name(self.path)
             # Con run puedo tomar el output y el error que se genere. Para trabajo futuro.
             a = run(['g++','-std=c++11',self.path,'-o',file_name], capture_output=True)
-
+            print(a)
 
         except Exception as e:
             print("Excepcion porque esta malooooo en script",e) #TODO: Revisar que exception quiero mostras y como lidiar con ellas.

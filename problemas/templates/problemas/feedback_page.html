@@ -48,16 +48,16 @@
                                         </tr>
                                         <tr class="row_bad_feedback">
                                             <td class="sugerencia" colspan="5">
-                                                <div style="display: flex">
+                                                <div style="display: flex; justify-content: center">
                                                     {% if test.output_alternativo and test.output_alternativo.agregado %}
                                                         <b class="b_sugerencia"><i class="material-icons">lightbulb_outline</i>Sugerencia: </b>
                                                         <p>{{ test.output_alternativo.sugerencia}}</p>
                                                     {% elif test.error == '1'%}
                                                         <b class="b_error"><i class="material-icons ">warning</i> Error:</b>
-                                                        <p>Ocurrió un error al correr este test. Pide ayuda a tu tutora para resolverlo.</p>
+                                                        <p>El código tuvo un error antes de terminar. Pide ayuda a tu tutora para resolverlo.</p>
                                                     {% elif test.error == '2'%}
                                                         <b class="b_error"><i class="material-icons">access_time</i> Error de timeout:</b>
-                                                        <p>Tu código demoró mucho tiempo en correr y tuvo que parar. Pide ayuda a tu tutora para resolver este problema.  </p>
+                                                        <p>El código demoró mucho tiempo en correr y tuvo que parar. Pide ayuda a tu tutora para resolver este problema.  </p>
                                                     {% else %}
                                                         <b class="b_sugerencia"><i class="material-icons">lightbulb_outline</i> Sugerencia:</b>
                                                         <p>Aún no hay sugerencias para este caso, pide ayuda a tu tutora para arreglar tu código.</p>
