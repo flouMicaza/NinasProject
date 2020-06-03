@@ -40,7 +40,7 @@ class Script:
 
     def process_error(self, err):
         # No Error
-        if err == 0:
+        if err >= 0:
             return 0
         # Error
         else:

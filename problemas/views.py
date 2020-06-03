@@ -160,6 +160,9 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
                 test_feedback.output_alternativo = output_alternativo
                 test_feedback.save()
 
+    '''
+    Los errrores serían si no hay tests o si no compila el código. 
+    '''
     def handle_failed_single_response(self, request, error, **kwargs):
         this_context = self.get_context_data(**kwargs)
         this_context['error'] = error
