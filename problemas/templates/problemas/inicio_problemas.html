@@ -18,7 +18,13 @@
 
   </ul>
   <div id="enunciado" class="col s12 tab_content">{% include "problemas/enunciado_problema.html" %}</div>
-  <div id="resultados" class="col s12 tab_content">{% include "problemas/feedback_page.html" %}</div>
+  <div id="resultados" class="col s12 tab_content">
+      {%  if error %}
+          {% include "error.html" %}
+      {% else %}
+        {% include "problemas/feedback_page.html" %}
+      {% endif %}
+  </div>
     {% if request.user.es_profesora or request.user.es_voluntaria %}
         <div id="casos" class="col s12 tab_content">{% include "problemas/casos_prueba.html" %}</div>
     {% endif %}

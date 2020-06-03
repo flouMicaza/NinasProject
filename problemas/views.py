@@ -32,7 +32,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
     redirect_field_name = ''
     template_name = "problemas/inicio_problemas.html"
     feedback_template_name = "problemas/inicio_problemas.html"
-    feedback_error_template_name = "problemas/feedback_error.html"
+    feedback_error_template_name = "error.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -46,7 +46,8 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
 
         nuevos_outputs = {}
         for caso in Caso.objects.filter(problema=problema):
-            nuevos_outputs[caso.id] = OutputAlternativo.objects.filter(caso=caso, agregado=False,frecuencia__gt=1).count()
+            nuevos_outputs[caso.id] = OutputAlternativo.objects.filter(caso=caso, agregado=False,
+                                                                       frecuencia__gt=1).count()
         context['nuevos_outputs'] = nuevos_outputs
 
         if self.tab == 'enunciado':
@@ -89,9 +90,10 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         file = request.FILES.get('sample_code')  # Archivo que quiero testear
 
         # If the user didn´t uploaded a file it sends the user back to the same page
-        if file is None or file.name.split('.')[-1]!='cpp':
+        if file is None or file.name.split('.')[-1] != 'cpp':
             context_data = self.get_context_data(**kwargs)
-            context_data['file_error'] = "Debes agregar un archivo" if (file is None) else "El archivo debe ser formato .cpp"
+            context_data['file_error'] = "Debes agregar un archivo" if (
+                    file is None) else "El archivo debe ser formato .cpp"
             return render(request, self.template_name, context_data)
 
         # Save the file in the media folder
@@ -117,7 +119,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
             os.remove(script_path)
             return self.handle_successful_single_response(request, problema, response[1], file, **kwargs)
         else:
-            #os.remove(script_path)
+            # os.remove(script_path)
             return self.handle_failed_single_response(request, response[1], **kwargs)
 
     def handle_successful_single_response(self, request, problema, tests_arr, codigo_solucion, **kwargs):
@@ -148,7 +150,6 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
                                                         caso=caso,
                                                         feedback=feedback)
 
-
             # Si no pasa el test y no tuvo error, tengo que agregar output_alternativo y asociárselo al test_feedback
             if test_feedback.passed == 0 and test_feedback.error == 0:
                 output_alternativo, created = OutputAlternativo.objects.get_or_create(caso=caso,
@@ -163,10 +164,14 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
     '''
     Los errrores serían si no hay tests o si no compila el código. 
     '''
+
     def handle_failed_single_response(self, request, error, **kwargs):
         this_context = self.get_context_data(**kwargs)
         this_context['error'] = error
-        return render(request, self.feedback_error_template_name, this_context)
+        this_context['error_resumen'] = "Hubo un error al procesar tu código"
+        this_context['resultados_active'] = "active"
+        this_context['enunciado_active'] = ""
+        return render(request, self.feedback_template_name, this_context)
 
 
 @method_decorator([profesora_required], name='dispatch')
