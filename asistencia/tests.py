@@ -66,8 +66,8 @@ class InitialData(TestCase):
 
         ## ASISTENCIA
 
-        self.clase_basico1 = Clase.objects.create(nombre="Clase 1: Ciclos for", curso=self.curso_basico)
-        self.clase_basico2 = Clase.objects.create(nombre="Clase 2: Ciclos while", curso=self.curso_basico)
+        self.clase_basico1 = Clase.objects.create(nombre="Clase 1: Ciclos for", curso=self.curso_basico, fecha_clase=date(2020, 4, 4))
+        self.clase_basico2 = Clase.objects.create(nombre="Clase 2: Ciclos while", curso=self.curso_basico, fecha_clase=date(2020, 4, 5))
 
         ## basico1 : alumna1, alumna3, alumna4, alumna2
         ## basico2 : alumna2, alumna4
@@ -126,7 +126,7 @@ class UtilsTest(InitialData):
     def test_asistencias_alumna(self):
         asistencias = Asistencia.objects.filter(alumna=self.usuaria, clase__curso=self.mi_curso).order_by('clase_id')
         clases_asistencias = clases_asistencias_alumna(self.usuaria, self.mi_curso)
-        Clase.objects.create(nombre="mi_clase", curso=self.mi_curso)  # clase sin asistencias
+        Clase.objects.create(nombre="mi_clase", curso=self.mi_curso,fecha_clase=date(2020, 4, 4))  # clase sin asistencias
         self.assertEqual(len(asistencias), len(clases_asistencias))
         self.assertNotEqual(len(clases_asistencias), len(Clase.objects.filter(curso=self.mi_curso)))
 
@@ -169,8 +169,8 @@ class Asistencia_GralViewTest(InitialData):
         usuaria = self.usuaria_profesora1
         self.curso = Curso.objects.create(nombre="Django", cant_clases=15)
         self.curso.profesoras.add(usuaria)
-        self.clase1 = Clase.objects.create(nombre="Clase 1: Modelos en Django", curso=self.curso)
-        self.clase2 = Clase.objects.create(nombre="Clase 2: Administrador de Django", curso=self.curso)
+        self.clase1 = Clase.objects.create(nombre="Clase 1: Modelos en Django", curso=self.curso,fecha_clase=date(2020, 4, 10))
+        self.clase2 = Clase.objects.create(nombre="Clase 2: Administrador de Django", curso=self.curso,fecha_clase=date(2020, 5, 4))
 
         self.client.force_login(user=usuaria)
 
@@ -232,8 +232,8 @@ class Asistencia_GralViewTest(InitialData):
         self.curso.profesoras.add(usuaria)
         self.curso.alumnas.add(self.usuaria_alumna1)
         self.curso.alumnas.add(self.usuaria_alumna2)
-        self.clase1 = Clase.objects.create(nombre="Clase 1: Modelos en Django", curso=self.curso)
-        self.clase2 = Clase.objects.create(nombre="Clase 2: Administrador de Django", curso=self.curso)
+        self.clase1 = Clase.objects.create(nombre="Clase 1: Modelos en Django", curso=self.curso,fecha_clase=date(2020, 5, 1))
+        self.clase2 = Clase.objects.create(nombre="Clase 2: Administrador de Django", curso=self.curso,fecha_clase=date(2020, 10, 4))
 
         self.client.force_login(user=usuaria)
 

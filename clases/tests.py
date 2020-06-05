@@ -75,27 +75,20 @@ class ClasesEnCursoTest(InitialData):
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_basico.id}))
         self.assertNotContains(response, "Clase 2: " + self.clase_basica_2.nombre)
 
-    def test_voluntaria_no_ve_clases_privadas(self):
-        self.client.force_login(user=self.usuaria_voluntaria)
-        response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_basico.id}))
-        self.assertNotContains(response, "Clase 2: " + self.clase_basica_2.nombre)
-
     def test_profesora_puede_editar_clase(self):
         self.client.force_login(user=self.usuaria_profesora)
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_basico.id}))
-        self.assertContains(response, 'Editar')
+        self.assertContains(response, 'create')
 
     def test_voluntaria_no_puede_editar(self):
         self.client.force_login(user=self.usuaria_voluntaria)
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_basico.id}))
-        self.assertNotContains(response, 'editar')
-        self.assertNotContains(response, 'guardar')
+        self.assertNotContains(response, 'create')
 
     def test_alumna_no_puede_editar(self):
         self.client.force_login(user=self.usuaria_alumna)
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_basico.id}))
-        self.assertNotContains(response, 'editar')
-        self.assertNotContains(response, 'guardar')
+        self.assertNotContains(response, 'create')
 
     def test_curso_sin_clases(self):
         self.client.force_login(user=self.usuaria_voluntaria)

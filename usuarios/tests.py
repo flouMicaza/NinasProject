@@ -129,15 +129,14 @@ class UserModelTest(InitialData):
 
     def test_menu_items_docente(self):
         menu_items = self.usuaria_prof.get_menu_items()
-        self.menu_items = [("Mis cursos", '/')]
+        self.menu_items = [("Mis cursos", '/'), ('Cambiar contraseña', '/reset-password/')]
         self.assertEquals(self.menu_items, menu_items)
         menu_items_voluntaria = self.usuaria_voluntaria.get_menu_items()
         self.assertEquals(self.menu_items, menu_items_voluntaria)
 
     def test_menu_items_coordinadora(self):
-        menu_items = self.usuaria_coordinadora.get_menu_items()
-        self.menu_items = [("Mis cursos", '/'), ('Modo coordinadora', '/coordinadora/inicio/')]
-        self.assertEquals(self.menu_items, menu_items)
+        #no habrá coordinadora por ahora.
+        pass
 
     def test_menu_items_estudiante(self):
         pass
@@ -153,8 +152,9 @@ class MenuTest(InitialData):
         self.assertContains(response, 'Mis cursos')
         self.assertNotContains(response, 'Modo coordinadora')
 
-    def test_menu_coordinadora(self):
+    '''def test_menu_coordinadora(self):
         self.client.force_login(user=self.usuaria_coordinadora)
         response = self.client.get(reverse('cursos:mis_cursos'))
         self.assertContains(response, 'Mis cursos')
         self.assertContains(response, 'Modo coordinadora')
+    '''

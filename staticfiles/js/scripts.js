@@ -12,13 +12,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 
+document.addEventListener('DOMContentLoaded', function() {
+    var elem = document.querySelector('.collapsible.expandable');
+    var instance = M.Collapsible.init(elem, {
+      accordion: false
+    });
+});
+
 
 //modal asistencia de un curso (para una alumna)
 $(document).ready(function(){
     $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
     $('select').not('.disabled').formSelect();
     $('.modal').modal();
-    $('.tabs').tabs();
+    $('ul.tabs').tabs();
     $('#tabla_asist_gral').DataTable({
         scrollX: true,
         order:[[0, "asc"]],
@@ -46,9 +53,8 @@ $(document).ready(function(){
 
         }
     
-});
+    });
 
-$('select').material_select();
 });
 
 $( function()

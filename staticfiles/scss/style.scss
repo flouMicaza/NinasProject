@@ -1,31 +1,91 @@
-$primary-color: #FF5252 !default;
+$primary-color: #FF5252!default;
 $hover-color:  #FF8A80;
-$present_color: #FCFFD1;
+$present_color: #fcffd1;
 $absent-color: #FECCC4;
-$x-color: #B32727;
-$check-color: #15B342;
+$x-color: #eb1212;
+$check-color: #05A175;
 $not-enabled-color: #80868b;
 
+
+.letra_rosada {
+  color: $primary-color;
+}
 .container {
   margin-top: 2em;
 }
-.btn, .btn-large, .btn-small {
-  background-color: $primary-color;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+
+.output {
+  text-align: left !important;
+}
+#reporte_inicial {
+
+  font-size: 1.5em;
+  margin-top:1em;
+  margin-bottom: 1em;
+}
+.consolas{
+    font: 1.3rem Inconsolata, monospace;
+}
+#casos-de-prueba > tbody > tr:nth-child(even) {background-color: #f2f2f2;}
+
+.tabla-modal > td, .tabla-modal > th{
+  padding: 10px;
+  border-bottom: 1px solid $not-enabled-color ;
+  border-top: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  text-align: center;
+}
+
+tr.row_good_feedback > td , tr.row_good_feedback > th{
+  padding: 10px;
+  border-bottom: 1px solid $not-enabled-color ;
+  border-top: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  text-align: center;
+  max-width: 5em;
+  word-wrap: break-word;
+}
+tr.row_bad_feedback > td {
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  border-bottom: #ffffff;
+  border-right: 0px solid #ddd;
+  border-left: 0px solid #ddd;
+  text-align: center;
+  max-width: 5em;
+  word-wrap: break-word;
+}
+
+.b_sugerencia{
+  background-color:  $primary-color;
+  color: whitesmoke;
+  padding: 0.5em;
+  margin-right: 0.5em;
+  display: flex;
+  align-items: center;
 
 }
 
-.btn:hover {
-  background-color: $hover-color;
+.b_error {
+  background-color:  $x-color;
+  color: whitesmoke;
+  padding: 0.5em;
+  margin-right: 0.5em;
+  display: flex;
+  align-items: center;
 }
 
-nav {
-  background-color: $primary-color;
-}
-
-
-table {
-  border-collapse:collapse;
+tr.row_bad_feedback> td.sugerencia{
+  padding: 10px;
+  padding-left: 20px;
+  border-bottom: 2px solid $not-enabled-color;
+  border-top: #ffffff;
+  text-align: center;
+  max-width: 5em;
+  word-wrap: break-word;
+  padding-bottom:1.5em;
 }
 
 
@@ -33,8 +93,14 @@ td, th {
     padding: 10px;
     border-bottom: 2px solid $hover-color;
     text-align: center;
+	word-wrap: break-word;
 }
 
+.row_bad_feedback{
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-bottom: #ffffff;
+}
 .tabla-asistencia-alumna {
     table-layout: fixed;
     width: 80%;
@@ -52,20 +118,20 @@ td, th {
     margin-block-end: 10%;
 }
 
-.tabla-asist-gral .sticky-left{
+.tabla-asist-gral1 .sticky-left{
     position: sticky;
     left: 0;
     background-color: white;
 }
 
 
-.tabla-asist-gral .sticky-right-first {
+.tabla-asist-gral1 .sticky-right-first {
   position: sticky;
   right: 74px;
   background-color: white;
 }
 
-.tabla-asist-gral .sticky-right-last {
+.tabla-asist-gral1 .sticky-right-last {
   position: sticky;
   right: 0;
   background-color: white;
@@ -194,41 +260,8 @@ div.dataTables_wrapper {
   align-items: baseline;
 }
 
-.collection-info {
-  display: flex;
-  justify-content: space-between;
-}
 
-/* label focus color */
-   .input-field input[type=text]:not(.browser-default):focus + label {
-     color: $primary-color;
-   }
-	.input-field input[type=password]:not(.browser-default):focus + label {
-     color: $primary-color;
-   }
-   /* label underline focus color */
-   .input-field input[type=text]:not(.browser-default):focus {
-     border-bottom: 1px solid $primary-color;
-     box-shadow: 0 1px 0 0 $primary-color;
-   }
-	.input-field input[type=password]:not(.browser-default):focus {
-     border-bottom: 1px solid $primary-color;
-     box-shadow: 0 1px 0 0 $primary-color;
-   }
-   /* valid color */
-   .input-field input[type=text].valid {
-     border-bottom: 1px solid $primary-color;
-     box-shadow: 0 1px 0 0 $primary-color;
-   }
-   .input-field input[type=password].valid {
-     border-bottom: 1px solid $primary-color;
-     box-shadow: 0 1px 0 0 $primary-color;
-   }
 
-  [type="checkbox"]:checked + span:not(.lever)::before {
-    border-right : 2px solid $hover-color;
-    border-bottom : 2px solid $hover-color;
-  }
 
 
   .icon_style{
@@ -273,11 +306,15 @@ hr.problemas-line {
   border: 1px dotted $not-enabled-color;
 }
 
-.collection {
-  border: 1px solid $hover-color;
+
+.feedback-bueno {
+  background-color: $check-color
 }
 
-.collection .collection-item {
-  border-bottom: 5px solid $hover-color;
+.feedback-malo {
+  background-color: $x-color
 }
 
+.tab_content {
+  padding: 1em;
+}
