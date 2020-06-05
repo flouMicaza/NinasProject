@@ -62,3 +62,26 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return HttpResponseRedirect(reverse('usuarios:index'))
+
+
+class ResetPassword(LoginRequiredMixin, View):
+    login_url = 'usuarios:login'
+    redirect_field_name = ''
+
+    def get(self, request):
+        return render(request, 'registration/reset-password.html')
+
+    def post(self, request):
+        old_password = request.POST['actual_pass']
+        new_password1 = request.POST['password']
+        new_password2 = request.POST['password_2']
+        user = authenticate(request, username=request.user.username, password=old_password)
+        if user is not None and new_password1==new_password2:
+            user.set_password(new_password2)
+            user.save()
+            login(request, user)
+            return HttpResponseRedirect(reverse('usuarios:index'))
+        else:
+            return render(request, 'registration/reset-password.html', {
+                'error_message': 'Contraseña incorrecta o contraseñas no coinciden.'
+            })

@@ -38,11 +38,3 @@ def clases_asistencias_alumna(usuaria, curso):
         lista += [[asistencia.clase, asistencia.asistio]]
     return lista
 
-
-
-
-
-
-
-
-

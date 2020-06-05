@@ -31,10 +31,10 @@
             <div >
                 {% if id_prox_clase < 0 %} <!-- disabled porque ya se pasó asistencia en todas-->
                     <div class="material-icons right" >
-                        <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=1 %}" class="waves-effect waves-light btn-small btn" >
+                        <button class="waves-effect waves-light btn-small btn" disabled>
                             <i class="material-icons right" >edit</i>
-                                Modificar Asistencia
-                            </a>
+                                Pasar Asistencia
+                            </button>
                     </div>
                 {% else %} <!-- boton activado-->
                     <div class="material-icons right" >
@@ -100,25 +100,25 @@
 
                                 {% endfor %}
                 </tbody>
-                        
+
                         <tfoot>
-                        
+
                             <tr>
                                 <th>  </th>
-                                
+
                                 <th class="sticky-left"> Alumnas por clase </th>
-                                
+
                                 <td>  </td>
                                 {% for total in total_por_clase %}
-                                
+
                                 <td> {{ total }} </td>
-                                
+
                                 {% endfor %}
-                                
+
                                 <td>  </td>
-                                
+
                             </tr>
-                            
+
                         </tfoot>
 
                 </table>

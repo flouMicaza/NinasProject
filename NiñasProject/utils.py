@@ -55,3 +55,10 @@ def get_casos_por_categoria(casos):
         cat = {'categoria': categoria['categoría'], 'casos': casos.filter(categoría=categoria['categoría'])}
         casos_ordenados.append(cat)
     return casos_ordenados
+
+## Entrega la clase si esta corresponde al curso ingresado
+def get_clase(curso_id, clase_id):
+    clases = Clase.objects.filter(curso_id=curso_id, id=clase_id)
+    if len(clases) > 0:
+        return clases[0]
+    return None

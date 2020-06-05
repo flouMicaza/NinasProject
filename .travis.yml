@@ -3,12 +3,9 @@ python:
   - "3.6"
 install:
   - pip3 install -r requirements.txt
-addons:
-  chrome: stable
 before_script:
+  - python manage.py collectstatic --noinput
   - python manage.py makemigrations
   - python manage.py migrate
-  - echo $PATH
-
 script:
   - python manage.py test

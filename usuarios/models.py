@@ -19,10 +19,14 @@ class User(AbstractUser):
                              ('Modo coordinadora', reverse('coordinadora:inicio_coordinadora'))]
         }
         if self.es_coordinadora:
-            return items_dict['coordinadora']
+            items_dict['profesora'].append(('Cambiar contraseña', reverse('usuarios:reset-password')))
+            return items_dict['profesora']
         elif self.es_profesora:
+            items_dict['profesora'].append(('Cambiar contraseña', reverse('usuarios:reset-password')))
             return items_dict['profesora']
         elif self.es_voluntaria:
+            items_dict['voluntaria'].append(('Cambiar contraseña', reverse('usuarios:reset-password')))
             return items_dict['voluntaria']
         elif self.es_alumna:
+            items_dict['alumna:'].append(('Cambiar contraseña', reverse('usuarios:reset-password')))
             return items_dict['alumna:']
