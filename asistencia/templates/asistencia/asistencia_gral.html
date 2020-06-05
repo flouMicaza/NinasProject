@@ -132,15 +132,19 @@
             <div style="text-align:center;margin-top:10%"><img src="{% static 'images/escribir.png' %}" alt="gatito que pasa asistencia" style="width:300px;"></div>
         </div>
 
-        <!-- boton de pasar asistencia:-->
-        <div class="flex-center">
-                <div class="material-icons left">
-                    <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn ">
-                        <i class="material-icons right">format_list_bulleted</i>
-                            Pasar asistencia
-                        </a>
-                </div>
-        </div>
+        {% if id_prox_clase > 0 %}
+            <!-- boton de pasar asistencia:-->
+            <div class="flex-center">
+                    <div class="material-icons left">
+                        <a href="{% url 'asistencia:asistencia' curso_id=curso.id clase_id=id_prox_clase %}" class="waves-effect waves-light btn-small btn ">
+                            <i class="material-icons right">format_list_bulleted</i>
+                                Pasar asistencia
+                            </a>
+                    </div>
+            </div>
+        {% else %}
+            <p  class="flex-center">El día de la clase podrás empezar a pasar asistencia</p>
+        {% endif %}
         <!-- boton de volver: -->
         <div class="flex-center">
             <div class="material-icons left">

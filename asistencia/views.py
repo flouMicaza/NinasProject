@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect
 from django.forms import formset_factory, modelformset_factory
 
 from NiñasProject.decorators import profesora_required, docente_required
-from NiñasProject.utils import get_curso, get_clase
+from NiñasProject.utils import get_cursos, get_clase
 from usuarios.models import User
 from .forms import AsistenciaModelFormSet
 from .utils import *
@@ -49,7 +49,7 @@ class Asistencia_GralView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         curso_id = kwargs['curso_id']
         usuaria = User.objects.get(username=request.user.username)
-        curso = get_curso(usuaria, curso_id)
+        curso = get_cursos(usuaria, curso_id)
         if curso != None:
             clases_totales = Clase.objects.filter(curso=curso).order_by('id')
             asistencias = Asistencia.objects.filter(clase__curso=curso).order_by('clase_id')
@@ -104,7 +104,7 @@ def get_form(request, **kwargs):
     clase = get_object_or_404(Clase, pk=clase_id)
     ## entrega la clase si corresponde al curso
 
-    if get_curso(usuaria,curso_id)==None:
+    if get_cursos(usuaria,curso_id)==None:
         return HttpResponseForbidden("No tienes permiso para pasar asistencia en este curso.")
 
     elif get_clase(curso_id, clase_id)==None :

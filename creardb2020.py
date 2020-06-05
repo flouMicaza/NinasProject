@@ -13,10 +13,10 @@ from clases.models import Clase
 @transaction.atomic
 def poblar_db():
     # guardado en la bdd
-    curso_basico = Curso.objects.create(nombre="C++: Básico, FCFM", cant_clases=8)
-    curso_medio = Curso.objects.create(nombre="C++: Medio, FCFM", cant_clases=8)
-    curso_basico_umayor = Curso.objects.create(nombre="C++: Básico, UMayor", cant_clases=8)
-    curso_medio_umayor = Curso.objects.create(nombre="C++: Medio, UMayor", cant_clases=8)
+    curso_basico = Curso.objects.create(nombre="C++: Básico, FCFM", cant_clases=18)
+    curso_medio = Curso.objects.create(nombre="C++: Medio, FCFM", cant_clases=18)
+    curso_basico_umayor = Curso.objects.create(nombre="C++: Básico, UAndes", cant_clases=18)
+    curso_medio_umayor = Curso.objects.create(nombre="C++: Medio, UAndes", cant_clases=18)
 
 
 
