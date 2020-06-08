@@ -14,37 +14,37 @@ from clases.models import Clase
 def poblar_db():
     # guardado en la bdd
     curso_basico = Curso.objects.create(nombre="C++: Básico, FCFM", cant_clases=8)
-    curso_medio = Curso.objects.create(nombre="C++: Medio, FCFM", cant_clases=8)
-    curso_basico_umayor = Curso.objects.create(nombre="C++: Básico, UMayor", cant_clases=8)
-    curso_medio_umayor = Curso.objects.create(nombre="C++: Medio, UMayor", cant_clases=8)
+    curso_medio = Curso.objects.create(nombre="C++: Avanzado, FCFM", cant_clases=8)
+    curso_basico_umayor = Curso.objects.create(nombre="C++: Básico, UAndes", cant_clases=8)
+    curso_medio_umayor = Curso.objects.create(nombre="C++: Medio, UAndes", cant_clases=8)
 
     ## PROFESORAS
 
     # guardado en la bdd
-    usuaria_profesora = User.objects.create_user(username="profesora", password="contraseña123", es_profesora=True)
-    usuaria_profesora2 = User.objects.create_user(username="profesora2", password="contraseña123", es_profesora=True)
+    usuaria_profesora = User.objects.create_user(username="profesora", password="ninas20anual", es_profesora=True)
+    usuaria_profesora2 = User.objects.create_user(username="profesora2", password="ninas20anual", es_profesora=True)
 
     # nuevo
-    usuaria_profesora3 = User.objects.create_user(username="profesora3", password="contraseña123", es_profesora=True)
-    usuaria_profesora4 = User.objects.create_user(username="profesora4", password="contraseña123", es_profesora=True)
-    usuaria_profesora5 = User.objects.create_user(username="profesora5", password="contraseña123", es_profesora=True)
-    usuaria_profesora6 = User.objects.create_user(username="profesora6", password="contraseña123", es_profesora=True)
-    usuaria_profesora7 = User.objects.create_user(username="profesora7", password="contraseña123", es_profesora=True)
-    usuaria_profesora8 = User.objects.create_user(username="profesora8", password="contraseña123", es_profesora=True)
+    usuaria_profesora3 = User.objects.create_user(username="profesora3", password="ninas20anual", es_profesora=True)
+    usuaria_profesora4 = User.objects.create_user(username="profesora4", password="ninas20anual", es_profesora=True)
+    usuaria_profesora5 = User.objects.create_user(username="profesora5", password="ninas20anual", es_profesora=True)
+    usuaria_profesora6 = User.objects.create_user(username="profesora6", password="ninas20anual", es_profesora=True)
+    usuaria_profesora7 = User.objects.create_user(username="profesora7", password="ninas20anual", es_profesora=True)
+    usuaria_profesora8 = User.objects.create_user(username="profesora8", password="ninas20anual", es_profesora=True)
 
     ## VOLUNTARIAS
 
     # guardado en la bdd
-    usuaria_voluntaria = User.objects.create_user(username="voluntaria", password="contraseña123", es_voluntaria=True)
-    usuaria_voluntaria2 = User.objects.create_user(username="voluntaria2", password="contraseña123", es_voluntaria=True)
-    usuaria_voluntaria3 = User.objects.create_user(username="voluntaria3", password="contraseña123", es_voluntaria=True)
+    usuaria_voluntaria = User.objects.create_user(username="voluntaria", password="ninas20anual", es_voluntaria=True)
+    usuaria_voluntaria2 = User.objects.create_user(username="voluntaria2", password="ninas20anual", es_voluntaria=True)
+    usuaria_voluntaria3 = User.objects.create_user(username="voluntaria3", password="ninas20anual", es_voluntaria=True)
     # nuevo
-    usuaria_voluntaria4 = User.objects.create_user(username="voluntaria4", password="contraseña123", es_voluntaria=True)
-    usuaria_voluntaria5 = User.objects.create_user(username="voluntaria5", password="contraseña123", es_voluntaria=True)
-    usuaria_voluntaria6 = User.objects.create_user(username="voluntaria6", password="contraseña123", es_voluntaria=True)
-    usuaria_voluntaria7 = User.objects.create_user(username="voluntaria7", password="contraseña123", es_voluntaria=True)
-    usuaria_voluntaria8 = User.objects.create_user(username="voluntaria8", password="contraseña123", es_voluntaria=True)
-    usuaria_voluntaria9 = User.objects.create_user(username="voluntaria9", password="contraseña123", es_voluntaria=True)
+    usuaria_voluntaria4 = User.objects.create_user(username="voluntaria4", password="ninas20anual", es_voluntaria=True)
+    usuaria_voluntaria5 = User.objects.create_user(username="voluntaria5", password="ninas20anual", es_voluntaria=True)
+    usuaria_voluntaria6 = User.objects.create_user(username="voluntaria6", password="ninas20anual", es_voluntaria=True)
+    usuaria_voluntaria7 = User.objects.create_user(username="voluntaria7", password="ninas20anual", es_voluntaria=True)
+    usuaria_voluntaria8 = User.objects.create_user(username="voluntaria8", password="ninas20anual", es_voluntaria=True)
+    usuaria_voluntaria9 = User.objects.create_user(username="voluntaria9", password="ninas20anual", es_voluntaria=True)
 
     ## RELACIONES USUARIAS CURSOS
 
