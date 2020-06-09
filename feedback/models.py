@@ -12,6 +12,7 @@ class Feedback(models.Model):
     fecha_envio = models.DateTimeField(auto_now_add=True, help_text="Fecha y hora en que se recibe el feedback")
     codigo_solucion = models.FileField(upload_to='soluciones', help_text="Se acepta formato .cpp",
                                        validators=[FileExtensionValidator(['cpp'])])
+    resultado = models.BooleanField(help_text="Si paso todos los test o no", default=True)
 
     def __str__(self):
         return str(self.user) + ":" + str(self.problema)

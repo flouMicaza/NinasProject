@@ -25,4 +25,4 @@ class ProblemaForm(HTML5RequiredMixin,ModelForm):
 
     class Meta:
         model = Problema
-        exclude = ['source', 'fecha_creacion']
+        exclude = ['source', 'fecha_creacion', 'clase']

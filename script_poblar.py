@@ -182,14 +182,14 @@ def crear_alumnas_dump():
                                                 password="contraseña123", es_alumna=True)
 
     alumnas_basico = [usuaria_alumna1, usuaria_alumna2, usuaria_alumna3, usuaria_alumna4, usuaria_alumna5,
-                usuaria_alumna6, usuaria_alumna7, usuaria_alumna8, usuaria_alumna9, usuaria_alumna10,
-                usuaria_alumna11, usuaria_alumna12, usuaria_alumna13, usuaria_alumna14, usuaria_alumna15,
-                usuaria_alumna16, usuaria_alumna17, usuaria_alumna18, usuaria_alumna19, usuaria_alumna20,
-                usuaria_alumna21, usuaria_alumna22, usuaria_alumna23, usuaria_alumna24, usuaria_alumna25,
-                usuaria_alumna26, usuaria_alumna27, usuaria_alumna28, usuaria_alumna29, usuaria_alumna30]
+                      usuaria_alumna6, usuaria_alumna7, usuaria_alumna8, usuaria_alumna9, usuaria_alumna10,
+                      usuaria_alumna11, usuaria_alumna12, usuaria_alumna13, usuaria_alumna14, usuaria_alumna15,
+                      usuaria_alumna16, usuaria_alumna17, usuaria_alumna18, usuaria_alumna19, usuaria_alumna20,
+                      usuaria_alumna21, usuaria_alumna22, usuaria_alumna23, usuaria_alumna24, usuaria_alumna25,
+                      usuaria_alumna26, usuaria_alumna27, usuaria_alumna28, usuaria_alumna29, usuaria_alumna30]
 
     alumnas_avanzado = [usuaria_alumna31, usuaria_alumna32, usuaria_alumna33, usuaria_alumna34, usuaria_alumna35,
-                usuaria_alumna36, usuaria_alumna37, usuaria_alumna38, usuaria_alumna39, usuaria_alumna40]
+                        usuaria_alumna36, usuaria_alumna37, usuaria_alumna38, usuaria_alumna39, usuaria_alumna40]
 
     curso_basico = Curso.objects.get(nombre="C++: Básico, FCFM")
     curso_avanzado = Curso.objects.get(nombre='C++: Avanzado, FCFM')
@@ -199,3 +199,42 @@ def crear_alumnas_dump():
 
     for alumna in alumnas_avanzado:
         curso_avanzado.alumnas.add(alumna)
+
+
+@transaction.atomic
+def crear_alumnas(path, curso):
+    with open(path, 'r') as csvFile:
+        reader = csv.reader(csvFile)
+        headers = next(reader, None)
+        for row in reader:
+            print(row[0])
+            alumna= User.objects.create_user(username=row[0] + row[1] + '.' + row[2] + row[3],
+                                          password='ninas20curso', es_alumna=True, first_name=row[0] + " " + row[1],
+                                          last_name=row[2] + " " + row[3])
+            curso.alumnas.add(alumna)
+            curso.save()
+
+path = 'asistencia al 6_6 - Hoja 1.csv'
+curso = Curso.objects.first()
+crear_alumnas(path,curso)
+
+@transaction.atomic
+def crear_alumnas_asistencia(path, curso):
+    with open(path, 'r') as csvFile:
+        reader = csv.reader(csvFile)
+        headers = next(reader, None)
+        for row in reader:
+            alumna, created = User.objects.get_or_create(username=row[0] + row[1] + '.' + row[2] + row[3],
+
+                                                         es_alumna=True, first_name=row[0] + " " + row[1],
+                                                         last_name=row[2] + " " + row[3])
+            curso.alumnas.add(alumna)
+            curso.save()
+            for i in range(4, len(headers)):
+                fecha = headers[i]
+                date_clase = datetime.datetime.strptime(fecha, '%d/%m/%Y').date()
+                print(date_clase)
+                if date_clase != datetime.date(2020, 5, 2):
+                    clase = Clase.objects.get(curso=curso, fecha_clase=date_clase)
+                    print(row[i])
+                    Asistencia.objects.create(alumna=alumna, clase=clase, asistio=True if row[i] == 'TRUE' else False)

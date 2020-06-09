@@ -164,7 +164,7 @@
                         <div id="problemas">
                             <hr class="problemas-line">
                              <div class="title-and-button">
-                             {% if clase.problemas.all %}
+                             {% if clase.problema_set.all %}
                                     <p>Problemas de la clase:</p>
                              {% else %}
                                  <p>Aún no hay problemas</p>
@@ -174,7 +174,7 @@
                              {% endif %}
 
                              </div>
-                            {% for problema in clase.problemas.all %}
+                            {% for problema in clase.problema_set.all %}
                                 <div class="title-and-button">
                                     <a href="{% url 'problemas:enunciado-problema' curso_id=curso.id problema_id=problema.id result=0%}">{{ problema }}</a>
                                 </div>

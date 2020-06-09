@@ -152,6 +152,8 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
 
             # Si no pasa el test y no tuvo error, tengo que agregar output_alternativo y asociárselo al test_feedback
             if test_feedback.passed == 0 and test_feedback.error == 0:
+                feedback.resultado = False
+                feedback.save()
                 output_alternativo, created = OutputAlternativo.objects.get_or_create(caso=caso,
                                                                                       output_obtenido=test_feedback.output_obtenido)
                 if not created:
@@ -195,7 +197,8 @@ class CrearProblemasViews(LoginRequiredMixin, View):
         form = ProblemaForm(request.POST, request.FILES)
         if form.is_valid():
             nuevo_problema = form.save()
-            clase.problemas.add(nuevo_problema)
+            nuevo_problema.clase = clase
+            nuevo_problema.save()
             messages.success(request, 'Se creó el problema ' + nuevo_problema.titulo)
             return HttpResponseRedirect(reverse('cursos:curso', kwargs={'curso_id': clase.curso.id}))
         return render(request, 'problemas/crear_problema.html', {'clase': clase, 'form': form})

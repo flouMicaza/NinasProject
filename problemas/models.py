@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.core.files import File
 
+from clases.models import Clase
 from my_lib.files_wrapper import file_to_file, change_path_extension, get_file_name, check_if_file_is_valid
 
 class Problema(models.Model):
@@ -22,6 +23,7 @@ class Problema(models.Model):
     source = models.FileField(upload_to='source', blank=True, null=True)
 
     tests = models.FileField(upload_to='test_files',help_text="Se aceptan formatos .csv y .json",validators=[FileExtensionValidator(['json', 'csv'])])
+    clase = models.ForeignKey(Clase, blank=True, null=True, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         """

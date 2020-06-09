@@ -60,7 +60,5 @@ class ActualizarOutputsAlternativos(LoginRequiredMixin, View):
 
     # FIX: esto asume que un problema solo pertenece a un curso!
     def get_curso(self, caso, user):
-        clase = Clase.objects.filter(problemas__in=[caso.problema])  # clases en la que está este problema
-        curso = clase.values('curso')  # cursos en los que está este problema
-
-        return Curso.objects.get(clase__in=clase)
+        clase = caso.problema.clase # clases en la que está este problema
+        return clase.curso

@@ -1,7 +1,6 @@
 from datetime import date
 from django.db import models
 from cursos.models import Curso
-from problemas.models import Problema
 
 
 class Clase(models.Model):
@@ -9,7 +8,7 @@ class Clase(models.Model):
     publica = models.BooleanField('clase publica', default=True,help_text="Determina si la clase estará pública para estudiantes y voluntarias")
     fecha_clase = models.DateField("fecha clase", help_text="Fecha en la que se realizará la clase")
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE, help_text="Curso al que pertenece la clase")
-    problemas = models.ManyToManyField(Problema, blank=True,help_text="Problemas a resolver en esta clase")
+
     class Meta:
         unique_together = (("nombre", "curso","fecha_clase"))
 
