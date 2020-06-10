@@ -26,6 +26,33 @@ $(document).ready(function(){
     $('select').not('.disabled').formSelect();
     $('.modal').modal();
     $('ul.tabs').tabs();
+    $('#tabla_estadísticas').DataTable({
+        scrollX: true,
+        order:[[0, "asc"]],
+        dom: "Blfrtip",
+        oLanguage: {
+            sLengthMenu: '<span>Alumnas por página:</span><select class="browser-default">' +
+                '<option value="10">10</option>' +
+                '<option value="20">20</option>' +
+                '<option value="30">30</option>' +
+                '<option value="40">40</option>' +
+                '<option value="50">50</option>' +
+                '<option value="-1">Todas</option>' +
+                '</select></div>',
+            sSearch: "Buscar:",
+            sInfo: "Mostrando alumnas del _START_ al _END_ de un total de _TOTAL_ alumnas",
+            sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            sInfoFiltered: "(filtrado de un total de _MAX_ alumnas)",
+            oPaginate: {
+                    sFirst:    "Primero",
+                    sLast:     "Último",
+                    sNext:     "Siguiente",
+                    sPrevious: "Anterior"
+                },
+            sZeroRecords: "No se encontraron resultados",
+
+        }
+    })
     $('#tabla_asist_gral').DataTable({
         scrollX: true,
         order:[[0, "asc"]],

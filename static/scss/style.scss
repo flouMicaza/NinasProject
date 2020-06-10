@@ -115,24 +115,39 @@ td, th {
     margin-top: 3%;
     margin-block-end: 10%;
 }
+.container-tabla-estadisticas {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position:relative;
+    margin-left:0%;
+    margin-top: 3%;
+    margin-block-end: 10%;
+}
 
-.tabla-asist-gral1 .sticky-left{
+
+.tabla-asist-gral .sticky-left , #tabla_estadísticas .sticky-left{
     position: sticky;
     left: 0;
     background-color: white;
 }
 
 
-.tabla-asist-gral1 .sticky-right-first {
+.tabla-asist-gral .sticky-right-first, #tabla_estadísticas .sticky-right-first {
   position: sticky;
   right: 74px;
   background-color: white;
 }
 
-.tabla-asist-gral1 .sticky-right-last {
+.tabla-asist-gral .sticky-right-last, #tabla_estadísticas .sticky-right-last {
   position: sticky;
   right: 0;
   background-color: white;
+}
+
+ .estadistica-th1 {
+  border-bottom: 1px solid white;
 }
 
 .list {

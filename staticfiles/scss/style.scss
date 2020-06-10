@@ -39,10 +39,8 @@ $not-enabled-color: #80868b;
 
 tr.row_good_feedback > td , tr.row_good_feedback > th{
   padding: 10px;
-  border-bottom: 1px solid $not-enabled-color ;
-  border-top: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid $not-enabled-color ;
   text-align: center;
   max-width: 5em;
   word-wrap: break-word;
@@ -51,8 +49,17 @@ tr.row_bad_feedback > td {
   padding: 10px;
   border-top: 1px solid #ddd;
   border-bottom: #ffffff;
-  border-right: 0px solid #ddd;
-  border-left: 0px solid #ddd;
+  text-align: center;
+  max-width: 5em;
+  word-wrap: break-word;
+}
+
+tr.row_bad_feedback> td.sugerencia{
+  padding: 10px;
+  padding-left: 20px;
+  padding-bottom:1.5em;
+  border-bottom: 2px solid $not-enabled-color;
+  border-top: #ffffff;
   text-align: center;
   max-width: 5em;
   word-wrap: break-word;
@@ -77,16 +84,7 @@ tr.row_bad_feedback > td {
   align-items: center;
 }
 
-tr.row_bad_feedback> td.sugerencia{
-  padding: 10px;
-  padding-left: 20px;
-  border-bottom: 2px solid $not-enabled-color;
-  border-top: #ffffff;
-  text-align: center;
-  max-width: 5em;
-  word-wrap: break-word;
-  padding-bottom:1.5em;
-}
+
 
 
 td, th {
@@ -108,6 +106,16 @@ td, th {
 }
 
 .container-tabla-asist-gral {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position:relative;
+    margin-left:0%;
+    margin-top: 3%;
+    margin-block-end: 10%;
+}
+.container-tabla-estadisticas {
     max-width: 100%;
     display: flex;
     flex-direction: row;

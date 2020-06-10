@@ -5,12 +5,16 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.forms import modelform_factory, HiddenInput
+
+from NiñasProject.decorators import docente_required
 from asistencia.utils import clases_asistencias_alumna, porcentaje_asistencia, Clase
 
 from clases.models import Clase
 from cursos.models import Curso
+from feedback.models import Feedback
 from usuarios.models import User
 
 #Vista padre de los cursos
@@ -80,6 +84,8 @@ class CursoView(CursosView):
         clase_edit.save()
         return HttpResponseRedirect(reverse('cursos:curso',kwargs=kwargs))
 
+
+@method_decorator([docente_required], name='dispatch')
 class MisCursosView(CursosView):
 
     def get(self, request):
@@ -90,10 +96,28 @@ class MisCursosView(CursosView):
             return HttpResponseRedirect(reverse('usuarios:index'))
 
 
+@method_decorator([docente_required], name='dispatch')
 class EstadisticasView(LoginRequiredMixin, View):
     login_url = 'usuarios:login'
     redirect_field_name = ''
 
     def get(self, request, **kwargs):
-        mensaje = "este curso", kwargs["curso_id"]
-        return HttpResponse(mensaje)
+        curso_id = kwargs["curso_id"]
+        curso = get_object_or_404(Curso, id=curso_id, profesoras__in=[request.user])
+        clases = Clase.objects.filter(curso=curso, publica=True)
+        feedback_alumnas = self.get_feedbacks(request.user,curso)
+        return render(request, 'cursos/tabla_estadisticas.html', {'curso': curso,'clases':clases, 'feedback_alumnas':feedback_alumnas})
+
+
+    def get_feedbacks(self, alumna,curso):
+        clases = Clase.objects.filter(curso=curso, publica=True)
+        alumnas = curso.alumnas.all()
+        result = {}
+        for alumna in alumnas:
+            alu_resultado = {'alumna': alumna, 'feedbacks': {}}
+            for clase in clases:
+                for problema in clase.problema_set.all():
+                    feedback = Feedback.objects.filter(user=alumna, problema=problema).order_by('fecha_envio').last()
+                    alu_resultado['feedbacks'][problema.id] = feedback
+            result[alumna.id] = alu_resultado
+        return result
