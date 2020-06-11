@@ -49,15 +49,15 @@ span.badge.new {
 }
 
 /*collection */
-.collection {
+.collection-principal {
   border: 1px solid $hover-color;
 }
 
-.collection .collection-item {
+.collection-principal>.collection-item {
   border-bottom: 5px solid $hover-color;
 }
 
-.collection-info {
+.collection-principal .collection-info {
   display: flex;
   justify-content: space-between;
 }
@@ -99,6 +99,7 @@ li.active> .collapsible-header{
 }
 
 .btn, .btn-large, .btn-small {
+  margin-top: 5px;
   background-color: $primary-color;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }

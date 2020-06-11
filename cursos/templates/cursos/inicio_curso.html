@@ -1,5 +1,6 @@
 {% extends 'menu.html' %}
 {% load static %}
+{% load template_tags %}
 {% block title %}{{ curso.nombre }}{% endblock %}
 
 
@@ -108,7 +109,7 @@
         </div>
     {% endif %}
 
-    <ul class="collection">
+    <ul class="collection collection-principal">
         {% if clases %}
             {% for clase in clases %}
                 {% if clase.publica or not usuaria.es_alumna %}
@@ -174,11 +175,24 @@
                              {% endif %}
 
                              </div>
-                            {% for problema in clase.problema_set.all %}
-                                <div class="title-and-button">
-                                    <a href="{% url 'problemas:enunciado-problema' curso_id=curso.id problema_id=problema.id result=0%}">{{ problema }}</a>
-                                </div>
-                            {% endfor %}
+                            <ul class="collection collection-pequena">
+
+                                {% for problema in clase.problema_set.all %}
+                                <li class="collection-item">
+                                    <div>
+                                        <a href="{% url 'problemas:enunciado-problema' curso_id=curso.id problema_id=problema.id result=0%}">
+                                            {{ problema }}
+                                        </a>
+                                    {% with feedbacks|lookup:problema.id as feedback %}
+                                    {% if feedback and feedback.resultado == True %}
+                                        <div class="secondary-content" style="color: green"> Completo </div>
+                                    {% elif feedback and feedback.resultado == False %}
+                                        <div class="secondary-content" style="color: darkorange">Incompleto </div>
+                                    {% endif %}
+                                {% endwith %}
+                                </li>
+                                {% endfor %}
+                          </ul>
                         </div>
 
                     </li>

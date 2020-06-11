@@ -48,6 +48,8 @@ class CursoView(CursosView):
             usuaria = request.user
             clases_totales = Clase.objects.filter(curso=curso)
             clases_asistencias = clases_asistencias_alumna(usuaria=usuaria, curso=curso)
+            feedbacks = self.get_feedbacks_alumna(usuaria,clases_totales)
+
 
             parameters = {
                 'curso': curso,
@@ -56,7 +58,8 @@ class CursoView(CursosView):
                 'porcentaje_asistencia': porcentaje_asistencia(usuaria=usuaria, curso=curso),
                 'clases_asistencias': clases_asistencias,
                 'nro_clases_totales': max(len(clases_totales), curso.cant_clases),
-                'nro_clases_realizadas': len(clases_asistencias)
+                'nro_clases_realizadas': len(clases_asistencias),
+                'feedbacks':feedbacks
             }
             return render(request, 'cursos/inicio_curso.html', parameters)
         else:
@@ -84,6 +87,12 @@ class CursoView(CursosView):
         clase_edit.save()
         return HttpResponseRedirect(reverse('cursos:curso',kwargs=kwargs))
 
+    def get_feedbacks_alumna(self, usuaria, clases_totales):
+        result = {}
+        for clase in clases_totales:
+            for problema in clase.problema_set.all():
+                result[problema.id] = Feedback.objects.filter(user=usuaria, problema=problema).order_by('fecha_envio').last()
+        return result
 
 @method_decorator([docente_required], name='dispatch')
 class MisCursosView(CursosView):
@@ -105,11 +114,11 @@ class EstadisticasView(LoginRequiredMixin, View):
         curso_id = kwargs["curso_id"]
         curso = get_object_or_404(Curso, id=curso_id, profesoras__in=[request.user])
         clases = Clase.objects.filter(curso=curso, publica=True)
-        feedback_alumnas = self.get_feedbacks(request.user,curso)
+        feedback_alumnas = self.get_feedbacks_curso(curso)
         return render(request, 'cursos/tabla_estadisticas.html', {'curso': curso,'clases':clases, 'feedback_alumnas':feedback_alumnas})
 
 
-    def get_feedbacks(self, alumna,curso):
+    def get_feedbacks_curso(self, curso):
         clases = Clase.objects.filter(curso=curso, publica=True)
         alumnas = curso.alumnas.all()
         result = {}
