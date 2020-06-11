@@ -17,8 +17,8 @@ from shutil import copyfile
 
 ComunicationClient = Client()
 
-
-class scriptServerTest(TestCase):
+# Estos test se activan al correrlos en local porque hay que tener el script del servidor.
+'''class scriptServerTest(TestCase):
     def setUp(self):
         fs = FileSystemStorage()
         enunciado = 'test/Problem_-_4A_-_Codeforces.pdf'
@@ -61,3 +61,4 @@ class scriptServerTest(TestCase):
         for resp in response[1]:
             self.assertEqual(1, resp[4])
 
+'''
