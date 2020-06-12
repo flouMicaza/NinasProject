@@ -22,7 +22,7 @@ class Server:
 
     def __init__(self, port, scheduler_slaves=10):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        self.public_host = '0.0.0.0'
+        self.public_host = '172.16.0.1'
         self.socket.bind((self.public_host, port))
 
         self.sub_id_to_port_dict = {}
@@ -97,7 +97,7 @@ class Server:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         try:
-            sock.connect(('0.0.0.0', self.sub_id_to_port_dict[submission_id]))
+            sock.connect(('172.16.0.2', self.sub_id_to_port_dict[submission_id]))
             sock.sendall(reply_message)
             logging.debug("Successfuly Sent Response " + str(submission_id))
         except ConnectionRefusedError:
@@ -119,7 +119,7 @@ class Server:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         try:
-            sock.connect(('0.0.0.0', self.sub_id_to_port_dict[submission_id]))
+            sock.connect(('172.16.0.1', self.sub_id_to_port_dict[submission_id]))
             sock.sendall(reply_message)
             logging.debug("Successfuly Sent Error Response " + str(submission_id))
         except ConnectionRefusedError:
