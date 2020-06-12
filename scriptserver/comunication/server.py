@@ -22,7 +22,8 @@ class Server:
 
     def __init__(self, port, scheduler_slaves=10):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        self.socket.bind(('localhost', port))
+        self.public_host = 'localhost'
+        self.socket.bind((self.public_host, port))
 
         self.sub_id_to_port_dict = {}
 
@@ -39,7 +40,7 @@ class Server:
         self.script_dict = script_dict
 
     def receive_msg(self):
-        # print("Waiting for message")
+        print("Waiting for message")
         data, addr = self.socket.recvfrom(1024)
         decoded_data = json.loads(data.decode())
         # print("Received Message")
