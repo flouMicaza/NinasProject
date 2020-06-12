@@ -22,7 +22,8 @@ class Server:
 
     def __init__(self, port, scheduler_slaves=10):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        self.public_host = '172.16.0.1'
+        self.public_host = '0.0.0.0'
+        print(self.public_host, "las variables",port)
         self.socket.bind((self.public_host, port))
 
         self.sub_id_to_port_dict = {}
