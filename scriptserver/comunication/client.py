@@ -33,11 +33,11 @@ class Client:
         message = json.dumps([port, port, submission_path, test_path, lang]).encode()
 
         # Send packed message to testing process
-        self.udp_sock.sendto(message, ('127.0.0.2', self.server_port))
+        self.udp_sock.sendto(message, ('0.0.0.0', self.server_port))
 
         # Open Socket
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.bind(('127.0.0.2', port))
+        sock.bind(('0.0.0.0', port))
 
         test_data = []
         try:
