@@ -73,7 +73,17 @@ def check_valid_json(path):
 
             for e in datastore:
                 headers = list(e.keys())
-                if len(headers) != 3 or headers[0] != "Input" or headers[1] != "Output" or headers[2] != "Categoria":
+                if len(headers) != 3:
+                    print("len de headers es != 3. Línea: ", e)
+                    raise Exception
+                elif headers[0] != "Input":
+                    print("Header 0 no es Input. Línea: ", e)
+                    raise Exception
+                elif headers[1] != "Output":
+                    print("Header 0 no es Output. Línea: ", e)
+                    raise Exception
+                elif headers[2] != "Categoria":
+                    print("Header 0 no es Categoria. Línea: ", e)
                     raise Exception
 
             jsonFile.close()
