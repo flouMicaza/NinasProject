@@ -139,6 +139,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         this_context['test_array'] = tests_arr
         this_context['resultados_active'] = "active"
         this_context['enunciado_active'] = ""
+        this_context['casos_active'] = ""
         return render(request, self.feedback_template_name, this_context)
 
     def crear_test_feedbacks(self, feedback, tests_arr):
