@@ -21,7 +21,8 @@ class CasosAlternativos(LoginRequiredMixin, View):
         if request.is_ajax():
             id_caso = request.GET.get('id')
             caso = Caso.objects.get(id=id_caso)
-            outputs_sugeridos = OutputAlternativo.objects.filter(caso=caso, agregado=False, frecuencia__gt=1)
+            # outputs_sugeridos = OutputAlternativo.objects.filter(caso=caso, agregado=False, frecuencia__gt=1)
+            outputs_sugeridos = OutputAlternativo.objects.filter(caso=caso, agregado=False)
             outputs_agregados = OutputAlternativo.objects.filter(caso=caso, agregado=True)
 
             formset = OutputAlternativoModelFormSet(queryset=outputs_sugeridos)
