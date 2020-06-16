@@ -46,8 +46,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
 
         nuevos_outputs = {}
         for caso in Caso.objects.filter(problema=problema):
-            nuevos_outputs[caso.id] = OutputAlternativo.objects.filter(caso=caso, agregado=False,
-                                                                       frecuencia__gt=1).count()
+            nuevos_outputs[caso.id] = OutputAlternativo.objects.filter(caso=caso, agregado=False).count()
         context['nuevos_outputs'] = nuevos_outputs
 
         if self.tab == 'enunciado':
