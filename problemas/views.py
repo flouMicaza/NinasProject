@@ -145,7 +145,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         nuevos_outputs = {}
         for test in tests_arr:
             input = test[1]
-            caso = Caso.objects.get(input=input, problema=feedback.problema)
+            caso = Caso.objects.filter(input=input, problema=feedback.problema).first()
             test_feedback = TestFeedback.objects.create(passed=test[0], output_obtenido=test[5], error=test[4],
                                                         caso=caso,
                                                         feedback=feedback)
