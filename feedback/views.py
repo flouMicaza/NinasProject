@@ -48,11 +48,14 @@ class ActualizarOutputsAlternativos(LoginRequiredMixin, View):
         id_caso = kwargs['caso_id']
         caso = Caso.objects.get(id=id_caso)
         curso = self.get_curso(caso, request.user)
-        outputs_sugeridos = OutputAlternativo.objects.filter(caso=caso, agregado=False, frecuencia__gt=1)
+        #outputs_sugeridos = OutputAlternativo.objects.filter(caso=caso, agregado=False, frecuencia__gt=1)
+        outputs_sugeridos = OutputAlternativo.objects.filter(caso=caso, agregado=False)
         formset = OutputAlternativoModelFormSet(request.POST, queryset=outputs_sugeridos)
         if formset.is_valid():
+            print("Formset valid!")
             instances = formset.save()
             for inst in instances:
+                print(inst)
                 inst.agregado = True
                 inst.save()
         return HttpResponseRedirect(
