@@ -4,7 +4,7 @@ from scriptserver.util import clean_output
 
 class Tester:
 
-    def __init__(self, timeout=2):
+    def __init__(self, timeout=3):
         self.tests = []
         self.timeout = timeout
 
