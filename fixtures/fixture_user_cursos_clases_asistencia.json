@@ -1,0 +1,6483 @@
+[
+{
+  "model": "usuarios.user",
+  "pk": 447,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$rlJTfO15NRD9$4XPaK1688i4aDdRxhKkKXtzNRfEnGpO/TrkQLQYCEkA=",
+    "last_login": "2020-12-13T23:46:21.561Z",
+    "is_superuser": false,
+    "username": "profesora",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:58.790Z",
+    "es_profesora": true,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 448,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$CvmIRkOYfZzQ$aCeYrSb7eSp6WCQTZbmh8DdM3MoCbPkU+pn8RUvDuAE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "profesora2",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:58.913Z",
+    "es_profesora": true,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 449,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$PioAMlZ2z0J5$ONSPantXYjYtHX56dcsh8CVMxsNEGRgNo+7hpcbsTVw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "profesora3",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:58.999Z",
+    "es_profesora": true,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 450,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$OcE9d7oDMAl1$TX/Zp8CZsIleK8NxXu7p6Tv7FqOgDP1f3OvnN6YONJY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "profesora4",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:59.079Z",
+    "es_profesora": true,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 451,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$JWSW9AeiM3vk$fRiqrKhk98vSYqZgZDmNB9Y2nVsqs0dzIWA+X0rmDXE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "profesora5",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:59.161Z",
+    "es_profesora": true,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 452,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$Y0t2RI0i8bMy$RbxPH4tBP/7W1ERf7Yam6CV19D6hgauG/B4ovDs25qo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "profesora6",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:59.237Z",
+    "es_profesora": true,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 453,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$gPFy2mTRsL8m$kjL7wQO+jLbLA4TpPQ6wT3OtdXafpgVIw1eBrhWtoi0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "profesora7",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:59.314Z",
+    "es_profesora": true,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 454,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$KotRtS9WNuKI$K2+fYcFICLQzkyjkvGUWeH5cdkUp2hwBgcM/Gzr032E=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "profesora8",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:59.391Z",
+    "es_profesora": true,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 455,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$GiJ8XDZv7pQk$8e9PwRrbHEMhTLhRwej/67QMaNPR1Urbg48LV1vdrAU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "voluntaria",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:59.467Z",
+    "es_profesora": false,
+    "es_voluntaria": true,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 456,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$8sjq253LigI1$NgsLQJNUnqxccGOR+/H5GmzbyHMy7Cuzte4T6yp16i4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "voluntaria2",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:59.543Z",
+    "es_profesora": false,
+    "es_voluntaria": true,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 457,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$HxLJQfbLHcDp$m6Z0oIfn24ozS8SI0crQlzH9EVkimGFgh0ig/q612/Q=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "voluntaria3",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:59.619Z",
+    "es_profesora": false,
+    "es_voluntaria": true,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 458,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$YbtY5awHycoS$yBmV9qXhvFnb0ePDO2Z7g/ueW85rBFFKLScxhc7H6CU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "voluntaria4",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:59.695Z",
+    "es_profesora": false,
+    "es_voluntaria": true,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 459,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$3C3EgOdzYGja$X76mtXVto4yVU611xPnmhXMh0erKodFn+13OPbTOkRU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "voluntaria5",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:59.771Z",
+    "es_profesora": false,
+    "es_voluntaria": true,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 460,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$z3ejxJJBDSSw$uugOhyySxKWkfYTwftJAxK9KVbXdijosyfysqtOefUE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "voluntaria6",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:59.850Z",
+    "es_profesora": false,
+    "es_voluntaria": true,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 461,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$FWDW2Qicn8SL$0pgp8SEaWHP3wTcTS1s94xtsS8wTzBHdJzJ4F8OuIY0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "voluntaria7",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:44:59.926Z",
+    "es_profesora": false,
+    "es_voluntaria": true,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 462,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$vabK1XbMwU8q$J1IqrnvxX3uW3THgoxs8K/sn2C/lsiR+ZOi2AnRM20s=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "voluntaria8",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:00.001Z",
+    "es_profesora": false,
+    "es_voluntaria": true,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 463,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$cXrHGVbL2nOE$TzOTsW9orjtQ4DP/26vxguUUsSCNgCZQNGaFScr8nCg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "voluntaria9",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:00.079Z",
+    "es_profesora": false,
+    "es_voluntaria": true,
+    "es_coordinadora": false,
+    "es_alumna": false,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 464,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$0tiYrsN0dEZj$5SesPGpCNkGdO+dgooBzDWkcIKbLFr87QAXzVwagA7c=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna1",
+    "first_name": "Juana",
+    "last_name": "Perez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:00.166Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 465,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$xxn0hE9EIF3e$/uV4txaRhMC4wpiuONerzXzdz/GfvnLXZAQ/5EQumXI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna2",
+    "first_name": "Claudia",
+    "last_name": "Mu\u00f1oz",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:00.242Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 466,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$5luSoK5o39pm$S/YZcUe7dy9WnHxMbb3yrLY6o2ibxxhBlVqIRwrIRaw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna3",
+    "first_name": "Claudia",
+    "last_name": "Briones",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:00.318Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 467,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$4gR6u8Vw67sz$B4mbXAFodp9IIfkMTgLDVsNVFw0uwVk0YiaANB/GOxo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna4",
+    "first_name": "Claudia",
+    "last_name": "Opazo",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:00.396Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 468,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$ccTdbFQ6QYRe$ouWB5cbCZVkgmbuonzA648/Ggu1gQtTb0M0vD/DRgBg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna5",
+    "first_name": "Antonia",
+    "last_name": "Quezada",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:00.472Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 469,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$an1eeFKiwnXb$/QaecPU+UVZLOnu9ARMSEcdM2sHnLsTitVhJBPNyTrs=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna6",
+    "first_name": "Fernanda",
+    "last_name": "Mac\u00edas",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:00.548Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 470,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$QNzJHTaQTPam$DgPVqny9JuzEn3WTdrcVx7gIbJs9ZRLeukVyv6MrSgA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna7",
+    "first_name": "Ignacia",
+    "last_name": "Mac\u00edas",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:00.624Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 471,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$UyPhCRiCyXbF$EObjR4Uobim7ri2EtspP8KqPSjvMYzkJNI74MWAwPYs=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna8",
+    "first_name": "Ignacia",
+    "last_name": "Labarca",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:00.700Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 472,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$JKnfUj3vtzyP$aAG/eDWi1lV4X/3uRgYoD5M0++mY3CsuCqHh3HYHivY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna9",
+    "first_name": "Karina",
+    "last_name": "Rozas",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:00.777Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 473,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$et2HWvnCBC8K$sUiuwr/l9S+bLtnNQlJkaeukl6Fd4kMeaoGaj8ZMbpE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna10",
+    "first_name": "Florencia",
+    "last_name": "Manr\u00edquez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:00.852Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 474,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$LQYBxkNAyt8P$gMWNhd0sW7SjJbQZ9tjPr/nNtXuqWTU91LT76/zaSzg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna11",
+    "first_name": "Antonia",
+    "last_name": "Jimenez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:00.928Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 475,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$Ro7pRjM7YaGB$bp1KdII29/7W+N8PxR1bs04Hr5IX8sQEjVmt+TrdC2c=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna12",
+    "first_name": "Constanza",
+    "last_name": "Mora",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.005Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 476,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$TscbpwtIeLTo$6vLMxmaSe6Q4aQ9X0PWNfMbhYDImAlbCuAFYF2S6q1E=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna13",
+    "first_name": "Rosario",
+    "last_name": "Gonz\u00e1lez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.081Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 477,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$Hp3oV5lYwdYK$Ds0E+W8zTI2fTLnT+uvNQp+gSeS8jWW1Li9G39jXIio=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna14",
+    "first_name": "Lupe",
+    "last_name": "Rojas",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.158Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 478,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$alaMYZ7IOs0t$LBaq4yS1hf3JCceXvn5NvsnlHbBfotrnXcwmayYMXfM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna15",
+    "first_name": "Martina",
+    "last_name": "Monsalves",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.234Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 479,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$zZwYVre8tOez$ExvJYLOwXBWrpIcIqrIXD8Bzwj99fnK3vOCiZ6fzTCQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna16",
+    "first_name": "Bel\u00e9n",
+    "last_name": "Acevedo",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.311Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 480,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$m3k08fcvpzkr$rdNT5ha5C4oA4CIKyKvyUFbJrVT+iuQBculyaWgUNbc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna17",
+    "first_name": "Francisca",
+    "last_name": "Riquelme",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.387Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 481,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$wNUJRdmeX99T$uY9SEmPa0pRDeRfIzztSOasF7UZpH/3lKumWZwoYXA8=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna18",
+    "first_name": "Gabriela",
+    "last_name": "Herrera",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.463Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 482,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$71lqmTRvjejT$yR/ZCX+G1YSU3EHfPLdxAGXIsj+O6KHNIt1fKexco30=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna19",
+    "first_name": "Francisca",
+    "last_name": "Fabres",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.539Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 483,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$I4D6tnllVcSi$QTMi3Afn1fleJtBHInc1x6FprKMrLFfbkn+DPbB3xbQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna20",
+    "first_name": "B\u00e1rbara",
+    "last_name": "Fuentes",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.615Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 484,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$UbUGbNRlXrmT$NydOhQFsMdV7pnmVrX6i7Bm8Yv6dKhd97NzUz7xNEPM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna21",
+    "first_name": "Paula",
+    "last_name": "Cifuentes",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.691Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 485,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$VNcZRrQMHRMo$/aIJ6gAFGBXGST/o8Quexu21AwAsFhuz6rCv9rJ93ew=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna22",
+    "first_name": "Paulina",
+    "last_name": "Lagos",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.767Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 486,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$pfyC0cv07s10$J6AbDNFkMoh8EdDDJVoDa8kwT/pCqeuZtL8oPxwcvw4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna23",
+    "first_name": "Alejandra",
+    "last_name": "Rivas",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.843Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 487,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$UhQ3dBySfOvz$Jm+jYszxZdmYnCQeqv1H6bZ3v8W0rvpBp1pN4T4dB7g=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna24",
+    "first_name": "Mabel",
+    "last_name": "Recabarren",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.919Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 488,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$h7LqirvfGedB$MDI7wFCxWDsqLW+YcoiLtebSh6hd4GmL3EiAr9yXdRo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna25",
+    "first_name": "Teresa",
+    "last_name": "Paredes",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:01.995Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 489,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$1b9AQmYe6r8u$0q9gVge7GooVMvTHSBI3sdbAqnCDH83kTRlK28bMirM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna26",
+    "first_name": "Alicia",
+    "last_name": "Cuadra",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:02.071Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 490,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$ElSv2jb2R8R2$lhZDA3HJLlKZPWjB1J7DY/+X0E7GrgUJ5b164WgHGuY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna27",
+    "first_name": "Cecilia",
+    "last_name": "Poblete",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:02.147Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 491,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$laYBrqKmKd9j$XSQyI4NRdeNnTrsYLV7CIG9WflM/Kv9uSKGLlMfozMo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna28",
+    "first_name": "Marta",
+    "last_name": "Osorio",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:02.224Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 492,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$aPbLu1AbsgbG$VkPYLa7nyHHcjYkD/qBoZt1dZavdLihUZfRYoMXtUm0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna29",
+    "first_name": "Natalia",
+    "last_name": "Arce",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:02.300Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 493,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$m8vqP3uwLFh5$86LKLjriiA6DqkYqg+rcgUqhmFwsXznn5W32JfsYHGg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna30",
+    "first_name": "Daniela",
+    "last_name": "Medina",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:02.376Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 494,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$FP7gqg20r410$/MrfGZCWDAxIdkOlypY9LPh7rtCgQTtBCy2PtvL1Eqk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna31",
+    "first_name": "Gabriela",
+    "last_name": "Cuadra",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:02.451Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 495,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$NDluX33QVlIr$mQ9JXUpU0KmL/dH9QDzB0Im1Yp1Fv8I86kKDQPngyqI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna32",
+    "first_name": "Luciana",
+    "last_name": "D\u00edaz",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:02.527Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 496,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$NL0Yaq2KL50z$9d9uFwU6Xg99HH36gymrxW9SlDJOrVl3KeoHPJiMqFM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna33",
+    "first_name": "Lucia",
+    "last_name": "C\u00e1ceres",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:02.603Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 497,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$EiPPovBaPELk$7HLWS6PW3NtX+ZxiNO/dChnZdEQmzZpFfFDnnbFIs4w=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna34",
+    "first_name": "Laura",
+    "last_name": "Mierzo",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:02.679Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 498,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$dkF3rYJglD3r$IDrIo4m42AA5POwZSpnLPFVnlqMK5mZh+Y//eShtob4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna35",
+    "first_name": "Scarlett",
+    "last_name": "Suarez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:02.755Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 499,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$HJaYHZLH03tl$RA95fsx6UgTxI6y9PAEvihz78B9KUiI9nXupyj+qSf4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna36",
+    "first_name": "Catalina",
+    "last_name": "Bravo",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:02.831Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 500,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$3ft2TIGZIKSK$pgTXLnaraqG9LDKzXnPwSt6kTlGZAAk6eN8D7o86b8M=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna37",
+    "first_name": "Alejandra",
+    "last_name": "Mu\u00f1oz",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:02.907Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 501,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$QmNQmZnJdePL$5AW5Z3ggNc2tAGufX+VXqq/ojwVKFBqhUycJ2vlr8xk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna38",
+    "first_name": "Josefa",
+    "last_name": "Perez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:02.983Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 502,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$A5UIvTfPke72$GiCsvtPLisUMeMmnTRP3l8SpkWrJbdhGhsgLmHlaaHs=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna39",
+    "first_name": "Josefina",
+    "last_name": "Quir\u00f3z",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:03.059Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 503,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$hIHTXLcqVDhg$92js89H4fInQGwkK2DQg+6csDRw0sDU6vXkjbhFqjNk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna40",
+    "first_name": "Monserrat",
+    "last_name": "Martinez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:03.137Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 504,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$9zyNaCaIrnxO$bBRCKkacjaNHiZnapSQk+ipC58a0DZxtqrs3m989UCs=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna41",
+    "first_name": "Valentina",
+    "last_name": "Ruiz",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:03.213Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 505,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$Jgn4xQSWzZs6$BfDHgrOVEt40O/YKyj3TblYAhBGBDSCXIY//qWsQQpE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna42",
+    "first_name": "Margarita",
+    "last_name": "Elfernan",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:03.289Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 506,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$op09pwVRccm2$fWmNvQanJZE83n2DfeMHrisL/Y0yjEUB4dxKVapdESs=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna43",
+    "first_name": "Javiera",
+    "last_name": "Ramos",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:03.366Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 507,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$M9piYlNEVHB4$hdaJirGjt06iAAHrsVko/51qkdjCyzcXrhT+++OD9oE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna44",
+    "first_name": "Mar\u00eda Jos\u00e9",
+    "last_name": "Del Campo",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:03.442Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 508,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$6oSDDCmwti3S$/+X4lY+V99edBCMTeZzRhQEGJTNNFPEjEFVytAcDCYM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna45",
+    "first_name": "Kiara",
+    "last_name": "De la Maza",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:03.518Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 509,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$3aHZOs99KEGN$NQH2EyvGaYUfJQlpxU7rbmP1OotqBKBBtgkv59pYMaI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna46",
+    "first_name": "Karen",
+    "last_name": "James",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:03.595Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 510,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$DruZErXYvY8N$cYq4krzspCuqOefXh55yQrEfEFF/FWpJUCB7qE1M47o=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna47",
+    "first_name": "Sof\u00eda",
+    "last_name": "Toledo",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:03.671Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 511,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$e0shsy420y3K$VH/tnMqO/3dC8R1vCIXFXcEn46cfLyM5rXxi5FTtWTA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna48",
+    "first_name": "Agustina",
+    "last_name": "Timana",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:03.747Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 512,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$UbdXNr8EMf47$X2FNp31jt4iFUEW9KgYjDPJbhmnuf2DsHkWyvGBQzpg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna49",
+    "first_name": "Dominga",
+    "last_name": "Espinoza",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:03.823Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 513,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$R9WZPb49ZoRR$vhWWNYQM0NPseBnb/Uq2jZR9yBcpADndJQ5I7Dg9gks=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna50",
+    "first_name": "Asunci\u00f3n",
+    "last_name": "G\u00f3mez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:03.899Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 514,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$CLcyC92jVnR1$O/XaYwu3jj8P6vxsbAtRh+qHyKE5Iw1pp4baG/hs3SM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna51",
+    "first_name": "Fernanda",
+    "last_name": "Mac\u00edas",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:03.975Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 515,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$46wRkrkm2LWJ$Gbz3d22EiIFfzDNMhcvVjvT3R2ayWo2Er4pTiPWCZdg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna52",
+    "first_name": "Ignacia",
+    "last_name": "Mac\u00edas",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:04.051Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 516,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$qxFdUhkQAET6$xmgjHJlvJulJ/GPP0Tc5UO/Kh38/wXLvmv7JgGkWoCU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna53",
+    "first_name": "Ignacia",
+    "last_name": "Labarca",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:04.127Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 517,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$uJHpCCshuLI0$zoWRy84m6V6Lf5+aZb/dEe90ner3FbA86lJKxatjVPY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna54",
+    "first_name": "Karina",
+    "last_name": "Rozas",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:04.203Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 518,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$x8rhfmyt9Dfv$YP+HcsBDkI390Omxr+hmKgZ6csskCYx9MuZadRJBogE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna55",
+    "first_name": "Florencia",
+    "last_name": "Manr\u00edquez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:04.279Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 519,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$tQzKE34UVKsM$iecZqXp1osx2RqmFzCOJI4PG0WxHB51dzSNj7y7NXQc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna56",
+    "first_name": "Antonia",
+    "last_name": "Jimenez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:04.357Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 520,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$CEzwRJdUlftu$WTito9il8wDuzWcUV0ZLxnHJ6oi8OCYVOLOxbVu/yFM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna57",
+    "first_name": "Constanza",
+    "last_name": "Mora",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:04.435Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 521,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$qiI96PK0qsEh$68QBCQkZc4gDLa8OdQyEqiEQvK4xTioVIBMP0hQfQ9E=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna58",
+    "first_name": "Rosario",
+    "last_name": "Gonz\u00e1lez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:04.513Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 522,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$rQ3Jz0lyMMFA$pJrZ3WN+Z0Mrx27XbtwzqXGtzPZ3R3V63R7IEQaSMCY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna59",
+    "first_name": "Lupe",
+    "last_name": "Rojas",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:04.591Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 523,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$NP813sJf6U1P$ha2yegS1ZXmRGXyxfjq6Uvc8xW1wp68rznxT4K2Vb/0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna60",
+    "first_name": "Martina",
+    "last_name": "Monsalves",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:04.669Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 524,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$vFoezyTkdeyB$ON8aDnIvgyvxNHuNAvjnVLYoDBEVtX9bLo6+s3FLT9k=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna61",
+    "first_name": "Bel\u00e9n",
+    "last_name": "Acevedo",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:04.747Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 525,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$4xxZH5NhrSs0$jAEyxR3g6JULbswg+lQAHAQAqiqyPQp8sPe6VZnERCI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna62",
+    "first_name": "Francisca",
+    "last_name": "Riquelme",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:04.825Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 526,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$40fQhlccf5ZL$CYmJgvVw3Eli65Z05vhRvW+74UAH9zhRW5Cx3g/q3RE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna63",
+    "first_name": "Gabriela",
+    "last_name": "Herrera",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:04.907Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 527,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$zdQyVLyBPSC8$X9bVDH5qrayN4UAeKvrFHVtnTVfEd9gk9wb9pERgACA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna64",
+    "first_name": "Francisca",
+    "last_name": "Fabres",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:04.989Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 528,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$nx8sIyRXLA36$xiTqrZv6qaZHlkRnW2Qt5i3k2gEc/sRPmCvIbq1qqUw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna65",
+    "first_name": "B\u00e1rbara",
+    "last_name": "Fuentes",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:05.065Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 529,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$mz8cSEIJ9IeQ$w2nU2Oqazn6cxGxT6MnMEOTR8AdDrufl7DUkoUiqzMo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna66",
+    "first_name": "Paula",
+    "last_name": "Cifuentes",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:05.145Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 530,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$QadBbUt2aFCZ$XaplRvwEEgRmBJ7ge82TNtfuhwI8saDhVOFQZtiJT5Y=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna67",
+    "first_name": "Paulina",
+    "last_name": "Lagos",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:05.222Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 531,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$PQypQRjFYdAc$UO+o4k5qQrtAMN2Q4HqvhtHWOmwWDk9LSOWgBc1NeE4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna68",
+    "first_name": "Alejandra",
+    "last_name": "Rivas",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:05.302Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 532,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$iSvJZ16pJUlU$rASasaHzxUhIx6OO/lGc9iHjCC519lZwNCV8oygAOJM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna69",
+    "first_name": "Mabel",
+    "last_name": "Recabarren",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:05.399Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 533,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$fX02XgI2e3Em$UTgCHKkPDxG/xLTmC1mpzDZZwl6aet3w/sWiWet2B4Y=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna70",
+    "first_name": "Teresa",
+    "last_name": "Paredes",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:05.488Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 534,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$4RyOWVhMI1gd$nVz0NNBsopi05MTeA9JSnrAD//BMe1f0QU5odFL1gWQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna71",
+    "first_name": "Alicia",
+    "last_name": "Cuadra",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:05.572Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 535,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$ybuHfVUMcBFx$3CUXEsH6aLHcHp6IAYLgipyZ5Rbw+51Dk88y3LTjDfY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna72",
+    "first_name": "Cecilia",
+    "last_name": "Poblete",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:05.655Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 536,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$44uMTFF5Mh3X$zZg6ia55zeLBaD6mQ6eB/Ho1i99ahZEeN0txRnhZoUI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna73",
+    "first_name": "Marta",
+    "last_name": "Osorio",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:05.738Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 537,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$hPBwLwMgiITs$ecoiP1fplRUspdYl4DTFU3c10kTzbLhAfSL4WUjBOnI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna74",
+    "first_name": "Natalia",
+    "last_name": "Arce",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:05.822Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 538,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$UWMcWiEWjsu9$nOiEiMAGaE6Rbawz81hD6Mtj/2nImg/2kMojKZtGD/I=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna75",
+    "first_name": "Daniela",
+    "last_name": "Medina",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:05.907Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 539,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$UmYqGkarRo5W$2Er5d4JD520E8kz8AMarYJ4gcbwXX/gB/ahr8C5AMPk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna76",
+    "first_name": "Gabriela",
+    "last_name": "Cuadra",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:05.992Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 540,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$Wxlu4KHQllaj$MUTpDkJoJr6Xuusl/a06aGhwHJvCQy47M3ABnToZ5zM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna77",
+    "first_name": "Luciana",
+    "last_name": "D\u00edaz",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:06.073Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 541,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$DixMoWsrmoav$g+0S5JWqrG/YVOu9ZQd4foqKIYucGzZGZ8U22nIqRLc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna78",
+    "first_name": "Lucia",
+    "last_name": "C\u00e1ceres",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:06.171Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 542,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$Q6fK73ddpk8Q$emRDBDre0C9HrBLxSJPdU6f8M3a9oo8T0cuXDNUCJ68=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna79",
+    "first_name": "Laura",
+    "last_name": "Mierzo",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:06.301Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 543,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$M7V5yaTOoEO4$c3IS1N7Rsz2E0cT3cMiIWczTFTbds/cCvJAPtT7eqL8=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna80",
+    "first_name": "Scarlett",
+    "last_name": "Suarez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:06.437Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 544,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$5tCdUexiqAsD$eRbnU0GHY+Wi3ETQ0HSvpXBtKC2M/mRbA0GDQBZEKKg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna81",
+    "first_name": "Catalina",
+    "last_name": "Bravo",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:06.544Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 545,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$mZHdwPqmrTw7$pvmu3y7vbPmKZXv97xuLk7vh94LrsvL6YvPBBJRit44=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna82",
+    "first_name": "Alejandra",
+    "last_name": "Mu\u00f1oz",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:06.632Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 546,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$IjXGFDLImHGP$UI0dBCHzUqVyEYT8RwWw5DIjRsZtVqKHy9PRZ+M240A=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna83",
+    "first_name": "Josefa",
+    "last_name": "Perez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:06.717Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 547,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$Zf1AqpaPWxsz$8e0n0/2+8dfiDe3n3HkltQUmJG68G+KzLFFtmRN/WK0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna84",
+    "first_name": "Josefina",
+    "last_name": "Quir\u00f3z",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:06.801Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 548,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$pEECMWthVCsM$w67rCbXbWo5+Drq6jcVka5aQ50DL7bi+ULWNHNT0PLg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna85",
+    "first_name": "Monserrat",
+    "last_name": "Martinez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:06.883Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 549,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$HMq87Xr0Vjt1$L8Sz1nFJzYml+whI3sHbeFndGx/k2ULTqQBKC05lYSk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna86",
+    "first_name": "Valentina",
+    "last_name": "Ruiz",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:06.968Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 550,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$OdXJwUJ9LDZ9$06YnA67vcXwAh5Ia9QqYMJzAbixEcEk88hstsfOUt5w=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna87",
+    "first_name": "Margarita",
+    "last_name": "Elfernan",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:07.049Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 551,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$ozkxzSKvXBn9$TjjBc5v/b4Z/OiSuTrPzT2AJvsL3YVTuruzo651QMhI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna88",
+    "first_name": "Javiera",
+    "last_name": "Ramos",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:07.129Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 552,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$BAqvTrepEz3r$HHiz+9CABD7M01brwYzcjhEzzSicVTmhr9/f6Ghtx/8=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna89",
+    "first_name": "Mar\u00eda Jos\u00e9",
+    "last_name": "Del Campo",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:07.211Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 553,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$9GUiY7ILMDO5$IhkCLYOSY4li1FLliwlj2Ndd4L3GUvWOIMAfBaOZG78=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna90",
+    "first_name": "Kiara",
+    "last_name": "De la Maza",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:07.290Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 554,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$ueidJHdqnUWG$PgZ1CGCojCpnrqowf7XQKDnARU5hnql6M/TDB9VNXZA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna91",
+    "first_name": "Karen",
+    "last_name": "James",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:07.369Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 555,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$sCduCrdGxaDr$HYAUg+VfFfdkm0Uui5dqfBLOVlH9b0FkcE5eUX6UuHo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna92",
+    "first_name": "Sof\u00eda",
+    "last_name": "Toledo",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:07.448Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 556,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$JqMkfF8WE0xI$bkP9rwJ2ZmDnWbvJQfxzI+K0kfgtTms24RR0F6Tb5X4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna93",
+    "first_name": "Agustina",
+    "last_name": "Timana",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:07.532Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 557,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$eQ7B8sx5lNlv$VYTNZTcie74+w1PGDvD2ExLM6Uq/QTj1/HjPwOyUtVU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna94",
+    "first_name": "Dominga",
+    "last_name": "Espinoza",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:07.668Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 558,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$QqnzpWsKXap1$xB56HB54z9FbpWH0jBNY2Ze/WvSXVEsgcHQvMfCqANM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna95",
+    "first_name": "Asunci\u00f3n",
+    "last_name": "G\u00f3mez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:07.769Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 559,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$HvbsYmpc4cF6$Eq2hlJVgsytYswLDdIm6qEqdhbKINKpRz8FMRVAUIrk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna96",
+    "first_name": "Karen",
+    "last_name": "James",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:07.870Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 560,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$nynWNtFgzNzu$T7Gpfa+zhwszafKMqc3q1T3c7LeFyVDpnHOLfzv6Ul4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna97",
+    "first_name": "Sof\u00eda",
+    "last_name": "Toledo",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:07.970Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 561,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$FleT27l9luNC$G6wnjBcz3lmdQdFZSSLAvYhjJphzfLpB7AH04+lHVxY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna98",
+    "first_name": "Agustina",
+    "last_name": "Timana",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:08.070Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 562,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$cw71yxjmcu6j$3FKlrRvlHQKYylJrSDaVfzuEf92V8FlCuPTAZ5MZUrE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna99",
+    "first_name": "Dominga",
+    "last_name": "Espinoza",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:08.171Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.user",
+  "pk": 563,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$Q03zHBLADHMF$/xboCMeOCwOdromV3RYD/95g7x2ERZul7XGbysw9H4I=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "alumna100",
+    "first_name": "Asunci\u00f3n",
+    "last_name": "G\u00f3mez",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-12-13T23:45:08.278Z",
+    "es_profesora": false,
+    "es_voluntaria": false,
+    "es_coordinadora": false,
+    "es_alumna": true,
+    "model_pic": "pic_folder/None/no-img.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "cursos.curso",
+  "pk": 31,
+  "fields": {
+    "nombre": "C++: B\u00e1sico, FCFM",
+    "cant_clases": 8,
+    "profesoras": [
+      [
+        "profesora"
+      ]
+    ],
+    "voluntarias": [
+      [
+        "voluntaria"
+      ],
+      [
+        "voluntaria2"
+      ]
+    ],
+    "alumnas": [
+      [
+        "alumna1"
+      ],
+      [
+        "alumna2"
+      ],
+      [
+        "alumna3"
+      ],
+      [
+        "alumna4"
+      ],
+      [
+        "alumna5"
+      ],
+      [
+        "alumna6"
+      ],
+      [
+        "alumna7"
+      ],
+      [
+        "alumna8"
+      ],
+      [
+        "alumna9"
+      ],
+      [
+        "alumna10"
+      ],
+      [
+        "alumna11"
+      ],
+      [
+        "alumna12"
+      ],
+      [
+        "alumna13"
+      ],
+      [
+        "alumna14"
+      ],
+      [
+        "alumna15"
+      ],
+      [
+        "alumna16"
+      ],
+      [
+        "alumna17"
+      ],
+      [
+        "alumna18"
+      ],
+      [
+        "alumna19"
+      ],
+      [
+        "alumna20"
+      ],
+      [
+        "alumna21"
+      ],
+      [
+        "alumna22"
+      ],
+      [
+        "alumna23"
+      ],
+      [
+        "alumna24"
+      ],
+      [
+        "alumna25"
+      ],
+      [
+        "alumna26"
+      ],
+      [
+        "alumna27"
+      ],
+      [
+        "alumna28"
+      ],
+      [
+        "alumna29"
+      ],
+      [
+        "alumna30"
+      ]
+    ],
+    "tema": []
+  }
+},
+{
+  "model": "cursos.curso",
+  "pk": 32,
+  "fields": {
+    "nombre": "C++: Avanzado, FCFM",
+    "cant_clases": 8,
+    "profesoras": [
+      [
+        "profesora2"
+      ]
+    ],
+    "voluntarias": [
+      [
+        "voluntaria2"
+      ],
+      [
+        "voluntaria3"
+      ]
+    ],
+    "alumnas": [],
+    "tema": []
+  }
+},
+{
+  "model": "cursos.curso",
+  "pk": 33,
+  "fields": {
+    "nombre": "C++: B\u00e1sico, UAndes",
+    "cant_clases": 8,
+    "profesoras": [
+      [
+        "profesora6"
+      ]
+    ],
+    "voluntarias": [
+      [
+        "voluntaria6"
+      ],
+      [
+        "voluntaria7"
+      ]
+    ],
+    "alumnas": [
+      [
+        "alumna31"
+      ],
+      [
+        "alumna32"
+      ],
+      [
+        "alumna33"
+      ],
+      [
+        "alumna34"
+      ],
+      [
+        "alumna35"
+      ],
+      [
+        "alumna36"
+      ],
+      [
+        "alumna37"
+      ],
+      [
+        "alumna38"
+      ],
+      [
+        "alumna39"
+      ],
+      [
+        "alumna40"
+      ],
+      [
+        "alumna41"
+      ],
+      [
+        "alumna42"
+      ],
+      [
+        "alumna43"
+      ],
+      [
+        "alumna44"
+      ],
+      [
+        "alumna45"
+      ],
+      [
+        "alumna46"
+      ],
+      [
+        "alumna47"
+      ],
+      [
+        "alumna48"
+      ],
+      [
+        "alumna49"
+      ],
+      [
+        "alumna50"
+      ],
+      [
+        "alumna51"
+      ],
+      [
+        "alumna52"
+      ],
+      [
+        "alumna53"
+      ],
+      [
+        "alumna54"
+      ],
+      [
+        "alumna55"
+      ],
+      [
+        "alumna56"
+      ],
+      [
+        "alumna57"
+      ],
+      [
+        "alumna58"
+      ],
+      [
+        "alumna59"
+      ],
+      [
+        "alumna60"
+      ]
+    ],
+    "tema": []
+  }
+},
+{
+  "model": "cursos.curso",
+  "pk": 34,
+  "fields": {
+    "nombre": "C++: Medio, UAndes",
+    "cant_clases": 8,
+    "profesoras": [
+      [
+        "profesora7"
+      ]
+    ],
+    "voluntarias": [
+      [
+        "voluntaria7"
+      ],
+      [
+        "voluntaria8"
+      ]
+    ],
+    "alumnas": [
+      [
+        "alumna86"
+      ],
+      [
+        "alumna87"
+      ],
+      [
+        "alumna88"
+      ],
+      [
+        "alumna89"
+      ],
+      [
+        "alumna90"
+      ]
+    ],
+    "tema": []
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 168,
+  "fields": {
+    "nombre": "Ciclos for",
+    "publica": true,
+    "fecha_clase": "2020-04-04",
+    "curso": 31
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 169,
+  "fields": {
+    "nombre": "Ciclos while",
+    "publica": true,
+    "fecha_clase": "2020-04-11",
+    "curso": 31
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 170,
+  "fields": {
+    "nombre": "Grafos",
+    "publica": true,
+    "fecha_clase": "2020-04-18",
+    "curso": 31
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 171,
+  "fields": {
+    "nombre": "DBS",
+    "publica": true,
+    "fecha_clase": "2020-04-25",
+    "curso": 31
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 172,
+  "fields": {
+    "nombre": "DFS",
+    "publica": true,
+    "fecha_clase": "2020-05-02",
+    "curso": 31
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 173,
+  "fields": {
+    "nombre": "Arreglos",
+    "publica": true,
+    "fecha_clase": "2020-04-04",
+    "curso": 32
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 174,
+  "fields": {
+    "nombre": "Variables",
+    "publica": true,
+    "fecha_clase": "2020-04-11",
+    "curso": 32
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 175,
+  "fields": {
+    "nombre": "Listas Enlazadas",
+    "publica": true,
+    "fecha_clase": "2020-04-18",
+    "curso": 32
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 176,
+  "fields": {
+    "nombre": "Intro a la Programaci\u00f3n Competitiva",
+    "publica": true,
+    "fecha_clase": "2020-04-25",
+    "curso": 32
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 177,
+  "fields": {
+    "nombre": "Intro a la Programaci\u00f3n Competitiva 2",
+    "publica": true,
+    "fecha_clase": "2020-05-02",
+    "curso": 32
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 178,
+  "fields": {
+    "nombre": "Clase 1: Ciclos for",
+    "publica": true,
+    "fecha_clase": "2020-04-04",
+    "curso": 33
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 179,
+  "fields": {
+    "nombre": "Clase 2: Ciclos while",
+    "publica": true,
+    "fecha_clase": "2020-04-11",
+    "curso": 33
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 180,
+  "fields": {
+    "nombre": "Clase 3: Grafos",
+    "publica": true,
+    "fecha_clase": "2020-04-18",
+    "curso": 33
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 181,
+  "fields": {
+    "nombre": "Clase 4: DBS",
+    "publica": true,
+    "fecha_clase": "2020-04-25",
+    "curso": 33
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 182,
+  "fields": {
+    "nombre": "Clase 5: DFS",
+    "publica": true,
+    "fecha_clase": "2020-05-02",
+    "curso": 33
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 183,
+  "fields": {
+    "nombre": "Clase 1: Arreglos",
+    "publica": true,
+    "fecha_clase": "2020-04-04",
+    "curso": 34
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 184,
+  "fields": {
+    "nombre": "Clase 2: Variables",
+    "publica": true,
+    "fecha_clase": "2020-04-11",
+    "curso": 34
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 185,
+  "fields": {
+    "nombre": "Clase 3: Listas Enlazadas",
+    "publica": true,
+    "fecha_clase": "2020-04-18",
+    "curso": 34
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 186,
+  "fields": {
+    "nombre": "Clase 4: Intro a la Programaci\u00f3n Competitiva",
+    "publica": true,
+    "fecha_clase": "2020-04-25",
+    "curso": 34
+  }
+},
+{
+  "model": "clases.clase",
+  "pk": 187,
+  "fields": {
+    "nombre": "Clase 5: Intro a la Programaci\u00f3n Competitiva 2",
+    "publica": true,
+    "fecha_clase": "2020-05-02",
+    "curso": 34
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 604,
+  "fields": {
+    "alumna": [
+      "alumna1"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 605,
+  "fields": {
+    "alumna": [
+      "alumna2"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 606,
+  "fields": {
+    "alumna": [
+      "alumna3"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 607,
+  "fields": {
+    "alumna": [
+      "alumna4"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 608,
+  "fields": {
+    "alumna": [
+      "alumna5"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 609,
+  "fields": {
+    "alumna": [
+      "alumna6"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 610,
+  "fields": {
+    "alumna": [
+      "alumna7"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 611,
+  "fields": {
+    "alumna": [
+      "alumna8"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 612,
+  "fields": {
+    "alumna": [
+      "alumna9"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 613,
+  "fields": {
+    "alumna": [
+      "alumna10"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 614,
+  "fields": {
+    "alumna": [
+      "alumna11"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 615,
+  "fields": {
+    "alumna": [
+      "alumna12"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 616,
+  "fields": {
+    "alumna": [
+      "alumna13"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 617,
+  "fields": {
+    "alumna": [
+      "alumna14"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 618,
+  "fields": {
+    "alumna": [
+      "alumna15"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 619,
+  "fields": {
+    "alumna": [
+      "alumna16"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 620,
+  "fields": {
+    "alumna": [
+      "alumna17"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 621,
+  "fields": {
+    "alumna": [
+      "alumna18"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 622,
+  "fields": {
+    "alumna": [
+      "alumna19"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 623,
+  "fields": {
+    "alumna": [
+      "alumna20"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 624,
+  "fields": {
+    "alumna": [
+      "alumna21"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 625,
+  "fields": {
+    "alumna": [
+      "alumna22"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 626,
+  "fields": {
+    "alumna": [
+      "alumna23"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 627,
+  "fields": {
+    "alumna": [
+      "alumna24"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 628,
+  "fields": {
+    "alumna": [
+      "alumna25"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 629,
+  "fields": {
+    "alumna": [
+      "alumna26"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 630,
+  "fields": {
+    "alumna": [
+      "alumna27"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 631,
+  "fields": {
+    "alumna": [
+      "alumna28"
+    ],
+    "clase": 168,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 632,
+  "fields": {
+    "alumna": [
+      "alumna29"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 633,
+  "fields": {
+    "alumna": [
+      "alumna30"
+    ],
+    "clase": 168,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 634,
+  "fields": {
+    "alumna": [
+      "alumna1"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 635,
+  "fields": {
+    "alumna": [
+      "alumna2"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 636,
+  "fields": {
+    "alumna": [
+      "alumna3"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 637,
+  "fields": {
+    "alumna": [
+      "alumna4"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 638,
+  "fields": {
+    "alumna": [
+      "alumna5"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 639,
+  "fields": {
+    "alumna": [
+      "alumna6"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 640,
+  "fields": {
+    "alumna": [
+      "alumna7"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 641,
+  "fields": {
+    "alumna": [
+      "alumna8"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 642,
+  "fields": {
+    "alumna": [
+      "alumna9"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 643,
+  "fields": {
+    "alumna": [
+      "alumna10"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 644,
+  "fields": {
+    "alumna": [
+      "alumna11"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 645,
+  "fields": {
+    "alumna": [
+      "alumna12"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 646,
+  "fields": {
+    "alumna": [
+      "alumna13"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 647,
+  "fields": {
+    "alumna": [
+      "alumna14"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 648,
+  "fields": {
+    "alumna": [
+      "alumna15"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 649,
+  "fields": {
+    "alumna": [
+      "alumna16"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 650,
+  "fields": {
+    "alumna": [
+      "alumna17"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 651,
+  "fields": {
+    "alumna": [
+      "alumna18"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 652,
+  "fields": {
+    "alumna": [
+      "alumna19"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 653,
+  "fields": {
+    "alumna": [
+      "alumna20"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 654,
+  "fields": {
+    "alumna": [
+      "alumna21"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 655,
+  "fields": {
+    "alumna": [
+      "alumna22"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 656,
+  "fields": {
+    "alumna": [
+      "alumna23"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 657,
+  "fields": {
+    "alumna": [
+      "alumna24"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 658,
+  "fields": {
+    "alumna": [
+      "alumna25"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 659,
+  "fields": {
+    "alumna": [
+      "alumna26"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 660,
+  "fields": {
+    "alumna": [
+      "alumna27"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 661,
+  "fields": {
+    "alumna": [
+      "alumna28"
+    ],
+    "clase": 169,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 662,
+  "fields": {
+    "alumna": [
+      "alumna29"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 663,
+  "fields": {
+    "alumna": [
+      "alumna30"
+    ],
+    "clase": 169,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 664,
+  "fields": {
+    "alumna": [
+      "alumna1"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 665,
+  "fields": {
+    "alumna": [
+      "alumna2"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 666,
+  "fields": {
+    "alumna": [
+      "alumna3"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 667,
+  "fields": {
+    "alumna": [
+      "alumna4"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 668,
+  "fields": {
+    "alumna": [
+      "alumna5"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 669,
+  "fields": {
+    "alumna": [
+      "alumna6"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 670,
+  "fields": {
+    "alumna": [
+      "alumna7"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 671,
+  "fields": {
+    "alumna": [
+      "alumna8"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 672,
+  "fields": {
+    "alumna": [
+      "alumna9"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 673,
+  "fields": {
+    "alumna": [
+      "alumna10"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 674,
+  "fields": {
+    "alumna": [
+      "alumna11"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 675,
+  "fields": {
+    "alumna": [
+      "alumna12"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 676,
+  "fields": {
+    "alumna": [
+      "alumna13"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 677,
+  "fields": {
+    "alumna": [
+      "alumna14"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 678,
+  "fields": {
+    "alumna": [
+      "alumna15"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 679,
+  "fields": {
+    "alumna": [
+      "alumna16"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 680,
+  "fields": {
+    "alumna": [
+      "alumna17"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 681,
+  "fields": {
+    "alumna": [
+      "alumna18"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 682,
+  "fields": {
+    "alumna": [
+      "alumna19"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 683,
+  "fields": {
+    "alumna": [
+      "alumna20"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 684,
+  "fields": {
+    "alumna": [
+      "alumna21"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 685,
+  "fields": {
+    "alumna": [
+      "alumna22"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 686,
+  "fields": {
+    "alumna": [
+      "alumna23"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 687,
+  "fields": {
+    "alumna": [
+      "alumna24"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 688,
+  "fields": {
+    "alumna": [
+      "alumna25"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 689,
+  "fields": {
+    "alumna": [
+      "alumna26"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 690,
+  "fields": {
+    "alumna": [
+      "alumna27"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 691,
+  "fields": {
+    "alumna": [
+      "alumna28"
+    ],
+    "clase": 170,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 692,
+  "fields": {
+    "alumna": [
+      "alumna29"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 693,
+  "fields": {
+    "alumna": [
+      "alumna30"
+    ],
+    "clase": 170,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 694,
+  "fields": {
+    "alumna": [
+      "alumna1"
+    ],
+    "clase": 171,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 695,
+  "fields": {
+    "alumna": [
+      "alumna2"
+    ],
+    "clase": 171,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 696,
+  "fields": {
+    "alumna": [
+      "alumna3"
+    ],
+    "clase": 171,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 697,
+  "fields": {
+    "alumna": [
+      "alumna4"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 698,
+  "fields": {
+    "alumna": [
+      "alumna5"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 699,
+  "fields": {
+    "alumna": [
+      "alumna6"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 700,
+  "fields": {
+    "alumna": [
+      "alumna7"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 701,
+  "fields": {
+    "alumna": [
+      "alumna8"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 702,
+  "fields": {
+    "alumna": [
+      "alumna9"
+    ],
+    "clase": 171,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 703,
+  "fields": {
+    "alumna": [
+      "alumna10"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 704,
+  "fields": {
+    "alumna": [
+      "alumna11"
+    ],
+    "clase": 171,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 705,
+  "fields": {
+    "alumna": [
+      "alumna12"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 706,
+  "fields": {
+    "alumna": [
+      "alumna13"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 707,
+  "fields": {
+    "alumna": [
+      "alumna14"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 708,
+  "fields": {
+    "alumna": [
+      "alumna15"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 709,
+  "fields": {
+    "alumna": [
+      "alumna16"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 710,
+  "fields": {
+    "alumna": [
+      "alumna17"
+    ],
+    "clase": 171,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 711,
+  "fields": {
+    "alumna": [
+      "alumna18"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 712,
+  "fields": {
+    "alumna": [
+      "alumna19"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 713,
+  "fields": {
+    "alumna": [
+      "alumna20"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 714,
+  "fields": {
+    "alumna": [
+      "alumna21"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 715,
+  "fields": {
+    "alumna": [
+      "alumna22"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 716,
+  "fields": {
+    "alumna": [
+      "alumna23"
+    ],
+    "clase": 171,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 717,
+  "fields": {
+    "alumna": [
+      "alumna24"
+    ],
+    "clase": 171,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 718,
+  "fields": {
+    "alumna": [
+      "alumna25"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 719,
+  "fields": {
+    "alumna": [
+      "alumna26"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 720,
+  "fields": {
+    "alumna": [
+      "alumna27"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 721,
+  "fields": {
+    "alumna": [
+      "alumna28"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 722,
+  "fields": {
+    "alumna": [
+      "alumna29"
+    ],
+    "clase": 171,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 723,
+  "fields": {
+    "alumna": [
+      "alumna30"
+    ],
+    "clase": 171,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 724,
+  "fields": {
+    "alumna": [
+      "alumna1"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 725,
+  "fields": {
+    "alumna": [
+      "alumna2"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 726,
+  "fields": {
+    "alumna": [
+      "alumna3"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 727,
+  "fields": {
+    "alumna": [
+      "alumna4"
+    ],
+    "clase": 172,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 728,
+  "fields": {
+    "alumna": [
+      "alumna5"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 729,
+  "fields": {
+    "alumna": [
+      "alumna6"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 730,
+  "fields": {
+    "alumna": [
+      "alumna7"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 731,
+  "fields": {
+    "alumna": [
+      "alumna8"
+    ],
+    "clase": 172,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 732,
+  "fields": {
+    "alumna": [
+      "alumna9"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 733,
+  "fields": {
+    "alumna": [
+      "alumna10"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 734,
+  "fields": {
+    "alumna": [
+      "alumna11"
+    ],
+    "clase": 172,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 735,
+  "fields": {
+    "alumna": [
+      "alumna12"
+    ],
+    "clase": 172,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 736,
+  "fields": {
+    "alumna": [
+      "alumna13"
+    ],
+    "clase": 172,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 737,
+  "fields": {
+    "alumna": [
+      "alumna14"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 738,
+  "fields": {
+    "alumna": [
+      "alumna15"
+    ],
+    "clase": 172,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 739,
+  "fields": {
+    "alumna": [
+      "alumna16"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 740,
+  "fields": {
+    "alumna": [
+      "alumna17"
+    ],
+    "clase": 172,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 741,
+  "fields": {
+    "alumna": [
+      "alumna18"
+    ],
+    "clase": 172,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 742,
+  "fields": {
+    "alumna": [
+      "alumna19"
+    ],
+    "clase": 172,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 743,
+  "fields": {
+    "alumna": [
+      "alumna20"
+    ],
+    "clase": 172,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 744,
+  "fields": {
+    "alumna": [
+      "alumna21"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 745,
+  "fields": {
+    "alumna": [
+      "alumna22"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 746,
+  "fields": {
+    "alumna": [
+      "alumna23"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 747,
+  "fields": {
+    "alumna": [
+      "alumna24"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 748,
+  "fields": {
+    "alumna": [
+      "alumna25"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 749,
+  "fields": {
+    "alumna": [
+      "alumna26"
+    ],
+    "clase": 172,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 750,
+  "fields": {
+    "alumna": [
+      "alumna27"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 751,
+  "fields": {
+    "alumna": [
+      "alumna28"
+    ],
+    "clase": 172,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 752,
+  "fields": {
+    "alumna": [
+      "alumna29"
+    ],
+    "clase": 172,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 753,
+  "fields": {
+    "alumna": [
+      "alumna30"
+    ],
+    "clase": 172,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 754,
+  "fields": {
+    "alumna": [
+      "alumna31"
+    ],
+    "clase": 178,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 755,
+  "fields": {
+    "alumna": [
+      "alumna32"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 756,
+  "fields": {
+    "alumna": [
+      "alumna33"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 757,
+  "fields": {
+    "alumna": [
+      "alumna34"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 758,
+  "fields": {
+    "alumna": [
+      "alumna35"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 759,
+  "fields": {
+    "alumna": [
+      "alumna36"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 760,
+  "fields": {
+    "alumna": [
+      "alumna37"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 761,
+  "fields": {
+    "alumna": [
+      "alumna38"
+    ],
+    "clase": 178,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 762,
+  "fields": {
+    "alumna": [
+      "alumna39"
+    ],
+    "clase": 178,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 763,
+  "fields": {
+    "alumna": [
+      "alumna40"
+    ],
+    "clase": 178,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 764,
+  "fields": {
+    "alumna": [
+      "alumna41"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 765,
+  "fields": {
+    "alumna": [
+      "alumna42"
+    ],
+    "clase": 178,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 766,
+  "fields": {
+    "alumna": [
+      "alumna43"
+    ],
+    "clase": 178,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 767,
+  "fields": {
+    "alumna": [
+      "alumna44"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 768,
+  "fields": {
+    "alumna": [
+      "alumna45"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 769,
+  "fields": {
+    "alumna": [
+      "alumna46"
+    ],
+    "clase": 178,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 770,
+  "fields": {
+    "alumna": [
+      "alumna47"
+    ],
+    "clase": 178,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 771,
+  "fields": {
+    "alumna": [
+      "alumna48"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 772,
+  "fields": {
+    "alumna": [
+      "alumna49"
+    ],
+    "clase": 178,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 773,
+  "fields": {
+    "alumna": [
+      "alumna50"
+    ],
+    "clase": 178,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 774,
+  "fields": {
+    "alumna": [
+      "alumna51"
+    ],
+    "clase": 178,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 775,
+  "fields": {
+    "alumna": [
+      "alumna52"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 776,
+  "fields": {
+    "alumna": [
+      "alumna53"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 777,
+  "fields": {
+    "alumna": [
+      "alumna54"
+    ],
+    "clase": 178,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 778,
+  "fields": {
+    "alumna": [
+      "alumna55"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 779,
+  "fields": {
+    "alumna": [
+      "alumna56"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 780,
+  "fields": {
+    "alumna": [
+      "alumna57"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 781,
+  "fields": {
+    "alumna": [
+      "alumna58"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 782,
+  "fields": {
+    "alumna": [
+      "alumna59"
+    ],
+    "clase": 178,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 783,
+  "fields": {
+    "alumna": [
+      "alumna60"
+    ],
+    "clase": 178,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 784,
+  "fields": {
+    "alumna": [
+      "alumna31"
+    ],
+    "clase": 179,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 785,
+  "fields": {
+    "alumna": [
+      "alumna32"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 786,
+  "fields": {
+    "alumna": [
+      "alumna33"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 787,
+  "fields": {
+    "alumna": [
+      "alumna34"
+    ],
+    "clase": 179,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 788,
+  "fields": {
+    "alumna": [
+      "alumna35"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 789,
+  "fields": {
+    "alumna": [
+      "alumna36"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 790,
+  "fields": {
+    "alumna": [
+      "alumna37"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 791,
+  "fields": {
+    "alumna": [
+      "alumna38"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 792,
+  "fields": {
+    "alumna": [
+      "alumna39"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 793,
+  "fields": {
+    "alumna": [
+      "alumna40"
+    ],
+    "clase": 179,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 794,
+  "fields": {
+    "alumna": [
+      "alumna41"
+    ],
+    "clase": 179,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 795,
+  "fields": {
+    "alumna": [
+      "alumna42"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 796,
+  "fields": {
+    "alumna": [
+      "alumna43"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 797,
+  "fields": {
+    "alumna": [
+      "alumna44"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 798,
+  "fields": {
+    "alumna": [
+      "alumna45"
+    ],
+    "clase": 179,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 799,
+  "fields": {
+    "alumna": [
+      "alumna46"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 800,
+  "fields": {
+    "alumna": [
+      "alumna47"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 801,
+  "fields": {
+    "alumna": [
+      "alumna48"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 802,
+  "fields": {
+    "alumna": [
+      "alumna49"
+    ],
+    "clase": 179,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 803,
+  "fields": {
+    "alumna": [
+      "alumna50"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 804,
+  "fields": {
+    "alumna": [
+      "alumna51"
+    ],
+    "clase": 179,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 805,
+  "fields": {
+    "alumna": [
+      "alumna52"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 806,
+  "fields": {
+    "alumna": [
+      "alumna53"
+    ],
+    "clase": 179,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 807,
+  "fields": {
+    "alumna": [
+      "alumna54"
+    ],
+    "clase": 179,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 808,
+  "fields": {
+    "alumna": [
+      "alumna55"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 809,
+  "fields": {
+    "alumna": [
+      "alumna56"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 810,
+  "fields": {
+    "alumna": [
+      "alumna57"
+    ],
+    "clase": 179,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 811,
+  "fields": {
+    "alumna": [
+      "alumna58"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 812,
+  "fields": {
+    "alumna": [
+      "alumna59"
+    ],
+    "clase": 179,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 813,
+  "fields": {
+    "alumna": [
+      "alumna60"
+    ],
+    "clase": 179,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 814,
+  "fields": {
+    "alumna": [
+      "alumna31"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 815,
+  "fields": {
+    "alumna": [
+      "alumna32"
+    ],
+    "clase": 180,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 816,
+  "fields": {
+    "alumna": [
+      "alumna33"
+    ],
+    "clase": 180,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 817,
+  "fields": {
+    "alumna": [
+      "alumna34"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 818,
+  "fields": {
+    "alumna": [
+      "alumna35"
+    ],
+    "clase": 180,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 819,
+  "fields": {
+    "alumna": [
+      "alumna36"
+    ],
+    "clase": 180,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 820,
+  "fields": {
+    "alumna": [
+      "alumna37"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 821,
+  "fields": {
+    "alumna": [
+      "alumna38"
+    ],
+    "clase": 180,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 822,
+  "fields": {
+    "alumna": [
+      "alumna39"
+    ],
+    "clase": 180,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 823,
+  "fields": {
+    "alumna": [
+      "alumna40"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 824,
+  "fields": {
+    "alumna": [
+      "alumna41"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 825,
+  "fields": {
+    "alumna": [
+      "alumna42"
+    ],
+    "clase": 180,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 826,
+  "fields": {
+    "alumna": [
+      "alumna43"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 827,
+  "fields": {
+    "alumna": [
+      "alumna44"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 828,
+  "fields": {
+    "alumna": [
+      "alumna45"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 829,
+  "fields": {
+    "alumna": [
+      "alumna46"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 830,
+  "fields": {
+    "alumna": [
+      "alumna47"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 831,
+  "fields": {
+    "alumna": [
+      "alumna48"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 832,
+  "fields": {
+    "alumna": [
+      "alumna49"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 833,
+  "fields": {
+    "alumna": [
+      "alumna50"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 834,
+  "fields": {
+    "alumna": [
+      "alumna51"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 835,
+  "fields": {
+    "alumna": [
+      "alumna52"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 836,
+  "fields": {
+    "alumna": [
+      "alumna53"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 837,
+  "fields": {
+    "alumna": [
+      "alumna54"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 838,
+  "fields": {
+    "alumna": [
+      "alumna55"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 839,
+  "fields": {
+    "alumna": [
+      "alumna56"
+    ],
+    "clase": 180,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 840,
+  "fields": {
+    "alumna": [
+      "alumna57"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 841,
+  "fields": {
+    "alumna": [
+      "alumna58"
+    ],
+    "clase": 180,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 842,
+  "fields": {
+    "alumna": [
+      "alumna59"
+    ],
+    "clase": 180,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 843,
+  "fields": {
+    "alumna": [
+      "alumna60"
+    ],
+    "clase": 180,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 844,
+  "fields": {
+    "alumna": [
+      "alumna31"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 845,
+  "fields": {
+    "alumna": [
+      "alumna32"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 846,
+  "fields": {
+    "alumna": [
+      "alumna33"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 847,
+  "fields": {
+    "alumna": [
+      "alumna34"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 848,
+  "fields": {
+    "alumna": [
+      "alumna35"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 849,
+  "fields": {
+    "alumna": [
+      "alumna36"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 850,
+  "fields": {
+    "alumna": [
+      "alumna37"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 851,
+  "fields": {
+    "alumna": [
+      "alumna38"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 852,
+  "fields": {
+    "alumna": [
+      "alumna39"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 853,
+  "fields": {
+    "alumna": [
+      "alumna40"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 854,
+  "fields": {
+    "alumna": [
+      "alumna41"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 855,
+  "fields": {
+    "alumna": [
+      "alumna42"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 856,
+  "fields": {
+    "alumna": [
+      "alumna43"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 857,
+  "fields": {
+    "alumna": [
+      "alumna44"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 858,
+  "fields": {
+    "alumna": [
+      "alumna45"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 859,
+  "fields": {
+    "alumna": [
+      "alumna46"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 860,
+  "fields": {
+    "alumna": [
+      "alumna47"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 861,
+  "fields": {
+    "alumna": [
+      "alumna48"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 862,
+  "fields": {
+    "alumna": [
+      "alumna49"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 863,
+  "fields": {
+    "alumna": [
+      "alumna50"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 864,
+  "fields": {
+    "alumna": [
+      "alumna51"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 865,
+  "fields": {
+    "alumna": [
+      "alumna52"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 866,
+  "fields": {
+    "alumna": [
+      "alumna53"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 867,
+  "fields": {
+    "alumna": [
+      "alumna54"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 868,
+  "fields": {
+    "alumna": [
+      "alumna55"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 869,
+  "fields": {
+    "alumna": [
+      "alumna56"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 870,
+  "fields": {
+    "alumna": [
+      "alumna57"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 871,
+  "fields": {
+    "alumna": [
+      "alumna58"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 872,
+  "fields": {
+    "alumna": [
+      "alumna59"
+    ],
+    "clase": 181,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 873,
+  "fields": {
+    "alumna": [
+      "alumna60"
+    ],
+    "clase": 181,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 874,
+  "fields": {
+    "alumna": [
+      "alumna31"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 875,
+  "fields": {
+    "alumna": [
+      "alumna32"
+    ],
+    "clase": 182,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 876,
+  "fields": {
+    "alumna": [
+      "alumna33"
+    ],
+    "clase": 182,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 877,
+  "fields": {
+    "alumna": [
+      "alumna34"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 878,
+  "fields": {
+    "alumna": [
+      "alumna35"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 879,
+  "fields": {
+    "alumna": [
+      "alumna36"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 880,
+  "fields": {
+    "alumna": [
+      "alumna37"
+    ],
+    "clase": 182,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 881,
+  "fields": {
+    "alumna": [
+      "alumna38"
+    ],
+    "clase": 182,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 882,
+  "fields": {
+    "alumna": [
+      "alumna39"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 883,
+  "fields": {
+    "alumna": [
+      "alumna40"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 884,
+  "fields": {
+    "alumna": [
+      "alumna41"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 885,
+  "fields": {
+    "alumna": [
+      "alumna42"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 886,
+  "fields": {
+    "alumna": [
+      "alumna43"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 887,
+  "fields": {
+    "alumna": [
+      "alumna44"
+    ],
+    "clase": 182,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 888,
+  "fields": {
+    "alumna": [
+      "alumna45"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 889,
+  "fields": {
+    "alumna": [
+      "alumna46"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 890,
+  "fields": {
+    "alumna": [
+      "alumna47"
+    ],
+    "clase": 182,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 891,
+  "fields": {
+    "alumna": [
+      "alumna48"
+    ],
+    "clase": 182,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 892,
+  "fields": {
+    "alumna": [
+      "alumna49"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 893,
+  "fields": {
+    "alumna": [
+      "alumna50"
+    ],
+    "clase": 182,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 894,
+  "fields": {
+    "alumna": [
+      "alumna51"
+    ],
+    "clase": 182,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 895,
+  "fields": {
+    "alumna": [
+      "alumna52"
+    ],
+    "clase": 182,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 896,
+  "fields": {
+    "alumna": [
+      "alumna53"
+    ],
+    "clase": 182,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 897,
+  "fields": {
+    "alumna": [
+      "alumna54"
+    ],
+    "clase": 182,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 898,
+  "fields": {
+    "alumna": [
+      "alumna55"
+    ],
+    "clase": 182,
+    "asistio": true
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 899,
+  "fields": {
+    "alumna": [
+      "alumna56"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 900,
+  "fields": {
+    "alumna": [
+      "alumna57"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 901,
+  "fields": {
+    "alumna": [
+      "alumna58"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 902,
+  "fields": {
+    "alumna": [
+      "alumna59"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+},
+{
+  "model": "asistencia.asistencia",
+  "pk": 903,
+  "fields": {
+    "alumna": [
+      "alumna60"
+    ],
+    "clase": 182,
+    "asistio": false
+  }
+}
+]

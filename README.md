@@ -1,4 +1,4 @@
-# NiñasProject
+# NiñasCode
 # Primera vez en el proyecto
 
 ### Clonar el repositorio. 
@@ -43,16 +43,20 @@ El paso 5 siempre se hace para correr el servidor, para poder acceder a la aplic
 
 
 ### Crear datos
-Al iniciar el proyecto la base de datos va a estar vacía. Si el proyecto trae _fixtures_ se puede llenar la base de datos con los datos de la fixture: 
+#### Con fixtures
+Al iniciar el proyecto la base de datos va a estar vacía. 
+Si el proyecto trae una carpeta _fixtures_ se puede llenar la base de datos con los datos de la fixture: 
 ```
 python manage.py loaddata nombre-archivo-fixture.json
 ```
+* `fixture_user_cursos_clases_asistencia`: Esta fixture trae data de todos los modelos que salen en su nombre. Los nombres de las usuarias y sus contraseñas las encontrarás en el archivo `Scripts_y_datos/creardbpequeño.py` 
 
-Si no hay fixtures en el proyecto habrá que crear datos a mano. 
-
-Primero crearemos un super usuario que nos dará acceso al administrador de Django: 
+#### Superusuario
+Con o sin fixtures crearemos un super usuario que nos dará acceso al administrador de Django: 
 ```
 python manage.py createsuperuser
 ```
 
-Luego hay que entrar a _localhost:8000/admin_ e ingresar con las credenciales creadas antes.  
+Luego hay que entrar a _localhost:8000/admin_ e ingresar con las credenciales creadas antes y 
+tendrás acceso a la mayoría de los datos de la base de datos. 
+
