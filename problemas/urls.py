@@ -13,4 +13,5 @@ urlpatterns = [
     path('<int:curso_id>/curso/<int:problema_id>/problema/casos/<int:result>', views.ProblemasViews.as_view(tab='casos'), name='casos-problema'),
     path('<int:curso_id>/curso/<int:problema_id>/problema/feedback/<int:result>', views.ProblemasViews.as_view(tab='feedback'), name='feedback-problema'),
     path('<int:clase_id>/agregar-problema', views.CrearProblemasViews.as_view(), name='crear-problema'),
+    path('<int:curso_id>/curso/<int:problema_id>/problema/edit/', views.EditarProblemasViews.as_view(), name='editar-problema')
 ] +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
