@@ -42,6 +42,8 @@ Para iniciar el proyecto django hay que seguir una serie de pasos:
 
 El paso 5 siempre se hace para correr el servidor, para poder acceder a la aplicación hay que entrar a _localhost:8000/_ o a _127.0.0.1:8000/_. 
 
+En la siguiente carpeta encuentras ejemplos de enunciados, casos de prueba y soluciones para hacer pruebas: https://drive.google.com/drive/u/1/folders/16XIQIm0lMl6OVuNQjjZbepWmCkUlDoWu
+
 
 ### Crear datos
 #### Con fixtures
