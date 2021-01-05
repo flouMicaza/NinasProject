@@ -37,7 +37,8 @@ Para iniciar el proyecto django hay que seguir una serie de pasos:
 2.  ```python manage.py makemigrations``` para crear los archivos que crean las tablas de la base de datos. 
 3. ```python manage.py migrate```  para crear las tablas de la base de datos. 
 4. ```python manage.py collectstatic``` para crear los archivos estáticos del proyecto. 
-5. ```python manage.py runserver ``` para correr el proyecto. 
+5. ```python manage.py runserver ``` para correr la aplicación web.
+6. En otra consola ejecutar `python run_server.py` o `python run_server_win.py` según tu sistema operativo cuando vayas a utilizar la revisión de soluciones. 
 
 El paso 5 siempre se hace para correr el servidor, para poder acceder a la aplicación hay que entrar a _localhost:8000/_ o a _127.0.0.1:8000/_. 
 
