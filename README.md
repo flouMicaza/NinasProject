@@ -27,7 +27,7 @@ source env/bin/activate
 
 ### Iniciar el proyecto Django: 
 Para iniciar el proyecto django hay que seguir una serie de pasos: 
-1. ``` pip3 intstall requirements.txt ``` para instalar todas la librerías necesarias para el proyecto. 
+1. ``` pip3 intstall -r requirements.txt ``` para instalar todas la librerías necesarias para el proyecto. 
 > En caso que salga un error relacionado con C, al instalar rcssmin probar instalar con el siguiente comando: 
 ''' 
     pip install rcssmin --install-option="--without-c-extensions"
