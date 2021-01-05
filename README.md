@@ -60,6 +60,8 @@ Con o sin fixtures crearemos un super usuario que nos dará acceso al administra
 python manage.py createsuperuser
 ```
 
+Ojo que el superusuario no tiene tipo de usuario Profesora ni Estudiante, por lo que no servirá para ser usado en la plataforma. Solo servirá para ser utilizado en el administrador. 
+
 Luego hay que entrar a _localhost:8000/admin_ e ingresar con las credenciales creadas antes y 
 tendrás acceso a la mayoría de los datos de la base de datos. 
 
