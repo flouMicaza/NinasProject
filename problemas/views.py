@@ -222,6 +222,5 @@ class EditarProblemasViews(LoginRequiredMixin, View):
             messages.success(request, 'Se creó el problema ' + nuevo_problema.titulo)
             kwargs['result'] = 0
             return HttpResponseRedirect(reverse('problemas:enunciado-problema', kwargs=kwargs))
-        print(form.errors)
         kwargs['form'] = form
         return render(request, 'problemas/editar_problema.html',kwargs )
