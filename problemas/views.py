@@ -145,7 +145,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         nuevos_outputs = {}
         for test in tests_arr:
             input = test[1]
-            caso = Caso.objects.get(input=input, problema=feedback.problema)
+            caso = Caso.objects.filter(input=input, problema=feedback.problema).first()
             test_feedback = TestFeedback.objects.create(passed=test[0], output_obtenido=test[5], error=test[4],
                                                         caso=caso,
                                                         feedback=feedback)
@@ -203,22 +203,6 @@ class CrearProblemasViews(LoginRequiredMixin, View):
             return HttpResponseRedirect(reverse('cursos:curso', kwargs={'curso_id': clase.curso.id}))
         return render(request, 'problemas/crear_problema.html', {'clase': clase, 'form': form})
 
-'''
-@method_decorator([profesora_required], name='dispatch')
-class EditarProblemasViews(LoginRequiredMixin, UpdateView):
-    model = Problema
-    form_class = ProblemaForm
-    template_name = 'problemas/editar_problema.html'
-
-    def get_object(self, **kwargs):
-        problema = get_object_or_404(Problema,id=self.kwargs['problema_id'])
-        return problema
-
-    def get_success_url(self):
-        self.kwargs['result'] = 0
-        return reverse('problemas:enunciado-problema',kwargs=self.kwargs)
-
-'''
 
 @method_decorator([profesora_required], name='dispatch')
 class EditarProblemasViews(LoginRequiredMixin, View):
