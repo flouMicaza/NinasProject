@@ -145,7 +145,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         nuevos_outputs = {}
         for test in tests_arr:
             input = test[1]
-            caso = Caso.objects.get(input=input, problema=feedback.problema)
+            caso = Caso.objects.filter(input=input, problema=feedback.problema).first()
             test_feedback = TestFeedback.objects.create(passed=test[0], output_obtenido=test[5], error=test[4],
                                                         caso=caso,
                                                         feedback=feedback)
@@ -202,3 +202,25 @@ class CrearProblemasViews(LoginRequiredMixin, View):
             messages.success(request, 'Se creó el problema ' + nuevo_problema.titulo)
             return HttpResponseRedirect(reverse('cursos:curso', kwargs={'curso_id': clase.curso.id}))
         return render(request, 'problemas/crear_problema.html', {'clase': clase, 'form': form})
+
+
+@method_decorator([profesora_required], name='dispatch')
+class EditarProblemasViews(LoginRequiredMixin, View):
+    def get(self, request,**kwargs):
+        problema = get_object_or_404(Problema,id=kwargs['problema_id'])
+        form = ProblemaForm(instance=problema)
+        kwargs['form'] = form
+        return render(request,'problemas/editar_problema.html', kwargs)
+
+    def post(self, request,**kwargs):
+        problema = get_object_or_404(Problema, id=kwargs['problema_id'])
+        form = ProblemaForm(request.POST, request.FILES, instance=problema)
+        form.fields['statement'].required = False
+
+        if form.is_valid():
+            nuevo_problema = form.save()
+            messages.success(request, 'Se creó el problema ' + nuevo_problema.titulo)
+            kwargs['result'] = 0
+            return HttpResponseRedirect(reverse('problemas:enunciado-problema', kwargs=kwargs))
+        kwargs['form'] = form
+        return render(request, 'problemas/editar_problema.html',kwargs )

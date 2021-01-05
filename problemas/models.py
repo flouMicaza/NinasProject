@@ -13,16 +13,19 @@ from django.core.files import File
 from clases.models import Clase
 from my_lib.files_wrapper import file_to_file, change_path_extension, get_file_name, check_if_file_is_valid
 
+
 class Problema(models.Model):
     titulo = models.CharField(max_length=100)
     fecha_creacion = models.DateTimeField(editable=False, blank=True, null=True)
 
-    statement = models.FileField(upload_to='statements',help_text="Solo se aceptan PDF's",validators=[FileExtensionValidator(['pdf'])])
+    statement = models.FileField(upload_to='statements', help_text="Solo se aceptan PDF's",
+                                 validators=[FileExtensionValidator(['pdf'])])
 
     # The source with which the statement file was created (a .zip or another compression format)
     source = models.FileField(upload_to='source', blank=True, null=True)
 
-    tests = models.FileField(upload_to='test_files',help_text="Se aceptan formatos .csv y .json",validators=[FileExtensionValidator(['json', 'csv'])])
+    tests = models.FileField(upload_to='test_files', help_text="Se aceptan formatos .csv y .json",
+                             validators=[FileExtensionValidator(['json', 'csv'])])
     clase = models.ForeignKey(Clase, blank=True, null=True, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
@@ -46,6 +49,7 @@ class Problema(models.Model):
 
     def get_tests_name(self):
         return self.tests.name.split("/")[-1]
+
 
 @receiver(post_save, sender=Problema)
 def create_assignment(sender, instance, created, **kwargs):
@@ -81,18 +85,21 @@ def create_assignment(sender, instance, created, **kwargs):
         os.remove(test_url)
         create_test_cases(instance)
 
+
 def create_test_cases(problema):
     with open(settings.BASE_DIR + problema.tests.url, 'r') as f:
         datastore = json.load(f)
 
     for test_dict in datastore:  # Aquí es donde se generan los test, tengo que modificar para que reciba mi nueva info.
-        caso = Caso(categoría=test_dict["Categoria"],input=test_dict["Input"],output_esperado=test_dict["Output"],problema=problema)
+        caso = Caso(categoría=test_dict["Categoria"], input=test_dict["Input"], output_esperado=test_dict["Output"],
+                    problema=problema)
         caso.save()
+
 
 class Caso(models.Model):
     categoría = models.TextField(help_text="Descripción del caso")
-    input = models.CharField(max_length=255,help_text="Input del caso")
-    output_esperado = models.CharField(max_length=255,help_text="Output esperado para el input")
+    input = models.CharField(max_length=255, help_text="Input del caso")
+    output_esperado = models.CharField(max_length=255, help_text="Output esperado para el input")
     problema = models.ForeignKey(Problema, on_delete=models.CASCADE, help_text="Problema al que pertenece el caso")
 
     def __str__(self):

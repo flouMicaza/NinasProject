@@ -3,8 +3,11 @@
 {% block title %}{{ curso.nombre}} : {{ problema.titulo }}{% endblock %}
 
 {% block content %}
-
-    <h3>{{ problema.titulo }}</h3><h4>{{ curso.nombre }}</h4>
+    <div class="title-and-button">
+            <h3>{{ problema.titulo }}</h3>
+            <a href="{% url 'problemas:editar-problema' curso_id=curso.id problema_id=problema.id %}" class="btn btn-primary btn-large">Editar<i class="material-icons left">mode_edit</i></a>
+    </div>
+    <h4>{{ curso.nombre }}</h4>
 
     <a href="{% url 'cursos:curso' curso_id=curso.id %}" style="margin-bottom:1rem;" class="waves-effect waves-light btn-small btn">
                         <i class="material-icons left">arrow_back</i>Volver</a>
