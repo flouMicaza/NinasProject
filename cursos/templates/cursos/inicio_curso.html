@@ -121,7 +121,7 @@
                                     {% if clase.publica %} <p class="">Publicada</p>
                                     {% else %} <p class="">No publicada</p>
                                     {% endif %}
-                                    <a class="btn-floating waves-effect waves-light btn-small btn" style="margin-left: 10px" onclick="editar_clase({{ clase.id }})">
+                                    <a class="btn-floating btn-small btn" style="margin-left: 10px" onclick="editar_clase({{ clase.id }})">
                                         <i class="tiny material-icons">create</i>
                                     </a>
                                 {% endif %}
@@ -130,14 +130,17 @@
                         {% if user.es_profesora %}
                             <div style = "display:none" id="clase_edit_{{ clase.id }}">
                                 <form method="post" action="">
+
                                     {% csrf_token %}
+
                                     <input type="hidden" value="{{ clase.id }}" name="id_clase">
                                     <div class="title-and-button">
                                         <div class="input-field ">
                                             <i class="material-icons prefix">mode_edit</i>
                                             <input value="{{ clase.nombre }}"  type='text' class='validate' name="nombre">
-                                            <label class='active' for='clase_edit_" + id_clase + "'>Clase {{ forloop.counter }} :</label>
+                                            <label class='active' for='clase_edit_" + id_clase + "'>Clase {{ forloop.counter }}:</label>
                                         </div>
+
                                         <div>
                                             <input value="{{ clase.fecha_clase.year }}-{{ clase.fecha_clase.month }}-{{ clase.fecha_clase.day }}" type="text" id="fecha_clase" class="datepicker" name="fecha_clase">
                                             <label class="active" for="fecha_clase">Fecha clase </label>
@@ -154,7 +157,8 @@
                                             <span>Pública</span>
                                         </label>
                                         <div>
-                                            <button type="submit"  class="waves-effect waves-light btn-small btn" style="align-self: end">Guardar</button>
+                                            <button type="submit"  class="waves-effect waves-light btn-small btn" style="align-self: end; margin-top: 15px; margin-bottom: 10px">Guardar</button>
+                                            <button class="waves-effect waves-light btn-small btn" style="align-self: end; margin-top: 15px; margin-bottom: 10px" onclick="cerrar_edicion_clase({{ clase.id }})">Cancelar</button>
                                         </div>
                                     </div>
                                 </form>

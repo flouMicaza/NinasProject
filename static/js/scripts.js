@@ -171,3 +171,12 @@ function editar_clase(id_clase) {
         "justify-content":"space-between"
     })
 }
+
+//evento para cerrar edición de curso sin guardar
+function cerrar_edicion_clase(id_clase) {
+    $("#clase_" + id_clase).css({
+        "display": "flex",
+        "justify-content":"space-between"
+    })
+    $("#clase_edit_"+ id_clase).css("display","none")
+}
