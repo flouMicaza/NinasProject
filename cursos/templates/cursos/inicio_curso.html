@@ -116,13 +116,12 @@
                     <li class="collection-item publica{{ clase.publica }}" >
                         <div id="clase_{{ clase.id }}" class="collection-info">
                             <p><b>Clase {{ forloop.counter }}: {{ clase.nombre }}</b></p>
-                            <div style="display: flex;">
+                            <div style="display: flex; align-items: center">
                                 {% if user.es_profesora %}
                                     {% if clase.publica %} <p class="">Publicada</p>
-                                    {% else %} <p>No publicada</p>
+                                    {% else %} <p class="">No publicada</p>
                                     {% endif %}
-
-                                    <a class="" onclick="editar_clase({{ clase.id }})">
+                                    <a class="btn-floating waves-effect waves-light btn-small btn" style="margin-left: 10px" onclick="editar_clase({{ clase.id }})">
                                         <i class="tiny material-icons">create</i>
                                     </a>
                                 {% endif %}
