@@ -25,7 +25,7 @@ class Problema(models.Model):
     source = models.FileField(upload_to='source', blank=True, null=True)
 
     tests = models.FileField(upload_to='test_files', help_text="Se aceptan formatos .csv y .json",
-                             validators=[FileExtensionValidator(['json', 'csv'])])
+                             validators=[FileExtensionValidator(['json', 'csv']), check_if_file_is_valid])
     clase = models.ForeignKey(Clase, blank=True, null=True, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
@@ -66,7 +66,7 @@ def create_assignment(sender, instance, created, **kwargs):
         test_url = instance.tests.url[1:]
         json_tests_url = change_path_extension(test_url, 'json')
 
-        if not check_if_file_is_valid(test_url):
+        if not check_if_file_is_valid(path=test_url):
             instance.tests = None
             instance.save()
             os.remove(test_url)
