@@ -292,8 +292,8 @@ div.dataTables_wrapper {
 
    /* The alert message box */
 .alert {
-  padding: 20px;
-  background-color: $primary-color; 
+  padding: 15px;
+  background-color: $primary-color;
   color: white;
   margin-bottom: 15px;
 }
@@ -305,14 +305,14 @@ div.dataTables_wrapper {
   font-weight: bold;
   float: right;
   font-size: 22px;
-  line-height: 20px;
+  line-height: 15px;
   cursor: pointer;
   transition: 0.3s;
 }
 
 /* When moving the mouse over the close button */
 .closebtn:hover {
-  color: black;
+  color: $absent-color;
 }
 
 .publicaFalse {
