@@ -46,7 +46,8 @@ class SubirArchivosTestJSON(InitialData):
         self.assertContains(response, titulo)
         response = self.client.get(reverse('problemas:casos-problema', kwargs={'curso_id':self.curso_basico.id, 'problema_id': Problema.objects.first().id, 'result':0}))
         self.assertContains(response, "2020")
-        self.assertContains(response, "Anno multiplo de 4")'''
+        self.assertContains(response, "Anno multiplo de 4")
+    '''
     
 
     def test_same_input_problem(self):
@@ -162,7 +163,8 @@ class SubirArchivosTestCSV(InitialData):
         self.assertContains(response, titulo)
         response = self.client.get(reverse('problemas:casos-problema', kwargs={'curso_id':self.curso_basico.id, 'problema_id': Problema.objects.first().id, 'result':0}))
         self.assertContains(response, "2020")
-        self.assertContains(response, "Ano multiplo de 4")'''
+        self.assertContains(response, "Ano multiplo de 4")
+        '''
 
     def test_same_input_problem(self):
         self.client.force_login(user=self.usuaria_profesora)

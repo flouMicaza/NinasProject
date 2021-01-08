@@ -2,9 +2,9 @@ from django.core.exceptions import ValidationError
 
 import csv
 import json
-import yaml
 import os
-
+import random
+import string 
 
 def get_file_name(file_path):
     """
@@ -32,103 +32,96 @@ def change_path_extension(path, new_extension):
 
 # ------------------------------------------------------------------------------------------------
 # functions to check file validity
-def raiseErrorCSV(csvFile, kind, *kwargs):
-    csvFile.close()
-    if os.path.exists("temporalTestFile.csv"):
-        os.remove("temporalTestFile.csv")
-    if kind == 0:
-        raise ValidationError('El archivo de test no es valido')
-    elif kind == 1:
-        raise ValidationError(f'Hay una cantidad distinta de columnas a las esperadas')
-    elif kind == 2:
-        raise ValidationError(f'El primer Header debería ser Input, pero es {kwargs[0]}')
-    elif kind == 3:
-        raise ValidationError(f'El segundo Header debería ser Output, pero es {kwargs[0]}')
-    elif kind == 4:
-        raise ValidationError(f'El tercer Header debería ser Categoria, pero es {kwargs[0]}')
-    elif kind == 5:
-        raise ValidationError(f'Test {kwargs[0]} no posee tres elementos')
-    elif kind == 6:
-        raise ValidationError(f'El input "{kwargs[0]}" se repite en los test {kwargs[1]} y {kwargs[2]}')
+def raiseError(File, kind, *kwargs):
+    args = [0]*3
+    for i,e in enumerate(kwargs):
+        args[i] = e
+    
+    errors = {
+        'csv' : {
+            0: 'El archivo de test no es valido',
+            1: 'Hay una cantidad distinta de columnas a las esperadas',
+            2: f'El primer Header debería ser Input, pero es {args[0]}',
+            3: f'El segundo Header debería ser Output, pero es {args[0]}',
+            4: f'El tercer Header debería ser Categoria, pero es {args[0]}',
+            5: f'Test {args[0]} no posee tres elementos',
+            6: f'El input "{args[0]}" se repite en los test {args[1]} y {args[2]}' 
 
-    
-def check_valid_csv(csvFile = None, path = ""):
-    
-    if csvFile == None:
-        csvFile = open(path, 'r')
-    else:
-        with open("temporalTestFile.csv", "w") as f:
-            content = csvFile.file.file.read().decode()
-            for l in content:
-                f.write(l)
-            f.close()
-        csvFile = open("temporalTestFile.csv", "r")
-    
-    try:
-        reader = csv.reader(csvFile, None)
-    except:
-        raiseErrorCSV(csvFile, 0)
-    
-    headers = next(reader, None)
+        },
+        'json': {
+            0: 'El archivo de test no es valido',
+            1: f'Hay menos elementos de los esperados en el test {args[0]}',
+            2: f'El primer Header del test:{args[0]} debería ser Input, pero es {args[1]}',
+            3: f'El segundo Header del test:{args[0]} debería ser Output, pero es {args[1]}',
+            4: f'El tercer Header del test:{args[0]} debería ser Categoria, pero es {args[1]}',
+            5: f'El input "{args[0]}" se repite en los test {args[1]} y {args[2]}'
+        }
+    }
 
-    if len(headers) != 3:
-        raiseErrorCSV(csvFile, 1)
-    elif headers[0] != "Input":
-        raiseErrorCSV(csvFile, 2, headers[0])
-    elif headers[1] != "Output":
-        raiseErrorCSV(csvFile, 3, headers[1])
-    elif headers[2] != "Categoria":
-        raiseErrorCSV(csvFile, 4, headers[2])
+    extension = File.name.split('.')[-1]    
+    File.close()
+    if extension == 'csv': 
+        if os.path.exists(File.name):
+            os.remove(File.name)
+    
+    raise ValidationError(errors[extension][kind])
 
+def check_inputs(reader, csvFile):
     inputs = dict()
     i = 0
     l = next(reader, None)
     while l != None:
         if len(l)!=3:
-            raiseErrorCSV(csvFile, 5, i+1)
+            raiseError(csvFile, 5, i+1)
         if inputs.get(l[0]) != None:
-            raiseErrorCSV(csvFile, 6, l[0], inputs.get(l[0]), i+1)
+            raiseError(csvFile, 6, l[0], inputs.get(l[0]), i+1)
         inputs[l[0]] = i+1
         l = next(reader, None)
         i+=1
+    return
 
-    if os.path.exists("temporalTestFile.csv"):
-        os.remove("temporalTestFile.csv")
+def create_csv_file(csvFile):
+    letters = string.ascii_letters
+    result_str = ''.join(random.choice(letters) for i in range(10))
+    filename = f'{result_str}.csv'    
+    with open(filename, "w") as f:
+        content = csvFile.file.file.read().decode()
+        for l in content:
+            f.write(l)
+        f.close()
+    return filename
+
+def check_valid_csv(csvFile = None, path = ""):
+    if csvFile == None:
+        csvFile = open(path, 'r')
+        filename = ""
+    #crear archivo
+    else:
+        filename = create_csv_file(csvFile)
+        csvFile = open(filename, 'r')
+    
+    try:
+        reader = csv.reader(csvFile, None)
+    except:
+        raiseError(csvFile, 0)
+
+    headers = next(reader, None)
+
+    if len(headers) != 3:
+        raiseError(csvFile, 1)
+    elif headers[0] != "Input":
+        raiseError(csvFile, 2, headers[0])
+    elif headers[1] != "Output":
+        raiseError(csvFile, 3, headers[1])
+    elif headers[2] != "Categoria":
+        raiseError(csvFile, 4, headers[2])
+
+    check_inputs(reader, csvFile)
+
+    if os.path.exists(filename):
+        os.remove(filename)
 
     return True
-
-
-def check_valid_yml(ymlFile= None, path = ""):
-    with open(path, 'r') as ymlFile:
-        try:
-            yml_str = ymlFile.read()
-            new_list = yaml.load(yml_str, Loader=yaml.FullLoader)
-
-            for e in new_list:
-                headers = list(e.keys())
-                if len(headers) != 3 or headers[0] != "Input" or headers[1] != "Output" or headers[2] != "Categoria":
-                    raise Exception
-
-            ymlFile.close()
-            return True
-        except:
-            ymlFile.close()
-            return False
-
-def raiseErrorJson(jsonFile, kind, *kwargs):
-    jsonFile.close()
-    if kind == 0:
-        raise ValidationError('El archivo de test no es valido')
-    elif kind == 1:
-        raise ValidationError(f'Hay menos elementos de los esperados en el test {kwargs[0]}')
-    elif kind == 2:
-        raise ValidationError(f'El primer Header del test:{kwargs[0]} debería ser Input, pero es {kwargs[1]}')
-    elif kind == 3:
-        raise ValidationError(f'El segundo Header del test:{kwargs[0]} debería ser Output, pero es {kwargs[1]}')
-    elif kind == 4:
-        raise ValidationError(f'El tercer Header del test:{kwargs[0]} debería ser Categoria, pero es {kwargs[1]}')
-    elif kind == 5:
-        raise ValidationError(f'El input "{kwargs[0]}" se repite en los test {kwargs[1]} y {kwargs[2]}')
 
 def check_valid_json(jsonFile = None, path = ""):
     if jsonFile == None:
@@ -137,7 +130,7 @@ def check_valid_json(jsonFile = None, path = ""):
     try:
         datastore = json.load(jsonFile)
     except:
-        raiseErrorJson(jsonFile, 0)
+        raiseError(jsonFile, 0)
 
     inputs = dict()
     for i, e in enumerate(datastore):
@@ -146,30 +139,28 @@ def check_valid_json(jsonFile = None, path = ""):
 
         if len(headers) != 3:
             # print("len de headers es != 3. Línea: ", e)
-            raiseErrorJson(jsonFile, 1, i+1)
+            raiseError(jsonFile, 1, i+1)
 
         elif headers[0] != "Input":
             # print("Header 0 no es Input. Línea: ", e)
-            raiseErrorJson(jsonFile, 2, i+1,headers[0])
+            raiseError(jsonFile, 2, i+1,headers[0])
 
         elif headers[1] != "Output":
             # print("Header 0 no es Output. Línea: ", e)
-            raiseErrorJson(jsonFile, 3,i+1, headers[1])
+            raiseError(jsonFile, 3,i+1, headers[1])
 
         elif headers[2] != "Categoria":
             # print("Header 0 no es Categoria. Línea: ", e)
-            raiseErrorJson(jsonFile, 4, i+1, headers[2])
+            raiseError(jsonFile, 4, i+1, headers[2])
 
         if inputs.get(vals[0]) != None:
-            raiseErrorJson(jsonFile, 5, vals[0], inputs.get(vals[0]),i+1)
+            raiseError(jsonFile, 5, vals[0], inputs.get(vals[0]),i+1)
         inputs[vals[0]] = i+1
 
     return True
 
 valid_file_functions = dict()
 valid_file_functions['csv'] = lambda x,y: check_valid_csv(x,y)
-valid_file_functions['yml'] = lambda x,y: check_valid_yml(x,y)
-valid_file_functions['yaml'] = lambda x,y: check_valid_yml(x,y)
 valid_file_functions['json'] = lambda x,y: check_valid_json(x,y)
 # ------------------------------------------------------------------------------------------------
 # functions to import files into lists of dicts
@@ -195,21 +186,6 @@ def csv_to_dict_list(csv_path):
     return new_list
 
 
-def yml_to_dict_list(yml_path):
-    """
-    Creates a list of dictionaries from a .yml file
-    :param yml_path: str
-    :return: list(dict())
-    """
-    with open(yml_path, 'r') as ymlFile:
-        yml_str = ymlFile.read()
-        new_list = yaml.load(yml_str, Loader=yaml.FullLoader)
-
-    ymlFile.close()
-
-    return new_list
-
-
 def json_to_dict_list(json_path):
     """
     Creates a list of dictionaries from a .json file
@@ -225,8 +201,6 @@ def json_to_dict_list(json_path):
 
 file_to_dict_list_functions = dict()
 file_to_dict_list_functions['csv'] = lambda x: csv_to_dict_list(x)
-file_to_dict_list_functions['yml'] = lambda x: yml_to_dict_list(x)
-file_to_dict_list_functions['yaml'] = lambda x: yml_to_dict_list(x)
 file_to_dict_list_functions['json'] = lambda x: json_to_dict_list(x)
 
 
@@ -323,13 +297,7 @@ def append_file_to_file(path1, path2):
         raise Exception('In or Out File Extensions not supported.')
 
 def check_if_file_is_valid(file = None, path=""):
-    if file == None:
-        extension = path.split('.')[-1]
-        if valid_file_functions.get(extension) == None:
-            return False
-        return valid_file_functions[extension](None, path)
-    else:
-        extension = file.name.split('.')[-1]
-        if valid_file_functions.get(extension) == None:
-            return False
-        return valid_file_functions[extension](file, path)
+    extension = path.split('.')[-1] if file == None else file.name.split('.')[-1]
+    if valid_file_functions.get(extension) == None:
+        return False
+    return valid_file_functions[extension](file, path)
