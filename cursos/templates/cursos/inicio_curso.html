@@ -172,18 +172,16 @@
 
                         <div id="problemas">
                             <hr class="problemas-line">
-                             <div class="title-and-button">
-                             {% if clase.problema_set.all %}
+                            <div class="title-and-button">
+                                {% if clase.problema_set.all %}
                                     <p>Problemas de la clase:</p>
-                             {% else %}
-                                 <p>Aún no hay problemas</p>
-                             {% endif %}
-                             {% if usuaria.es_profesora %}
-                                <a href="{%  url 'problemas:crear-problema' clase_id=clase.id%}" class="btn-floating waves-effect waves-light btn-small btn"><i class="material-icons">add</i></a>
-                             {% endif %}
-
-                             </div>
-
+                                {% else %}
+                                    <p>Aún no hay problemas</p>
+                                {% endif %}
+                                {% if usuaria.es_profesora %}
+                                    <a href="{%  url 'problemas:crear-problema' clase_id=clase.id%}" class="btn-floating waves-effect waves-light btn-small btn"><i class="material-icons">add</i></a>
+                                {% endif %}
+                            </div>
 
                             <ul class="collection collection-pequena">
 
@@ -195,18 +193,16 @@
                                         </a>
                                     </div>
                                     {% with feedbacks|lookup:problema.id as feedback %}
-                                    {% if feedback and feedback.resultado == True %}
-                                        <div class="secondary-content" style="color: green"> Completo </div>
-                                    {% elif feedback and feedback.resultado == False %}
-                                        <div class="secondary-content" style="color: darkorange">Incompleto </div>
-                                    {% endif %}
+                                        {% if feedback and feedback.resultado == True %}
+                                            <div class="secondary-content" style="color: green"> Completo </div>
+                                        {% elif feedback and feedback.resultado == False %}
+                                            <div class="secondary-content" style="color: darkorange">Incompleto </div>
+                                        {% endif %}
                                     {% endwith %}
                                 </li>
                                 {% endfor %}
-                          </ul>
-
+                            </ul>
                         </div>
-
                     </li>
                 {% endif %}
             {% endfor %}
