@@ -180,3 +180,18 @@ function cerrar_edicion_clase(id_clase) {
     })
     $("#clase_edit_"+ id_clase).css("display","none")
 }
+
+//ordenar clases ascendentemente o descendentemente
+function sortClase() {
+    let lista_clases, items_clase, end, i;
+
+    var text = document.getElementById("sort-button").firstChild;
+    text.data = text.data == "Ordenar por más recientes" ? "Ordenar por más antiguas" : "Ordenar por más recientes";
+
+    lista_clases = document.getElementById("lista-clases");
+    items_clase = lista_clases.getElementsByClassName("items-clase");
+    end = items_clase.length - 1;
+    for (i = 0; i < end; i++) {
+        items_clase[i].parentNode.insertBefore(items_clase[end], items_clase[i]);
+    }
+}
