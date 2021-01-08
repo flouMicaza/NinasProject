@@ -195,3 +195,24 @@ function sortClase() {
         items_clase[i].parentNode.insertBefore(items_clase[end], items_clase[i]);
     }
 }
+
+
+//permite habilitar/deshabilitar botón para subir soluciones si hay o no un archivo seleccionado
+$(document).ready
+    (function () {
+        //when input's value changes
+        $("#file").change(function () {
+            if($(this).val()) {
+                $("#submit-sol").prop("disabled", false);
+            }
+            else {
+                $("#submit-sol").prop("disabled", true);
+            }
+        });
+        //when button is clicked
+        $("#submit-sol").click(function () {
+            if($("#file").val()) {
+                console.log("file selected");
+            }
+        });
+    });
