@@ -186,7 +186,7 @@ function sortClase() {
     let lista_clases, items_clase, end, i;
 
     var text = document.getElementById("sort-button").firstChild;
-    text.data = text.data == "Ordenar por más recientes" ? "Ordenar por más antiguas" : "Ordenar por más recientes";
+    text.data = text.data == "Más recientes primero" ? "Más antiguas primero" : "Más recientes primero";
 
     lista_clases = document.getElementById("lista-clases");
     items_clase = lista_clases.getElementsByClassName("items-clase");

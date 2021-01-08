@@ -335,3 +335,16 @@ hr.problemas-line {
 .tab_content {
   padding: 1em;
 }
+
+#sort-button:focus {
+  background-color: $primary-color;
+}
+
+#sort-button:hover {
+  background-color: $hover-color;
+}
+
+#sort-button {
+  margin-bottom: 5px;
+  margin-top: 15px;
+}

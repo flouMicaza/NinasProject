@@ -108,8 +108,9 @@
 
         </div>
     {% endif %}
-
-    <button id="sort-button" class="btn-small btn" onclick="sortClase()">Ordenar por más recientes</button>
+    <div>
+        <button id="sort-button" class="btn-small btn" onclick="sortClase()">Más antiguas primero<i class="material-icons right">cached</i></button>
+    </div>
     <ul class="collection collection-principal" id="lista-clases">
         {% if clases %}
             {% for clase in clases %}
@@ -119,8 +120,8 @@
                             <p><b>Clase {{ forloop.counter }}: {{ clase.nombre }}</b> <span class="letra_gris fecha_clase" style="font-size: smaller">&nbsp; {{ clase.fecha_clase }}</span></p>
                             <div style="display: flex; align-items: center">
                                 {% if user.es_profesora %}
-                                    {% if clase.publica %} <p class="">Publicada</p>
-                                    {% else %} <p class="">No publicada</p>
+                                    {% if clase.publica %} <p>Publicada</p>
+                                    {% else %} <p>No publicada</p>
                                     {% endif %}
                                     <a class="btn-floating btn-small btn" style="margin-left: 10px" onclick="editar_clase({{ clase.id }})">
                                         <i class="tiny material-icons">create</i>
