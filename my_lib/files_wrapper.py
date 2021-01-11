@@ -60,9 +60,8 @@ def raiseError(File, kind, *kwargs):
 
     extension = File.name.split('.')[-1]    
     File.close()
-    if extension == 'csv': 
-        if os.path.exists(File.name):
-            os.remove(File.name)
+    if os.path.exists(File.name):
+        os.remove(File.name)
     
     raise ValidationError(errors[extension][kind])
 
@@ -80,12 +79,12 @@ def check_inputs(reader, csvFile):
         i+=1
     return
 
-def create_csv_file(csvFile):
+def create_temp_file(File, ext):
     letters = string.ascii_letters
     result_str = ''.join(random.choice(letters) for i in range(10))
-    filename = f'{result_str}.csv'    
+    filename = f'{result_str}.{ext}'    
     with open(filename, "w") as f:
-        content = csvFile.file.file.read().decode()
+        content = File.file.file.read().decode()
         for l in content:
             f.write(l)
         f.close()
@@ -97,7 +96,7 @@ def check_valid_csv(csvFile = None, path = ""):
         filename = ""
     #crear archivo
     else:
-        filename = create_csv_file(csvFile)
+        filename = create_temp_file(csvFile, 'csv')
         csvFile = open(filename, 'r')
     
     try:
@@ -126,6 +125,10 @@ def check_valid_csv(csvFile = None, path = ""):
 def check_valid_json(jsonFile = None, path = ""):
     if jsonFile == None:
         jsonFile = open(path, 'r')
+        filename = ""
+    else:
+        filename = create_temp_file(jsonFile, 'json')
+        jsonFile = open(filename, 'r')
 
     try:
         datastore = json.load(jsonFile)
@@ -157,6 +160,9 @@ def check_valid_json(jsonFile = None, path = ""):
             raiseError(jsonFile, 5, vals[0], inputs.get(vals[0]),i+1)
         inputs[vals[0]] = i+1
 
+    if os.path.exists(filename):
+        os.remove(filename)
+    
     return True
 
 valid_file_functions = dict()

@@ -66,13 +66,6 @@ def create_assignment(sender, instance, created, **kwargs):
         test_url = instance.tests.url[1:]
         json_tests_url = change_path_extension(test_url, 'json')
 
-        if not check_if_file_is_valid(path=test_url):
-            instance.tests = None
-            instance.save()
-            os.remove(test_url)
-            print("El archivo de test no es válido")
-            return
-
         # Passes the information from the original file to the json file
         file_to_file(test_url, json_tests_url)
 

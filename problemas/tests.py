@@ -29,8 +29,6 @@ class SubirArchivosTestJSON(InitialData):
     def setUp(self):
         super(SubirArchivosTestJSON, self).setUp()
     
-    '''Al ser el test correcto, se crean muchos archivos
-
     def test_no_problem(self):
         self.client.force_login(user=self.usuaria_profesora)
         titulo = 'ProblemaTEST'
@@ -47,7 +45,6 @@ class SubirArchivosTestJSON(InitialData):
         response = self.client.get(reverse('problemas:casos-problema', kwargs={'curso_id':self.curso_basico.id, 'problema_id': Problema.objects.first().id, 'result':0}))
         self.assertContains(response, "2020")
         self.assertContains(response, "Anno multiplo de 4")
-    '''
     
 
     def test_same_input_problem(self):
@@ -146,8 +143,6 @@ class SubirArchivosTestCSV(InitialData):
     def setUp(self):
         super(SubirArchivosTestCSV, self).setUp()
 
-    ''' Al ser el test correcto, se crean muchos archivos
-
     def test_no_problem(self):
         self.client.force_login(user=self.usuaria_profesora)
         titulo = 'ProblemaTEST'
@@ -164,7 +159,6 @@ class SubirArchivosTestCSV(InitialData):
         response = self.client.get(reverse('problemas:casos-problema', kwargs={'curso_id':self.curso_basico.id, 'problema_id': Problema.objects.first().id, 'result':0}))
         self.assertContains(response, "2020")
         self.assertContains(response, "Ano multiplo de 4")
-        '''
 
     def test_same_input_problem(self):
         self.client.force_login(user=self.usuaria_profesora)
@@ -240,21 +234,3 @@ class SubirArchivosTestCSV(InitialData):
         response = self.client.post(reverse('problemas:crear-problema', kwargs={'clase_id': self.clase_basica_1.id}), data = form_data, follow = True)
         assert len(Problema.objects.all()) == 0
         self.assertContains(response, 'El tercer Header debería ser Categoria, pero es CAtegoria')
-
-    ''' 
-    Al parecer el formato csv es mas robusto y no logre hacerlo fallar
-    def test_invalid_csv(self):
-        self.client.force_login(user=self.usuaria_profesora)
-        titulo = 'ProblemaTEST'
-        statement = SimpleUploadedFile('statement.pdf', b'a', 'application/pdf')
-        tests = b''
-        tests = InMemoryUploadedFile(BytesIO(tests), 'tests', 'tests.csv', 'application/csv', len(tests), None, None)
-        form_data = {
-            'titulo':titulo,
-            'statement':statement,
-            'tests':tests
-        }
-        response = self.client.post(reverse('problemas:crear-problema', kwargs={'clase_id': self.clase_basica_1.id}), data = form_data, follow = True)
-        assert len(Problema.objects.all()) == 0
-        self.assertContains(response, 'El archivo de test no es')
-    '''
