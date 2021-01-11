@@ -104,6 +104,10 @@ li.active> .collapsible-header{
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
+.btn:focus {
+  background-color: $primary-color;
+}
+
 .btn:hover {
   background-color: $hover-color;
 }
