@@ -14,7 +14,7 @@ from django.views import View
 from django.views.generic import TemplateView
 
 from NiñasProject.decorators import profesora_required
-from NiñasProject.utils import get_ordered_test_feedback, get_casos_por_categoria, get_cursos
+from NiñasProject.utils import get_ordered_test_feedback, get_casos_por_categoria, get_cursos, problema_en_curso
 from clases.models import Clase
 from cursos.models import Curso
 from feedback.models import Feedback, TestFeedback, OutputAlternativo
@@ -79,6 +79,12 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         curso = get_cursos(request.user, curso_id)
 
         if curso == None:
+            return HttpResponseRedirect(reverse('usuarios:index'))
+
+        problema_id = kwargs['problema_id']
+
+        if not problema_en_curso(problema_id, curso_id):
+            messages.success(request, "No tienes permiso para ver ese problema")
             return HttpResponseRedirect(reverse('usuarios:index'))
 
         return self.render_to_response(context)
