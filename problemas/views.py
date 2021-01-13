@@ -14,7 +14,7 @@ from django.views import View
 from django.views.generic import TemplateView
 
 from NiñasProject.decorators import profesora_required
-from NiñasProject.utils import get_ordered_test_feedback, get_casos_por_categoria
+from NiñasProject.utils import get_ordered_test_feedback, get_casos_por_categoria, get_cursos
 from clases.models import Clase
 from cursos.models import Curso
 from feedback.models import Feedback, TestFeedback, OutputAlternativo
@@ -70,6 +70,18 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
             context['ordered_test_feedback'] = get_ordered_test_feedback(context['test_feedback'], problema)
             context['resultados_active'] = "active"
         return context
+
+    # override method in TemplateView to set condition
+    def get(self, request, *args, **kwargs):
+
+        context = self.get_context_data(**kwargs)
+        curso_id = kwargs['curso_id']
+        curso = get_cursos(request.user, curso_id)
+
+        if curso == None:
+            return HttpResponseRedirect(reverse('usuarios:index'))
+
+        return self.render_to_response(context)
 
     def post(self, request, *args, **kwargs):
 
