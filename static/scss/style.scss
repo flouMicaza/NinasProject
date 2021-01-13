@@ -5,7 +5,7 @@ $absent-color: #FECCC4;
 $x-color: #eb1212;
 $check-color: #05A175;
 $not-enabled-color: #80868b;
-
+$no-assist-color: 		#FFA500;
 
 .letra_rosada {
   color: $primary-color;
@@ -175,6 +175,9 @@ td, th {
     color: $check-color;
 }
 
+.icon-orange {
+  color: $no-assist-color;
+}
 
 .flex-container {
   display: flex;
@@ -330,4 +333,9 @@ hr.problemas-line {
 
 .tab_content {
   padding: 1em;
+}
+
+.icon-header {
+  position: relative;
+  margin-right: 10px;
 }

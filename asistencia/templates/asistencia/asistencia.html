@@ -13,7 +13,8 @@
 
     <div class="material-icons left">
 
-        <a href="{% url 'asistencia:asistencia_gral' curso_id=curso.id %}" class="waves-effect waves-light btn-small btn red accent-2">
+        <a href="{% url 'asistencia:asistencia_gral' curso_id=curso.id %}" class="waves-effect waves-light btn-small btn red accent-2" 
+            onclick="clear_cache('{{ request.scheme }}','{{ request.get_host }}', '{% url 'asistencia:asistencia_cache' curso_id=curso.id clase_id=clase.id %}')">
                 <i class="material-icons left">arrow_back</i>Volver</a>
 
 
@@ -31,7 +32,11 @@
                             <div><img src="/media/users/avatar.png"  style="width:70px; margin-right:15px;"></div>
                         {% endif %}
                         <label class="nombre-checkbox">
-                            {{ form.asistio }}
+                            {% if form.asistio is None %}
+                                {{ False }}
+                            {%else%}
+                                {{ form.asistio }}
+                            {%endif%}
                             <span>{{ form.instance.alumna.first_name }} {{ form.instance.alumna.last_name }}</span>
                         </label>
                     </div>
@@ -51,4 +56,8 @@
                 </div>
         </form>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src={% static 'js/scripts.js' %}></script>
 {% endblock %}

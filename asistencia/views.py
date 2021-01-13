@@ -1,13 +1,15 @@
 from datetime import datetime
 from django import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseForbidden, HttpResponseNotFound
+from django.http import HttpResponseForbidden, HttpResponseNotFound, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.forms import formset_factory, modelformset_factory
+from django.core.cache import cache
+from django.contrib import messages
 
 from NiñasProject.decorators import profesora_required, docente_required
 from NiñasProject.utils import get_cursos, get_clase
@@ -40,7 +42,8 @@ class Asistencia_GralView(LoginRequiredMixin, View):
                 for asistencia in asist:
                     lista_a += [asistencia.asistio]
                 total = len(asist.filter(asistio=True))
-                lista = [alumna, lista_a, total]
+                no = len(asist.filter(asistio=None))
+                lista = [alumna, lista_a, total, no]
                 lista_asistencias += [lista]
                 i += 1
 
@@ -118,12 +121,18 @@ def get_form(request, **kwargs):
         for alu in lista_alumnas:
             asist = Asistencia.objects.get_or_create(alumna=alu, clase=clase)
         if request.method == 'GET':  ## cuando entro por primera vez
-            formset = AsistenciaModelFormSet(queryset=Asistencia.objects.filter(clase=clase))
-            return render(request, template_name, {
-                'curso': curso,
-                'clase': clase,
-                'formset': formset,
-            })
+            n_asistencia = request.path.split('/')[-2] #.../curso/asistencia/n_asistencia/
+            if cache.get(n_asistencia) == None:
+                cache.get_or_set(n_asistencia, True, 120)
+                formset = AsistenciaModelFormSet(queryset=Asistencia.objects.filter(clase=clase))
+                return render(request, template_name, {
+                    'curso': curso,
+                    'clase': clase,
+                    'formset': formset,
+                })
+            else:
+                messages.success(request, 'Ya hay alguien pasando asistencia, espere 2 minutos')
+                return HttpResponseRedirect(reverse('asistencia:asistencia_gral', kwargs={'curso_id':clase.curso.id}))
 
         elif request.method == 'POST':  ## cuando pongo save
             formset = AsistenciaModelFormSet(request.POST,
@@ -132,3 +141,8 @@ def get_form(request, **kwargs):
             if formset.is_valid():
                 instances = formset.save()
                 return HttpResponseRedirect(reverse('asistencia:asistencia_gral', kwargs={'curso_id': clase.curso.id}))
+
+# Borra el cache al usar boton atras en la asistencia
+def clear_cache(request, **kwargs):
+    cache.delete(kwargs['clase_id'])
+    return HttpResponse(status=204)

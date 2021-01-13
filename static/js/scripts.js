@@ -171,3 +171,8 @@ function editar_clase(id_clase) {
         "justify-content":"space-between"
     })
 }
+
+function clear_cache(scheme, host, url){
+    fetch(scheme.concat('://',host,url))
+    return true
+}
