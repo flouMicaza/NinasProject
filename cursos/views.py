@@ -63,6 +63,7 @@ class CursoView(CursosView):
             }
             return render(request, 'cursos/inicio_curso.html', parameters)
         else:
+            messages.success(request, "No tienes permiso para ver ese curso")
             return HttpResponseRedirect(reverse('usuarios:index'))
 
     def post(self, request,**kwargs):
@@ -85,6 +86,7 @@ class CursoView(CursosView):
                 messages.success(request,"No se actualizó la fecha, ya existe una clase para ese día")
 
         clase_edit.save()
+        messages.success(request, "La clase se editó correctamente")
         return HttpResponseRedirect(reverse('cursos:curso',kwargs=kwargs))
 
     def get_feedbacks_alumna(self, usuaria, clases_totales):
