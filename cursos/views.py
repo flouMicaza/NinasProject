@@ -63,7 +63,7 @@ class CursoView(CursosView):
             }
             return render(request, 'cursos/inicio_curso.html', parameters)
         else:
-            return HttpResponseForbidden("No tienes permiso para acceder a este curso.")
+            return HttpResponseRedirect(reverse('usuarios:index'))
 
     def post(self, request,**kwargs):
         id_clase = request.POST['id_clase']
