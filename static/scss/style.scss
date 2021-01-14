@@ -331,3 +331,27 @@ hr.problemas-line {
 .tab_content {
   padding: 1em;
 }
+
+.notification {
+  background-color: $hover-color;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+}
+
+.notification .badge {
+  position: absolute;
+  min-width: 1.5rem;
+  line-height: 0;
+  margin-left: 10px;
+  top: -10px;
+  right: -10px;
+  padding: 10px 5px;
+  border-radius: 50%;
+  background-color: $hover-color;
+  color: white
+}
+
+.notification:hover .badge {
+  background-color: $primary-color;
+}

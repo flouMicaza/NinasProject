@@ -22,12 +22,18 @@
                                     <td class="consolas">{{ caso.input }}</td>
                                     <td class="consolas output">{{ caso.output_esperado }}</td>
                                     <td>
-                                        <button class="open-modal btn btn-small" id="{{ caso.id }}">
-                                            Ver
-                                        </button>
                                         {% with nuevos_outputs|lookup:caso.id as nuevos %}
                                             {% if nuevos > 0  %}
-                                                <span class="new badge " data-badge-caption="Nuevos outputs"> {{ nuevos_outputs | lookup:caso.id }}</span>
+
+                                                <button class="open-modal btn btn-small notification" id="{{ caso.id }}">
+                                                    <span>Ver</span>
+                                                    <span class="badge" id="num-notif"> {{ nuevos_outputs | lookup:caso.id }}</span>
+                                                </button>
+
+                                            {% else %}
+                                                <button class="open-modal btn btn-small notification" id="{{ caso.id }}">
+                                                    <span>Ver</span>
+                                                </button>
                                             {% endif %}
                                         {% endwith %}
                                     </td>
