@@ -16,38 +16,81 @@
 
             <div id="outputs-sugeridos" style="margin-top:2em">
                 <h5>Outputs recibidos</h5>
-
                     <div style="max-width: 100%; overflow-x:auto">
-                    <form method="post" action="{% url 'feedback:actualizar-outputs-alternativos' caso_id=id_caso%}" class="list">
-                        {% csrf_token %}
-                        {{ formset.management_form }}
-                        <table id='tabla-output-sugerido' class="data-feedback" >
-                            <thead>
-                                <tr class="tabla-modal">
-                                    <th>Output recibido</th>
-                                    <th>Frecuencia</th>
-                                    <th>Sugerencia</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <form method="post" action="{% url 'feedback:actualizar-outputs-alternativos' caso_id=id_caso%}" class="list">
+                            {% csrf_token %}
+                            {{ formset.management_form }}
+                            <table id='tabla-output-sugerido' class="data-feedback">
+                                <thead>
+                                    <tr class="row_good_feedback">
+                                        <th>Output recibido</th>
+                                        <th>Sugerencia</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                 {% if outputs_sugeridos %}
-
                                     {% for form in formset %}
                                         {{ form.id }}
-                                            <tr class=" tabla-modal">
-                                                <td class="consolas">{{  form.instance.output_obtenido}}</td>
-                                                <td >{{ form.instance.frecuencia }}</td>
-                                                <td>{{ form.sugerencia }}</td>
-                                            </tr>
-                                    {% endfor %}
+                                        <tr class="row_bad_feedback ">
+                                            <td class="consolas">{{  form.instance.output_obtenido}}</td>
+                                            <td>{{ form.sugerencia }}</td>
+                                        </tr>
+                                        <tr class="row_bad_feedback">
+                                            <th class="codigos-casos letra_rosada" colspan="2" >
+                                                <ul class="collapsible expandable">
+                                                    <li>
+                                                        <div class="collapsible-header">
+                                                            <i class="material-icons">expand_more</i>
+                                                            Códigos ({{ form.instance.frecuencia }})
+                                                        </div>
+                                                        <div class="collapsible-body" style="text-align: left">
 
+                                                                <p class="consolas">Camila Rodríguez, 19 de abril 2020, 10:45 am</p>
+                                                            <p>#include </p>
+                                                            <p>using namespace</p>
+                                                            <p>int main() {</p>
+                                                            <p>}</p>
+                                                        <hr>
+                                                            <p class="consolas">Camila Rodríguez, 19 de abril 2020, 10:45 am</p>
+                                                            <p>#include iostream
+
+using namespace std;<br>
+
+int main(){<br>
+    int agno;<br>
+    cin >> agno;<br>
+
+    if(agno%4==0 && agno%100!=0){<br>
+        cout << "Yes" << endl;<br>
+    }<br>
+    else if (agno%400==0){<br>
+        cout << "Yes" << endl;<br>
+    }<br>
+    else{<br>
+        cout << "No" << endl;<br>
+
+    }<br>
+    return 0;
+
+}</p>
+
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </th>
+
+
+                                        </tr>
+                                    {% endfor %}
                                 {% else %}
-                                     <tr class="tabla-modal">
+                                    <tr class="tabla-modal">
                                          <td colspan="4"><span class="letra_rosada">No se han recibido errores para este caso</span></td>
                                     </tr>
                                 {% endif %}
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+
+
                         <div style="display: flex; justify-content: flex-end">
                             <button type="submit" class="btn btn-small modal-close" style="margin-top:1em">Guardar y salir<span><i class="material-icons right">save</i></span></button>
                         </div>
@@ -56,13 +99,13 @@
             </div>
 
             <div id="outputs-alternativos" style="margin-top: 2em">
-                <h5>Outputs agregados</h5>
+                <h5>Sugerencias agregadas</h5>
                  <div style="max-width: 100%; overflow-x:auto">
                     <table id='tabla-output-agregado' class="data-feedback" >
                         <thead>
                             <tr class="tabla-modal">
                                 <th>Output recibido</th>
-                                <th>Frecuencia</th>
+                                <th>Código</th>
                                 <th>Sugerencia</th>
 
                             </tr>
@@ -72,13 +115,18 @@
                                 {% for output in outputs_agregados %}
                                     <tr class=" tabla-modal">
                                         <td class="consolas">{{ output.output_obtenido }}</td>
-                                        <td >{{ output.frecuencia }}</td>
+                                        <td><div style="display: inline-flex;justify-content: center">
+                                            <button class="btn btn-small" style="margin-top: 0">
+                                                <i class="material-icons" style="vertical-align: middle">text_snippet</i>
+                                                <span style="padding-left: 0.5em; font-size: larger; line-height: 0">({{ output.frecuencia }})</span>
+                                            </button>
+                                        </div></td>
                                         <td>{{ output.sugerencia }}</td>
                                     </tr>
                                 {% endfor %}
                             {% else %}
                                 <tr class="tabla-modal">
-                                    <td colspan="4"><span class="letra_rosada"> No se han agregado casos aún. </span></td>
+                                    <td colspan="4"><span class="letra_rosada"> No se han agregado sugerencias aún. </span></td>
                                 </tr>
                             {% endif %}
                         </tbody>
@@ -89,3 +137,11 @@
         </div>
     </div>
 </div>
+
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            $('.collapsible').collapsible();
+        })
+    </script>
+{% endblock %}

@@ -28,7 +28,7 @@ $not-enabled-color: #80868b;
 }
 #casos-de-prueba > tbody > tr:nth-child(even) {background-color: #f2f2f2;}
 
-.tabla-modal > td, .tabla-modal > th{
+.tabla-modal > td, .tabla-modal > th {
   padding: 10px;
   border-bottom: 1px solid $not-enabled-color ;
   border-top: 1px solid #ddd;
@@ -37,7 +37,7 @@ $not-enabled-color: #80868b;
   text-align: center;
 }
 
-tr.row_good_feedback > td , tr.row_good_feedback > th{
+tr.row_good_feedback > td , tr.row_good_feedback > th {
   padding: 10px;
   border-top: 2px solid #ddd;
   border-bottom: 2px solid $not-enabled-color ;
@@ -45,10 +45,10 @@ tr.row_good_feedback > td , tr.row_good_feedback > th{
   max-width: 5em;
   word-wrap: break-word;
 }
+
 tr.row_bad_feedback > td {
   padding: 10px;
-  border-top: 1px solid #ddd;
-  border-bottom: #ffffff;
+  border: 1px solid #fff;
   text-align: center;
   max-width: 5em;
   word-wrap: break-word;
@@ -59,7 +59,6 @@ tr.row_bad_feedback> td.sugerencia{
   padding-left: 20px;
   padding-bottom:1.5em;
   border-bottom: 2px solid $not-enabled-color;
-  border-top: #ffffff;
   text-align: center;
   max-width: 5em;
   word-wrap: break-word;
@@ -84,7 +83,16 @@ tr.row_bad_feedback> td.sugerencia{
   align-items: center;
 }
 
-
+tr.row_bad_feedback> th.codigos-casos {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  border: 1px solid #fff;
+  border-bottom: 2px solid $not-enabled-color;
+  text-align: center;
+  max-width: 5em;
+  word-wrap: break-word;
+}
 
 
 td, th {
@@ -99,6 +107,7 @@ td, th {
   border-left: 1px solid #ddd;
   border-bottom: #ffffff;
 }
+
 .tabla-asistencia-alumna {
     table-layout: fixed;
     width: 80%;
