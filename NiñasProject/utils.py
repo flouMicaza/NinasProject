@@ -70,8 +70,7 @@ def problema_en_curso(problema_id, curso_id):
     clases = Clase.objects.filter(curso_id=curso_id)
     problema = []
     for element in clases:
-        clase_id = getattr(element, 'id')
-        problema += (Problema.objects.filter(clase_id=clase_id, id=problema_id))
+        problema += (Problema.objects.filter(clase_id=element.id, id=problema_id))
     if len(problema) > 0:
         return True
     return False
