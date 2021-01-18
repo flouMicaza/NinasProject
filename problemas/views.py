@@ -71,7 +71,6 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
             context['resultados_active'] = "active"
         return context
 
-    # override method in TemplateView to set condition
     def get(self, request, *args, **kwargs):
 
         context = self.get_context_data(**kwargs)
@@ -79,6 +78,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
         curso = get_cursos(request.user, curso_id)
 
         if curso == None:
+            messages.success(request, "No perteneces al curso que intentaste acceder")
             return HttpResponseRedirect(reverse('usuarios:index'))
 
         problema_id = kwargs['problema_id']
