@@ -209,10 +209,4 @@ $(document).ready
                 $("#submit-sol").prop("disabled", true);
             }
         });
-        //when button is clicked
-        $("#submit-sol").click(function () {
-            if($("#file").val()) {
-                console.log("file selected");
-            }
-        });
     });
