@@ -33,13 +33,13 @@ def change_path_extension(path, new_extension):
 # ------------------------------------------------------------------------------------------------
 # functions to check file validity
 def raiseError(File, kind, *kwargs):
-    args = [0]*3
+    args = [0,0,0]
     for i,e in enumerate(kwargs):
         args[i] = e
     
     errors = {
         'csv' : {
-            0: 'El archivo de test no es valido',
+            0: f'El archivo de test no es valido: "{args[0]}"',
             1: 'Hay una cantidad distinta de columnas a las esperadas',
             2: f'El primer Header debería ser Input, pero es {args[0]}',
             3: f'El segundo Header debería ser Output, pero es {args[0]}',
@@ -49,7 +49,7 @@ def raiseError(File, kind, *kwargs):
 
         },
         'json': {
-            0: 'El archivo de test no es valido',
+            0: f'El archivo de test no es valido: "{args[0]}"',
             1: f'Hay menos elementos de los esperados en el test {args[0]}',
             2: f'El primer Header del test:{args[0]} debería ser Input, pero es {args[1]}',
             3: f'El segundo Header del test:{args[0]} debería ser Output, pero es {args[1]}',
@@ -92,17 +92,17 @@ def create_temp_file(File, ext):
 
 def check_valid_csv(csvFile = None, path = ""):
     if csvFile == None:
-        csvFile = open(path, 'r')
+        csvFile = open(path, 'r', encoding='utf-8-sig')
         filename = ""
     #crear archivo
     else:
         filename = create_temp_file(csvFile, 'csv')
-        csvFile = open(filename, 'r')
+        csvFile = open(filename, 'r', encoding='utf-8-sig')
     
     try:
         reader = csv.reader(csvFile, None)
-    except:
-        raiseError(csvFile, 0)
+    except Exception as e:
+        raiseError(csvFile, 0, e)
 
     headers = next(reader, None)
 
@@ -124,16 +124,16 @@ def check_valid_csv(csvFile = None, path = ""):
 
 def check_valid_json(jsonFile = None, path = ""):
     if jsonFile == None:
-        jsonFile = open(path, 'r')
+        jsonFile = open(path, 'r', encoding='utf-8-sig')
         filename = ""
     else:
         filename = create_temp_file(jsonFile, 'json')
-        jsonFile = open(filename, 'r')
+        jsonFile = open(filename, 'r', encoding='utf-8-sig')
 
     try:
         datastore = json.load(jsonFile)
-    except:
-        raiseError(jsonFile, 0)
+    except Exception as e:
+        raiseError(jsonFile, 0, e)
 
     inputs = dict()
     for i, e in enumerate(datastore):
@@ -178,7 +178,7 @@ def csv_to_dict_list(csv_path):
     """
     new_list = []
 
-    with open(csv_path, 'r') as csvFile:
+    with open(csv_path, 'r',encoding='utf-8-sig') as csvFile:
         reader = csv.reader(csvFile)
         headers = next(reader, None)
         for row in reader:
@@ -198,7 +198,7 @@ def json_to_dict_list(json_path):
     :param json_path: str
     :return: list(dict())
     """
-    with open(json_path, 'r') as jsonFile:
+    with open(json_path, 'r', encoding='utf-8-sig') as jsonFile:
         datastore = json.load(jsonFile)
     jsonFile.close()
 

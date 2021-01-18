@@ -80,7 +80,7 @@ def create_assignment(sender, instance, created, **kwargs):
 
 
 def create_test_cases(problema):
-    with open(settings.BASE_DIR + problema.tests.url, 'r') as f:
+    with open(settings.BASE_DIR + problema.tests.url, 'r', encoding='utf-8-sig') as f:
         datastore = json.load(f)
 
     for test_dict in datastore:  # Aquí es donde se generan los test, tengo que modificar para que reciba mi nueva info.

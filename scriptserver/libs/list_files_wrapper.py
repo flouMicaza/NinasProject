@@ -3,7 +3,7 @@ import csv
 def csv_to_list(csv_path):
 	new_list = []
 	
-	with open(csv_path, 'r') as csvFile:
+	with open(csv_path, 'r', encoding='utf-8-sig') as csvFile:
 		reader = csv.reader(csvFile)
 		for row in reader:
 			new_list.append(row)
