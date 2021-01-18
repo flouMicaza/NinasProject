@@ -69,6 +69,7 @@ class CursoView(CursosView):
     def post(self, request,**kwargs):
         id_clase = request.POST['id_clase']
         clase_edit = Clase.objects.get(id=id_clase)
+        edit_correct = True
         if request.POST.get('publica'):
             clase_edit.publica = True
         else:
@@ -82,9 +83,12 @@ class CursoView(CursosView):
             clase_mismo_dia = Clase.objects.filter(fecha_clase=request.POST.get('fecha_clase'))
             if len(clase_mismo_dia) == 0 or clase_mismo_dia.first()==clase_edit:
                 clase_edit.fecha_clase = request.POST['fecha_clase']
-                messages.success(request, "La clase se editó correctamente")
             else:
                 messages.success(request,"No se actualizó la fecha, ya existe una clase para ese día")
+                edit_correct = False
+
+        if edit_correct:
+            messages.success(request, "La clase se editó correctamente")
 
         clase_edit.save()
         return HttpResponseRedirect(reverse('cursos:curso',kwargs=kwargs))
