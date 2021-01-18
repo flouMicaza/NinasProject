@@ -82,11 +82,11 @@ class CursoView(CursosView):
             clase_mismo_dia = Clase.objects.filter(fecha_clase=request.POST.get('fecha_clase'))
             if len(clase_mismo_dia) == 0 or clase_mismo_dia.first()==clase_edit:
                 clase_edit.fecha_clase = request.POST['fecha_clase']
+                messages.success(request, "La clase se editó correctamente")
             else:
                 messages.success(request,"No se actualizó la fecha, ya existe una clase para ese día")
 
         clase_edit.save()
-        messages.success(request, "La clase se editó correctamente")
         return HttpResponseRedirect(reverse('cursos:curso',kwargs=kwargs))
 
     def get_feedbacks_alumna(self, usuaria, clases_totales):
