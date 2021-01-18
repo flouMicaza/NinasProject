@@ -113,6 +113,16 @@ li.active> .collapsible-header{
   background-color: $hover-color;
 }
 
+.btn-save {
+  margin-top: 15px;
+  margin-bottom: 10px
+}
+
+.btn-sort {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
 nav {
   background-color: $primary-color;
   height:70px;

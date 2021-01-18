@@ -19,8 +19,8 @@
     <div class='title-and-button' >
         <div>
             <h1>{{ curso.nombre }}</h1>
-            <p class="flex-center" style="justify-content: left"><i class="material-icons" style="font-size: large; margin-right: 5px">place</i>{{ curso.sede.nombre }}
-                            <i class="material-icons" style="font-size: large; margin-right: 5px;margin-left: 15px">date_range</i>{{ curso.anho }}</p>
+            <p class="flex-center" style="justify-content: left"><i class="material-icons curso-icons">place</i>{{ curso.sede.nombre }}
+                            <i class="material-icons curso-icons date-icon">date_range</i>{{ curso.anho }}</p>
         </div>
         {% if usuaria.es_profesora %}
             <a href="{% url 'clases:agregar_clase' curso_id=curso.id %}" class="waves-effect waves-light btn-large btn" >Agregar clase</a>
@@ -113,7 +113,7 @@
         </div>
     {% endif %}
     <div>
-        <button id="sort-button" class="btn-small btn" onclick="sortClase()">Más antiguas primero<i class="material-icons right">cached</i></button>
+        <button id="sort-button" class="btn-small btn btn-sort" onclick="sortClase()">Más antiguas primero<i class="material-icons right">cached</i></button>
     </div>
     <ul class="collection collection-principal" id="lista-clases">
         {% if clases %}
@@ -167,7 +167,7 @@
                                             <span>Pública</span>
                                         </label>
                                         <div>
-                                            <button type="submit"  class="waves-effect waves-light btn-small btn" style="align-self: end; margin-top: 15px; margin-bottom: 10px">Guardar</button>
+                                            <button type="submit"  class="waves-effect waves-light btn-small btn btn-save">Guardar</button>
                                         </div>
                                     </div>
                                 </form>
