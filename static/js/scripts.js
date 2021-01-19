@@ -184,10 +184,13 @@ function cerrar_edicion_clase(id_clase) {
 
 //ordenar clases ascendentemente o descendentemente
 function cambiar_orden() {
-    let lista_clases, items_clase, end, i, text, current_url, aux, new_url;
+    let current_url, lista_clases, items_clase, end, i, text, new_order, aux, new_url;
 
+    current_url = window.location.href;
+    
     text = document.getElementById("sort-button").firstChild;
-    text.data = sessionStorage.current_order === "newest" ? "Más antiguas primero" : "Más recientes primero";
+    text.data = current_url.includes("newest") ? "Más antiguas primero" : "Más recientes primero";
+
     lista_clases = document.getElementById("lista-clases");
     items_clase = lista_clases.getElementsByClassName("items-clase");
     end = items_clase.length - 1;
@@ -195,11 +198,10 @@ function cambiar_orden() {
         items_clase[i].parentNode.insertBefore(items_clase[end], items_clase[i]);
     }
 
-    sessionStorage.current_order = sessionStorage.current_order === "newest" ? "oldest" : "newest";
-    current_url = window.location.href;
+    new_order = current_url.includes("newest") ? "oldest" : "newest";
     const r = /(\d+\/curso\/)(\D+)*/;
     aux = current_url.replace(r, '$1');
-    new_url = aux + sessionStorage.current_order + '/';
+    new_url = aux + new_order + '/';
     window.history.replaceState({}, '', new_url);
 }
 
