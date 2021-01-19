@@ -39,7 +39,7 @@ def raiseError(File, kind, *kwargs):
     
     errors = {
         'csv' : {
-            0: f'El archivo de test no es valido: "{args[0]}"',
+            0: f'El archivo de test no es válido: "{args[0]}"',
             1: 'Hay una cantidad distinta de columnas a las esperadas',
             2: f'El primer Header debería ser Input, pero es {args[0]}',
             3: f'El segundo Header debería ser Output, pero es {args[0]}',
@@ -49,7 +49,7 @@ def raiseError(File, kind, *kwargs):
 
         },
         'json': {
-            0: f'El archivo de test no es valido: "{args[0]}"',
+            0: f'El archivo de test no es válido: "{args[0]}"',
             1: f'Hay menos elementos de los esperados en el test {args[0]}',
             2: f'El primer Header del test:{args[0]} debería ser Input, pero es {args[1]}',
             3: f'El segundo Header del test:{args[0]} debería ser Output, pero es {args[1]}',
