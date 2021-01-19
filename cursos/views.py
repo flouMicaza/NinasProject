@@ -43,13 +43,18 @@ class CursoView(CursosView):
     def get(self, request, **kwargs ):
         curso_id = kwargs['curso_id']
         curso = get_object_or_404(Curso, pk=curso_id)
+        if 'order' not in kwargs:
+            orden = 'oldest'
+        else:
+            orden = kwargs['order']
 
         if curso in self.get_cursos(request.user.username):
             usuaria = request.user
             clases_totales = Clase.objects.filter(curso=curso)
+            if orden == 'newest':
+                clases_totales = clases_totales.order_by('-fecha_clase')
             clases_asistencias = clases_asistencias_alumna(usuaria=usuaria, curso=curso)
             feedbacks = self.get_feedbacks_alumna(usuaria,clases_totales)
-
 
             parameters = {
                 'curso': curso,
@@ -59,7 +64,8 @@ class CursoView(CursosView):
                 'clases_asistencias': clases_asistencias,
                 'nro_clases_totales': max(len(clases_totales), curso.cant_clases),
                 'nro_clases_realizadas': len(clases_asistencias),
-                'feedbacks':feedbacks
+                'feedbacks':feedbacks,
+                'order': orden
             }
             return render(request, 'cursos/inicio_curso.html', parameters)
         else:
@@ -86,6 +92,20 @@ class CursoView(CursosView):
 
         clase_edit.save()
         return HttpResponseRedirect(reverse('cursos:curso',kwargs=kwargs))
+
+    def clases_order(self, request, **kwargs):
+        order = request.GET.get('order', 'oldest')
+        curso_id = kwargs['curso_id']
+        curso = get_object_or_404(Curso, pk=curso_id)
+
+        if curso in self.get_cursos(request.user.username):
+            clases_totales = Clase.objects.filter(curso=curso)
+
+        if (order == 'oldest'):
+            clases_totales = clases_totales.order_by('fecha_clase')
+
+        elif (order == 'asc'):
+            clases_totales = clases_totales.order_by('-fecha_clase')
 
     def get_feedbacks_alumna(self, usuaria, clases_totales):
         result = {}

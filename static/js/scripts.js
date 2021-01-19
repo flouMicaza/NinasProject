@@ -181,19 +181,26 @@ function cerrar_edicion_clase(id_clase) {
     $("#clase_edit_"+ id_clase).css("display","none")
 }
 
+
 //ordenar clases ascendentemente o descendentemente
-function sortClase() {
-    let lista_clases, items_clase, end, i;
+function cambiar_orden() {
+    let lista_clases, items_clase, end, i, text, current_url, aux, new_url;
 
-    var text = document.getElementById("sort-button").firstChild;
-    text.data = text.data == "Más recientes primero" ? "Más antiguas primero" : "Más recientes primero";
-
+    text = document.getElementById("sort-button").firstChild;
+    text.data = sessionStorage.current_order === "newest" ? "Más antiguas primero" : "Más recientes primero";
     lista_clases = document.getElementById("lista-clases");
     items_clase = lista_clases.getElementsByClassName("items-clase");
     end = items_clase.length - 1;
     for (i = 0; i < end; i++) {
         items_clase[i].parentNode.insertBefore(items_clase[end], items_clase[i]);
     }
+
+    sessionStorage.current_order = sessionStorage.current_order === "newest" ? "oldest" : "newest";
+    current_url = window.location.href;
+    const r = /(\d+\/curso\/)(\D+)*/;
+    aux = current_url.replace(r, '$1');
+    new_url = aux + sessionStorage.current_order + '/';
+    window.history.replaceState({}, '', new_url);
 }
 
 

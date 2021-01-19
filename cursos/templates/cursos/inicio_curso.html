@@ -113,7 +113,13 @@
         </div>
     {% endif %}
     <div>
-        <button id="sort-button" class="btn-small btn btn-sort" onclick="sortClase()">Más antiguas primero<i class="material-icons right">cached</i></button>
+        <a id="sort-button" class="btn-small btn btn-sort" onclick="cambiar_orden()">
+            {% if order == 'newest' %}
+                Más recientes primero
+            {% else %}
+                Más antiguas primero
+            {% endif %}
+            <i class="material-icons right">cached</i></a>
     </div>
     <ul class="collection collection-principal" id="lista-clases">
         {% if clases %}
@@ -121,7 +127,7 @@
                 {% if clase.publica or not usuaria.es_alumna %}
                     <li class="collection-item publica{{ clase.publica }} items-clase">
                         <div id="clase_{{ clase.id }}" class="collection-info">
-                            <p><b>{{ clase.nombre }}</b> <span class="letra_gris fecha_clase" style="font-size: smaller">&nbsp; {{ clase.fecha_clase }}</span></p>
+                            <p><b>{{ clase.nombre }}</b> <span id="la-fecha" class="letra_gris fecha_clase" style="font-size: smaller">&nbsp; {{ clase.fecha_clase }}</span></p>
                             <div style="display: flex; align-items: center">
                                 {% if user.es_profesora %}
                                     {% if clase.publica %} <p>Publicada</p>
