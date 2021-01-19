@@ -25,7 +25,7 @@ class Problema(models.Model):
     source = models.FileField(upload_to='source', blank=True, null=True)
 
     tests = models.FileField(upload_to='test_files', help_text="Se aceptan formatos .csv y .json",
-                             validators=[FileExtensionValidator(['json', 'csv'])])
+                             validators=[FileExtensionValidator(['json', 'csv']), check_if_file_is_valid])
     clase = models.ForeignKey(Clase, blank=True, null=True, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
@@ -66,13 +66,6 @@ def create_assignment(sender, instance, created, **kwargs):
         test_url = instance.tests.url[1:]
         json_tests_url = change_path_extension(test_url, 'json')
 
-        if not check_if_file_is_valid(test_url):
-            instance.tests = None
-            instance.save()
-            os.remove(test_url)
-            print("El archivo de test no es válido")
-            return
-
         # Passes the information from the original file to the json file
         file_to_file(test_url, json_tests_url)
 
@@ -87,7 +80,7 @@ def create_assignment(sender, instance, created, **kwargs):
 
 
 def create_test_cases(problema):
-    with open(settings.BASE_DIR + problema.tests.url, 'r') as f:
+    with open(settings.BASE_DIR + problema.tests.url, 'r', encoding='utf-8-sig') as f:
         datastore = json.load(f)
 
     for test_dict in datastore:  # Aquí es donde se generan los test, tengo que modificar para que reciba mi nueva info.
