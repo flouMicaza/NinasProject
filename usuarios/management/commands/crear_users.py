@@ -33,7 +33,7 @@ class Command(BaseCommand):
             csvFile = open(path, 'r', encoding='utf-8-sig')
             reader = csv.reader(csvFile)
         except Exception as e:
-            raise(e)
+            raise e
         headers = next(reader, None)
         if len(headers)!=2: #Actualmente solo se considera nombre,apellido
             raise Exception("No hay suficientes columnas")
