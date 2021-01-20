@@ -36,12 +36,12 @@ class Command(BaseCommand):
             raise e
         headers = next(reader, None)
         if len(headers)!=2: #Actualmente solo se considera nombre,apellido
-            raise Exception("No hay suficientes columnas")
+            raise Exception(f"Se esperaban 2 columnas en los headers, pero hay {len(headers)}")
         elif headers!=["nombre","apellido"]: #Se espera que los headers tengan ese orden
             raise Exception("Los headers no estan correctos, deberian ser: nombre,apellido")
         for i,row in enumerate(reader):
             if len(row)!=2:
-                raise Exception(f"No hay suficientes columnas en la fila {i+1}")
+                raise Exception(f"Se esperaban 2 columnas en la fila {i+1}, pero hay {len(row)}")
         csvFile.close()
 
     def create(self, path, kind, curso):
