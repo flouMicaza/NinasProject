@@ -187,7 +187,7 @@ function cambiar_orden() {
     let current_url, lista_clases, items_clase, end, i, text, new_order, aux, new_url;
 
     current_url = window.location.href;
-    
+
     text = document.getElementById("sort-button").firstChild;
     text.data = current_url.includes("newest") ? "Más antiguas primero" : "Más recientes primero";
 
@@ -199,7 +199,7 @@ function cambiar_orden() {
     }
 
     new_order = current_url.includes("newest") ? "oldest" : "newest";
-    const r = /(\d+\/curso\/)(\D+)*/;
+    const r = /(\d+\/curso\/)(\D*)/;
     aux = current_url.replace(r, '$1');
     new_url = aux + new_order + '/';
     window.history.replaceState({}, '', new_url);
