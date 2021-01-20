@@ -6,6 +6,10 @@ from django.core.management.base import BaseCommand
 from usuarios.models import User
 from cursos.models import Curso
 
+# modo de uso:
+# $python3 manage.py crear_users tipo_de_usuarias path 
+# curso = input (si se deja en blanco solo se crean, no se agrega a ningun curso)
+
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('user_kind', nargs='+', type=str)
@@ -54,9 +58,9 @@ class Command(BaseCommand):
                     i+=1
                 user = User.objects.create_user(first_name=row[0], last_name=row[1],username=username,
                                                 es_profesora= tipos['profesoras'], es_voluntaria = tipos['voluntarias'],
-                                                es_coordinadora = tipos['profesoras'], es_alumna =tipos['alumnas'], 
+                                                es_coordinadora = tipos['coordinadoras'], es_alumna =tipos['alumnas'], 
                                                 password='tempPass21')
-                if curso:
+                if curso and kind!='coordinadoras':
                     # tipos de usuarias que pueden pertenecer al curso
                     ops = {'profesoras':curso.profesoras, 'alumnas':curso.alumnas, 'voluntarias':curso.voluntarias}
                     ops[kind].add(user)
