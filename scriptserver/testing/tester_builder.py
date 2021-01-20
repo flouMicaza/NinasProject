@@ -17,7 +17,7 @@ class TesterBuilder():
         :param path: str
         :return: TesterBuilder
         """
-        with open(path, 'r') as f:
+        with open(path, 'r', encoding='utf-8-sig') as f:
             datastore = json.load(f)
 
         for test_dict in datastore: #Aquí es donde se generan los test, tengo que modificar para que reciba mi nueva info.
