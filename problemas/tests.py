@@ -13,6 +13,9 @@ from cursos.models import Curso
 from usuarios.models import User
 from problemas.models import Problema
 
+# Cuando se actualice modelo:
+# from coordinacion.models import Sede
+
 class InitialData(TestCase):
     def setUp(self):
         self.client = Client()
@@ -37,7 +40,7 @@ class SubirArchivosTestJSON(InitialData):
     # probar que al cargar un curso se ven sus clases asociadas.
     def setUp(self):
         super(SubirArchivosTestJSON, self).setUp()
-    
+
     def test_no_problem(self):
         self.client.force_login(user=self.usuaria_profesora)
         titulo = 'ProblemaTEST'
@@ -54,7 +57,7 @@ class SubirArchivosTestJSON(InitialData):
         response = self.client.get(reverse('problemas:casos-problema', kwargs={'curso_id':self.curso_basico.id, 'problema_id': Problema.objects.first().id, 'result':0}))
         self.assertContains(response, "2020")
         self.assertContains(response, "Anno multiplo de 4")
-    
+
 
     def test_same_input_problem(self):
         self.client.force_login(user=self.usuaria_profesora)
@@ -70,7 +73,7 @@ class SubirArchivosTestJSON(InitialData):
         response = self.client.post(reverse('problemas:crear-problema', kwargs={'clase_id': self.clase_basica_1.id}), data = form_data, follow = True)
         assert len(Problema.objects.all()) == 0
         self.assertContains(response, 'El input &quot;2020&quot; se repite en los test 1 y 2')
-    
+
     def test_less_headers(self):
         self.client.force_login(user=self.usuaria_profesora)
         titulo = 'ProblemaTEST'
@@ -85,7 +88,7 @@ class SubirArchivosTestJSON(InitialData):
         response = self.client.post(reverse('problemas:crear-problema', kwargs={'clase_id': self.clase_basica_1.id}), data = form_data, follow = True)
         assert len(Problema.objects.all()) == 0
         self.assertContains(response, 'Hay menos elementos de los esperados en el test 1')
-    
+
     def test_incorrect_header_input(self):
         self.client.force_login(user=self.usuaria_profesora)
         titulo = 'ProblemaTEST'
@@ -183,7 +186,7 @@ class SubirArchivosTestCSV(InitialData):
         response = self.client.post(reverse('problemas:crear-problema', kwargs={'clase_id': self.clase_basica_1.id}), data = form_data, follow = True)
         assert len(Problema.objects.all()) == 0
         self.assertContains(response, 'El input &quot;2020&quot; se repite en los test 1 y 2')
-    
+
     def test_less_headers(self):
         self.client.force_login(user=self.usuaria_profesora)
         titulo = 'ProblemaTEST'
@@ -198,7 +201,7 @@ class SubirArchivosTestCSV(InitialData):
         response = self.client.post(reverse('problemas:crear-problema', kwargs={'clase_id': self.clase_basica_1.id}), data = form_data, follow = True)
         assert len(Problema.objects.all()) == 0
         self.assertContains(response, 'Hay una cantidad distinta de columnas a las esperadas')
-    
+
     def test_incorrect_header_input(self):
         self.client.force_login(user=self.usuaria_profesora)
         titulo = 'ProblemaTEST'
@@ -257,7 +260,7 @@ class PermisosProblemaTest(InitialData):
         statement_2 = SimpleUploadedFile('statement_2.pdf', b'a', 'application/pdf')
         tests_2 = b'[{\n    "Input":"2001", \n    "Output": "No\\n", \n    "Categoria": "Anno no es multiplo de 4 ni de 400"}]'
         tests_2 = InMemoryUploadedFile(BytesIO(tests_2), 'tests', 'tests_2.json', 'application/json', len(tests_2), None, None)
-        
+
         self.problema_basico = Problema.objects.create(titulo="Problema Básico",
                                                        fecha_creacion=datetime.date(2019, 11, 20),
                                                        statement=statement_1, tests=tests_1, clase=self.clase_basica_1)
@@ -303,14 +306,12 @@ class PermisosProblemaTest(InitialData):
         response = self.client.get(reverse('problemas:enunciado-problema', kwargs={'curso_id': self.curso_avanzado.id,
                                                                                    'problema_id': 10,
                                                                                    'result': 1}))
-        self.assertTemplateUsed(response, 'error/404.html')
         self.assertEquals(response.status_code, 404)
 
     def test_editar_problema_no_existe(self):
         self.client.force_login(user=self.usuaria_profesora2)
         response = self.client.get(reverse('problemas:editar-problema', kwargs={'curso_id': self.curso_avanzado.id,
                                                                                    'problema_id': 10}))
-        self.assertTemplateUsed(response, 'error/404.html')
         self.assertEquals(response.status_code, 404)
 
     def test_enunciado_curso_no_existe(self):
@@ -318,13 +319,11 @@ class PermisosProblemaTest(InitialData):
         response = self.client.get(reverse('problemas:enunciado-problema', kwargs={'curso_id': 10,
                                                                                    'problema_id': self.problema_basico.id,
                                                                                    'result': 1}))
-        self.assertTemplateUsed(response, 'error/404.html')
         self.assertEquals(response.status_code, 404)
 
     def test_editar_curso_no_existe(self):
         self.client.force_login(user=self.usuaria_profesora)
         response = self.client.get(reverse('problemas:editar-problema', kwargs={'curso_id': 10,
                                                                                 'problema_id': self.problema_basico.id}))
-        self.assertTemplateUsed(response, 'error/404.html')
         self.assertEquals(response.status_code, 404)
 
