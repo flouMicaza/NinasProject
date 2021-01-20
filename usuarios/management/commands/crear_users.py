@@ -46,7 +46,10 @@ class Command(BaseCommand):
 
     def create(self, path, kind, curso):
         tipos = {'profesoras':False, 'alumnas':False, 'coordinadoras':False, 'voluntarias':False} #tipos de usuarias disponibles
-        tipos[kind] = True
+        if tipos.get(kind) != None:
+            tipos[kind] = True
+        else:
+            raise Exception(f'El tipo de usuarias {kind} no esta definido, debe ser alguno de los siguientes: {(", ").join(list(tipos.keys()))}')
         with open(path,'r', encoding='utf-8-sig') as csvFile:
             reader = csv.reader(csvFile)
             next(reader,None)
