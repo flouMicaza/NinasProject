@@ -14,16 +14,17 @@ logging.basicConfig(level=logging.DEBUG,
                     format='[%(levelname)s] (%(threadName)-9s) %(message)s', )
 
 CATEGORY_BYTE_LEN = 100
-STD_BYTE_LEN = 300
+STD_BYTE_LEN = 1000
 TOTAL_BYTES_BY_MESSAGE = 2048
 
 
 class Server:
 
-    def __init__(self, port, scheduler_slaves=10):
+    def __init__(self, port, scheduler_slaves=10, std_byte_len=STD_BYTE_LEN):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.public_host = 'localhost'
         self.socket.bind((self.public_host, port))
+        self.std_byte_len = std_byte_len
 
         self.sub_id_to_port_dict = {}
 
@@ -76,9 +77,9 @@ class Server:
             # Unpack info
             passed = int(result[0])  # 1 byte
             test = result[1]
-            test_input = test.input.decode()[:STD_BYTE_LEN]  # STDLEN bytes
-            expected_output = test.output.decode()[:STD_BYTE_LEN]  # STDLEN bytes
-            actual_output = result[2][0].decode()[:STD_BYTE_LEN]  # STDLEN bytes
+            test_input = test.input.decode()[:self.std_byte_len]  # STDLEN bytes
+            expected_output = test.output.decode()[:self.std_byte_len]  # STDLEN bytes
+            actual_output = result[2][0].decode()[:self.std_byte_len]  # STDLEN bytes
             comment = test.get_comment()[:CATEGORY_BYTE_LEN]  # CATLEN bytes
             err = result[2][1]  # 1 byte
             timeout = result[2][2]

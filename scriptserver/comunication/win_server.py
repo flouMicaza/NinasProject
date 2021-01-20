@@ -6,8 +6,8 @@ script_dict2 = {}
 
 class WinServer(Server):
 
-    def __init__(self, port, scheduler_slaves=10):
-        Server.__init__(self, port, scheduler_slaves)
+    def __init__(self, port, scheduler_slaves=10, std_byte_len=1000):
+        Server.__init__(self, port, scheduler_slaves, std_byte_len)
         self.script_dict = script_dict2
 
 
