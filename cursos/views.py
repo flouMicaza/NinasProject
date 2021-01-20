@@ -88,7 +88,7 @@ class CursoView(CursosView):
             if len(clase_mismo_dia) == 0 or clase_mismo_dia.first()==clase_edit:
                 clase_edit.fecha_clase = request.POST['fecha_clase']
             else:
-                messages.success(request,"No se actualizó la fecha, ya existe una clase para ese día")
+                messages.success(request,f"No se actualizó la fecha para la clase {clase_edit.nombre}, ya existe una clase para ese día")
 
         clase_edit.save()
         return HttpResponseRedirect(reverse('cursos:curso',kwargs=kwargs))
