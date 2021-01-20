@@ -117,6 +117,7 @@ def check_valid_csv(csvFile = None, path = ""):
 
     check_inputs(reader, csvFile)
 
+    csvFile.close()
     if os.path.exists(filename):
         os.remove(filename)
 
@@ -160,6 +161,7 @@ def check_valid_json(jsonFile = None, path = ""):
             raiseError(jsonFile, 5, vals[0], inputs.get(vals[0]),i+1)
         inputs[vals[0]] = i+1
 
+    jsonFile.close()
     if os.path.exists(filename):
         os.remove(filename)
     
