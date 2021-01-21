@@ -1,16 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.forms import modelform_factory, HiddenInput
 
 from NiñasProject.decorators import docente_required
-from asistencia.utils import clases_asistencias_alumna, porcentaje_asistencia, Clase
+from asistencia.utils import clases_asistencias_alumna, porcentaje_asistencia
 
 from clases.models import Clase
 from cursos.models import Curso
@@ -43,13 +42,18 @@ class CursoView(CursosView):
     def get(self, request, **kwargs ):
         curso_id = kwargs['curso_id']
         curso = get_object_or_404(Curso, pk=curso_id)
+        if 'order' not in kwargs:
+            orden = 'oldest'
+        else:
+            orden = kwargs['order']
 
         if curso in self.get_cursos(request.user.username):
             usuaria = request.user
             clases_totales = Clase.objects.filter(curso=curso)
+            if orden == 'newest':
+                clases_totales = clases_totales.order_by('-fecha_clase')
             clases_asistencias = clases_asistencias_alumna(usuaria=usuaria, curso=curso)
             feedbacks = self.get_feedbacks_alumna(usuaria,clases_totales)
-
 
             parameters = {
                 'curso': curso,
@@ -59,7 +63,8 @@ class CursoView(CursosView):
                 'clases_asistencias': clases_asistencias,
                 'nro_clases_totales': max(len(clases_totales), curso.cant_clases),
                 'nro_clases_realizadas': len(clases_asistencias),
-                'feedbacks':feedbacks
+                'feedbacks':feedbacks,
+                'order': orden
             }
             return render(request, 'cursos/inicio_curso.html', parameters)
         else:
@@ -82,7 +87,7 @@ class CursoView(CursosView):
             if len(clase_mismo_dia) == 0 or clase_mismo_dia.first()==clase_edit:
                 clase_edit.fecha_clase = request.POST['fecha_clase']
             else:
-                messages.success(request,"No se actualizó la fecha, ya existe una clase para ese día")
+                messages.success(request,f"No se actualizó la fecha para la clase {clase_edit.nombre}, ya existe una clase para ese día")
 
         clase_edit.save()
         return HttpResponseRedirect(reverse('cursos:curso',kwargs=kwargs))

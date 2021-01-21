@@ -6,22 +6,26 @@
 {% block content %}
     {% if cursos %}
         <ul class=" collection with-header collapsible popout">
-            <li class="collection-header" >
+            <li class="collection-header" style="margin-bottom: 30px">
                     <h1>Mis cursos</h1>
             </li>
 
                 {% for curso in cursos %}
                 <li class="active">
                     <div class="collapsible-header">
-                        {{ curso.nombre }}
+                        <div>
+                            <h5><p class="title-mis-cursos">{{ curso.nombre }}</p></h5>
+                            <p class="flex-center"><i class="material-icons curso-icons">place</i>{{ curso.sede.nombre }}
+                            <i class="material-icons curso-icons date-icon">date_range</i>{{ curso.anho }}</p>
+                        </div>
                     </div>
                     <div class="collapsible-body">
 
-                        <a href="{% url 'cursos:curso' curso_id=curso.id %}" class="waves-effect waves-light btn-large "><i class="material-icons right">school</i>Clases y problemas</a>
+                        <a href="{% url 'cursos:curso' curso_id=curso.id %}" class="waves-effect waves-light btn btn-large"><i class="material-icons right">school</i>Clases y problemas</a>
 
-                        <a href="{% url 'cursos:estadisticas' curso_id=curso.id %}" class="btn btn-large"><i class="material-icons right">show_chart</i>Avance estudiantes</a>
+                        <a href="{% url 'cursos:estadisticas' curso_id=curso.id %}" class="waves-effect waves-light btn btn-large"><i class="material-icons right">show_chart</i>Avance estudiantes</a>
 
-                        <a href="{% url 'asistencia:asistencia_gral' curso_id=curso.id %}" class="waves-effect waves-light btn-large "><i class="material-icons right">format_list_bulleted</i>Asistencia</a>
+                        <a href="{% url 'asistencia:asistencia_gral' curso_id=curso.id %}" class="waves-effect waves-light btn btn-large "><i class="material-icons right">format_list_bulleted</i>Asistencia</a>
                     </div>
                 </li>
                 {% endfor %}
