@@ -2,7 +2,7 @@ from clases.models import Clase
 from cursos.models import Curso
 
 ## Entrega el curso si la usuaria tiene permiso para acceder a el
-from problemas.models import Caso
+from problemas.models import Caso, Problema
 
 '''
 Método que entrega el curso correspondiente a curso_id solo si la usuaria pertenece al curso. 
@@ -62,3 +62,15 @@ def get_clase(curso_id, clase_id):
     if len(clases) > 0:
         return clases[0]
     return None
+
+'''
+Método que entrega True si el problema asociado pertenece al curso 
+'''
+def problema_en_curso(problema_id, curso_id):
+    clases = Clase.objects.filter(curso_id=curso_id)
+    problema = []
+    for element in clases:
+        problema += (Problema.objects.filter(clase_id=element.id, id=problema_id))
+    if len(problema) > 0:
+        return True
+    return False

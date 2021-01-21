@@ -20,7 +20,7 @@
                             {% for caso in categoria.casos %}
                                 <tr class="row_good_feedback">
                                     <td class="consolas">{{ caso.input }}</td>
-                                    <td class="consolas output">{{ caso.output_esperado }}</td>
+                                    <td class="consolas">{{ caso.output_esperado }}</td>
                                     <td>
                                         {% with nuevos_outputs|lookup:caso.id as nuevos %}
                                             {% if nuevos > 0  %}

@@ -57,23 +57,23 @@ class ClasesEnCursoTest(InitialData):
     def test_profesora_ve_clases(self):
         self.client.force_login(user=self.usuaria_profesora)
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_basico.id}))
-        self.assertContains(response, "Clase 1: Variables")
-        self.assertContains(response, "Clase 2: Condiciones")
+        self.assertContains(response, "Variables")
+        self.assertContains(response, "Condiciones")
 
     def test_alumna_ve_clases_publicas(self):
         self.client.force_login(user=self.usuaria_alumna)
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_basico.id}))
-        self.assertContains(response, "Clase 1: " + self.clase_basica_1.nombre)
+        self.assertContains(response, self.clase_basica_1.nombre)
 
     def test_voluntaria_ve_clases_publicas(self):
         self.client.force_login(user=self.usuaria_voluntaria)
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_basico.id}))
-        self.assertContains(response, "Clase 1: " + self.clase_basica_1.nombre)
+        self.assertContains(response, self.clase_basica_1.nombre)
 
     def test_alumna_no_ve_clases_privadas(self):
         self.client.force_login(user=self.usuaria_alumna)
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': self.curso_basico.id}))
-        self.assertNotContains(response, "Clase 2: " + self.clase_basica_2.nombre)
+        self.assertNotContains(response, self.clase_basica_2.nombre)
 
     def test_profesora_puede_editar_clase(self):
         self.client.force_login(user=self.usuaria_profesora)
