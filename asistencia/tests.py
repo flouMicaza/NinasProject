@@ -462,7 +462,7 @@ class NoneAsistenciaTest(InitialData):
         for e in Asistencia.objects.filter(clase=clase):
             assert e.asistio == None
         r = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id':curso.id}))
-        self.assertContains(r, "remove_circle")
+        self.assertContains(r, "remove_circle", count=6) #5 alumnas + 1 leyenda
 
     
     def test_lock(self):
