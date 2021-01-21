@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Max
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
@@ -11,8 +12,8 @@ from NiñasProject.decorators import docente_required
 from clases.models import Clase
 from cursos.models import Curso
 from feedback.forms import OutputAlternativoModelFormSet
-from feedback.models import OutputAlternativo
-from problemas.models import Caso
+from feedback.models import OutputAlternativo, Feedback, TestFeedback
+from problemas.models import Caso, Problema
 
 
 @method_decorator([docente_required], name='dispatch')
@@ -20,19 +21,33 @@ class CasosAlternativos(LoginRequiredMixin, View):
     def get(self, request):
         if request.is_ajax():
             id_caso = request.GET.get('id')
+            problema = request.GET.get('problema')
+
+            #problema = Problema.objects.get(id=id_problema)
             caso = Caso.objects.get(id=id_caso)
+
             # outputs_sugeridos = OutputAlternativo.objects.filter(caso=caso, agregado=False, frecuencia__gt=1)
             outputs_sugeridos = OutputAlternativo.objects.filter(caso=caso, agregado=False)
             outputs_agregados = OutputAlternativo.objects.filter(caso=caso, agregado=True)
 
             formset = OutputAlternativoModelFormSet(queryset=outputs_sugeridos)
 
+            ultimos_feedbacks = []
+            for feedback in Feedback.objects.filter(problema=problema).values('user').annotate(
+                    ultima_fecha=Max('fecha_envio')):
+                ultimo = Feedback.objects.get(problema=problema, user=feedback['user'],
+                                              fecha_envio=feedback['ultima_fecha'])
+                ultimos_feedbacks.append(ultimo)
+
+            tests_caso = TestFeedback.objects.filter(caso=caso)
+
             context = {
                 'id_caso': id_caso,
                 'caso': caso,
                 'outputs_sugeridos': outputs_sugeridos,
                 'outputs_agregados': outputs_agregados,
-                'formset': formset
+                'formset': formset,
+                'tests_caso': tests_caso
             }
             return render(request, 'problemas/modal_casos_alternativos.html', context)
 

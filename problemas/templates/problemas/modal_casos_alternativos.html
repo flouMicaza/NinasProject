@@ -43,36 +43,15 @@
                                                             <i class="material-icons">expand_more</i>
                                                             Códigos ({{ form.instance.frecuencia }})
                                                         </div>
-                                                        <div class="collapsible-body" style="text-align: left">
+                                                        <div class="collapsible-body" style="text-align: left;color:black">
 
-                                                                <p class="consolas">Camila Rodríguez, 19 de abril 2020, 10:45 am</p>
-                                                            <p>#include </p>
-                                                            <p>using namespace</p>
-                                                            <p>int main() {</p>
-                                                            <p>}</p>
-                                                        <hr>
-                                                            <p class="consolas">Camila Rodríguez, 19 de abril 2020, 10:45 am</p>
-                                                            <p>#include iostream
+                                                            {% for i in tests_caso %}
 
-using namespace std;<br>
+                                                                    <p><span>{{ i.feedback.user }}</span><span class="letra_gris" style="font-size: smaller">&nbsp;{{ i.feedback.fecha_envio }}</span></p>
+                                                                    <p class="consolas" style="font-size: medium">{{ i.feedback.display_solucion.decode | safe }}</p>
+                                                                <hr>
+                                                            {% endfor %}
 
-int main(){<br>
-    int agno;<br>
-    cin >> agno;<br>
-
-    if(agno%4==0 && agno%100!=0){<br>
-        cout << "Yes" << endl;<br>
-    }<br>
-    else if (agno%400==0){<br>
-        cout << "Yes" << endl;<br>
-    }<br>
-    else{<br>
-        cout << "No" << endl;<br>
-
-    }<br>
-    return 0;
-
-}</p>
 
                                                         </div>
                                                     </li>

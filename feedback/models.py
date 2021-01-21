@@ -17,6 +17,10 @@ class Feedback(models.Model):
     def __str__(self):
         return str(self.user) + ":" + str(self.problema)
 
+    def display_solucion(self):
+        self.codigo_solucion.open()
+        return self.codigo_solucion.file.read().replace(b'\n', b'<br>').replace(b'  ', b'&nbsp')
+
 
 class TestFeedback(models.Model):
     passed = models.BooleanField(help_text="Si el test paso o no")
