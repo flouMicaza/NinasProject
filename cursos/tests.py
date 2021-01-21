@@ -116,10 +116,11 @@ class CursoViewTest(InitialData,TestCase):
         self.assertEquals(response.status_code, 404)
 
     def test_curso_sin_permiso(self):
+        # probar en curso sin permiso y redireccionar
         self.client.force_login(user=self.usuaria_profesora2)
         otro_curso = 3
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': otro_curso}))
         # self.assertTemplateUsed(response, 'error/403.html')
-        self.assertEquals(response.status_code, 403)
+        self.assertEquals(response.status_code, 302)
 
 

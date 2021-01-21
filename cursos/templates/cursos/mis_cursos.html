@@ -4,6 +4,16 @@
 
 
 {% block content %}
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                 <div class="alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                  {{message}}
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
     {% if cursos %}
         <ul class=" collection with-header collapsible popout">
             <li class="collection-header" style="margin-bottom: 30px">

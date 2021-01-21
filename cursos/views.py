@@ -68,11 +68,13 @@ class CursoView(CursosView):
             }
             return render(request, 'cursos/inicio_curso.html', parameters)
         else:
-            return HttpResponseForbidden("No tienes permiso para acceder a este curso.")
+            messages.success(request, "No tienes permiso para ver ese curso")
+            return HttpResponseRedirect(reverse('usuarios:index'))
 
     def post(self, request,**kwargs):
         id_clase = request.POST['id_clase']
         clase_edit = Clase.objects.get(id=id_clase)
+        edit_correct = True
         if request.POST.get('publica'):
             clase_edit.publica = True
         else:
@@ -88,6 +90,10 @@ class CursoView(CursosView):
                 clase_edit.fecha_clase = request.POST['fecha_clase']
             else:
                 messages.success(request,f"No se actualizó la fecha para la clase {clase_edit.nombre}, ya existe una clase para ese día")
+                edit_correct = False
+
+        if edit_correct:
+            messages.success(request, "La clase se editó correctamente")
 
         clase_edit.save()
         return HttpResponseRedirect(reverse('cursos:curso',kwargs=kwargs))
