@@ -1,16 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.forms import modelform_factory, HiddenInput
 
 from NiñasProject.decorators import docente_required
-from asistencia.utils import clases_asistencias_alumna, porcentaje_asistencia, Clase
+from asistencia.utils import clases_asistencias_alumna, porcentaje_asistencia
 
 from clases.models import Clase
 from cursos.models import Curso
@@ -92,20 +91,6 @@ class CursoView(CursosView):
 
         clase_edit.save()
         return HttpResponseRedirect(reverse('cursos:curso',kwargs=kwargs))
-
-    def clases_order(self, request, **kwargs):
-        order = request.GET.get('order', 'oldest')
-        curso_id = kwargs['curso_id']
-        curso = get_object_or_404(Curso, pk=curso_id)
-
-        if curso in self.get_cursos(request.user.username):
-            clases_totales = Clase.objects.filter(curso=curso)
-
-        if (order == 'oldest'):
-            clases_totales = clases_totales.order_by('fecha_clase')
-
-        elif (order == 'asc'):
-            clases_totales = clases_totales.order_by('-fecha_clase')
 
     def get_feedbacks_alumna(self, usuaria, clases_totales):
         result = {}
