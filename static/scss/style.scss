@@ -10,6 +10,10 @@ $no-assist-color: 		#FFA500;
 .letra_rosada {
   color: $primary-color;
 }
+
+.letra_gris {
+  color: $not-enabled-color;
+}
 .container {
   margin-top: 2em;
 }
@@ -276,9 +280,20 @@ div.dataTables_wrapper {
   align-items: baseline;
 }
 
+.title-mis-cursos {
+  margin-left: 10px;
+  margin-top: 0
+}
 
+/* has to be !important to override collapsible-header i */
+.curso-icons {
+  font-size: large!important;
+  margin-right: 5px!important;
+}
 
-
+.date-icon {
+  margin-left: 15px
+}
 
   .icon_style{
     position: absolute;
@@ -291,10 +306,10 @@ div.dataTables_wrapper {
 
    /* The alert message box */
 .alert {
-  padding: 20px;
-  background-color: $primary-color; 
+  padding: 15px;
+  background-color: $primary-color;
   color: white;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 /* The close button */
@@ -304,14 +319,14 @@ div.dataTables_wrapper {
   font-weight: bold;
   float: right;
   font-size: 22px;
-  line-height: 20px;
+  line-height: 15px;
   cursor: pointer;
   transition: 0.3s;
 }
 
 /* When moving the mouse over the close button */
 .closebtn:hover {
-  color: black;
+  color: $absent-color;
 }
 
 .publicaFalse {
@@ -345,3 +360,4 @@ hr.problemas-line {
   position: relative;
   margin-right: 10px;
 }
+

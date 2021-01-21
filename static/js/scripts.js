@@ -172,7 +172,56 @@ function editar_clase(id_clase) {
     })
 }
 
+//limpiar cache_lock
 function clear_cache(scheme, host, url){
     fetch(scheme.concat('://',host,url))
     return true
 }
+
+//evento para cerrar edición de curso sin guardar
+function cerrar_edicion_clase(id_clase) {
+    $("#clase_" + id_clase).css({
+        "display": "flex",
+        "justify-content":"space-between"
+    })
+    $("#clase_edit_"+ id_clase).css("display","none")
+}
+
+
+//ordenar clases ascendentemente o descendentemente
+function cambiar_orden() {
+    let current_url, lista_clases, items_clase, end, i, text, new_order, aux, new_url;
+
+    current_url = window.location.href;
+
+    text = document.getElementById("sort-button").firstChild;
+    text.data = current_url.includes("newest") ? "Más antiguas primero" : "Más recientes primero";
+
+    lista_clases = document.getElementById("lista-clases");
+    items_clase = lista_clases.getElementsByClassName("items-clase");
+    end = items_clase.length - 1;
+    for (i = 0; i < end; i++) {
+        items_clase[i].parentNode.insertBefore(items_clase[end], items_clase[i]);
+    }
+
+    new_order = current_url.includes("newest") ? "oldest" : "newest";
+    const r = /(\d+\/curso\/)(\D*)/;
+    aux = current_url.replace(r, '$1');
+    new_url = aux + new_order + '/';
+    window.history.replaceState({}, '', new_url);
+}
+
+
+//permite habilitar/deshabilitar botón para subir soluciones si hay o no un archivo seleccionado
+$(document).ready
+    (function () {
+        //when input's value changes
+        $("#file").change(function () {
+            if($(this).val()) {
+                $("#submit-sol").prop("disabled", false);
+            }
+            else {
+                $("#submit-sol").prop("disabled", true);
+            }
+        });
+    });

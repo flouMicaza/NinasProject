@@ -20,13 +20,16 @@
                             {% for caso in categoria.casos %}
                                 <tr class="row_good_feedback">
                                     <td class="consolas">{{ caso.input }}</td>
-                                    <td class="consolas output">{{ caso.output_esperado }}</td>
+                                    <td class="consolas">{{ caso.output_esperado }}</td>
                                     <td>
                                         <button class="open-modal btn btn-small" id="{{ caso.id }}">
                                             Ver
                                         </button>
                                         {% with nuevos_outputs|lookup:caso.id as nuevos %}
-                                            {% if nuevos > 0  %}
+                                            {% if nuevos == 1 %}
+                                                <span class="new badge " data-badge-caption="Nuevo output"> {{ nuevos_outputs | lookup:caso.id }}</span>
+                                            {% endif %}
+                                            {% if nuevos > 1  %}
                                                 <span class="new badge " data-badge-caption="Nuevos outputs"> {{ nuevos_outputs | lookup:caso.id }}</span>
                                             {% endif %}
                                         {% endwith %}
