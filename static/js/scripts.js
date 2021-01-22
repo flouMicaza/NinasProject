@@ -172,6 +172,12 @@ function editar_clase(id_clase) {
     })
 }
 
+//limpiar cache_lock
+function clear_cache(scheme, host, url){
+    fetch(scheme.concat('://',host,url))
+    return true
+}
+
 //evento para cerrar edición de curso sin guardar
 function cerrar_edicion_clase(id_clase) {
     $("#clase_" + id_clase).css({
