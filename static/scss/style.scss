@@ -14,6 +14,12 @@ $not-enabled-color: #80868b;
 .letra_gris {
   color: $not-enabled-color;
 }
+
+.fecha-texto {
+  font-size: smaller;
+  color: $not-enabled-color;
+  font-weight: normal;
+}
 .container {
   margin-top: 2em;
 }
@@ -52,7 +58,7 @@ tr.row_good_feedback > td , tr.row_good_feedback > th {
 
 tr.row_bad_feedback > td {
   padding: 10px;
-  border: 1px solid #fff;
+  border: 1px solid transparent;
   text-align: center;
   max-width: 5em;
   word-wrap: break-word;
@@ -91,7 +97,7 @@ tr.row_bad_feedback> th.codigos-casos {
   padding-top: 0;
   padding-bottom: 0;
   margin-top: 0;
-  border: 1px solid #fff;
+  border: transparent;
   border-bottom: 2px solid $not-enabled-color;
   text-align: center;
   max-width: 5em;
@@ -107,9 +113,29 @@ td, th {
 }
 
 .row_bad_feedback{
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
+  border-right: transparent;
+  border-left: transparent;
   border-bottom: #ffffff;
+}
+
+.codigos-body {
+  padding: 1em 0 0;
+  text-align: left;
+  color:black;
+  border-bottom: transparent;
+}
+
+.codigos-header > .collapsible-header {
+  background-color: transparent!important;
+  border-bottom: transparent;
+  color: $primary-color;
+  font-weight: normal;
+  padding: 0;
+}
+
+.no-sombra {
+  box-shadow: none!important;
+  border: transparent
 }
 
 .tabla-asistencia-alumna {
@@ -343,6 +369,11 @@ hr.problemas-line {
   border: 1px dotted $not-enabled-color;
 }
 
+hr.linea-rosada {
+  background-color: $hover-color;
+  border: 1px solid $hover-color
+}
+
 
 .feedback-bueno {
   background-color: $check-color
@@ -379,3 +410,22 @@ hr.problemas-line {
 .notification:hover .badge {
   background-color: $primary-color;
 }
+
+.big-badge {
+  border-radius: 50%;
+  background-color: $primary-color;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  color: white;
+}
+
+#casos-categoria.active .big-badge {
+  display: none;
+}
+
+
+
+
+
+

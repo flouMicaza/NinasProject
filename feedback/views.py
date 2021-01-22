@@ -9,11 +9,9 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from NiñasProject.decorators import docente_required
-from clases.models import Clase
-from cursos.models import Curso
 from feedback.forms import OutputAlternativoModelFormSet
 from feedback.models import OutputAlternativo, Feedback, TestFeedback
-from problemas.models import Caso, Problema
+from problemas.models import Caso
 
 
 @method_decorator([docente_required], name='dispatch')
@@ -23,7 +21,6 @@ class CasosAlternativos(LoginRequiredMixin, View):
             id_caso = request.GET.get('id')
             problema = request.GET.get('problema')
 
-            #problema = Problema.objects.get(id=id_problema)
             caso = Caso.objects.get(id=id_caso)
 
             # outputs_sugeridos = OutputAlternativo.objects.filter(caso=caso, agregado=False, frecuencia__gt=1)
@@ -39,7 +36,7 @@ class CasosAlternativos(LoginRequiredMixin, View):
                                               fecha_envio=feedback['ultima_fecha'])
                 ultimos_feedbacks.append(ultimo)
 
-            tests_caso = TestFeedback.objects.filter(caso=caso)
+            tests_caso = TestFeedback.objects.filter(caso=caso).order_by('-feedback__fecha_envio')
 
             context = {
                 'id_caso': id_caso,

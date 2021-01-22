@@ -36,40 +36,39 @@
                                             <td>{{ form.sugerencia }}</td>
                                         </tr>
                                         <tr class="row_bad_feedback">
-                                            <th class="codigos-casos letra_rosada" colspan="2" >
-                                                <ul class="collapsible expandable">
-                                                    <li>
+                                            <th class="codigos-casos" colspan="2">
+                                                <ul class="collapsible expandable no-sombra">
+                                                    <li class="codigos-header">
                                                         <div class="collapsible-header">
-                                                            <i class="material-icons">expand_more</i>
-                                                            Códigos ({{ form.instance.frecuencia }})
+                                                            <div class="btn btn-small">
+                                                                <i class="material-icons" style="vertical-align: middle">expand_more</i>
+                                                                <span>CÓDIGOS ({{ form.instance.frecuencia }})</span>
+                                                            </div>
                                                         </div>
-                                                        <div class="collapsible-body" style="text-align: left;color:black">
-
-                                                            {% for i in tests_caso %}
-
-                                                                    <p><span>{{ i.feedback.user }}</span><span class="letra_gris" style="font-size: smaller">&nbsp;{{ i.feedback.fecha_envio }}</span></p>
-                                                                    <p class="consolas" style="font-size: medium">{{ i.feedback.display_solucion.decode | safe }}</p>
-                                                                <hr>
+                                                        <div class="collapsible-body codigos-body">
+                                                            {% for test in tests_caso %}
+                                                                {% if test.output_obtenido == form.instance.output_obtenido %}
+                                                                  <hr class="linea-rosada">
+                                                                    <p>
+                                                                        <span class="letra_rosada">{{ test.feedback.user }}</span>
+                                                                        <span class="fecha-texto">&nbsp;{{ test.feedback.fecha_envio }}</span>
+                                                                    </p>
+                                                                    <p class="consolas" style="font-size: medium">{{ test.feedback.display_solucion.decode | safe }}</p>
+                                                                {% endif %}
                                                             {% endfor %}
-
-
                                                         </div>
                                                     </li>
                                                 </ul>
                                             </th>
-
-
                                         </tr>
                                     {% endfor %}
                                 {% else %}
-                                    <tr class="tabla-modal">
+                                    <tr class="row_bad_feedback">
                                          <td colspan="4"><span class="letra_rosada">No se han recibido errores para este caso</span></td>
                                     </tr>
                                 {% endif %}
                                 </tbody>
                             </table>
-
-
                         <div style="display: flex; justify-content: flex-end">
                             <button type="submit" class="btn btn-small modal-close" style="margin-top:1em">Guardar y salir<span><i class="material-icons right">save</i></span></button>
                         </div>
@@ -80,31 +79,50 @@
             <div id="outputs-alternativos" style="margin-top: 2em">
                 <h5>Sugerencias agregadas</h5>
                  <div style="max-width: 100%; overflow-x:auto">
+                    <div class="list"></div>
                     <table id='tabla-output-agregado' class="data-feedback" >
                         <thead>
-                            <tr class="tabla-modal">
+                            <tr class="row_good_feedback">
                                 <th>Output recibido</th>
-                                <th>Código</th>
                                 <th>Sugerencia</th>
-
                             </tr>
                         </thead>
                         <tbody>
                             {% if outputs_agregados %}
                                 {% for output in outputs_agregados %}
-                                    <tr class=" tabla-modal">
+                                    <tr class="row_bad_feedback">
                                         <td class="consolas">{{ output.output_obtenido }}</td>
-                                        <td><div style="display: inline-flex;justify-content: center">
-                                            <button class="btn btn-small" style="margin-top: 0">
-                                                <i class="material-icons" style="vertical-align: middle">text_snippet</i>
-                                                <span style="padding-left: 0.5em; font-size: larger; line-height: 0">({{ output.frecuencia }})</span>
-                                            </button>
-                                        </div></td>
                                         <td>{{ output.sugerencia }}</td>
                                     </tr>
+                                    <tr class="row_bad_feedback">
+                                            <th class="codigos-casos" colspan="2">
+                                                <ul class="collapsible expandable no-sombra">
+                                                    <li class="codigos-header">
+                                                        <div class="collapsible-header">
+                                                            <div class="btn btn-small">
+                                                                <i class="material-icons" style="vertical-align: middle">expand_more</i>
+                                                                <span>CÓDIGOS ({{ output.frecuencia }})</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="collapsible-body codigos-body">
+                                                            {% for test in tests_caso %}
+                                                                {% if test.output_obtenido == output.output_obtenido %}
+                                                                  <hr class="linea-rosada">
+                                                                    <p>
+                                                                        <span class="letra_rosada">{{ test.feedback.user }}</span>
+                                                                        <span class="fecha-texto">&nbsp;{{ test.feedback.fecha_envio }}</span>
+                                                                    </p>
+                                                                    <p class="consolas" style="font-size: medium">{{ test.feedback.display_solucion.decode | safe }}</p>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </th>
+                                        </tr>
                                 {% endfor %}
                             {% else %}
-                                <tr class="tabla-modal">
+                                <tr class="row_bad_feedback">
                                     <td colspan="4"><span class="letra_rosada"> No se han agregado sugerencias aún. </span></td>
                                 </tr>
                             {% endif %}
