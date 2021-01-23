@@ -1,0 +1,17 @@
+{% extends 'menu.html' %}
+{% load static %}
+{% block title %}Mis Cursos{% endblock %}
+
+
+{% block content %}
+  {% for curso in cursos %}
+  <p>
+  <a href="{% url 'coordinacion:editar_curso' curso.id %}">{{curso.nombre}}</a>
+  </p>
+  <p>
+  <a href="{% url 'coordinacion:eliminar_curso' curso.id %}">ELIMINAR</a> 
+  </p>
+  {%endfor%}
+
+<a href="{% url 'coordinacion:crear_curso' %}">Crear Curso</a>
+{% endblock %}

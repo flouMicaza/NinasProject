@@ -98,7 +98,7 @@ class CursoView(CursosView):
 class MisCursosView(CursosView):
 
     def get(self, request):
-        if request.user.es_profesora  or request.user.es_voluntaria :
+        if request.user.es_profesora  or request.user.es_voluntaria or request.user.es_coordinadora:
             cursos = self.get_cursos(request.user.username)
             return render(request, 'cursos/mis_cursos.html', {'cursos': cursos})
         else:

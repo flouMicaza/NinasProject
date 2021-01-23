@@ -1,0 +1,29 @@
+{% extends 'menu.html' %}
+{% load static %}
+{% block title %}Mis Cursos{% endblock %}
+
+
+{% block content %}
+
+  <a href="{%url 'coordinacion:crear_user' %}">Crear User</a>
+
+  {% for profesora in profesoras %}
+  <p>
+  <a href="{% url 'coordinacion:editar_users' profesora.id %}">{{profesora.first_name}} {{profesora.last_name}}</a>
+  </p>
+  {%endfor%}
+
+  {% for alumna in alumnas %}
+  <p>
+  <a href="{% url 'coordinacion:editar_users' alumna.id %}">{{alumna.first_name}} {{alumna.last_name}}</a>
+  </p>
+  {%endfor%}
+
+  {% for voluntaria in voluntarias %}
+  <p>
+  <a href="{% url 'coordinacion:editar_users' voluntaria.id %}">{{voluntaria.first_name}} {{voluntaria.last_name}}</a>
+  </p>
+  {%endfor%}
+
+
+{% endblock %}

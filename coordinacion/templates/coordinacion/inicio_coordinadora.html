@@ -1,8 +1,15 @@
 {% extends 'menu.html' %}
+{% load static %}
 {% block title %}Mis Cursos{% endblock %}
 
 
 {% block content %}
 <h1>Coordinadora</h1>
    Bienvenida Coordinadora
+
+
+<ul>
+<li><a href="{%url 'coordinacion:cursos' %}">Cursos</a></li>
+<li><a href="{%url 'coordinacion:users' %}">Users</a></li>
+</ul>
 {% endblock %}
