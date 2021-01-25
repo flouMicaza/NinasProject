@@ -7,7 +7,7 @@ from usuarios.models import User
 class Asistencia(models.Model):
     alumna = models.ForeignKey('usuarios.User', related_name='alumna' ,on_delete=models.CASCADE)
     clase = models.ForeignKey('clases.Clase', on_delete=models.CASCADE)
-    asistio = models.BooleanField('alumna asisitio', default=False)
+    asistio = models.BooleanField('alumna asisitio', default=None, null=True)
 
 
 

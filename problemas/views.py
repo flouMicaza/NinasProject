@@ -14,7 +14,7 @@ from django.views import View
 from django.views.generic import TemplateView
 
 from NiñasProject.decorators import profesora_required
-from NiñasProject.utils import get_ordered_test_feedback, get_casos_por_categoria
+from NiñasProject.utils import get_ordered_test_feedback, get_casos_por_categoria, get_cursos, problema_en_curso
 from clases.models import Clase
 from cursos.models import Curso
 from feedback.models import Feedback, TestFeedback, OutputAlternativo
@@ -70,6 +70,24 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
             context['ordered_test_feedback'] = get_ordered_test_feedback(context['test_feedback'], problema)
             context['resultados_active'] = "active"
         return context
+
+    def get(self, request, *args, **kwargs):
+
+        context = self.get_context_data(**kwargs)
+        curso_id = kwargs['curso_id']
+        curso = get_cursos(request.user, curso_id)
+
+        if curso == None:
+            messages.success(request, "No tienes permiso para ingresar a este curso")
+            return HttpResponseRedirect(reverse('usuarios:index'))
+
+        problema_id = kwargs['problema_id']
+
+        if not problema_en_curso(problema_id, curso_id):
+            messages.success(request, "No tienes permiso para ver ese problema")
+            return HttpResponseRedirect(reverse('usuarios:index'))
+
+        return self.render_to_response(context)
 
     def post(self, request, *args, **kwargs):
 
@@ -183,7 +201,8 @@ class CrearProblemasViews(LoginRequiredMixin, View):
         clase = get_object_or_404(Clase.objects.filter(id=clase_id))
 
         if not request.user in clase.curso.profesoras.all():
-            return HttpResponseForbidden("No tienes permiso para ingresar a este curso.")
+            messages.success(request, "No tienes permiso para ingresar a este curso")
+            return HttpResponseRedirect(reverse('usuarios:index'))
 
         form = ProblemaForm()
         return render(request, 'problemas/crear_problema.html', {'clase': clase, 'form': form})
@@ -192,7 +211,8 @@ class CrearProblemasViews(LoginRequiredMixin, View):
         clase_id = kwargs['clase_id']
         clase = get_object_or_404(Clase.objects.filter(id=clase_id))
         if not request.user in clase.curso.profesoras.all():
-            return HttpResponseForbidden("No tienes permiso para ingresar a este curso.")
+            messages.success(request, "No tienes permiso para ingresar a este curso")
+            return HttpResponseRedirect(reverse('usuarios:index'))
 
         form = ProblemaForm(request.POST, request.FILES)
         if form.is_valid():
@@ -206,10 +226,27 @@ class CrearProblemasViews(LoginRequiredMixin, View):
 
 @method_decorator([profesora_required], name='dispatch')
 class EditarProblemasViews(LoginRequiredMixin, View):
+
     def get(self, request,**kwargs):
-        problema = get_object_or_404(Problema,id=kwargs['problema_id'])
+
+        curso_id = kwargs['curso_id']
+        curso = get_object_or_404(Curso, id=curso_id)
+        cursos = get_cursos(request.user, curso_id)
+
+        if cursos == None:
+            messages.success(request, "No tienes permiso para ingresar a este curso")
+            return HttpResponseRedirect(reverse('usuarios:index'))
+
+        problema_id = kwargs['problema_id']
+        problema = get_object_or_404(Problema, id=problema_id)
+
+        if not problema_en_curso(problema_id, curso_id):
+            messages.success(request, "No tienes permiso para ver ese problema")
+            return HttpResponseRedirect(reverse('usuarios:index'))
+
         form = ProblemaForm(instance=problema)
         kwargs['form'] = form
+
         return render(request,'problemas/editar_problema.html', kwargs)
 
     def post(self, request,**kwargs):
@@ -219,7 +256,7 @@ class EditarProblemasViews(LoginRequiredMixin, View):
 
         if form.is_valid():
             nuevo_problema = form.save()
-            messages.success(request, 'Se creó el problema ' + nuevo_problema.titulo)
+            messages.success(request, 'Se editó el problema ' + nuevo_problema.titulo)
             kwargs['result'] = 0
             return HttpResponseRedirect(reverse('problemas:enunciado-problema', kwargs=kwargs))
         kwargs['form'] = form

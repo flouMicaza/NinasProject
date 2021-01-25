@@ -49,6 +49,7 @@ class InitialData(TestCase):
 
         self.curso_basico = Curso.objects.create(nombre="C++: Básico", cant_clases=15)
         self.curso_basico.profesoras.add(self.usuaria_profesora1)
+        self.curso_basico.profesoras.add(self.usuaria_profesora2)
         self.curso_basico.voluntarias.add(self.usuaria_voluntaria1)
         self.curso_basico.voluntarias.add(self.usuaria_voluntaria2)
         self.curso_basico.alumnas.add(self.usuaria_alumna1)
@@ -442,3 +443,59 @@ class AsistenciaViewTest(InitialData):
         response = self.client.get(reverse('cursos:curso', kwargs={'curso_id': 5}))
         # self.assertTemplateUsed(response, 'error/404.html')
         self.assertEquals(response.status_code, 404)
+
+class NoneAsistenciaTest(InitialData):
+    def setUp(self):
+        super(NoneAsistenciaTest, self).setUp()
+    
+    def test_none(self):
+        curso = self.curso_basico
+        user = self.usuaria_profesora1
+        import datetime
+        today = datetime.date.today()
+
+        # Se crea una clase sin asistencias un dia de ninasṕro
+        clase = Clase.objects.create(nombre="Clase prueba", curso=curso, fecha_clase=today)
+
+        self.client.force_login(user=user)
+        self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id':curso.id, 'clase_id':clase.id}))
+        for e in Asistencia.objects.filter(clase=clase):
+            assert e.asistio == None
+        r = self.client.get(reverse('asistencia:asistencia_gral', kwargs={'curso_id':curso.id}))
+        self.assertContains(r, "remove_circle", count=6) #5 alumnas + 1 leyenda
+
+    
+    def test_lock(self):
+        curso = self.curso_basico
+        user = self.usuaria_profesora1
+        user2 = self.usuaria_profesora2
+        import datetime
+        today = datetime.date.today()
+
+        # Se crea una clase sin asistencias un dia de ninasṕro
+        clase = Clase.objects.create(nombre="Clase prueba", curso=curso, fecha_clase=today)
+
+        self.client.force_login(user=user)
+        self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id':curso.id, 'clase_id':clase.id}))
+        self.client.force_login(user=user2)
+        r = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id':curso.id, 'clase_id':clase.id}), follow=True)
+        self.assertContains(r, 'Ya hay alguien pasando asistencia')
+    
+    def test_not_locked(self):
+        curso = self.curso_basico
+        curso2 = self.curso_avanzado
+        user = self.usuaria_profesora1
+        user2 = self.usuaria_profesora2
+        import datetime
+        today = datetime.date.today()
+
+        # Se crea una clase sin asistencias un dia de ninasṕro
+        clase = Clase.objects.create(nombre="Clase prueba", curso=curso, fecha_clase=today)
+        clase2 = Clase.objects.create(nombre="Clase prueba", curso=curso2, fecha_clase=today)
+
+        self.client.force_login(user=user)
+        self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id':curso.id, 'clase_id':clase.id}))
+
+        self.client.force_login(user=user2)
+        r = self.client.get(reverse('asistencia:asistencia', kwargs={'curso_id':curso2.id, 'clase_id':clase2.id}))
+        self.assertTemplateUsed(r, 'asistencia/asistencia.html')
