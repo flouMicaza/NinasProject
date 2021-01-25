@@ -2,11 +2,14 @@ from subprocess import Popen, PIPE
 from scriptserver.comunication.server import Server
 from scriptserver.testing.script import Script
 
+'''
+TODO: Hay que agregar el comando de C++ en este server para windows. Aunque probablemente no se vaya a usar. 
+'''
 script_dict2 = {}
 
 class WinServer(Server):
 
-    def __init__(self, port, scheduler_slaves=10, std_byte_len=1000):
+    def __init__(self, port, scheduler_slaves=10, std_byte_len=300):
         Server.__init__(self, port, scheduler_slaves, std_byte_len)
         self.script_dict = script_dict2
 
