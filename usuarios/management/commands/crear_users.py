@@ -1,6 +1,5 @@
 import csv
 import datetime
-import sys
 
 from django.core.management.base import BaseCommand
 from usuarios.models import User
@@ -9,6 +8,7 @@ from cursos.models import Curso
 # modo de uso:
 # $python3 manage.py crear_users tipo_de_usuarias path 
 # curso = input (si se deja en blanco solo se crean, no se agrega a ningun curso)
+
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
