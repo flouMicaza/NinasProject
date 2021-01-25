@@ -225,3 +225,47 @@ $(document).ready
             }
         });
     });
+
+// tabla alumnas coordinacion
+
+$(document).ready(function() {
+    $('#alumnas_table').DataTable(
+        {    "bLengthChange": false,
+    }
+    );
+} );
+
+// tabla profesoras coordinacion
+
+$(document).ready(function() {
+    $('#profesoras_table').DataTable(
+        {"bLengthChange": false,}
+    );
+} );
+
+// tabla voluntarias coordinacion
+
+$(document).ready(function() {
+    $('#voluntarias_table').DataTable( {
+        "bLengthChange": false,
+
+    });
+} );
+
+var click_counter = 0;
+
+function clicked(checked) {
+    if(checked){
+        click_counter+=1
+        $("#btn-1").prop("disabled", false);
+        $("#btn-2").prop("disabled", false);
+    }
+    else{
+        click_counter-=1
+        if (click_counter === 0){
+            $("#btn-1").prop("disabled", true);
+            $("#btn-2").prop("disabled", true);
+
+        }
+    }
+}

@@ -12,6 +12,6 @@ urlpatterns = [
     path('users', views.CoordinadoraUsersView.as_view(), name = 'users'),
     path('users/crear', views.CoordinadoraCrearUserView.as_view(), name = 'crear_user'),
     path('users/editar/<int:user_id>', views.CoordinadoraEditarUsersView.as_view(), name = 'editar_users'),
-    path('users/eliminar/<int:user_id>', views.eliminar_user, name = 'eliminar_user')
-
+    path('users/eliminar/<int:user_id>', views.eliminar_user, name = 'eliminar_user'),
+    path('users/eliminar_users', views.eliminar_users, name = 'eliminar_users')
 ]

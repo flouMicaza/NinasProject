@@ -114,5 +114,13 @@ class CoordinadoraCrearUserView(LoginRequiredMixin, FormView):
 
 @coordinadora_required
 def eliminar_user(request, user_id):
-    Curso.objects.get(id=curso_id).delete()
+    Curso.objects.get(id=user_id).delete()
+    return HttpResponseRedirect(reverse('coordinacion:users'))
+
+@coordinadora_required
+def eliminar_users(request):
+    users_id = request.POST.getlist('user_delete')
+    for user_id in users_id:
+        User.objects.get(id=user_id).delete()
+    messages.success(request, 'Usuarias eliminadas')
     return HttpResponseRedirect(reverse('coordinacion:users'))

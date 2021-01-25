@@ -1,29 +1,147 @@
 {% extends 'menu.html' %}
 {% load static %}
-{% block title %}Mis Cursos{% endblock %}
+{% block title %}Coordinacion usuarias{% endblock %}
 
 
 {% block content %}
+{% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                 <div class="alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                  {{message}}
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
-  <a href="{%url 'coordinacion:crear_user' %}">Crear User</a>
+<h1>Coordinación usuarias</h1>
 
-  {% for profesora in profesoras %}
-  <p>
-  <a href="{% url 'coordinacion:editar_users' profesora.id %}">{{profesora.first_name}} {{profesora.last_name}}</a>
-  </p>
-  {%endfor%}
+<form method="post" action="{% url 'coordinacion:eliminar_users'%}">
+  {%csrf_token%}
+  <div class="right" style="margin-bottom: 10px;">
+    <button id="btn-1" type="submit" class="waves-effect waves-light btn-small btn red accent-2 btn-right" disabled>
+      <i class="material-icons right">playlist_add_check</i>Eliminar</button>
+    </div>
+  <br>
+  <br>
+<ul class="collapsible expandable">
+  <li >
+    <div class="collapsible-header">
+      <i class="material-icons">expand_more</i>
+      Alumnas
+  </div>
+  <div class="collapsible-body">
+  <div class="container-tabla-users">
+    <table id="alumnas_table" class="display tabla-asist-gral">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Nombre de Usuaria</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for alumna in alumnas %}
+        <tr>
+          <td>
+            <label>
+              <input type="checkbox" value={{alumna.id}} name=user_delete onclick="clicked(this.checked)" />
+              <span></span>
+            </label>
+          </td>
+          <td>{{alumna.first_name}}</td>
+          <td>{{alumna.last_name}}</td>
+          <td><a href="{% url 'coordinacion:editar_users' alumna.id %}">{{alumna.username}}</a></td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+    </div>
+  </div>
+  </li>
 
-  {% for alumna in alumnas %}
-  <p>
-  <a href="{% url 'coordinacion:editar_users' alumna.id %}">{{alumna.first_name}} {{alumna.last_name}}</a>
-  </p>
-  {%endfor%}
+  <li>
+    <div class="collapsible-header">
+      <i class="material-icons">expand_more</i>
+      Profesoras
+  </div>
+  <div class="collapsible-body">
+  <div class="container-tabla-users">
+    <table id="profesoras_table" class="display tabla-asist-gral">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Nombre de Usuaria</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for profesora in profesoras %}
+        <tr>
+          <td>
+            <label>
+              <input type="checkbox" value={{profesora.id}} name=user_delete onclick="clicked(this.checked)" />
+              <span></span>
+            </label>
+          </td>
+          <td>{{profesora.first_name}}</td>
+          <td>{{profesora.last_name}}</td>
+          <td><a href="{% url 'coordinacion:editar_users' profesora.id %}">{{profesora.username}}</a></td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+  </div>
+  </div>
+  </li>
 
-  {% for voluntaria in voluntarias %}
-  <p>
-  <a href="{% url 'coordinacion:editar_users' voluntaria.id %}">{{voluntaria.first_name}} {{voluntaria.last_name}}</a>
-  </p>
-  {%endfor%}
+  <li>
+    <div class="collapsible-header">
+      <i class="material-icons">expand_more</i>
+      Voluntarias
+  </div>
+  <div class="collapsible-body">
+  <div class="container-tabla-users">
+    <table id="voluntarias_table" class="display tabla-asist-gral" ">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Nombre de Usuaria</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for voluntaria in voluntarias %}
+        <tr >
+          <td>
+            <label>
+              <input type="checkbox" value={{voluntaria.id}} name=user_delete onclick="clicked(this.checked)" />
+              <span></span>
+            </label>
+          </td>
+          <td>{{voluntaria.first_name}}</td>
+          <td>{{voluntaria.last_name}}</td>
+          <td><a href="{% url 'coordinacion:editar_users' voluntaria.id %}">{{voluntaria.username}}</a></td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+  </div>
+  </div>
+  </li>
+</ul>
 
+<div class="right">
+  <button id="btn-2" type="submit" class="waves-effect waves-light btn-small btn red accent-2" style="margin-bottom: 10px;" disabled>
+      <i class="material-icons right">playlist_add_check</i>Eliminar</button>
+</div>
+</form>
+{% endblock %}
 
+{% block scripts %}
+    <script src={% static 'js/scripts.js' %}></script>
 {% endblock %}

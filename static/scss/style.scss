@@ -130,6 +130,15 @@ td, th {
     margin-block-end: 10%;
 }
 
+.container-tabla-users{
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position:relative;
+    margin-top:0px;
+    margin-bottom:0px;
+}
 
 .tabla-asist-gral .sticky-left , #tabla_estadísticas .sticky-left{
     position: sticky;
