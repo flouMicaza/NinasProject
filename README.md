@@ -65,3 +65,14 @@ Ojo que el superusuario no tiene tipo de usuario Profesora ni Estudiante, por lo
 Luego hay que entrar a _localhost:8000/admin_ e ingresar con las credenciales creadas antes y 
 tendrás acceso a la mayoría de los datos de la base de datos. 
 
+## Servidor revisor de código
+Los archivos `run_server.py` y `run_server_win.py` permiten ejecutar el servidor revisor de código. 
+A este servidor se le puede especificar la cantidad máxima de soluciones que se pueden revisar en paralelo y
+el tamaño máximo que puede tener un output de un caso de prueba. 
+
+Los valores por defecto son `10 threads` y `300 bytes por output`. 
+
+Para modificar estos valores hay que especificarlos al ejecutar el servidor así: 
+```
+python run_server.py <cantidad threads> <tamaño output>
+```
