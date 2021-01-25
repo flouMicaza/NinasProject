@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.DEBUG,
                     format='[%(levelname)s] (%(threadName)-9s) %(message)s', )
 
 CATEGORY_BYTE_LEN = 100
-STD_BYTE_LEN = 1000
+STD_BYTE_LEN = 300
 TOTAL_BYTES_BY_MESSAGE = 2048
 
 
