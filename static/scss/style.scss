@@ -131,6 +131,7 @@ td, th {
   color: $primary-color;
   font-weight: normal;
   padding: 0;
+  width: fit-content;
 }
 
 .no-sombra {
@@ -415,7 +416,7 @@ hr.linea-rosada {
 }
 
 .big-badge {
-  border-radius: 50%;
+  border-radius: 25px;
   background-color: $primary-color;
   padding-left: 10px;
   padding-right: 10px;

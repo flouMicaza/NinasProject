@@ -6,9 +6,11 @@
                 <span> <i class="material-icons">expand_more</i>{{ categoria.categoria }}</span>
 
                     {% with nuevos_outputs|output_exists:categoria.casos as outputs_cat %}
-                        {% if outputs_cat > 0 %}
-                        <span class="big-badge">{{  nuevos_outputs|output_exists:categoria.casos }}</span>
-                    {% endif %}
+                        {% if outputs_cat == 1 %}
+                            <span class="big-badge">{{  nuevos_outputs|output_exists:categoria.casos }} nuevo output</span>
+                        {% elif outputs_cat > 1 %}
+                            <span class="big-badge">{{  nuevos_outputs|output_exists:categoria.casos }} nuevos outputs</span>
+                        {% endif %}
                     {% endwith %}
 
             </div>
