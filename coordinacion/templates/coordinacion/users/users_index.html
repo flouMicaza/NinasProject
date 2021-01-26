@@ -17,11 +17,11 @@
 
 <h1>Coordinación usuarias</h1>
 
-<form method="post" action="{% url 'coordinacion:eliminar_users'%}">
+<form method="post" action="{% url 'coordinacion:eliminar_users'%}" onsubmit="return eliminar_alerta('¿Esta segura que desea eliminar a estas usuarias?')" >
   {%csrf_token%}
   <div class="right" style="margin-bottom: 10px;">
     <button id="btn-1" type="submit" class="waves-effect waves-light btn-small btn red accent-2 btn-right" disabled>
-      <i class="material-icons right">playlist_add_check</i>Eliminar</button>
+      <i class="material-icons right">playlist_add_check</i>Eliminar Usuarias</button>
     </div>
   <br>
   <br>
@@ -47,7 +47,7 @@
         <tr>
           <td>
             <label>
-              <input type="checkbox" value={{alumna.id}} name=user_delete onclick="clicked(this.checked)" />
+              <input type="checkbox" id={{alumna.username}} value={{alumna.id}} name=user_delete onclick="clicked(this.checked, this.id)" />
               <span></span>
             </label>
           </td>
@@ -83,7 +83,7 @@
         <tr>
           <td>
             <label>
-              <input type="checkbox" value={{profesora.id}} name=user_delete onclick="clicked(this.checked)" />
+              <input type="checkbox" value={{profesora.id}} id={{profesora.username}} name=user_delete onclick="clicked(this.checked, this.id)" />
               <span></span>
             </label>
           </td>
@@ -119,7 +119,7 @@
         <tr >
           <td>
             <label>
-              <input type="checkbox" value={{voluntaria.id}} name=user_delete onclick="clicked(this.checked)" />
+              <input type="checkbox" value={{voluntaria.id}} id={{voluntaria.username}} name=user_delete onclick="clicked(this.checked, this.id)" />
               <span></span>
             </label>
           </td>
@@ -137,7 +137,7 @@
 
 <div class="right">
   <button id="btn-2" type="submit" class="waves-effect waves-light btn-small btn red accent-2" style="margin-bottom: 10px;" disabled>
-      <i class="material-icons right">playlist_add_check</i>Eliminar</button>
+      <i class="material-icons right">playlist_add_check</i>Eliminar Usuarias</button>
 </div>
 </form>
 {% endblock %}

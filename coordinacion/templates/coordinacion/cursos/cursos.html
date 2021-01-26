@@ -4,14 +4,61 @@
 
 
 {% block content %}
-  {% for curso in cursos %}
-  <p>
-  <a href="{% url 'coordinacion:editar_curso' curso.id %}">{{curso.nombre}}</a>
-  </p>
-  <p>
-  <a href="{% url 'coordinacion:eliminar_curso' curso.id %}">ELIMINAR</a> 
-  </p>
-  {%endfor%}
+{% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                 <div class="alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                  {{message}}
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
-<a href="{% url 'coordinacion:crear_curso' %}">Crear Curso</a>
+<h1>Coordinación cursos</h1>
+
+<form method="post" action="{% url 'coordinacion:eliminar_cursos'%}" onsubmit="return eliminar_alerta('¿Esta segura que desea eliminar estos cursos?')" >
+  {%csrf_token%}
+  <div class="right" style="margin-bottom: 10px;">
+    <button id="btn-1" type="submit" class="waves-effect waves-light btn-small btn red accent-2 btn-right" disabled>
+      <i class="material-icons right">playlist_add_check</i>Eliminar Cursos</button>
+    </div>
+  <br>
+  <br>
+  <div class="container-tabla-users">
+    <table id="alumnas_table" class="display tabla-asist-gral">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Curso</th>
+          <th>Año</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for curso in cursos %}
+        <tr>
+          <td>
+            <label>
+              <input type="checkbox" id="{{curso.nombre}}" value={{curso.id}} name=cursos_delete onclick="clicked(this.checked, this.id)" />
+              <span></span>
+            </label>
+          </td>
+          <td><a href="{% url 'coordinacion:editar_curso' curso.id %}">{{curso.nombre}}</a></td>
+          <td>{{curso.anho}}</td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+    </div>
+ 
+
+<div class="right">
+  <button id="btn-2" type="submit" class="waves-effect waves-light btn-small btn red accent-2" style="margin-bottom: 10px;" disabled>
+      <i class="material-icons right">playlist_add_check</i>Eliminar Cursos</button>
+</div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+    <script src={% static 'js/scripts.js' %}></script>
 {% endblock %}

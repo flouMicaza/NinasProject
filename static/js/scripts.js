@@ -253,19 +253,31 @@ $(document).ready(function() {
 } );
 
 var click_counter = 0;
+var user_dict = new Map();
 
-function clicked(checked) {
+function clicked(checked, id) {
+    console.log(id);
     if(checked){
         click_counter+=1
+        user_dict.set(id, id);
         $("#btn-1").prop("disabled", false);
         $("#btn-2").prop("disabled", false);
     }
     else{
         click_counter-=1
+        user_dict.delete(id);
         if (click_counter === 0){
             $("#btn-1").prop("disabled", true);
             $("#btn-2").prop("disabled", true);
-
         }
     }
+}
+
+function eliminar_alerta(message){
+    function logMapElements(value, key, map) {
+        message = message.concat('\n', value);
+    }
+    user_dict.forEach(logMapElements);
+    return confirm(message);
+
 }

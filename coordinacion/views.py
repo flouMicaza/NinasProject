@@ -8,7 +8,7 @@ from django.views.generic.edit import UpdateView, CreateView, FormView
 from django.contrib import messages
 from coordinacion.forms import UserForm
 
-
+from coordinacion.models import Sede
 from cursos.models import Curso
 from usuarios.models import User
 # Create your views here.
@@ -37,9 +37,9 @@ class CoordinadoraEditarCursosView(LoginRequiredMixin, UpdateView):
 
     def get_form(self):
         form = super().get_form()
-        form.fields['profesoras'].queryset=User.objects.filter(es_profesora=True)
-        form.fields['alumnas'].queryset=User.objects.filter(es_alumna=True)
-        form.fields['voluntarias'].queryset=User.objects.filter(es_voluntaria=True)
+        form.fields['profesoras'].queryset=User.objects.filter(es_profesora=True, is_active=True)
+        form.fields['alumnas'].queryset=User.objects.filter(es_alumna=True, is_active=True)
+        form.fields['voluntarias'].queryset=User.objects.filter(es_voluntaria=True, is_active=True)
         return form
 
     def form_valid(self, form):
@@ -49,16 +49,18 @@ class CoordinadoraEditarCursosView(LoginRequiredMixin, UpdateView):
 
 class CoordinadoraCrearCursosView(LoginRequiredMixin, CreateView):
     model = Curso
-    fields = ('nombre', 'profesoras', 'voluntarias', 'alumnas')
+    fields = ('nombre', 'sede', 'profesoras', 'voluntarias', 'alumnas')
     template_name = 'coordinacion/cursos/crear_curso.html'
     context_object_name = 'curso'
 
     def get_form(self):
         form = super().get_form()
         form.fields['nombre'].initial = ""
-        form.fields['profesoras'].queryset=User.objects.filter(es_profesora=True)
-        form.fields['alumnas'].queryset=User.objects.filter(es_alumna=True)
-        form.fields['voluntarias'].queryset=User.objects.filter(es_voluntaria=True)
+        form.fields['sede'].disabled = True
+        # form.fields['sede'].initial = TODO: setear sede inicial como sede coordinadora
+        form.fields['profesoras'].queryset=User.objects.filter(es_profesora=True, is_active=True)
+        form.fields['alumnas'].queryset=User.objects.filter(es_alumna=True, is_active=True)
+        form.fields['voluntarias'].queryset=User.objects.filter(es_voluntaria=True, is_active=True)
         return form
     
     def form_valid(self, form):
@@ -71,26 +73,34 @@ def eliminar_curso(request, curso_id):
     Curso.objects.get(id=curso_id).delete()
     return HttpResponseRedirect(reverse('coordinacion:cursos'))
 
+@coordinadora_required
+def eliminar_cursos(request):
+    cursos_id = request.POST.getlist('cursos_delete')
+    for curso_id in cursos_id:
+        Curso.objects.get(id=curso_id).delete()
+    messages.success(request, 'Cursos eliminados')
+    return HttpResponseRedirect(reverse('coordinacion:cursos'))
+
 #USERS VIEWS
 
 class CoordinadoraUsersView(LoginRequiredMixin, View):
     @method_decorator([coordinadora_required])
     def get(self, request):
-        profesoras=User.objects.filter(es_profesora=True)
-        alumnas=User.objects.filter(es_alumna=True)
-        voluntarias=User.objects.filter(es_voluntaria=True)
+        profesoras=User.objects.filter(es_profesora=True, is_active=True)
+        alumnas=User.objects.filter(es_alumna=True, is_active=True)
+        voluntarias=User.objects.filter(es_voluntaria=True, is_active=True)
         return render(request, 'coordinacion/users/users_index.html', {'profesoras':profesoras, 'alumnas':alumnas, 'voluntarias':voluntarias})
 
 class CoordinadoraEditarUsersView(LoginRequiredMixin, UpdateView):
     model = User
-    fields = ('first_name', 'last_name', 'username')
+    fields = ('first_name', 'last_name', 'es_alumna', 'es_voluntaria', 'es_profesora')
     template_name = 'coordinacion/users/editar_user.html'
     pk_url_kwarg = 'user_id'
     context_object_name = 'user'
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, 'usuario modificado')
+        messages.success(self.request, 'Usuaria modificada')
         return HttpResponseRedirect(reverse('coordinacion:users'))
 
 class CoordinadoraCrearUserView(LoginRequiredMixin, FormView):
@@ -121,6 +131,8 @@ def eliminar_user(request, user_id):
 def eliminar_users(request):
     users_id = request.POST.getlist('user_delete')
     for user_id in users_id:
-        User.objects.get(id=user_id).delete()
+        user = User.objects.get(id=user_id)
+        user.is_active = False
+        user.save()
     messages.success(request, 'Usuarias eliminadas')
     return HttpResponseRedirect(reverse('coordinacion:users'))

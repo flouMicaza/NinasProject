@@ -9,6 +9,7 @@ urlpatterns = [
     path('cursos/crear', views.CoordinadoraCrearCursosView.as_view(), name='crear_curso'),
     path('cursos/editar/<int:curso_id>', views.CoordinadoraEditarCursosView.as_view(), name='editar_curso'),
     path('cursos/eliminar/<int:curso_id>', views.eliminar_curso , name='eliminar_curso'),
+    path('curso/eliminar_cursos', views.eliminar_cursos, name='eliminar_cursos'),
     path('users', views.CoordinadoraUsersView.as_view(), name = 'users'),
     path('users/crear', views.CoordinadoraCrearUserView.as_view(), name = 'crear_user'),
     path('users/editar/<int:user_id>', views.CoordinadoraEditarUsersView.as_view(), name = 'editar_users'),
