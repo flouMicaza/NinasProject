@@ -9,6 +9,7 @@ class Sede(models.Model):
     profesoras = models.ManyToManyField(User, related_name="sedes_profesoras", blank=True)
     voluntarias = models.ManyToManyField(User, related_name="sedes_voluntarias", blank=True)
     alumnas = models.ManyToManyField(User, related_name="sedes_alumnas", blank=True)
+    coordinadora = models.ForeignKey(User, related_name="sedes_coordinadora", null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.nombre

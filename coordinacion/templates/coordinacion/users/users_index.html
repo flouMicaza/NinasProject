@@ -47,7 +47,7 @@
         <tr>
           <td>
             <label>
-              <input type="checkbox" id={{alumna.username}} value={{alumna.id}} name=user_delete onclick="clicked(this.checked, this.id)" />
+              <input type="checkbox" id="{{alumna.first_name}} {{alumna.last_name}}" value={{alumna.id}} name=user_delete onclick="clicked(this.checked, this.id)" />
               <span></span>
             </label>
           </td>
@@ -83,7 +83,7 @@
         <tr>
           <td>
             <label>
-              <input type="checkbox" value={{profesora.id}} id={{profesora.username}} name=user_delete onclick="clicked(this.checked, this.id)" />
+              <input type="checkbox" value={{profesora.id}} id="{{profesora.first_name}} {{profesora.last_name}}" name=user_delete onclick="clicked(this.checked, this.id)" />
               <span></span>
             </label>
           </td>
@@ -119,7 +119,7 @@
         <tr >
           <td>
             <label>
-              <input type="checkbox" value={{voluntaria.id}} id={{voluntaria.username}} name=user_delete onclick="clicked(this.checked, this.id)" />
+              <input type="checkbox" value={{voluntaria.id}} id="{{voluntaria.first_name}} {{voluntaria.last_name}}" name=user_delete onclick="clicked(this.checked, this.id)" />
               <span></span>
             </label>
           </td>

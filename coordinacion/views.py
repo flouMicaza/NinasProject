@@ -37,9 +37,10 @@ class CoordinadoraEditarCursosView(LoginRequiredMixin, UpdateView):
 
     def get_form(self):
         form = super().get_form()
-        form.fields['profesoras'].queryset=User.objects.filter(es_profesora=True, is_active=True)
-        form.fields['alumnas'].queryset=User.objects.filter(es_alumna=True, is_active=True)
-        form.fields['voluntarias'].queryset=User.objects.filter(es_voluntaria=True, is_active=True)
+        sede = Sede.objects.get(coordinadora=self.request.user)
+        form.fields['profesoras'].queryset = sede.profesoras.filter(es_profesora=True, is_active=True)
+        form.fields['alumnas'].queryset = sede.alumnas.filter(es_alumna=True, is_active=True)
+        form.fields['voluntarias'].queryset = sede.voluntarias.filter(es_voluntaria=True, is_active=True)
         return form
 
     def form_valid(self, form):
@@ -55,12 +56,13 @@ class CoordinadoraCrearCursosView(LoginRequiredMixin, CreateView):
 
     def get_form(self):
         form = super().get_form()
+        sede = Sede.objects.get(coordinadora=self.request.user)
         form.fields['nombre'].initial = ""
+        form.fields['sede'].initial = sede
         form.fields['sede'].disabled = True
-        # form.fields['sede'].initial = TODO: setear sede inicial como sede coordinadora
-        form.fields['profesoras'].queryset=User.objects.filter(es_profesora=True, is_active=True)
-        form.fields['alumnas'].queryset=User.objects.filter(es_alumna=True, is_active=True)
-        form.fields['voluntarias'].queryset=User.objects.filter(es_voluntaria=True, is_active=True)
+        form.fields['profesoras'].queryset = sede.profesoras.filter(es_profesora=True, is_active=True)
+        form.fields['alumnas'].queryset = sede.alumnas.filter(es_alumna=True, is_active=True)
+        form.fields['voluntarias'].queryset = sede.voluntarias.filter(es_voluntaria=True, is_active=True)
         return form
     
     def form_valid(self, form):
@@ -86,9 +88,10 @@ def eliminar_cursos(request):
 class CoordinadoraUsersView(LoginRequiredMixin, View):
     @method_decorator([coordinadora_required])
     def get(self, request):
-        profesoras=User.objects.filter(es_profesora=True, is_active=True)
-        alumnas=User.objects.filter(es_alumna=True, is_active=True)
-        voluntarias=User.objects.filter(es_voluntaria=True, is_active=True)
+        sede = Sede.objects.get(coordinadora=self.request.user)
+        profesoras = sede.profesoras.filter(es_profesora=True, is_active=True)
+        alumnas = sede.alumnas.filter(es_alumna=True, is_active=True)
+        voluntarias = sede.voluntarias.filter(es_voluntaria=True, is_active=True)
         return render(request, 'coordinacion/users/users_index.html', {'profesoras':profesoras, 'alumnas':alumnas, 'voluntarias':voluntarias})
 
 class CoordinadoraEditarUsersView(LoginRequiredMixin, UpdateView):
@@ -112,19 +115,25 @@ class CoordinadoraCrearUserView(LoginRequiredMixin, FormView):
         user = User.objects.create_user(first_name=data['first_name'], last_name=data['last_name'], username=data['username'],
                password='tempPass21', es_profesora=data['es_profesora'], es_alumna=data['es_alumna'], es_voluntaria=data['es_voluntaria'])
         user.save()
+        sede = Sede.objects.get(coordinadora=self.request.user)
         for curso_id in data['cursos']:
             if data['es_profesora']:
                 Curso.objects.get(id=int(curso_id)).profesoras.add(user)
+                sede.profesoras.add(user)
             if data['es_voluntaria']:
                 Curso.objects.get(id=int(curso_id)).voluntarias.add(user)
+                sede.voluntarias.add(user)
             if data['es_alumna']:
                 Curso.objects.get(id=int(curso_id)).alumnas.add(user)
+                sede.alumnas.add(user)
 
         return HttpResponseRedirect(reverse('coordinacion:users'))
 
 @coordinadora_required
 def eliminar_user(request, user_id):
-    Curso.objects.get(id=user_id).delete()
+    user = User.objects.get(id=user_id)
+    user.is_active = False
+    user.save()
     return HttpResponseRedirect(reverse('coordinacion:users'))
 
 @coordinadora_required

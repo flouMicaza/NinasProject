@@ -7,9 +7,22 @@
 <h1>Coordinadora</h1>
    Bienvenida Coordinadora
 
+<ul class="collection">
+   <li class="collection-item">
+      <div>
+         Usuarias
+         <a href="{%url 'coordinacion:crear_user' %}" class="secondary-content"><i class="material-icons">add</i> Crear</a>
+         <a href="{%url 'coordinacion:users' %}" class="secondary-content"><i class="material-icons">edit</i> Editar</a>
+      </div>
+   </li>  
+   
+   <li class="collection-item">
+      <div>
+         Cursos
+         <a href="{%url 'coordinacion:crear_curso' %}" class="secondary-content"><i class="material-icons">add</i> Crear</a>
+         <a href="{%url 'coordinacion:cursos' %}" class="secondary-content"><i class="material-icons">edit</i> Editar</a>
+      </div>
+   </li>
 
-<ul>
-<li><a href="{%url 'coordinacion:cursos' %}">Cursos</a> <a href="{%url 'coordinacion:cursos' %}"> Editar</a> <a href="{%url 'coordinacion:crear_curso' %}"> Crear</a></li>
-<li><a href="{%url 'coordinacion:users' %}">Users</a> <a href="{%url 'coordinacion:users' %}"> Editar</a> <a href="{%url 'coordinacion:crear_user'%}"> Crear</a></li>
-</ul>
+ </ul>
 {% endblock %}
