@@ -4,6 +4,7 @@
 {% block title %}Estadísticas {{ curso.nombre }}{% endblock %}
 
 {% block content %}
+{% if hay_alumnas %}
 <h2>Estadísticas {{ curso.nombre }}</h2>
     <div class="flex-container" style="margin-top: 2%; "> <!-- botones de pasar asistencia y de volver cuando hay tabla-->
         <!-- BUTTON DE VOLVER -->
@@ -14,7 +15,7 @@
             </div>
         </div>
     </div>
-
+    {% if hay_clases %}
     <div class="container-tabla-estadisticas">
         <table id= "tabla_estadísticas" class="display cell-border">
             <thead>
@@ -75,4 +76,20 @@
             </tbody>
         </table>
     </div>
+
+    {% else %} <!-- quizá no haya que hacer esta separación pero hay que ver cómo queda la tabla anterior -->
+        no hay clases pero sí alumnas uwu
+    {% endif %}
+{% else %}
+    <h2 style="text-align:center;">Este curso no tiene alumnas!</h2>
+    <div style="text-align:center;margin-top:5%"><img src="{% static 'images/error_kitten.png' %}" alt="gatito del mensaje de error" style="width:300px;"></div>
+    <p style="text-align:center;">Para mostrar las estadísticas es necesario que el curso tenga alumnas inscritas.</p>
+    <p style="text-align:center;">Habla con la coordinadora del curso para solucionar el problema :)</p>
+    <div class="flex-center">
+        <div class="material-icons left">
+            <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn" style="margin-top: 25px;">
+                <i class="material-icons left">arrow_back</i>Volver</a>
+        </div>
+    </div>
+{% endif %}
 {% endblock %}

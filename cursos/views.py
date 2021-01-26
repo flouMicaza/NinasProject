@@ -126,7 +126,16 @@ class EstadisticasView(LoginRequiredMixin, View):
         curso = get_object_or_404(Curso, id=curso_id, profesoras__in=[request.user])
         clases = Clase.objects.filter(curso=curso, publica=True)
         feedback_alumnas = self.get_feedbacks_curso(curso)
-        return render(request, 'cursos/tabla_estadisticas.html', {'curso': curso,'clases':clases, 'feedback_alumnas':feedback_alumnas})
+
+        hay_alumnas = True
+        hay_clases = True
+
+        if len(feedback_alumnas) == 0:
+            hay_alumnas = False
+        if len(clases) == 0:
+            hay_clases = False
+
+        return render(request, 'cursos/tabla_estadisticas.html', {'curso': curso,'clases':clases, 'feedback_alumnas':feedback_alumnas, 'hay_alumnas':hay_alumnas, 'hay_clases':hay_clases})
 
 
     def get_feedbacks_curso(self, curso):
