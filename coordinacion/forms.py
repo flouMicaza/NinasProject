@@ -8,10 +8,9 @@ from usuarios.models import User
 
 from django import forms
 
-todos_cursos = [(c.id, c.nombre) for c in Curso.objects.all()]
 
 class UserForm(ModelForm):
-
+    todos_cursos = [(c.id, c.nombre) for c in Curso.objects.all()]
     cursos = forms.MultipleChoiceField(choices = todos_cursos, required=False)
     class Meta:
         model = User
