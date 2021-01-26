@@ -10,8 +10,8 @@ from django import forms
 
 
 class UserForm(ModelForm):
-    todos_cursos = [(c.id, c.nombre) for c in Curso.objects.all()]
-    cursos = forms.MultipleChoiceField(choices = todos_cursos, required=False)
+    # todos_cursos = [(c.id, c.nombre) for c in Curso.objects.all()]
+    # cursos = forms.MultipleChoiceField(choices = todos_cursos, required=False)
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'es_profesora','es_alumna','es_voluntaria']
