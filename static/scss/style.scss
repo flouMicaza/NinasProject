@@ -130,28 +130,56 @@ td, th {
     margin-block-end: 10%;
 }
 
+.tabla-asist-gral .header-row, .tabla-estadisticas .header-row {
+  border: 1px solid white;
+  background-color: $primary-color;
+  color: white;
+  font-weight: normal;
+}
 
-.tabla-asist-gral .sticky-left , #tabla_estadísticas .sticky-left{
+tr.datos-row > td {
+  padding: 10px;
+  border: 1px solid white!important;
+  text-align: center;
+  word-wrap: break-word;
+  border-radius: 0;
+  background-color: #fee;
+}
+
+tr.datos-row:nth-child(odd) > td {
+  background-color: white!important;
+}
+
+@media only screen and (min-width: 300px) {
+  .tabla-asist-gral .sticky-left, .tabla-estadisticas .sticky-left {
     position: sticky;
     left: 0;
-    background-color: white;
+  }
 }
 
-
-.tabla-asist-gral .sticky-right-first, #tabla_estadísticas .sticky-right-first {
+.tabla-asist-gral .sticky-right-first, .tabla-estadisticas .sticky-right-first {
   position: sticky;
-  right: 74px;
+  right: 97px;
   background-color: white;
+  max-width: 74px;
 }
 
-.tabla-asist-gral .sticky-right-last, #tabla_estadísticas .sticky-right-last {
+.tabla-asist-gral .sticky-right-last, .tabla-estadisticas .sticky-right-last {
   position: sticky;
   right: 0;
   background-color: white;
+  max-width: 74px;
 }
 
- .estadistica-th1 {
+.estadistica-th1 {
   border-bottom: 1px solid white;
+}
+
+.max-ancho-tabla {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .list {
