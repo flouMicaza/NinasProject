@@ -22,27 +22,26 @@ from usuarios.models import User
 # Create your views here.
 from django.views import View
 
-
+@method_decorator([coordinadora_required], name='dispatch')
 class CoordinadoraInicioView(LoginRequiredMixin, View):
-    @method_decorator([coordinadora_required])
     def get(self, request):
         return render(request, 'coordinacion/inicio_coordinadora.html')
 
 # CURSOS VIEWS
+@method_decorator([coordinadora_required], name='dispatch')
 class CoordinadoraCursosView(LoginRequiredMixin, View):
-    @method_decorator([coordinadora_required])
     def get(self, request):
         cursos = Curso.objects.all()
         return render(request, 'coordinacion/cursos/cursos.html', {'cursos':cursos})
 
-
+@method_decorator([coordinadora_required], name='dispatch')
 class CoordinadoraEditarCursosView(LoginRequiredMixin, UpdateView):
     model = Curso
     fields = ('nombre', 'profesoras', 'voluntarias', 'alumnas')
     template_name = 'coordinacion/cursos/editar_curso.html'
     pk_url_kwarg = 'curso_id'
     context_object_name = 'curso'
-
+    
     def get_form(self):
         form = super().get_form()
         sede = Sede.objects.get(coordinadora=self.request.user)
@@ -56,6 +55,7 @@ class CoordinadoraEditarCursosView(LoginRequiredMixin, UpdateView):
         messages.success(self.request, 'Curso modificado')
         return HttpResponseRedirect(reverse('coordinacion:cursos'))
 
+@method_decorator([coordinadora_required], name='dispatch')
 class CoordinadoraCrearCursosView(LoginRequiredMixin, CreateView):
     # model = Curso
     # fields = ('nombre', 'sede', 'profesoras', 'voluntarias', 'alumnas')
@@ -132,8 +132,8 @@ def eliminar_cursos(request):
 
 #USERS VIEWS
 
+@method_decorator([coordinadora_required], name='dispatch')
 class CoordinadoraUsersView(LoginRequiredMixin, View):
-    @method_decorator([coordinadora_required])
     def get(self, request):
         sede = Sede.objects.get(coordinadora=self.request.user)
         profesoras = sede.profesoras.filter(es_profesora=True, is_active=True)
@@ -141,6 +141,7 @@ class CoordinadoraUsersView(LoginRequiredMixin, View):
         voluntarias = sede.voluntarias.filter(es_voluntaria=True, is_active=True)
         return render(request, 'coordinacion/users/users_index.html', {'profesoras':profesoras, 'alumnas':alumnas, 'voluntarias':voluntarias})
 
+@method_decorator([coordinadora_required], name='dispatch')
 class CoordinadoraEditarUsersView(LoginRequiredMixin, UpdateView):
     model = User
     fields = ('first_name', 'last_name', 'es_alumna', 'es_voluntaria', 'es_profesora')
@@ -149,10 +150,22 @@ class CoordinadoraEditarUsersView(LoginRequiredMixin, UpdateView):
     context_object_name = 'user'
 
     def form_valid(self, form):
-        form.save()
+        user = form.save()
+        sede = Sede.objects.get(coordinadora=self.request.user)
+        sede.profesoras.remove(user)
+        sede.voluntarias.remove(user)
+        sede.alumnas.remove(user)
+        if user.es_voluntaria:
+            sede.voluntarias.add(user)
+        if user.es_profesora:
+            sede.profesoras.add(user)
+        if user.es_alumna:
+            sede.alumnas.add(user)
+
         messages.success(self.request, 'Usuaria modificada')
         return HttpResponseRedirect(reverse('coordinacion:users'))
 
+@method_decorator([coordinadora_required], name='dispatch')
 class CoordinadoraCrearUserView(LoginRequiredMixin, FormView):
     form_class = UserForm
     template_name = 'coordinacion/users/crear_user.html'
