@@ -8,9 +8,11 @@ from django.views.generic.edit import UpdateView, CreateView, FormView
 from django.contrib import messages
 from coordinacion.forms import UserForm, CursoForm
 from django.core.exceptions import ValidationError
-from my_lib.files_wrapper import check_valid_csv_users
-#from usuarios.management.commands.crear_users import Command
+from usuarios.management.commands.crear_users import Command
+from my_lib.files_wrapper import create_temp_file
+from django.core.files import File
 
+import os
 import csv
 import datetime
 
@@ -71,11 +73,11 @@ class CoordinadoraCrearCursosView(LoginRequiredMixin, CreateView):
 
     def post(self, request, *args, **kwargs):
         try:
-            self.validate(request)
+            filename = self.validate(request)
         except Exception as e:
             messages.success(request, e)
             return HttpResponseRedirect(reverse('coordinacion:crear_curso'))
-        self.form_valid(request)
+        self.form_valid(request, filename)
         messages.success(self.request, 'Curso creado')
         return HttpResponseRedirect(reverse('coordinacion:cursos'))
 
@@ -86,18 +88,30 @@ class CoordinadoraCrearCursosView(LoginRequiredMixin, CreateView):
         sede = Sede.objects.get(coordinadora=user)
         if len(Curso.objects.filter(nombre=form['nombre'], anho = datetime.datetime.now().year, sede=sede.nombre))>0:
             raise ValidationError("Ya existe un curso con este nombre este año en esta sede")
-        lista = request.FILES['lista_alumnas']
-        check_valid_csv_users(lista)
-        
-    def form_valid(self, request):
+        lista = request.FILES.get('lista_alumnas')
+        if lista!=None:
+            filename = create_temp_file(File(lista), 'csv')
+            with open(filename, 'r') as lista:
+                Command().csvValidator(lista)
+            return filename
+        else:
+            return None
+
+    def form_valid(self, request, filename):
         form = request.POST
         user = request.user
         sede = Sede.objects.get(coordinadora=user)
         curso = Curso.objects.create(nombre=form.get('nombre'), sede=sede)
         for profesora in form.getlist('profesoras'):
             curso.profesoras.add(profesora)
-        for alumna in form.getlist('alumnas'):
-            curso.alumnas.add(alumna)
+        if filename!=None:
+            with open(filename, 'r', encoding='utf-8-sig') as csvFile:
+                Command().create('alumnas', sede, curso, csvFile)
+            if os.path.exists(filename):
+                os.remove(filename)
+        else:
+            for alumna in form.getlist('alumnas'):
+                curso.alumnas.add(alumna)
         for voluntaria in form.getlist('voluntarias'):
             curso.voluntarias.add(voluntaria)
         curso.save()
