@@ -6,7 +6,13 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic.edit import UpdateView, CreateView, FormView
 from django.contrib import messages
-from coordinacion.forms import UserForm
+from coordinacion.forms import UserForm, CursoForm
+from django.core.exceptions import ValidationError
+from my_lib.files_wrapper import check_valid_csv_users
+#from usuarios.management.commands.crear_users import Command
+
+import csv
+import datetime
 
 from coordinacion.models import Sede
 from cursos.models import Curso
@@ -45,29 +51,56 @@ class CoordinadoraEditarCursosView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, 'curso modificado')
+        messages.success(self.request, 'Curso modificado')
         return HttpResponseRedirect(reverse('coordinacion:cursos'))
 
 class CoordinadoraCrearCursosView(LoginRequiredMixin, CreateView):
-    model = Curso
-    fields = ('nombre', 'sede', 'profesoras', 'voluntarias', 'alumnas')
+    # model = Curso
+    # fields = ('nombre', 'sede', 'profesoras', 'voluntarias', 'alumnas')
     template_name = 'coordinacion/cursos/crear_curso.html'
     context_object_name = 'curso'
 
     def get_form(self):
-        form = super().get_form()
+        form = CursoForm()
         sede = Sede.objects.get(coordinadora=self.request.user)
         form.fields['nombre'].initial = ""
-        form.fields['sede'].initial = sede
-        form.fields['sede'].disabled = True
         form.fields['profesoras'].queryset = sede.profesoras.filter(es_profesora=True, is_active=True)
         form.fields['alumnas'].queryset = sede.alumnas.filter(es_alumna=True, is_active=True)
         form.fields['voluntarias'].queryset = sede.voluntarias.filter(es_voluntaria=True, is_active=True)
         return form
-    
-    def form_valid(self, form):
-        form.save()
+
+    def post(self, request, *args, **kwargs):
+        try:
+            self.validate(request)
+        except Exception as e:
+            messages.success(request, e)
+            return HttpResponseRedirect(reverse('coordinacion:crear_curso'))
+        self.form_valid(request)
+        messages.success(self.request, 'Curso creado')
         return HttpResponseRedirect(reverse('coordinacion:cursos'))
+
+
+    def validate(self, request):
+        user = request.user
+        form = request.POST
+        sede = Sede.objects.get(coordinadora=user)
+        if len(Curso.objects.filter(nombre=form['nombre'], anho = datetime.datetime.now().year, sede=sede.nombre))>0:
+            raise ValidationError("Ya existe un curso con este nombre este año en esta sede")
+        lista = request.FILES['lista_alumnas']
+        check_valid_csv_users(lista)
+        
+    def form_valid(self, request):
+        form = request.POST
+        user = request.user
+        sede = Sede.objects.get(coordinadora=user)
+        curso = Curso.objects.create(nombre=form.get('nombre'), sede=sede)
+        for profesora in form.getlist('profesoras'):
+            curso.profesoras.add(profesora)
+        for alumna in form.getlist('alumnas'):
+            curso.alumnas.add(alumna)
+        for voluntaria in form.getlist('voluntarias'):
+            curso.voluntarias.add(voluntaria)
+        curso.save()
 
 
 @coordinadora_required
@@ -116,17 +149,13 @@ class CoordinadoraCrearUserView(LoginRequiredMixin, FormView):
                password='tempPass21', es_profesora=data['es_profesora'], es_alumna=data['es_alumna'], es_voluntaria=data['es_voluntaria'])
         user.save()
         sede = Sede.objects.get(coordinadora=self.request.user)
-        for curso_id in data['cursos']:
-            if data['es_profesora']:
-                Curso.objects.get(id=int(curso_id)).profesoras.add(user)
-                sede.profesoras.add(user)
-            if data['es_voluntaria']:
-                Curso.objects.get(id=int(curso_id)).voluntarias.add(user)
-                sede.voluntarias.add(user)
-            if data['es_alumna']:
-                Curso.objects.get(id=int(curso_id)).alumnas.add(user)
-                sede.alumnas.add(user)
-
+        if data['es_profesora']:
+            sede.profesoras.add(user)
+        if data['es_voluntaria']:
+            sede.voluntarias.add(user)
+        if data['es_alumna']:
+            sede.alumnas.add(user)
+        messages.success(self.request, 'Usuaria Creada')
         return HttpResponseRedirect(reverse('coordinacion:users'))
 
 @coordinadora_required
