@@ -135,6 +135,8 @@ td, th {
   background-color: $primary-color;
   color: white;
   font-weight: normal;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 tr.datos-row > td {
@@ -155,20 +157,11 @@ tr.datos-row:nth-child(odd) > td {
     position: sticky;
     left: 0;
   }
-}
 
-.tabla-asist-gral .sticky-right-first, .tabla-estadisticas .sticky-right-first {
-  position: sticky;
-  right: 97px;
-  background-color: white;
-  max-width: 74px;
-}
-
-.tabla-asist-gral .sticky-right-last, .tabla-estadisticas .sticky-right-last {
-  position: sticky;
-  right: 0;
-  background-color: white;
-  max-width: 74px;
+  .tabla-asist-gral .sticky-right, .tabla-estadisticas .sticky-right {
+    position: sticky;
+    right: 0;
+  }
 }
 
 .estadistica-th1 {

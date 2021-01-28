@@ -23,10 +23,10 @@
              <h5> {{curso.nombre}} </h5>
              <p>Van {{clases_hasta_ahora}} clases de un total de 
                  {% if clases_hasta_ahora > curso.cant_clases %}
-                    {{clases_hasta_ahora}}
+                    {{clases_hasta_ahora}}.
                 {% else %}
-                    {{curso.cant_clases}}
-                {% endif %}.</p>
+                    {{curso.cant_clases}}.
+                {% endif %}</p>
             </div>
             <div class="info-assist">    
                 <ul>
@@ -71,33 +71,22 @@
             <table id= "tabla_asist_gral" class="display tabla-asist-gral">
                 <thead>
                     <tr>
-                        <th> N° </th>
-
-                        <th class="sticky-left"> Nombre </th>
-                        
-                        <th class="sticky-left"> Apellido </th>
-
+                        <th class="header-row"> N° </th>
+                        <th class="sticky-left header-row"> Nombre </th>
                         {% for clase in clases %}
-                            <th>
-                                <abbr title="{{clase.nombre}}" rel="tooltip"> Clase {{ forloop.counter }} </abbr>
+                            <th class="header-row small-column">
+                                <abbr title="{{clase.nombre}}" rel="tooltip"> C{{ forloop.counter }} </abbr>
                             </th>
                         {% endfor %}
-
-                         <th class="sticky-right-first"> Clases Asistidas </th>
-
-                         <th class="sticky-right-last"> Clases No Asistidas </th>
-
+                         <th class="header-row sticky-right"> Asistidas / No Asistidas </th>
                     </tr>
                 </thead>
 
                 <tbody>
-
                     {% for lista in lista_asistencias %}
-
-                        <tr>
-                            <td> {{ forloop.counter }}</td>
-                            <td class="sticky-left"> {{ lista.0.first_name }}</td>
-                            <td class="sticky-left"> {{ lista.0.last_name }} </td>
+                        <tr class="datos-row">
+                            <td>{{ forloop.counter }}</td>
+                            <td class="sticky-left"> {{ lista.0.last_name }}, {{ lista.0.first_name }}</td>
                             {% for bool in lista.1 %}
 
                                 {% if bool is None%}
@@ -106,41 +95,26 @@
                                 {% elif bool %}
                                     <td>  <i class="material-icons icon-green">check_circle</i> </td>
 
-
                                 {% else %}
                                     <td>  <i class="material-icons icon-red">cancel</i> </td>
-
-
                                 {% endif %}
 
                             {% endfor %}
-
-
-                            <td class="sticky-right-first"> {{ lista.2 }} </td>
-                            <td class="sticky-right-last"> {{clases_hasta_ahora|safe|sub:lista.2|sub:lista.3}}</td>
-
-                                {% endfor %}
+                            <td class="sticky-right"> <span style="color:green">{{ lista.2 }}</span> / <span style="color:red">{{clases_hasta_ahora|safe|sub:lista.2|sub:lista.3}}</span></td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
 
-                        <tfoot>
-
-                            <tr>
-                                <th>  </th>
-
-                                <th class="sticky-left"> Alumnas por clase </th>
-
-                                <td>  </td>
-                                {% for total in total_por_clase %}
-
-                                <td> {{ total }} </td>
-
-                                {% endfor %}
-
-                                <td>  </td>
-
-                            </tr>
-
-                        </tfoot>
+                <tfoot>
+                    <tr>
+                        <th> </th>
+                        <th class="sticky-left" style="background-color: white"> Total alumnas por clase </th>
+                        {% for total in total_por_clase %}
+                            <td> {{ total }} </td>
+                        {% endfor %}
+                        <td class="sticky-right" style="background-color: white"> </td>
+                    </tr>
+                </tfoot>
 
                 </table>
         </div>
