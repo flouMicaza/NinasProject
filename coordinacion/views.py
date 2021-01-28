@@ -109,8 +109,8 @@ class CoordinadoraCrearCursosView(LoginRequiredMixin, CreateView):
                 Command().create('alumnas', sede, curso, csvFile)
             if os.path.exists(filename):
                 os.remove(filename)
-        else:
-            for alumna in form.getlist('alumnas'):
+        for alumna in form.getlist('alumnas'):
+            if not curso.alumnas.filter(id=alumna).exists():
                 curso.alumnas.add(alumna)
         for voluntaria in form.getlist('voluntarias'):
             curso.voluntarias.add(voluntaria)

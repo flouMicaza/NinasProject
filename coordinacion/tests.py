@@ -190,7 +190,7 @@ class CursosTest(InitialData):
         curso = Curso.objects.get(nombre=form_data['nombre'], sede=self.sede)
         user = self.sede.alumnas.get(username = 'UsuariaCSV')
         assert user in curso.alumnas.all()
-        assert self.usuaria_alumna not in curso.alumnas.all()
+        assert self.usuaria_alumna in curso.alumnas.all()
     
     def test_crear_curso_csv_usuarios_existen(self):
         lista_alumnas = b'nombre,apellido,email\nUsuaria,CSV,user_alumna'
@@ -209,7 +209,7 @@ class CursosTest(InitialData):
         curso = Curso.objects.get(nombre=form_data['nombre'], sede=self.sede)
         user = self.sede.alumnas.get(username = 'user_alumna')
         assert user in curso.alumnas.all()        
-        assert  User.objects.get(username = 'user_alumna').first_name != 'Usuaria' 
+        assert  User.objects.get(username = 'user_alumna').first_name != 'Usuaria'
 
 
     def test_editar_curso(self):
