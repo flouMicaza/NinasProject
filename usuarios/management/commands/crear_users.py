@@ -48,7 +48,7 @@ class Command(BaseCommand):
         if len(headers)!=3: #Actualmente solo se considera nombre,apellido,email
             raise Exception(f"Se esperaban 3 columnas en los headers, pero hay {len(headers)}")
         elif headers!=["nombre","apellido","email"]: #Se espera que los headers tengan ese orden
-            raise Exception("Los headers no estan correctos, deberian ser: nombre,apellido,email")
+            raise Exception("Los headers no estan correctos, deberían ser: nombre,apellido,email")
         for i,row in enumerate(reader):
             if len(row)!=3:
                 raise Exception(f"Se esperaban 3 columnas en la fila {i+1}, pero hay {len(row)}")

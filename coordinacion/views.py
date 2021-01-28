@@ -92,7 +92,12 @@ class CoordinadoraCrearCursosView(LoginRequiredMixin, CreateView):
         if lista!=None:
             filename = create_temp_file(File(lista), 'csv')
             with open(filename, 'r') as lista:
-                Command().csvValidator(lista)
+                try:
+                    Command().csvValidator(lista)
+                except Exception as e:
+                    if os.path.exists(filename):
+                        os.remove(filename)
+                    raise e
             return filename
         else:
             return None

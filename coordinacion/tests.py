@@ -379,3 +379,80 @@ class AccesosTest(InitialData):
 
         response = self.client.get(reverse('coordinacion:eliminar_users'), data = {'users_eliminar':[]})
         self.assertEquals(response.status_code, 302)
+
+class ValidacionTests(InitialData):
+    def setUp(self):
+        super(ValidacionTests, self).setUp()
+        self.client.force_login(self.usuaria_coordinadora)
+
+    def test_columnas_headers(self):
+        lista_alumnas = b'nombre,apellido\nUsuaria,CSV,user_alumna2'
+        lista_alumnas = InMemoryUploadedFile(BytesIO(lista_alumnas), 'lista_alumnas', 
+                        'lista_alumnas.csv', 'application/csv', len(lista_alumnas), None, None)
+
+        form_data = {
+            'nombre' : 'CursoTest',
+            'profesoras' : [],
+            'alumnas' : [self.usuaria_alumna.id],
+            'voluntarias' : [],
+            'lista_alumnas' : lista_alumnas
+        }
+
+        response = self.client.post(reverse('coordinacion:crear_curso'), data=form_data, follow=True)
+        self.assertContains(response, "Se esperaban 3 columnas")
+        assert not Curso.objects.filter(nombre=form_data['nombre'], sede=self.sede).exists()
+        assert not User.objects.filter(username="user_alumna2").exists()
+
+    def test_nombres_headers(self):
+        lista_alumnas = b'nombre,apellido,correo\nUsuaria,CSV,user_alumna2'
+        lista_alumnas = InMemoryUploadedFile(BytesIO(lista_alumnas), 'lista_alumnas', 
+                        'lista_alumnas.csv', 'application/csv', len(lista_alumnas), None, None)
+
+        form_data = {
+            'nombre' : 'CursoTest',
+            'profesoras' : [],
+            'alumnas' : [self.usuaria_alumna.id],
+            'voluntarias' : [],
+            'lista_alumnas' : lista_alumnas
+        }
+
+        response = self.client.post(reverse('coordinacion:crear_curso'), data=form_data, follow=True)
+        self.assertContains(response, "Los headers no estan correctos, deberían ser: nombre,apellido,email")
+        assert not Curso.objects.filter(nombre=form_data['nombre'], sede=self.sede).exists()
+        assert not User.objects.filter(username="user_alumna2").exists()
+
+    def test_elems_filas(self):
+        lista_alumnas = b'nombre,apellido,email\nUsuaria,CSV'
+        lista_alumnas = InMemoryUploadedFile(BytesIO(lista_alumnas), 'lista_alumnas', 
+                        'lista_alumnas.csv', 'application/csv', len(lista_alumnas), None, None)
+
+        form_data = {
+            'nombre' : 'CursoTest',
+            'profesoras' : [],
+            'alumnas' : [self.usuaria_alumna.id],
+            'voluntarias' : [],
+            'lista_alumnas' : lista_alumnas
+        }
+
+        response = self.client.post(reverse('coordinacion:crear_curso'), data=form_data, follow=True)
+        self.assertContains(response, "Se esperaban 3 columnas en la fila 1")
+        assert not Curso.objects.filter(nombre=form_data['nombre'], sede=self.sede).exists()
+        assert not User.objects.filter(username="user_alumna2").exists()
+    
+    def test_elems_filas2(self):
+        lista_alumnas = b'nombre,apellido,email\nUsuaria,CSV,username\nUsuaria2,CSV'
+        lista_alumnas = InMemoryUploadedFile(BytesIO(lista_alumnas), 'lista_alumnas', 
+                        'lista_alumnas.csv', 'application/csv', len(lista_alumnas), None, None)
+
+        form_data = {
+            'nombre' : 'CursoTest',
+            'profesoras' : [],
+            'alumnas' : [self.usuaria_alumna.id],
+            'voluntarias' : [],
+            'lista_alumnas' : lista_alumnas
+        }
+
+        response = self.client.post(reverse('coordinacion:crear_curso'), data=form_data, follow=True)
+        self.assertContains(response, "Se esperaban 3 columnas en la fila 2")
+        assert not Curso.objects.filter(nombre=form_data['nombre'], sede=self.sede).exists()
+        assert not User.objects.filter(username="user_alumna2").exists()

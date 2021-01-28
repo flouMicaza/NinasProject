@@ -231,6 +231,20 @@ $(document).ready
 $(document).ready(function() {
     $('#alumnas_table').DataTable(
         {    "bLengthChange": false,
+        oLanguage: {
+            sSearch: "Buscar:",
+            sInfo: "Mostrando alumnas del _START_ al _END_ de un total de _TOTAL_ alumnas",
+            sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            sInfoFiltered: "(filtrado de un total de _MAX_ alumnas)",
+            oPaginate: {
+                    sFirst:    "Primero",
+                    sLast:     "Último",
+                    sNext:     "Siguiente",
+                    sPrevious: "Anterior"
+                },
+            sZeroRecords: "No se encontraron resultados",
+
+        },
     }
     );
 } );
@@ -239,7 +253,21 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#profesoras_table').DataTable(
-        {"bLengthChange": false,}
+        {"bLengthChange": false,
+        oLanguage: {
+            sSearch: "Buscar:",
+            sInfo: "Mostrando profesoras del _START_ al _END_ de un total de _TOTAL_ profesoras",
+            sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            sInfoFiltered: "(filtrado de un total de _MAX_ profesoras)",
+            oPaginate: {
+                    sFirst:    "Primero",
+                    sLast:     "Último",
+                    sNext:     "Siguiente",
+                    sPrevious: "Anterior"
+                },
+            sZeroRecords: "No se encontraron resultados",
+
+        },}
     );
 } );
 
@@ -248,8 +276,42 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#voluntarias_table').DataTable( {
         "bLengthChange": false,
+        oLanguage: {
+            sSearch: "Buscar:",
+            sInfo: "Mostrando voluntarias del _START_ al _END_ de un total de _TOTAL_ voluntarias",
+            sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            sInfoFiltered: "(filtrado de un total de _MAX_ voluntarias)",
+            oPaginate: {
+                    sFirst:    "Primero",
+                    sLast:     "Último",
+                    sNext:     "Siguiente",
+                    sPrevious: "Anterior"
+                },
+            sZeroRecords: "No se encontraron resultados",
 
+        },
     });
+} );
+
+$(document).ready(function() {
+    $('#cursos_table').DataTable(
+        {    "bLengthChange": false,
+        oLanguage: {
+            sSearch: "Buscar:",
+            sInfo: "Mostrando cursos del _START_ al _END_ de un total de _TOTAL_ cursos",
+            sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            sInfoFiltered: "(filtrado de un total de _MAX_ cursos)",
+            oPaginate: {
+                    sFirst:    "Primero",
+                    sLast:     "Último",
+                    sNext:     "Siguiente",
+                    sPrevious: "Anterior"
+                },
+            sZeroRecords: "No se encontraron resultados",
+
+        },
+    }
+    );
 } );
 
 var click_counter = 0;
