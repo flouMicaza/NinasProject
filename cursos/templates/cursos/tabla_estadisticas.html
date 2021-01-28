@@ -5,10 +5,13 @@
 
 {% block content %}
 {% if hay_alumnas %}
-<h2>Estadísticas {{ curso.nombre }}</h2>
+<h4>Estadísticas</h4>
+<h5>{{ curso.nombre }}</h5>
 
     {% if not hay_clases %}
-        <h6>No hay clases creadas por el momento, pero puedes ver el listado de alumnas pertenecientes al curso.</h6>
+        <h6 style="margin-top: 2%">No hay clases creadas por el momento, pero puedes ver el listado de alumnas pertenecientes al curso.</h6>
+    {% else %}
+        <p>Se han publicado {{ total_problemas }} problemas en este curso.</p>
     {% endif %}
 
     <div class="flex-container" style="margin-top: 2%; ">
@@ -25,22 +28,23 @@
         <table id="tabla_estadísticas" class="display cell-border tabla-estadisticas">
             <thead>
                 <tr>
-                    <th class="sticky-left" style="border: 1px solid white; background-color: white"> </th>
+                    <th class="header-row sticky-left" rowspan="2">Nombre</th>
                     {% for clase in clases %}
                         <th class="max-ancho-tabla header-row" colspan="{{ clase.problema_set.all|length }}">
                             {{clase.nombre}}
                         </th>
                     {% endfor %}
+                    <th class="header-row" rowspan="2">Problemas Resueltos / Intentos</th>
+                    <th class="header-row" rowspan="2">Soluciones Enviadas</th>
                 </tr>
                 <tr>
-                    <th  class="sticky-left header-row">Nombre</th>
                     {% for clase in clases %}
                         {% if clase.problema_set.all|length == 0 %}
-                            <th class="header-row"></th>
+                            <th class="header-row">-</th>
                         {% else %}
                             {% for problema in clase.problema_set.all %}
                                 <th class="max-ancho-tabla header-row">
-                                    {{problema.titulo}}
+                                    <a class="letra_absent" href="{% url 'problemas:enunciado-problema' curso_id=curso.id problema_id=problema.id result=1 %}">{{problema.titulo}}</a>
                                 </th>
                             {% endfor %}
                         {% endif %}
@@ -50,21 +54,24 @@
             <tbody>
                 {% for alumna in curso.alumnas.all %}
                     <tr class="datos-row">
-                        <td class="sticky-left white-primary">{{ alumna.last_name }}, {{ alumna.first_name }}</td>
+                        <td class="sticky-left">{{ alumna.last_name }}, {{ alumna.first_name }}</td>
 
                         {% with feedback_alumnas|lookup:alumna.id as info_alu %}
                             {% for clase in clases %}
-                                 {% if clase.problema_set.all|length == 0 %}
+                                {% if clase.problema_set.all|length == 0 %}
                                     <td></td>
                                 {% else %}
                                     {% for problema in clase.problema_set.all %}
-                                        {% with info_alu.feedbacks|lookup:problema.id  as feedback%}
-                                            {% if feedback %}
-                                                {% if feedback.resultado == True %}
-                                                    <td>  <i class="material-icons icon-green">check_circle</i> </td>
-
-                                                {% elif feedback.resultado == False %}
-                                                    <td>  <i class="material-icons icon-red">cancel</i> </td>
+                                        {% with info_alu.0.feedbacks|lookup:problema.id  as feedback_list%}
+                                            {% if feedback_list.0 %}
+                                                {% if feedback_list.0.resultado == True %}
+                                                    <td>
+                                                        <i class="material-icons icon-green" style="vertical-align: middle">check_circle</i>
+                                                        <span style="color:red">{{ feedback_list.1 }}</span> / <span style="color:green">{{ feedback_list.2 }}</span></td>
+                                                {% elif feedback_list.0.resultado == False %}
+                                                    <td>
+                                                        <i class="material-icons icon-red" style="vertical-align: middle">cancel</i>
+                                                        <span style="color:red">{{ feedback_list.1 }}</span> / <span style="color:green">{{ feedback_list.2 }}</span></td>
                                                 {% endif %}
                                             {% else %}
                                                 <td></td>
@@ -73,6 +80,8 @@
                                     {% endfor %}
                                 {% endif %}
                             {% endfor %}
+                            <td>{{ info_alu.1 }} / {{ info_alu.2}}</td>
+                            <td>{{ info_alu.3 }}</td>
                         {% endwith %}
                     </tr>
                 {% endfor %}
