@@ -1,0 +1,17 @@
+[{
+    "Input":"1", 
+    "Output": "1\n", 
+    "Categoria": "Entero positivo"},
+{
+    "Input":"1.5", 
+    "Output": "1\n", 
+    "Categoria": "Decimal positivo"},
+{
+    "Input":"-2", 
+    "Output": "2\n", 
+    "Categoria": "Entero negativo"},
+{	
+	"Input":"-2.8", 
+    "Output": "2\n", 
+    "Categoria": "Decimal negativo"}
+]
