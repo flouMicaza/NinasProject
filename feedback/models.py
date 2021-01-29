@@ -5,6 +5,8 @@ from django.db import models
 from problemas.models import Problema, Caso
 from usuarios.models import User
 
+from html import escape
+
 
 class Feedback(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, help_text="Usuaria dueña del feedback.")
@@ -16,6 +18,11 @@ class Feedback(models.Model):
 
     def __str__(self):
         return str(self.user) + ":" + str(self.problema)
+
+    def display_solucion(self):
+        self.codigo_solucion.open()
+        aux = escape(self.codigo_solucion.file.read().decode())
+        return aux.encode().replace(b'\n', b'<br>').replace(b'  ', b'&nbsp')
 
 
 class TestFeedback(models.Model):

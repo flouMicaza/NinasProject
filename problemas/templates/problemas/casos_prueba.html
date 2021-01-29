@@ -1,10 +1,18 @@
 {% load template_tags %}
 <ul class="collapsible expandable">
     {% for categoria in casos %}
-        <li class="active">
-            <div class="collapsible-header">
-                <i class="material-icons">expand_more</i>
-                {{ categoria.categoria }}
+        <li id="casos-categoria">
+            <div class="collapsible-header" style="justify-content: space-between">
+                <span> <i class="material-icons">expand_more</i>{{ categoria.categoria }}</span>
+
+                    {% with nuevos_outputs|output_exists:categoria.casos as outputs_cat %}
+                        {% if outputs_cat == 1 %}
+                            <span class="big-badge">{{  nuevos_outputs|output_exists:categoria.casos }} nuevo output</span>
+                        {% elif outputs_cat > 1 %}
+                            <span class="big-badge">{{  nuevos_outputs|output_exists:categoria.casos }} nuevos outputs</span>
+                        {% endif %}
+                    {% endwith %}
+
             </div>
             <div class="collapsible-body">
                 <div style="max-width: 100%; overflow-x:auto">
@@ -22,15 +30,18 @@
                                     <td class="consolas">{{ caso.input }}</td>
                                     <td class="consolas">{{ caso.output_esperado }}</td>
                                     <td>
-                                        <button class="open-modal btn btn-small" id="{{ caso.id }}">
-                                            Ver
-                                        </button>
                                         {% with nuevos_outputs|lookup:caso.id as nuevos %}
-                                            {% if nuevos == 1 %}
-                                                <span class="new badge " data-badge-caption="Nuevo output"> {{ nuevos_outputs | lookup:caso.id }}</span>
-                                            {% endif %}
-                                            {% if nuevos > 1  %}
-                                                <span class="new badge " data-badge-caption="Nuevos outputs"> {{ nuevos_outputs | lookup:caso.id }}</span>
+                                            {% if nuevos > 0  %}
+
+                                                <button class="open-modal btn btn-small notification" id="{{ caso.id }}">
+                                                    <span>Ver</span>
+                                                    <span class="badge" id="num-notif"> {{ nuevos_outputs | lookup:caso.id }}</span>
+                                                </button>
+
+                                            {% else %}
+                                                <button class="open-modal btn btn-small notification" id="{{ caso.id }}">
+                                                    <span>Ver</span>
+                                                </button>
                                             {% endif %}
                                         {% endwith %}
                                     </td>
