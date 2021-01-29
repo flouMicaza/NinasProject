@@ -7,16 +7,6 @@
 
     {% if hay_clases and hay_alumnas and hay_asistencias %}     <!-- C++: Basico, FCFM y C++: Básico, UMayor -->
 
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                 <div class="alert">
-                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                  {{message}}
-                </div>
-            {% endfor %}
-        </ul>
-    {% endif %}
         <div style="display: flex;">
             <div style="width: fit-content;">
              <h4> Asistencia </h4>
