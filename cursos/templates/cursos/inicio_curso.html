@@ -187,7 +187,7 @@
                                 {% for problema in clase.problema_set.all %}
                                 <li class="collection-item title-and-button">
                                     <div>
-                                        <a href="{% url 'problemas:enunciado-problema' curso_id=curso.id problema_id=problema.id result=0%}">
+                                        <a href="{% url 'problemas:enunciado-problema' curso_id=curso.id problema_id=problema.id result=1%}">
                                             {{ problema }}
                                         </a>
                                     </div>

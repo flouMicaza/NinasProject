@@ -63,7 +63,7 @@ class ProblemasViews(LoginRequiredMixin, TemplateView):
             context['resultados_active'] = 'active'
 
         if self.kwargs['result'] == 1:
-            feedback = Feedback.objects.filter(problema=problema).order_by('fecha_envio').last()
+            feedback = Feedback.objects.filter(user = self.request.user, problema=problema).order_by('fecha_envio').last()
             context['test_feedback'] = TestFeedback.objects.filter(feedback=feedback)
             context['cantidad_buenos'] = context['test_feedback'].filter(passed='True').count()
             context['cantidad_malos'] = context['test_feedback'].filter(passed='False').count()
