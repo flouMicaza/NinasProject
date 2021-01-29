@@ -39,6 +39,13 @@
                         <small>Solo se aceptan PDF's</small>
                     </div>
                 </div>
+                <div class="row alinear-centro-v" style="margin-top: 3%">
+                    <span class="espacio-derecha">Descargar ejemplos de casos de prueba:</span>
+                    <a href="{% static 'file_samples/ejemplo_caso.json' %}" class="btn btn-small btn-no-bg espacio-derecha"
+                       download="ejemplo_caso.json"><i class="material-icons left">get_app</i> Formato .json</a>
+                    <a href="{% static 'file_samples/ejemplo_caso.csv' %}" class="btn btn-small btn-no-bg"
+                       download="ejemplo_caso.csv"><i class="material-icons left">get_app</i> Formato .csv</a>
+                </div>
                 <div class="row">
                      <div class="form-group">
                          <label><strong>Casos de prueba</strong></label>
@@ -52,13 +59,6 @@
                         <a href="{% url 'cursos:curso' curso_id=clase.curso.id %}" class="waves-effect waves-light btn-medium btn">Cancelar</a>
                     </div>
                 </div>
-            <div class="alinear-centro-v" style="margin-top: 8%">
-                <span class="espacio-derecha">Descargar ejemplos de casos de prueba:</span>
-                    <a href="{% static 'file_samples/ejemplo_caso.json' %}" class="btn btn-small btn-no-bg espacio-derecha"
-                       download="ejemplo_caso.json"><i class="material-icons left">get_app</i> Formato .json</a>
-                    <a href="{% static 'file_samples/ejemplo_caso.csv' %}" class="btn btn-small btn-no-bg"
-                       download="ejemplo_caso.csv"><i class="material-icons left">get_app</i> Formato .csv</a>
-            </div>
             </form>
         </div>
     </div>
