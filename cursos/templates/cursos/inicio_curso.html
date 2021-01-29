@@ -5,17 +5,6 @@
 
 
 {% block content %}
-    <!-- Mensaje de creación exitosa de curso -->
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                 <div class="alert">
-                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                  {{message}}
-                </div>
-            {% endfor %}
-        </ul>
-    {% endif %}
     <div class='title-and-button' >
         <div>
             <h1>{{ curso.nombre }}</h1>

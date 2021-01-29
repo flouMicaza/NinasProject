@@ -5,6 +5,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse
+from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.views import View
 
@@ -70,6 +71,7 @@ class ActualizarOutputsAlternativos(LoginRequiredMixin, View):
                 print(inst)
                 inst.agregado = True
                 inst.save()
+                messages.success(request, f"Se agregó la sugerencia en la categoría {caso.categoría}")
         return HttpResponseRedirect(
             reverse('problemas:casos-problema',
                     kwargs={'curso_id': curso.id, 'problema_id': caso.problema.id, 'result': 0}))
