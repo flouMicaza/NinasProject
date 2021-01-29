@@ -55,7 +55,6 @@ tr.row_good_feedback > td , tr.row_good_feedback > th {
   max-width: 5em;
   word-wrap: break-word;
 }
-
 tr.row_bad_feedback > td {
   padding: 10px;
   border: 1px solid transparent;
@@ -438,3 +437,13 @@ hr.linea-rosada {
   position: relative;
   margin-right: 10px;
 }
+
+.espacio-derecha {
+  margin-right: 10px;
+}
+
+.alinear-centro-v {
+  display: flex;
+  align-items: baseline
+}
+
