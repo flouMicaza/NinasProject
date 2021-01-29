@@ -123,6 +123,15 @@ li.active> .collapsible-header{
   margin-bottom: 5px;
 }
 
+.btn-no-bg {
+  background-color: transparent;
+  color: $primary-color;
+}
+
+.btn-no-bg:hover {
+  color: white;
+}
+
 nav {
   background-color: $primary-color;
   height:70px;
