@@ -5,7 +5,8 @@
 
 
 {% block content %}
-    {% if hay_curso %}
+
+{% if hay_curso %}
     <!-- Mensaje de creación exitosa de curso -->
     {% if messages %}
         <ul class="messages">
@@ -17,6 +18,7 @@
             {% endfor %}
         </ul>
     {% endif %}
+
     <div class='title-and-button' >
         <div>
             <h1>{{ curso.nombre }}</h1>
@@ -128,7 +130,7 @@
                 {% if clase.publica or not usuaria.es_alumna %}
                     <li class="collection-item publica{{ clase.publica }} items-clase">
                         <div id="clase_{{ clase.id }}" class="collection-info">
-                            <p><b>{{ clase.nombre }}</b> <span id="la-fecha" class="letra_gris fecha_clase" style="font-size: smaller">&nbsp; {{ clase.fecha_clase }}</span></p>
+                            <p><b>{{ clase.nombre }}</b> <span id="la-fecha" class="fecha-texto fecha_clase">&nbsp; {{ clase.fecha_clase }}</span></p>
                             <div style="display: flex; align-items: center">
                                 {% if user.es_profesora %}
                                     {% if clase.publica %} <p>Publicada</p>
