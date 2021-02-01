@@ -76,24 +76,24 @@ class CursoView(CursosView):
         id_clase = request.POST['id_clase']
         clase_edit = Clase.objects.get(id=id_clase)
         edit_correct = True
-        if request.POST.get('publica'):
-            clase_edit.publica = True
-        else:
-            clase_edit.publica = False
-
-        if request.POST.get('nombre'):
-            clase_edit.nombre = request.POST['nombre']
 
         if request.POST.get('fecha_clase'):
             #no puede haber dos clases un mismo día.
-            clase_mismo_dia = Clase.objects.filter(fecha_clase=request.POST.get('fecha_clase'))
+            clase_mismo_dia = Clase.objects.filter(fecha_clase=request.POST.get('fecha_clase'),curso=clase_edit.curso)
             if len(clase_mismo_dia) == 0 or clase_mismo_dia.first()==clase_edit:
                 clase_edit.fecha_clase = request.POST['fecha_clase']
             else:
-                messages.success(request,f"No se actualizó la fecha para la clase {clase_edit.nombre}, ya existe una clase para ese día")
+                messages.error(request,f"No se actualizó la clase {clase_edit.nombre}, ya existe una clase para la fecha ingresada")
                 edit_correct = False
 
         if edit_correct:
+            if request.POST.get('publica'):
+                clase_edit.publica = True
+            else:
+                clase_edit.publica = False
+
+            if request.POST.get('nombre'):
+                clase_edit.nombre = request.POST['nombre']
             messages.success(request, "La clase se editó correctamente")
 
         clase_edit.save()

@@ -29,7 +29,17 @@
             {% block menu %}
             {% endblock %}
             <div class="container">
-
+            <!--TODO: Arreglar esto para poder mostrar en rojo los mensajes de error y que destaquen mas-->
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                             <div class="alert">
+                              <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                              {{message}}
+                            </div>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 {% block content %}
                 {% endblock %}
             </div>

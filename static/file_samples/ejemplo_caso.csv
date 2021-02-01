@@ -1,0 +1,5 @@
+"Input","Output","Categoria"
+"1","1\n","Entero positivo"
+"1.6","1\n","Decimal positivo"
+"-2","2\n","Entero negativo"
+"-2.5","2\n","Decimal negativo"
