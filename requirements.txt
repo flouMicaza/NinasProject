@@ -10,7 +10,7 @@ pillow>=6.2.2
 psycopg2==2.7.5
 psycopg2-binary==2.8.5
 pytz==2019.2
-PyYAML==5.3.1
+PyYAML==5.4
 rcssmin==1.0.6
 rjsmin==1.1.0
 save==0.1
