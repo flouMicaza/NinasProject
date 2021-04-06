@@ -19,6 +19,8 @@ class IndexView(LoginRequiredMixin, View):
     def get(self, request):
         if request.user.es_profesora or request.user.es_voluntaria:
             return HttpResponseRedirect(reverse('cursos:mis_cursos'))
+        elif request.user.es_coordinadora:
+            return HttpResponseRedirect(reverse('coordinacion:inicio_coordinadora'))
         elif request.user.es_alumna:
             curso_id = self.get_curso_estudiante(request.user.username)
             return HttpResponseRedirect(reverse('cursos:curso', args={curso_id: curso_id}))

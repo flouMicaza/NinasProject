@@ -225,3 +225,121 @@ $(document).ready
             }
         });
     });
+
+// tabla alumnas coordinacion
+
+$(document).ready(function() {
+    $('#alumnas_table').DataTable(
+        {    "bLengthChange": false,
+        oLanguage: {
+            sSearch: "Buscar:",
+            sInfo: "Mostrando alumnas del _START_ al _END_ de un total de _TOTAL_ alumnas",
+            sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            sInfoFiltered: "(filtrado de un total de _MAX_ alumnas)",
+            oPaginate: {
+                    sFirst:    "Primero",
+                    sLast:     "Último",
+                    sNext:     "Siguiente",
+                    sPrevious: "Anterior"
+                },
+            sZeroRecords: "No se encontraron resultados",
+
+        },
+    }
+    );
+} );
+
+// tabla profesoras coordinacion
+
+$(document).ready(function() {
+    $('#profesoras_table').DataTable(
+        {"bLengthChange": false,
+        oLanguage: {
+            sSearch: "Buscar:",
+            sInfo: "Mostrando profesoras del _START_ al _END_ de un total de _TOTAL_ profesoras",
+            sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            sInfoFiltered: "(filtrado de un total de _MAX_ profesoras)",
+            oPaginate: {
+                    sFirst:    "Primero",
+                    sLast:     "Último",
+                    sNext:     "Siguiente",
+                    sPrevious: "Anterior"
+                },
+            sZeroRecords: "No se encontraron resultados",
+
+        },}
+    );
+} );
+
+// tabla voluntarias coordinacion
+
+$(document).ready(function() {
+    $('#voluntarias_table').DataTable( {
+        "bLengthChange": false,
+        oLanguage: {
+            sSearch: "Buscar:",
+            sInfo: "Mostrando voluntarias del _START_ al _END_ de un total de _TOTAL_ voluntarias",
+            sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            sInfoFiltered: "(filtrado de un total de _MAX_ voluntarias)",
+            oPaginate: {
+                    sFirst:    "Primero",
+                    sLast:     "Último",
+                    sNext:     "Siguiente",
+                    sPrevious: "Anterior"
+                },
+            sZeroRecords: "No se encontraron resultados",
+
+        },
+    });
+} );
+
+$(document).ready(function() {
+    $('#cursos_table').DataTable(
+        {    "bLengthChange": false,
+        oLanguage: {
+            sSearch: "Buscar:",
+            sInfo: "Mostrando cursos del _START_ al _END_ de un total de _TOTAL_ cursos",
+            sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            sInfoFiltered: "(filtrado de un total de _MAX_ cursos)",
+            oPaginate: {
+                    sFirst:    "Primero",
+                    sLast:     "Último",
+                    sNext:     "Siguiente",
+                    sPrevious: "Anterior"
+                },
+            sZeroRecords: "No se encontraron resultados",
+
+        },
+    }
+    );
+} );
+
+var click_counter = 0;
+var user_dict = new Map();
+
+function clicked(checked, id) {
+    console.log(id);
+    if(checked){
+        click_counter+=1
+        user_dict.set(id, id);
+        $("#btn-1").prop("disabled", false);
+        $("#btn-2").prop("disabled", false);
+    }
+    else{
+        click_counter-=1
+        user_dict.delete(id);
+        if (click_counter === 0){
+            $("#btn-1").prop("disabled", true);
+            $("#btn-2").prop("disabled", true);
+        }
+    }
+}
+
+function eliminar_alerta(message){
+    function logMapElements(value, key, map) {
+        message = message.concat('\n', value);
+    }
+    user_dict.forEach(logMapElements);
+    return confirm(message);
+
+}

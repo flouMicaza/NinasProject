@@ -1,0 +1,21 @@
+{% extends 'menu.html' %}
+{% load static %}
+{% block title %}Editar Curso{% endblock %}
+
+
+{% block content %}
+<h2 style="text-align: center;">Editar Curso</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <div>
+        <a href="{% url 'coordinacion:cursos' %}" class="waves-effect waves-light btn-small btn red accent-2" >
+            <i class="material-icons left">arrow_back</i>Volver</a>
+
+            <button type="submit" class="waves-effect waves-light btn-small btn red accent-2">
+                <i class="material-icons right">playlist_add_check</i>Guardar</button>
+
+    </div>
+</form>
+{% endblock %}

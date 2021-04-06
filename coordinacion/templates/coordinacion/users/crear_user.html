@@ -1,0 +1,75 @@
+{% extends 'menu.html' %}
+{% load static %}
+{% block title %}Crear Usuaria{% endblock %}
+
+
+{% block content %}
+
+<h2 style="text-align: center;">Crear Usuaria</h2>
+<form method="post">
+    {% csrf_token %}
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="fieldWrapper">
+        <label for="{{ form.first_name.id_for_label }}">Nombre</label>
+        {{ form.first_name }}
+        {{form.first_name.errors}}
+    </div>
+    <div class="fieldWrapper">
+        <label for="{{ form.last_name.id_for_label }}">Apellido</label>
+        {{ form.last_name }}
+        {{ form.last_name.errors }}
+
+    </div>
+    <div class="fieldWrapper">
+        <label for="{{ form.username.id_for_label }}">Nombre de usuario</label>
+        {{ form.username }}
+        {{ form.username.errors }}
+    </div>
+
+    <div class="flex-container-asistencia">
+    <label class="nombre-checkbox">
+        {{ form.es_profesora }}
+        
+        <span>Es profesora</span>
+    </label>
+    </div>
+
+    <div class="flex-container-asistencia">
+        <label class="nombre-checkbox">
+            {{ form.es_voluntaria }}
+            <span>Es voluntaria</span>
+        </label>
+    </div>
+
+
+    <div class="flex-container-asistencia">
+        <label class="nombre-checkbox">
+            {{ form.es_alumna }}
+            <span>Es alumna</span>
+        </label>
+    </div>
+
+    <div>
+        <a href="{% url 'coordinacion:inicio_coordinadora' %}" class="waves-effect waves-light btn-small btn red accent-2" >
+            <i class="material-icons left">arrow_back</i>Volver</a>
+
+            <button type="submit" class="waves-effect waves-light btn-small btn red accent-2">
+                <i class="material-icons right">playlist_add_check</i>Guardar</button>
+
+    </div>
+</form>
+{% endblock %}
+

@@ -5,6 +5,20 @@
 
 
 {% block content %}
+
+{% if hay_curso %}
+    <!-- Mensaje de creación exitosa de curso -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                 <div class="alert">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                  {{message}}
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <div class='title-and-button' >
         <div>
             <h1>{{ curso.nombre }}</h1>
@@ -211,6 +225,15 @@
             </li>
         {% endif %}
     </ul>
+
+    {% else %} <!-- Si no hay curso -->
+        <div>
+            <h2 style="text-align:center;">No tienes cursos registrados en este período!</h2>
+                <div style="text-align:center;"><img src="{% static 'images/error_kitten.png' %}" alt="gatito del mensaje de error" style="width:300px;"></div>
+
+                <p style="text-align:center;margin-top:5%;">Si estás en un curso actualmente, pide ayuda a tu tutora para que puedas ingresar.</p>
+        </div>
+    {% endif %}
 {% endblock %}\
 
 {% block scripts %}

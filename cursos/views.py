@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponseForbidden
@@ -42,6 +44,8 @@ class CursoView(CursosView):
     def get(self, request, **kwargs ):
         curso_id = kwargs['curso_id']
         curso = get_object_or_404(Curso, pk=curso_id)
+        hay_curso = True
+
         if 'order' not in kwargs:
             orden = 'oldest'
         else:
@@ -49,6 +53,8 @@ class CursoView(CursosView):
 
         if curso in self.get_cursos(request.user.username):
             usuaria = request.user
+            if (curso.anho != datetime.datetime.now().year) & usuaria.es_alumna:
+                hay_curso = False
             clases_totales = Clase.objects.filter(curso=curso)
             if orden == 'newest':
                 clases_totales = clases_totales.order_by('-fecha_clase')
@@ -64,7 +70,8 @@ class CursoView(CursosView):
                 'nro_clases_totales': max(len(clases_totales), curso.cant_clases),
                 'nro_clases_realizadas': len(clases_asistencias),
                 'feedbacks':feedbacks,
-                'order': orden
+                'order': orden,
+                'hay_curso': hay_curso
             }
             return render(request, 'cursos/inicio_curso.html', parameters)
         else:
@@ -109,7 +116,7 @@ class CursoView(CursosView):
 class MisCursosView(CursosView):
 
     def get(self, request):
-        if request.user.es_profesora  or request.user.es_voluntaria :
+        if request.user.es_profesora  or request.user.es_voluntaria or request.user.es_coordinadora:
             cursos = self.get_cursos(request.user.username)
             return render(request, 'cursos/mis_cursos.html', {'cursos': cursos})
         else:

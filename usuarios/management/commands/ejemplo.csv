@@ -1,4 +1,4 @@
-nombre,apellido
-Primera,Alumna
-Segunda,Alumna
-Tercera,Alumna
+nombre,apellido,email
+Primera,Alumna,testmail1@mail.com
+Segunda,Alumna,testmail2@mail.com
+Tercera,Alumna,testmail3@mail.com

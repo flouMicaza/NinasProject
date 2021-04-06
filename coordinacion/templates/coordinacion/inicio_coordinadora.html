@@ -1,8 +1,38 @@
 {% extends 'menu.html' %}
+{% load static %}
 {% block title %}Mis Cursos{% endblock %}
 
 
 {% block content %}
 <h1>Coordinadora</h1>
    Bienvenida Coordinadora
+
+<ul class="collection">
+   <li class="collection-item" style = "display: flex; align-items: baseline; justify-content: space-between;">
+      <div >
+         <a href="{% url 'coordinacion:users' %}">Usuarias</a>
+      </div>
+      <div>
+         <a href="{% url 'coordinacion:users' %}" class="waves-effect waves-light btn-small btn red accent-2" >
+               <i class="material-icons right">edit</i>Editar</a>
+         <a href="{% url 'coordinacion:crear_user' %}" class="waves-effect waves-light btn-small btn red accent-2">
+               <i class="material-icons right">add</i>Crear</a>
+      </div>
+         <!-- <a href="{%url 'coordinacion:crear_user' %}" class="secondary-content"><i class="material-icons">add</i> Crear</a>
+         <a href="{%url 'coordinacion:users' %}" class="secondary-content"><i class="material-icons">edit</i> Editar</a> -->
+   </li>  
+   
+   <li class="collection-item" style = "display: flex; align-items: baseline; justify-content: space-between">
+      <div>
+         <a href="{% url 'coordinacion:cursos' %}" >Cursos</a>
+      </div>
+      <div>
+         <a href="{% url 'coordinacion:cursos' %}" class="waves-effect waves-light btn-small btn red accent-2">
+            <i class="material-icons right">edit</i>Editar</a>
+         <a href="{% url 'coordinacion:crear_curso' %}" class="waves-effect waves-light btn-small btn red accent-2">
+            <i class="material-icons right">add</i>Crear</a>
+      </div>
+   </li>
+
+ </ul>
 {% endblock %}

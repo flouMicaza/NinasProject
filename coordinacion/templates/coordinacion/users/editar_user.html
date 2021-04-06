@@ -1,0 +1,52 @@
+{% extends 'menu.html' %}
+{% load static %}
+{% block title %}Editar Usuaria{% endblock %}
+
+
+{% block content %}
+<h2 style="text-align: center;">Editar Usuaria</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="fieldWrapper">
+        <label for="{{ form.first_name.id_for_label }}">Nombre</label>
+        {{ form.first_name }}
+    </div>
+    <div class="fieldWrapper">
+        <label for="{{ form.last_name.id_for_label }}">Apellido</label>
+        {{ form.last_name }}
+    </div>
+
+    <div class="flex-container-asistencia">
+    <label class="nombre-checkbox">
+        {{ form.es_profesora }}
+        <span>Es profesora</span>
+    </label>
+    </div>
+
+    <div class="flex-container-asistencia">
+        <label class="nombre-checkbox">
+            {{ form.es_voluntaria }}
+            <span>Es voluntaria</span>
+        </label>
+    </div>
+
+
+    <div class="flex-container-asistencia">
+        <label class="nombre-checkbox">
+            {{ form.es_alumna }}
+            <span>Es alumna</span>
+        </label>
+    </div>
+
+    <div>
+        <a href="{% url 'coordinacion:users' %}" class="waves-effect waves-light btn-small btn red accent-2" >
+            <i class="material-icons left">arrow_back</i>Volver</a>
+
+            <button type="submit" class="waves-effect waves-light btn-small btn red accent-2">
+                <i class="material-icons right">playlist_add_check</i>Guardar</button>
+    </div>
+
+</form>
+{% endblock %}
