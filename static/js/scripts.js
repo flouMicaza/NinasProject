@@ -27,7 +27,7 @@ $(document).ready(function(){
     $('.modal').modal();
     $('ul.tabs').tabs();
     $('#tabla_estadísticas').DataTable({
-        scrollX: true,
+        bSortClasses: false,
         order:[[0, "asc"]],
         dom: "Blfrtip",
         oLanguage: {
@@ -50,11 +50,13 @@ $(document).ready(function(){
                     sPrevious: "Anterior"
                 },
             sZeroRecords: "No se encontraron resultados",
-
+        },
+        "initComplete": function (settings, json) {
+            $('#tabla_estadísticas').wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
         }
-    })
+    });
     $('#tabla_asist_gral').DataTable({
-        scrollX: true,
+        bSortClasses: false,
         order:[[0, "asc"]],
         dom: "Blfrtip",
         oLanguage: {
@@ -77,9 +79,10 @@ $(document).ready(function(){
                     sPrevious: "Anterior"
                 },
             sZeroRecords: "No se encontraron resultados",
-
+        },
+        "initComplete": function (settings, json) {
+            $('#tabla_asist_gral').wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
         }
-    
     });
 
 });

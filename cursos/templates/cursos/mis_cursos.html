@@ -11,7 +11,11 @@
             </li>
 
                 {% for curso in cursos %}
-                <li class="active">
+                    {% if forloop.first %}
+                        <li class="active">
+                    {% else %}
+                        <li>
+                    {% endif %}
                     <div class="collapsible-header">
                         <div>
                             <h5><p class="title-mis-cursos">{{ curso.nombre }}</p></h5>

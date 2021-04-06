@@ -14,6 +14,7 @@ from asistencia.utils import clases_asistencias_alumna, porcentaje_asistencia
 from clases.models import Clase
 from cursos.models import Curso
 from feedback.models import Feedback
+from problemas.models import Problema
 from usuarios.models import User
 
 #Vista padre de los cursos
@@ -126,7 +127,30 @@ class EstadisticasView(LoginRequiredMixin, View):
         curso = get_object_or_404(Curso, id=curso_id, profesoras__in=[request.user])
         clases = Clase.objects.filter(curso=curso, publica=True)
         feedback_alumnas = self.get_feedbacks_curso(curso)
-        return render(request, 'cursos/tabla_estadisticas.html', {'curso': curso,'clases':clases, 'feedback_alumnas':feedback_alumnas})
+
+        clases = Clase.objects.filter(curso=curso, publica=True)
+        total_problemas = 0
+        for clase in clases:
+            total_problemas += Problema.objects.filter(clase=clase).count()
+
+        hay_alumnas = True
+        hay_clases = True
+
+        if len(feedback_alumnas) == 0:
+            hay_alumnas = False
+        if len(clases) == 0:
+            hay_clases = False
+
+        parameteres = {
+            'curso': curso,
+            'clases': clases,
+            'feedback_alumnas': feedback_alumnas,
+            'hay_alumnas': hay_alumnas,
+            'hay_clases': hay_clases,
+            'total_problemas': total_problemas
+        }
+
+        return render(request, 'cursos/tabla_estadisticas.html', parameteres)
 
 
     def get_feedbacks_curso(self, curso):
@@ -135,9 +159,29 @@ class EstadisticasView(LoginRequiredMixin, View):
         result = {}
         for alumna in alumnas:
             alu_resultado = {'alumna': alumna, 'feedbacks': {}}
+            resueltos = 0
+            intentos = 0
+            enviados = 0
             for clase in clases:
                 for problema in clase.problema_set.all():
-                    feedback = Feedback.objects.filter(user=alumna, problema=problema).order_by('fecha_envio').last()
-                    alu_resultado['feedbacks'][problema.id] = feedback
-            result[alumna.id] = alu_resultado
+                    feedback_correctos = Feedback.objects.filter(user=alumna, problema=problema, resultado=True)
+                    feedback_incorrectos = Feedback.objects.filter(user=alumna, problema=problema, resultado=False)
+
+                    # feedback corresponde a la última solución correcta o a la última (si no hay correctas)
+                    if feedback_correctos:
+                        feedback = feedback_correctos.order_by('fecha_envio').last()
+                    else:
+                        feedback = feedback_incorrectos.order_by('fecha_envio').last()
+
+                    incorrectos = feedback_incorrectos.count()
+                    correctos = feedback_correctos.count()
+
+                    # hay que preguntar si feedback existe, puede no haber ninguna solución enviada
+                    if feedback:
+                        intentos += 1
+                        enviados += incorrectos + correctos
+                        if correctos > 0:
+                            resueltos += 1
+                    alu_resultado['feedbacks'][problema.id] = [feedback, incorrectos, correctos]
+            result[alumna.id] = [alu_resultado, resueltos, intentos, enviados]
         return result

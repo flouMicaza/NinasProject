@@ -4,8 +4,17 @@
 {% block title %}Estadísticas {{ curso.nombre }}{% endblock %}
 
 {% block content %}
-<h2>Estadísticas {{ curso.nombre }}</h2>
-    <div class="flex-container" style="margin-top: 2%; "> <!-- botones de pasar asistencia y de volver cuando hay tabla-->
+{% if hay_alumnas %}
+<h4>Estadísticas</h4>
+<h5>{{ curso.nombre }}</h5>
+
+    {% if not hay_clases %}
+        <h6 style="margin-top: 2%">No hay clases creadas por el momento, pero puedes ver el listado de alumnas pertenecientes al curso.</h6>
+    {% else %}
+        <p>Se han publicado {{ total_problemas }} problemas en este curso.</p>
+    {% endif %}
+
+    <div class="flex-container" style="margin-top: 2%; ">
         <!-- BUTTON DE VOLVER -->
         <div style="align-self:stretch">
             <div class="material-icons left" style="position:relative;right:0%;">
@@ -16,27 +25,26 @@
     </div>
 
     <div class="container-tabla-estadisticas">
-        <table id= "tabla_estadísticas" class="display cell-border">
+        <table id="tabla_estadísticas" class="display cell-border tabla-estadisticas">
             <thead>
                 <tr>
-                    <th style=" border-bottom: 1px solid white"></th>
-                    <th style="border-bottom: 1px solid white"></th>
+                    <th class="header-row sticky-left" rowspan="2">Nombre</th>
                     {% for clase in clases %}
-                        <th style="border: 1px solid #ddd; border-bottom: 1px solid white" colspan="{{ clase.problema_set.all|length }}">
+                        <th class="max-ancho-tabla header-row" colspan="{{ clase.problema_set.all|length }}">
                             {{clase.nombre}}
                         </th>
                     {% endfor %}
+                    <th class="header-row" rowspan="2">Problemas Resueltos / Intentos</th>
+                    <th class="header-row" rowspan="2">Soluciones Enviadas</th>
                 </tr>
-                <tr class="tr-header">
-                    <th class="sticky-left" > Nombre</th>
-                    <th class="sticky-left" > Apellido</th>
+                <tr>
                     {% for clase in clases %}
                         {% if clase.problema_set.all|length == 0 %}
-                            <th style="border: 1px solid #ddd; border-top:1px solid white; border-bottom: 1px solid black"></th>
+                            <th class="header-row">-</th>
                         {% else %}
                             {% for problema in clase.problema_set.all %}
-                                <th style="border: 1px solid #ddd; border-top:1px solid white; border-bottom: 1px solid black">
-                                    {{problema.titulo}}
+                                <th class="max-ancho-tabla header-row">
+                                    <a class="letra_absent" href="{% url 'problemas:enunciado-problema' curso_id=curso.id problema_id=problema.id result=1 %}">{{problema.titulo}}</a>
                                 </th>
                             {% endfor %}
                         {% endif %}
@@ -45,22 +53,25 @@
             </thead>
             <tbody>
                 {% for alumna in curso.alumnas.all %}
-                    <tr>
-                        <td class="sticky-left">{{ alumna.first_name }}</td>
-                        <td class="sticky-left">{{ alumna.last_name }}</td>
+                    <tr class="datos-row">
+                        <td class="sticky-left">{{ alumna.last_name }}, {{ alumna.first_name }}</td>
+
                         {% with feedback_alumnas|lookup:alumna.id as info_alu %}
                             {% for clase in clases %}
-                                 {% if clase.problema_set.all|length == 0 %}
+                                {% if clase.problema_set.all|length == 0 %}
                                     <td></td>
                                 {% else %}
                                     {% for problema in clase.problema_set.all %}
-                                        {% with info_alu.feedbacks|lookup:problema.id  as feedback%}
-                                            {% if feedback %}
-                                                {% if feedback.resultado == True %}
-                                                    <td>  <i class="material-icons icon-green">check_circle</i> </td>
-
-                                                {% elif feedback.resultado == False %}
-                                                    <td>  <i class="material-icons icon-red">cancel</i> </td>
+                                        {% with info_alu.0.feedbacks|lookup:problema.id  as feedback_list%}
+                                            {% if feedback_list.0 %}
+                                                {% if feedback_list.0.resultado == True %}
+                                                    <td>
+                                                        <i class="material-icons icon-green" style="vertical-align: middle">check_circle</i>
+                                                        <span style="color:red">{{ feedback_list.1 }}</span> / <span style="color:green">{{ feedback_list.2 }}</span></td>
+                                                {% elif feedback_list.0.resultado == False %}
+                                                    <td>
+                                                        <i class="material-icons icon-red" style="vertical-align: middle">cancel</i>
+                                                        <span style="color:red">{{ feedback_list.1 }}</span> / <span style="color:green">{{ feedback_list.2 }}</span></td>
                                                 {% endif %}
                                             {% else %}
                                                 <td></td>
@@ -69,10 +80,24 @@
                                     {% endfor %}
                                 {% endif %}
                             {% endfor %}
+                            <td>{{ info_alu.1 }} / {{ info_alu.2}}</td>
+                            <td>{{ info_alu.3 }}</td>
                         {% endwith %}
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+{% else %}
+    <h2 style="text-align:center;">Este curso no tiene alumnas!</h2>
+    <div style="text-align:center;margin-top:5%"><img src="{% static 'images/error_kitten.png' %}" alt="gatito del mensaje de error" style="width:300px;"></div>
+    <p style="text-align:center;">Para mostrar las estadísticas es necesario que el curso tenga alumnas inscritas.</p>
+    <p style="text-align:center;">Habla con la coordinadora del curso para solucionar el problema :)</p>
+    <div class="flex-center">
+        <div class="material-icons left">
+            <a href="{% url 'cursos:mis_cursos' %}" class="waves-effect waves-light btn-small btn" style="margin-top: 25px;">
+                <i class="material-icons left">arrow_back</i>Volver</a>
+        </div>
+    </div>
+{% endif %}
 {% endblock %}

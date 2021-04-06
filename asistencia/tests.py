@@ -268,13 +268,13 @@ class Asistencia_GralViewTest(InitialData):
         self.assertContains(response, "Asistencia")
 
         for clase in clases:
-            self.assertContains(response, "Clase " + str(clase.id))
+            self.assertContains(response, "C" + str(clase.id))
             nro_asistencias = len(Asistencia.objects.filter(clase=clase, asistio=True))
             self.assertContains(response, nro_asistencias)
 
-        self.assertContains(response, "Alumna")
-        self.assertContains(response, "Alumnas por clase")
-        self.assertContains(response, "Clases Asistidas")
+        self.assertContains(response, "Nombre")
+        self.assertContains(response, "Total alumnas por clase")
+        self.assertContains(response, "Asistidas / No Asistidas")
 
         for alumna in curso.alumnas.all():
             total_alumna = len(asistencias.filter(alumna=alumna, asistio=True))
